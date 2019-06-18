@@ -3,28 +3,53 @@
   "version": "0.0.1",
   "description": "Monaco Editor for React",
   "main": "lib/index.js",
-  "module": "es/index.js",
+  "module": "lib/index.js",
   "scripts": {
+    "build": "npx babel src --out-dir lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SurenAt93/monaco-react.git"
   },
-  "keywords": ["monaco","editor","react","create-react-app","CRA"],
+  "keywords": [
+    "monaco",
+    "editor",
+    "react",
+    "create-react-app",
+    "CRA"
+  ],
   "author": "suren_at",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/SurenAt93/monaco-react/issues"
   },
   "homepage": "https://github.com/SurenAt93/monaco-react#readme",
-  "dependencies": {
-    "classnames": "^2.2.6",
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "monaco-editor": "^0.17.0",
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
-    "monaco-editor": "^0.17.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.4.4"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-proposal-class-properties",
+        {
+          "loose": false
+        }
+      ]
+    ]
   }
 }
