@@ -7,13 +7,7 @@ import { monaco } from '../utils';
 import { useMount, useUpdate } from '../utils/hooks';
 
 import config from '../config';
-
-import classNames from 'classnames';
-
-const wrapperStyles = {
-  display: 'flex',
-  position: 'relative',
-};
+import styles from './styles';
 
 const Editor =
   ({ value, language, theme, options, editorDidMount, line, loading }) =>
@@ -69,11 +63,11 @@ const Editor =
   }
 
   return (
-    <section className='full-size' style={wrapperStyles}>
+    <section style={styles.wrapper}>
       {isLoading && <Loading content={loading} />}
       <div
         ref={containerRef}
-        className="full-size"
+        style={{ ...styles.fullWidth, ...(isLoading && styles.hide) }}
       />
     </section>
   );
