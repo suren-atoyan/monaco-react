@@ -7,6 +7,7 @@
   "scripts": {
     "lint": "npx eslint src",
     "build": "npx babel src --out-dir lib",
+    "prepublish": "npm test && npm run lint && npm run build",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "repository": {
