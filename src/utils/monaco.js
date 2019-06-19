@@ -1,3 +1,5 @@
+import config from '../config';
+
 class Monaco {
   init() {
     if (window.monaco && window.monaco.editor) {
@@ -33,7 +35,7 @@ class Monaco {
   }
 
   createMonacoLoaderScript(mainScript) {
-    const loaderScript = this.createScript('/monaco-editor/vs/loader.js');
+    const loaderScript = this.createScript(config.urls.monacoLoader);
     loaderScript.onload = _ => this.injectScripts(mainScript);
 
     loaderScript.onerror = this.reject;
@@ -45,7 +47,7 @@ class Monaco {
     const mainScript = this.createScript();
 
     mainScript.innerHTML = `
-      require.config({ paths: { 'vs': '/monaco-editor/vs' }});
+      require.config({ paths: { 'vs': '${config.urls.monacoBase}' }});
       require(['vs/editor/editor.main'], function() {
         document.dispatchEvent(new Event('monaco_init'));
       });

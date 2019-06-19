@@ -1,7 +1,7 @@
 const config = {
   urls: {
-    monacoLoader: '/monaco-editor/vs/loader.js',
-    monacoBase: '/monaco-editor/vs',
+    monacoLoader: 'https://unpkg.com/monaco-editor/min/vs/loader.js',
+    monacoBase: 'https://unpkg.com/monaco-editor/min/vs',
   },
 
   theme: {
