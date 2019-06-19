@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 
 import Loading from '../Loading';
 
-import { monaco } from '../utils';
+import { monaco, noop } from '../utils';
 import { useMount, useUpdate } from '../utils/hooks';
 
 import config from '../config';
 import styles from './styles';
 
 const Editor =
-  ({ value, language, theme, options, editorDidMount, line, loading }) =>
+  ({ value, language, theme, editorDidMount, line, loading, width, height, options }) =>
 {
   const [isLoading, setIsLoading] = useState(true);
   const editorRef = useRef();
@@ -49,7 +49,6 @@ const Editor =
       ...options,
     });
 
-    editorDidMount &&
     editorDidMount(editorRef.current.getValue.bind(editorRef.current), editorRef.current);
 
     monacoRef.current.editor.defineTheme('dark', config.theme['night-dark']);
@@ -63,7 +62,7 @@ const Editor =
   }
 
   return (
-    <section style={styles.wrapper}>
+    <section style={{ ...styles.wrapper, width, height }}>
       {isLoading && <Loading content={loading} />}
       <div
         ref={containerRef}
@@ -74,21 +73,25 @@ const Editor =
 };
 
 Editor.propTypes = {
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   value: PropTypes.string,
-  language: PropTypes.string,
-  options: PropTypes.object,
-  editorDidMount: PropTypes.func,
   theme: PropTypes.string,
+  editorDidMount: PropTypes.func,
+  language: PropTypes.string,
   line: PropTypes.number,
   loading: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+  options: PropTypes.object,
 };
 
 Editor.defaultProps = {
-  language: 'javascript',
+  width: '100%',
+  height: '100%',
   value: '',
-  options: {},
-  editorDidMount: _ => {},
+  theme: 'light',
+  editorDidMount: noop,
   loading: 'Loading...',
+  options: {},
 };
 
 export default Editor;
