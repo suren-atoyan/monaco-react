@@ -19,7 +19,7 @@ Object {
       </section>
     </div>
     <script
-      src="/monaco-editor/vs/loader.js"
+      src="https://unpkg.com/monaco-editor/min/vs/loader.js"
     />
   </body>,
   "container": <div>
