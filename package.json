@@ -8,7 +8,7 @@
     "lint": "npx eslint src",
     "build": "npx babel src --out-dir lib",
     "prepublish": "npm test && npm run lint && npm run build",
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "npx jest"
   },
   "repository": {
     "type": "git",
@@ -39,7 +39,9 @@
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
+    "@testing-library/react": "^8.0.1",
     "babel-eslint": "9.x",
+    "babel-jest": "^24.8.0",
     "eslint": "5.x",
     "eslint-config-react-app": "^4.0.1",
     "eslint-plugin-flowtype": "2.x",
@@ -48,7 +50,10 @@
     "eslint-plugin-react": "7.x",
     "eslint-plugin-react-hooks": "1.5.0",
     "husky": "^2.4.1",
-    "react": "^16.8.6"
+    "jest": "^24.8.0",
+    "jest-dom": "^3.5.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "babel": {
     "presets": [
@@ -68,5 +73,6 @@
     "hooks": {
       "pre-commit": "npm test && npm run lint"
     }
-  }
+  },
+  "dependencies": {}
 }
