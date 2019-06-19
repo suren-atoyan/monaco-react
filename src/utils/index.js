@@ -1,3 +1,4 @@
 import monaco from './monaco';
+import noop from './noop';
 
-export { monaco };
+export { noop, monaco };
