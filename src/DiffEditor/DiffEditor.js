@@ -9,8 +9,21 @@ import { useMount, useUpdate } from '../utils/hooks';
 import config from '../config';
 import styles from './styles';
 
-const Editor =
-  ({ value, language, editorDidMount, theme, line, width, height, loading, options }) =>
+const DiffEditor =
+  ({
+    original,
+    modified,
+    language,
+    originalLanguage,
+    modifiedLanguage,
+    editorDidMount,
+    theme,
+    line,
+    width,
+    height,
+    loading,
+    options,
+  }) =>
 {
   const [isLoading, setIsLoading] = useState(true);
   const editorRef = useRef();
@@ -26,12 +39,19 @@ const Editor =
   });
 
   useUpdate(_ => {
-    editorRef.current.setValue(value);
-  }, [value]);
+    editorRef.current.getModel().modified.setValue(modified);
+  }, [modified]);
 
   useUpdate(_ => {
-    monacoRef.current.editor.setModelLanguage(editorRef.current.getModel(), language);
-  }, [language]);
+    editorRef.current.getModel().original.setValue(original);
+  }, [original]);
+
+  useUpdate(_ => {
+    const { original, modified } = editorRef.current.getModel();
+
+    monacoRef.current.editor.setModelLanguage(original, originalLanguage || language);
+    monacoRef.current.editor.setModelLanguage(modified, modifiedLanguage || language);
+  }, [language, originalLanguage, modifiedLanguage]);
 
   useUpdate(_ => {
     editorRef.current.setScrollPosition({ scrollTop: line });
@@ -46,19 +66,34 @@ const Editor =
   }, [options]);
 
   function createEditor() {
-    editorRef.current = monacoRef.current.editor.create(containerRef.current, {
-      value,
-      language,
+    editorRef.current = monacoRef.current.editor.createDiffEditor(containerRef.current, {
       automaticLayout: true,
       ...options,
     });
 
-    editorDidMount(editorRef.current.getValue.bind(editorRef.current), editorRef.current);
+    setModels();
+
+    const { original, modified } = editorRef.current.getModel();
+    editorDidMount(
+      modified.getValue.bind(editorRef.current),
+      original.getValue.bind(editorRef.current),
+      editorRef.current,
+    );
 
     monacoRef.current.editor.defineTheme('dark', config.theme['night-dark']);
     monacoRef.current.editor.setTheme(theme);
 
     setIsLoading(false);
+  }
+
+  function setModels() {
+    const originalModel = monacoRef.current.editor
+      .createModel(original, originalLanguage || language);
+
+    const modifiedModel = monacoRef.current.editor
+      .createModel(modified, modifiedLanguage || language);
+
+    editorRef.current.setModel({ original: originalModel, modified: modifiedModel });
   }
 
   function removeEditor() {
@@ -76,9 +111,12 @@ const Editor =
   );
 };
 
-Editor.propTypes = {
-  value: PropTypes.string,
+DiffEditor.propTypes = {
+  original: PropTypes.string,
+  modified: PropTypes.string,
   language: PropTypes.string,
+  originalLanguage: PropTypes.string,
+  modifiedLanguage: PropTypes.string,
   editorDidMount: PropTypes.func,
   theme: PropTypes.string,
   line: PropTypes.number,
@@ -88,7 +126,7 @@ Editor.propTypes = {
   options: PropTypes.object,
 };
 
-Editor.defaultProps = {
+DiffEditor.defaultProps = {
   editorDidMount: noop,
   theme: 'light',
   width: '100%',
@@ -97,4 +135,4 @@ Editor.defaultProps = {
   options: {},
 };
 
-export default Editor;
+export default DiffEditor;
