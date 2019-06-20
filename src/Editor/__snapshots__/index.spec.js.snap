@@ -6,7 +6,7 @@ Object {
   "baseElement": <body>
     <div>
       <section
-        style="display: flex; position: relative; height: 100%;"
+        style="display: flex; position: relative; width: 100%; height: 100%;"
       >
         <div
           style="display: flex; height: 100%; width: 100%; justify-content: center; align-items: center;"
@@ -24,7 +24,7 @@ Object {
   </body>,
   "container": <div>
     <section
-      style="display: flex; position: relative; height: 100%;"
+      style="display: flex; position: relative; width: 100%; height: 100%;"
     >
       <div
         style="display: flex; height: 100%; width: 100%; justify-content: center; align-items: center;"
