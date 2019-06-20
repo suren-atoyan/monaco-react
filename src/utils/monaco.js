@@ -1,30 +1,11 @@
 import config from '../config';
 
 class Monaco {
-  init() {
-    if (window.monaco && window.monaco.editor) {
-      return new Promise((res, rej) => res(window.monaco));
-    }
-
-    document.addEventListener('monaco_init', this.handleMainScriptLoad);
-
-    const mainScript = this.createMainScript();
-
-    const loaderScript = this.createMonacoLoaderScript(mainScript);
-
-    this.injectScripts(loaderScript);
-
-    return new Promise((res, rej) => {
-      this.resolve = res;
-      this.reject = rej;
-    });
-  }
-
   injectScripts(script) {
     document.body.appendChild(script);
   }
 
-  handleMainScriptLoad = () => {
+  handleMainScriptLoad = _ => {
     document.removeEventListener('monaco_init', this.handleMainScriptLoad);
     this.resolve(window.monaco);
   }
@@ -56,6 +37,33 @@ class Monaco {
     mainScript.onerror = this.reject;
 
     return mainScript;
+  }
+
+  isInitialized = false;
+
+  wrapperPromise = new Promise((res, rej) => {
+    this.resolve = res;
+    this.reject = rej;
+  });
+
+  init() {
+    if (!this.isInitialized) {
+      if (window.monaco && window.monaco.editor) {
+        return new Promise((res, rej) => res(window.monaco));
+      }
+
+      document.addEventListener('monaco_init', this.handleMainScriptLoad);
+
+      const mainScript = this.createMainScript();
+
+      const loaderScript = this.createMonacoLoaderScript(mainScript);
+
+      this.injectScripts(loaderScript);
+    }
+
+    this.isInitialized = true;
+
+    return this.wrapperPromise;
   }
 }
 
