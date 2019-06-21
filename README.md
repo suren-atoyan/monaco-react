@@ -1,10 +1,14 @@
 # monaco-react
 Monaco Editor for React
 
+## Synopsis
+
+Monaco editor wrapper for painless integration with React applications without need of webpack (or other module bundler) configuration files.
+
 ## Motivation
 There is a well-known web technology based code editor called [Monaco Editor](https://microsoft.github.io/monaco-editor/) that powers [VS Code](https://code.visualstudio.com/). [There are also many ways to integrate](https://github.com/Microsoft/monaco-editor-samples/) it provided by monaco creators. But there were tons of problems with integration of monaco with modern technologies; e.g React.
 
-There also exist solutions for integration with React; e.g [this one](https://github.com/react-monaco-editor/react-monaco-editor) and [this one](https://wangchujiang.com/react-monacoeditor/). But they need some custom webpack (or other module bundler) configuration to make Monaco fully work, which is not the "best" solution for such kind of things like create-react-app - [CRA](https://facebook.github.io/create-react-app/).
+There also exist solutions for integration with React; e.g [this one](https://github.com/react-monaco-editor/react-monaco-editor) and [this one](https://wangchujiang.com/react-monacoeditor/). But they need some custom webpack configuration to make Monaco fully work, which is not the "best" solution for such kind of things like create-react-app - [CRA](https://facebook.github.io/create-react-app/).
 
 With this solution, you don't need any kind of webpack configuration files and it works great both with React apps created by CRA or created by something else.
 
@@ -59,6 +63,10 @@ function App() {
 
 export default App;
 ```
+
+#### MonacoEditor instance
+
+The second argument of `editorDidMount` is the instance of the editor. So, you can use it to get the full control of the editor if you need it.
 
 ## Props
 
