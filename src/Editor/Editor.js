@@ -42,7 +42,7 @@ const Editor =
   }, [theme]);
 
   useUpdate(_ => {
-    monacoRef.current.editor.updateOptions(options);
+    editorRef.current.updateOptions(options);
   }, [options]);
 
   function createEditor() {
