@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MonacoEditor from 'monaco-react';
+import MonacoEditor from '@monaco-editor/react';
 import Settings from './Settings';
 
 import { useStore } from 'store';

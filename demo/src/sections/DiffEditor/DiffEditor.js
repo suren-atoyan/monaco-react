@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { DiffEditor as MonacoDiffEditor } from 'monaco-react';
+import { DiffEditor as MonacoDiffEditor } from '@monaco-editor/react';
 
 import { useStore } from 'store';
 import config from 'config';
