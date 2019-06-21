@@ -1177,6 +1177,11 @@
     prop-types "^15.7.2"
     react-is "^16.8.0"
 
+"@monaco-editor/react@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@monaco-editor/react/-/react-0.0.1.tgz#21d9bd084c77fe1cfdf4157b881436a084ed7304"
+  integrity sha512-ngu39bak1ehNiIzZZQ5L3wbmHl8KcVC+Ww8I1q8Jh8tG8JMxGNewZsGu9sztazozn4kq0lK0utNBJWh96pCVGA==
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
