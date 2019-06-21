@@ -7,7 +7,7 @@ import Divider from '@material-ui/core/Divider';
 import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
 
-import Editor from 'monaco-react';
+import Editor from '@monaco-editor/react';
 
 import { useStore } from 'store';
 import config from 'config';
