@@ -1,6 +1,6 @@
 ### Versions
 
 ## 0.0.1
-###### *June xx, 2019*
+###### *June 21, 2019*
 
-TBD
+First version of the library
