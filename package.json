@@ -74,5 +74,8 @@
       "pre-commit": "npm test && npm run lint"
     }
   },
+  "jest": {
+    "testPathIgnorePatterns": ["/node_modules/", "/demo/"]
+  },
   "dependencies": {}
 }
