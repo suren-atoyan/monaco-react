@@ -1,6 +1,8 @@
 # monaco-react
 Monaco Editor for React
 
+[![NPM](https://nodei.co/npm/@monaco-editor/react.png.png)](https://nodei.co/npm/@monaco-editor/react.png/)
+
 ## Synopsis
 
 Monaco editor wrapper for painless integration with React applications without need of webpack (or other module bundler) configuration files.
