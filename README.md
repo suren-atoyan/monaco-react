@@ -18,6 +18,8 @@ With this solution, you don't need any kind of webpack configuration files and i
 yarn add @monaco-editor/react # or npm install @monaco-editor/react
 ```
 
+## [Demo](https://monaco-react.surenatoyan.com/)
+
 ## Usage
 
 Example
