@@ -1,6 +1,6 @@
 {
   "name": "@monaco-editor/react",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Monaco Editor for React",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -28,7 +28,6 @@
   },
   "homepage": "https://github.com/SurenAt93/monaco-react#readme",
   "peerDependencies": {
-    "monaco-editor": "^0.17.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"

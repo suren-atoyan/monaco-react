@@ -1,5 +1,10 @@
 ### Versions
 
+## 0.0.3
+###### *June 22, 2019*
+
+ - Remove redundant peer dependency
+
 ## 0.0.2
 ###### *June 22, 2019*
 
