@@ -82,6 +82,7 @@ const Settings = _ => {
         <Typography variant="subtitle2" gutterBottom>
           For full list of options with descriptions visit <Link
             href={config.urls.IEditorOptions}
+            rel="noreferrer"
             target="_blank"
           >
             here
