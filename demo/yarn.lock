@@ -6934,7 +6934,7 @@ overmind-react@^19.0.1:
     overmind "18.0.1"
     tslib "^1.9.3"
 
-overmind@18.0.1:
+overmind@18.0.1, overmind@^18.0.1:
   version "18.0.1"
   resolved "https://registry.yarnpkg.com/overmind/-/overmind-18.0.1.tgz#f34512c0451ce432f15788a3acadd429406a833c"
   integrity sha512-nG0JlNXdIiRv5Bc23x6/tBORijAdZGqBsSFH5Ifh0Ghsw/qenCu0+eu9d8zXhTYBtdR+/bxwsEH2RJG47icacg==
