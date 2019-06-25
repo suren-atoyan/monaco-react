@@ -1,5 +1,12 @@
 ### Versions
 
+## 1.0.0
+###### *June 25, 2019*
+
+:tada: First stable version :tada:
+
+ - Add monaco version to CDN urls to avoid 302 redirects
+
 ## 0.0.3
 ###### *June 22, 2019*
 
