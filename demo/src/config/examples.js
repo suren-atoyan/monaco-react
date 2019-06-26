@@ -573,7 +573,7 @@ const examples = {
      }
   `),
   19: rTabs(`
-    // @monaco-editor/react is Monaco editor wrapper for painless integration with React
+    // @monaco-editor/react is Monaco editor wrapper for easy/one-line integration with React
     // applications without need of webpack (or other module bundler)
     // configuration files.
 

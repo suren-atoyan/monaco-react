@@ -116,7 +116,7 @@ const examples = {
 
     ## Synopsis
 
-    Monaco editor wrapper for painless integration with React applications without need of webpack (or other module bundler) configuration files.
+    Monaco editor wrapper for easy/one-line integration with React applications without need of webpack (or other module bundler) configuration files.
 
     ## Motivation
     There is a well-known web technology based code editor called [Monaco Editor](https://microsoft.github.io/monaco-editor/) that powers [VS Code](https://code.visualstudio.com/). [There are also many ways to integrate](https://github.com/Microsoft/monaco-editor-samples/) it provided by monaco creators. But there were tons of problems with integration of monaco with modern technologies; e.g React.
