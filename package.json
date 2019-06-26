@@ -1,7 +1,7 @@
 {
   "name": "@monaco-editor/react",
-  "version": "1.0.1",
-  "description": "Monaco Editor for React",
+  "version": "1.0.2",
+  "description": "Monaco editor wrapper for easy/one-line integration with React applications (e.g. powered by create-react-app) without need of webpack configuration files",
   "main": "lib/index.js",
   "module": "lib/index.js",
   "scripts": {
@@ -15,11 +15,12 @@
     "url": "git+https://github.com/SurenAt93/monaco-react.git"
   },
   "keywords": [
-    "monaco",
-    "editor",
-    "react",
+    "monaco editor",
+    "monaco editor react",
+    "code editor react",
     "create-react-app",
-    "CRA"
+    "CRA",
+    "vscode"
   ],
   "author": "suren_at",
   "license": "MIT",

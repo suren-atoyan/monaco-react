@@ -1,5 +1,10 @@
 ### Versions
 
+## 1.0.2
+###### *June 26, 2019*
+
+ - Update package description
+
 ## 1.0.1
 ###### *June 26, 2019*
 
