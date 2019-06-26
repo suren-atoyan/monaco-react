@@ -29,7 +29,7 @@ const Header = _ => {
             {"<MR />"}
           </Typography>        
           <Typography variant="h6" className={classes.title}>
-            Monaco-React
+            Monaco Editor React
           </Typography>
           <Button onClick={handleThemeSwitch}>
             <span className={classNames(classes.stars, { [classes.activate]: themeMode === 'dark' })} />
