@@ -1,5 +1,10 @@
 ### Versions
 
+## 1.0.1
+###### *June 26, 2019*
+
+ - Move from 'unpkg.com' to 'cdn.jsdelivr.net' (NOTE: in the future, it will be configurable)
+
 ## 1.0.0
 ###### *June 25, 2019*
 
