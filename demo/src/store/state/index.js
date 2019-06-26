@@ -71,7 +71,7 @@ const initialState = {
   },
 
   diffEditor: {
-    selectedLanguageId: 43, // 43 is the id of rust
+    selectedLanguageId: 24, // 24 is the id of markdown
   },
 };
 
