@@ -39,7 +39,7 @@
     <script type="text/javascript">
       const ss = { height: '1px', width: '1px', opacity: 0, position: 'absolute', zIndex: -1 };
       if (!(/bot|googlebot|crawler|spider|robot|crawling/i.test(navigator.userAgent))) {
-        Object.keys(ss).forEach(attr => (_msc.style[attr] = ss[attr]));
+        Object.keys(ss).forEach(function(attr) { _msc.style[attr] = ss[attr] });
       }
     </script>
     <div id="root"></div>
