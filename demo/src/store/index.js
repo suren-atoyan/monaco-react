@@ -9,4 +9,4 @@ export const store = createOvermind({
   actions,
 });
 
-export const useStore = createHook(store);
+export const useStore = createHook();
