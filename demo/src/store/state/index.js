@@ -39,7 +39,7 @@ const initialState = {
       overviewRulerBorder: true,
       overviewRulerLanes: 2,
       quickSuggestions: true,
-      quickSuggestionsDelay: 500,
+      quickSuggestionsDelay: 100,
       readOnly: false,
       renderControlCharacters: false,
       renderFinalNewline: true,
