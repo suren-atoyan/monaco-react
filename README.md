@@ -24,7 +24,7 @@ yarn add @monaco-editor/react # or npm install @monaco-editor/react
 
 ## Usage
 
-Example
+Example ([codesandbox](https://codesandbox.io/s/monaco-editor-react-u0fyv))
 ```js
 import React, { useState } from 'react';
 import Editor from '@monaco-editor/react';
