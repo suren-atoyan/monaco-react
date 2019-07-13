@@ -1,5 +1,10 @@
 ### Versions
 
+## 1.0.3
+###### *July 13, 2019*
+
+ - Add basic support for TypeScript
+
 ## 1.0.2
 ###### *June 26, 2019*
 
