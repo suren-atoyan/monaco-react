@@ -1,5 +1,10 @@
 ### Versions
 
+## 1.0.4
+###### *July 13, 2019*
+
+ - FIX: add "types" fild to package.json
+
 ## 1.0.3
 ###### *July 13, 2019*
 

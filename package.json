@@ -1,12 +1,13 @@
 {
   "name": "@monaco-editor/react",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Monaco editor wrapper for easy/one-line integration with React applications (e.g. powered by create-react-app) without need of webpack configuration files",
   "main": "lib/index.js",
   "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "lint": "npx eslint src",
-    "build": "npx babel src --out-dir lib",
+    "build": "npx babel src --out-dir lib && cp ./src/index.d.ts ./lib/",
     "prepublish": "npm test && npm run lint && npm run build",
     "test": "npx jest"
   },
