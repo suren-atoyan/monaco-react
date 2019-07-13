@@ -75,8 +75,8 @@ const DiffEditor =
 
     const { original, modified } = editorRef.current.getModel();
     editorDidMount(
-      modified.getValue.bind(editorRef.current),
-      original.getValue.bind(editorRef.current),
+      modified.getValue.bind(modified),
+      original.getValue.bind(original),
       editorRef.current,
     );
 
