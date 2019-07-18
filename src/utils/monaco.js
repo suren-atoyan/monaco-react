@@ -28,7 +28,7 @@ class Monaco {
     const mainScript = this.createScript();
 
     mainScript.innerHTML = `
-      require.config({ paths: { 'vs': '${config.urls.monacoBase}' }});
+      require.config({ paths: { 'vs': '${config.urls.monacoBase}' } });
       require(['vs/editor/editor.main'], function() {
         document.dispatchEvent(new Event('monaco_init'));
       });
