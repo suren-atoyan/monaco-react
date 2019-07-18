@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import Loading from '../Loading';
@@ -12,7 +12,8 @@ import styles from './styles';
 const Editor =
   ({ value, language, editorDidMount, theme, line, width, height, loading, options }) =>
 {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isEditorReady, setIsEditorReady] = useState(false);
+  const [isMonacoMounting, setIsMonacoMounting] = useState(true);
   const editorRef = useRef();
   const monacoRef = useRef();
   const containerRef = useRef();
@@ -20,32 +21,33 @@ const Editor =
   useMount(_ => {
     monaco
       .init()
-      .then(monaco => (monacoRef.current = monaco) && createEditor());
+      .then(monaco => (monacoRef.current = monaco) && setIsMonacoMounting(false))
+      .catch(error => console.error('An error occurred during initialization of Monaco: ', error));
 
     return removeEditor;
   });
 
   useUpdate(_ => {
     editorRef.current.setValue(value);
-  }, [value]);
+  }, [value], isEditorReady);
 
   useUpdate(_ => {
     monacoRef.current.editor.setModelLanguage(editorRef.current.getModel(), language);
-  }, [language]);
+  }, [language], isEditorReady);
 
   useUpdate(_ => {
     editorRef.current.setScrollPosition({ scrollTop: line });
-  }, [line]);
+  }, [line], isEditorReady);
 
   useUpdate(_ => {
     monacoRef.current.editor.setTheme(theme);
-  }, [theme]);
+  }, [theme], isEditorReady);
 
   useUpdate(_ => {
     editorRef.current.updateOptions(options);
-  }, [options]);
+  }, [options], isEditorReady);
 
-  function createEditor() {
+  const createEditor = useCallback(_ => {
     editorRef.current = monacoRef.current.editor.create(containerRef.current, {
       value,
       language,
@@ -58,19 +60,21 @@ const Editor =
     monacoRef.current.editor.defineTheme('dark', config.theme['night-dark']);
     monacoRef.current.editor.setTheme(theme);
 
-    setIsLoading(false);
-  }
+    setIsEditorReady(true);
+  }, [editorDidMount, language, options, theme, value]);
 
-  function removeEditor() {
-    editorRef.current.dispose();
-  }
+  useEffect(_ => {
+    !isMonacoMounting && !isEditorReady && createEditor();
+  }, [isMonacoMounting, isEditorReady, createEditor]);
+
+  const removeEditor = _ => editorRef.current.dispose();
 
   return (
     <section style={{ ...styles.wrapper, width, height }}>
-      {isLoading && <Loading content={loading} />}
+      {!isEditorReady && <Loading content={loading} />}
       <div
         ref={containerRef}
-        style={{ ...styles.fullWidth, ...(isLoading && styles.hide) }}
+        style={{ ...styles.fullWidth, ...(!isEditorReady && styles.hide) }}
       />
     </section>
   );
