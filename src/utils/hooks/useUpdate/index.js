@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react';
 
-const useUpdate = (effect, deps) => {
+const useUpdate = (effect, deps, applyChanges = true) => {
   const isInitialMount = useRef(true);
 
   useEffect(
-    isInitialMount.current
+    isInitialMount.current || !applyChanges
       ? _ => { isInitialMount.current = false }
       : effect,
     deps
