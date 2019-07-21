@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Loading from '../Loading';
@@ -25,7 +25,8 @@ const DiffEditor =
     options,
   }) =>
 {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isEditorReady, setIsEditorReady] = useState(false);
+  const [isMonacoMounting, setIsMonacoMounting] = useState(true);
   const editorRef = useRef();
   const monacoRef = useRef();
   const containerRef = useRef();
@@ -33,39 +34,50 @@ const DiffEditor =
   useMount(_ => {
     monaco
       .init()
-      .then(monaco => (monacoRef.current = monaco) && createEditor());
+      .then(monaco => (monacoRef.current = monaco) && setIsMonacoMounting(false))
+      .catch(error => console.error('An error occurred during initialization of Monaco: ', error));
 
     return removeEditor;
   });
 
   useUpdate(_ => {
     editorRef.current.getModel().modified.setValue(modified);
-  }, [modified]);
+  }, [modified], isEditorReady);
 
   useUpdate(_ => {
     editorRef.current.getModel().original.setValue(original);
-  }, [original]);
+  }, [original], isEditorReady);
 
   useUpdate(_ => {
     const { original, modified } = editorRef.current.getModel();
 
     monacoRef.current.editor.setModelLanguage(original, originalLanguage || language);
     monacoRef.current.editor.setModelLanguage(modified, modifiedLanguage || language);
-  }, [language, originalLanguage, modifiedLanguage]);
+  }, [language, originalLanguage, modifiedLanguage], isEditorReady);
 
   useUpdate(_ => {
     editorRef.current.setScrollPosition({ scrollTop: line });
-  }, [line]);
+  }, [line], isEditorReady);
 
   useUpdate(_ => {
     monacoRef.current.editor.setTheme(theme);
-  }, [theme]);
+  }, [theme], isEditorReady);
 
   useUpdate(_ => {
     editorRef.current.updateOptions(options);
-  }, [options]);
+  }, [options], isEditorReady);
 
-  function createEditor() {
+  const setModels = useCallback(_ => {
+    const originalModel = monacoRef.current.editor
+      .createModel(original, originalLanguage || language);
+
+    const modifiedModel = monacoRef.current.editor
+      .createModel(modified, modifiedLanguage || language);
+
+    editorRef.current.setModel({ original: originalModel, modified: modifiedModel });
+  }, [language, modified, modifiedLanguage, original, originalLanguage]);
+
+  const createEditor = useCallback(_ => {
     editorRef.current = monacoRef.current.editor.createDiffEditor(containerRef.current, {
       automaticLayout: true,
       ...options,
@@ -83,29 +95,21 @@ const DiffEditor =
     monacoRef.current.editor.defineTheme('dark', config.theme['night-dark']);
     monacoRef.current.editor.setTheme(theme);
 
-    setIsLoading(false);
-  }
+    setIsEditorReady(true);
+  }, [editorDidMount, options, theme, setModels]);
 
-  function setModels() {
-    const originalModel = monacoRef.current.editor
-      .createModel(original, originalLanguage || language);
+  useEffect(_ => {
+    !isMonacoMounting && !isEditorReady && createEditor();
+  }, [isMonacoMounting, isEditorReady, createEditor]);
 
-    const modifiedModel = monacoRef.current.editor
-      .createModel(modified, modifiedLanguage || language);
-
-    editorRef.current.setModel({ original: originalModel, modified: modifiedModel });
-  }
-
-  function removeEditor() {
-    editorRef.current.dispose();
-  }
+  const removeEditor = _ => editorRef.current.dispose();
 
   return (
     <section style={{ ...styles.wrapper, width, height }}>
-      {isLoading && <Loading content={loading} />}
+      {!isEditorReady && <Loading content={loading} />}
       <div
         ref={containerRef}
-        style={{ ...styles.fullWidth, ...(isLoading && styles.hide) }}
+        style={{ ...styles.fullWidth, ...(!isEditorReady && styles.hide) }}
       />
     </section>
   );
