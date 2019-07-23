@@ -1,5 +1,7 @@
 import Editor from './Editor';
 import DiffEditor from './DiffEditor';
 
-export { DiffEditor };
+import ControlledEditor from './ControlledEditor';
+
+export { DiffEditor, ControlledEditor };
 export default Editor;

@@ -25,7 +25,7 @@ export interface EditorProps {
   /**
    * Signature: function(getEditorValue: func, monaco: object) => void 
    * This function will be called right after monaco editor will be mounted and ready to work.
-   * It will get the editor instance as a second argument. Defaults to "noop"
+   * It gets the editor instance as a second argument. Defaults to "noop"
    */
   editorDidMount?: EditorDidMount;
 
@@ -52,7 +52,7 @@ export interface EditorProps {
   /**
    * The loading screen before the editor will be loaded. Defaults 'loading...'
    */
-  loading?: React.Element | string;
+  loading?: React.ElementType | string;
 
   /**
    * IEditorOptions
@@ -63,6 +63,27 @@ export interface EditorProps {
 declare const Editor: React.FC<EditorProps>;
 
 export default Editor;
+
+// Controlled Editor
+
+export type ControlledEditorOnChange = (
+  ev: any,
+  value: string | undefined,
+) => string | undefined;
+
+export interface ControlledEditorProps extends EditorProps {
+  /**
+   * Signature: function(ev: any, value: string | undefined) => string | undefined;
+   * onChange method of monaco editor. It will be called right after content of current model will be changed.
+   * It gets two arguments: first one is the "event" object of monaco, second one the current value
+   * NOTE: onChange can return the new value, which will be inserted to editor
+   */
+  onChange?: ControlledEditorOnChange;
+}
+
+declare const ControlledEditor: React.FC<ControlledEditorProps>;
+
+export { ControlledEditor };
 
 // Diff Editor
 
@@ -105,7 +126,7 @@ export interface DiffEditorProps {
   /**
    * Signature: function(getOriginalEditorValue: func, getModifiedEditorValue: func, monaco: object) => void
    * This function will be called right after monaco editor will be mounted and ready to work.
-   * It will get the editor instance as a third argument
+   * It gets the editor instance as a third argument
    */
   editorDidMount?: DiffEditorDidMount;
 
@@ -132,7 +153,7 @@ export interface DiffEditorProps {
   /**
    * The loading screen before the editor will be loaded. Defaults 'loading...'
    */
-  loading?: React.Element | string;
+  loading?: React.ElementType | string;
 
   /**
    * IDiffEditorOptions
