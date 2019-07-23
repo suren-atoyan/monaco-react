@@ -1,9 +1,9 @@
 ### Versions
 
-## 1.0.6
+## 1.0.7
 ###### *July 21, 2019*
 
-- Add a possibility to interact with DiffEditor before it is mounted
+- Add controlled version of editor component
 
 ## 1.0.5
 ###### *July 19, 2019*
