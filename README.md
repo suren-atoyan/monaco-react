@@ -48,8 +48,7 @@ Besides types three main components are also exported from the package:
 * DiffEditor
 * ControlledEditor
 
-And the utility to be able to access to monaco instance (simply called "monaco").
-
+And the utility that gives ability to access to monaco instance (simply called "monaco")
 
 #### Simple Usage
 
@@ -189,7 +188,7 @@ monaco
 It's handy to have access to the editor instance for some reason.
 
 As we have already mentioned, the `editorDidMount` prop gets the editor instance as a second argument.
-Here is an example how you can use the editor instance.
+Here is an example of how you can use the editor instance.
 You can play with it [here](https://codesandbox.io/s/monaco-editorreact---editor-instance-zgh90)
 
 ```js
@@ -237,9 +236,9 @@ The default export of the library is uncontrolled react component:
 
 ```import Editor from '@monaco-editor/react' ```
 
-We make it by default uncontrolled to keep the nature of the monaco editor as much as it is possible. And based on our experience we can say that in most cases it will cover your needs, as you can see in the examples above. And we highly recommended using that one.
+We make it by default uncontrolled to keep the nature of the monaco editor as much as it is possible. And based on our experience we can say that in most cases it will cover your needs, as you can see in the examples above. And we highly recommend using that one.
 
-But in any case, if you want a controlled one, there is an option for that. The library exports `ControlledEditor` (as named export). It is the same as the default one (`Editor`), plus it has `onChange` method. It is working a little bit different comparing with, for example, the controlled `input` field. Usually, by using `value` and `onChange` props, we are `circulating` data inside of the component, and by thus have full control over the data. In this particular component to avoid possible performance issues in very large code bases (which is going to be the `value` of Editor component), we suggest using this approach for "controlled" component. Here is `onChange` prop, it will be called each time when the content of the editor is changed. It gets two arguments, first one is the "event" object of monaco, the second one is the current value of editor. You can do with this value whatever you want and return what you want to see. So, the value returned from `onChange` will be set to the editor.
+But in any case, if you want a controlled one, there is an option for that. The library exports `ControlledEditor` (as named export). It is the same as the default one (`Editor`), plus it has `onChange` method. It is working a little bit different comparing with, for example, the controlled `input` field. Usually, by using `value` and `onChange` props, we are `circulating` data inside the component, and thus have full control over the data. In this particular component to avoid possible performance issues in very large code bases (which is going to be the `value` of Editor component), we suggest using this approach for "controlled" component. Here is `onChange` prop, it will be called each time when the content of the editor is changed. It gets two arguments, first one is the "event" object of monaco, the second one is the current value of the editor. You can do with this value whatever you want and return what you want to see. So, the value returned from `onChange` will be set to the editor.
 
 Here is the example.
 You can play with it [here](https://codesandbox.io/s/monaco-editorreact---controlled-editor-yg5il?fontsize=14)
@@ -333,7 +332,7 @@ You can play with it [here](https://codesandbox.io/s/monaco-editorreact---contro
 | language | enum: ... | | All languages that are [supported](https://github.com/microsoft/monaco-languages) by monaco-editor |
 | originalLanguage | enum: ... | *language | This prop gives you the opportunity to specify the language of the `original` source separately, otherwise, it will get the value of `language` property. (Possible values are the same as `language`) |
 | modifiedLanguage | enum: ... | *language | This prop gives you the opportunity to specify the language of the `modified` source separately, otherwise, it will get the value of `language` property. (Possible values are the same as `language`) |
-| editorDidMount | func | noop | **Signature: function(getOriginalEditorValue: func, getModifiedEditorValue: func, monaco: object) => void** <br/> This function will be called right after monaco editor is mounted and ready to work. It will get the editor instance as a third argument |
+| editorDidMount | func | noop | **Signature: function(getOriginalEditorValue: func, getModifiedEditorValue: func, monaco: object) => void** <br/> This function will be called right after monaco editor is mounted and is ready to work. It will get the editor instance as a third argument |
 | theme | enum: 'light' \| 'dark' | 'light' | Default themes of monaco |
 | line | number |  | The line to jump on it |
 | width | union: number \| string | '100%' | The width of the editor wrapper |
@@ -347,7 +346,7 @@ Extended from Editor (the same props as in Editor plus onChange introduced below
 
 | Name   |      Type      |  Default |  Description |
 |:----------|:-------------|:------|:------|
-| onChange | func | noop | **Signature: function(ev: any, value: string \| undefined) => string \| undefined** onChange method of monaco editor. It will be called right after content of current model is changed. It gets two arguments: first one is the "event" object of monaco, second one is the current value. NOTE: onChange can return the new value, which will be inserted to editor |
+| onChange | func | noop | **Signature: function(ev: any, value: string \| undefined) => string \| undefined** onChange method of monaco editor. It will be called right after the content of the current model is changed. It gets two arguments: first one is the "event" object of monaco, second one is the current value. NOTE: onChange can return the new value, which will be inserted to editor |
 
 ## License
 
