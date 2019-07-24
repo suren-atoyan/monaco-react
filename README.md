@@ -63,7 +63,7 @@ import ReactDOM from "react-dom";
 
 import Editor from '@monaco-editor/react';
 
-const App = _ => <Editor height={400} language="javascript" />;
+const App = _ => <Editor height="90vh" language="javascript" />;
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
@@ -219,7 +219,7 @@ function App() {
         Press to listen editor changes (see console)
       </button>
       <Editor
-        height={400}
+        height="90vh"
         editorDidMount={handleEditorDidMount}
         language="javascript"
       />
@@ -266,7 +266,7 @@ function App() {
 
   return (
     <ControlledEditor
-      height={400}
+      height="90vh"
       value={"// try to write e%v%a%l somewere 😈 \n"}
       onChange={handleEditorChange}
       language="javascript"
@@ -288,12 +288,12 @@ import { ControlledEditor } from "@monaco-editor/react";
 
 function App() {
   const handleEditorChange = (ev, value) => {
-    return "it dosn't matter what you are writing, I am staying here!!!";
+    return `"it dosn't matter what you are writing, I am staying here!!!"`;
   };
 
   return (
     <ControlledEditor
-      height={400}
+      height="90vh"
       onChange={handleEditorChange}
       language="javascript"
     />
