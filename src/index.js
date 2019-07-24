@@ -3,5 +3,7 @@ import DiffEditor from './DiffEditor';
 
 import ControlledEditor from './ControlledEditor';
 
-export { DiffEditor, ControlledEditor };
+import { monaco } from './utils';
+
+export { DiffEditor, ControlledEditor, monaco };
 export default Editor;
