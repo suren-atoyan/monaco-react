@@ -1,3 +1,5 @@
+// TODO: the whole content should be improved in the next version.
+
 import * as React from "react";
 
 type Theme =
@@ -8,7 +10,7 @@ type Theme =
 
 export type EditorDidMount = (
   getEditorValue: () => string,
-  monaco: any,
+  editor: any,
 ) => void;
 
 export interface EditorProps {
@@ -23,7 +25,7 @@ export interface EditorProps {
   language?: string;
 
   /**
-   * Signature: function(getEditorValue: func, monaco: object) => void 
+   * Signature: function(getEditorValue: func, editor: object) => void
    * This function will be called right after monaco editor will be mounted and ready to work.
    * It gets the editor instance as a second argument. Defaults to "noop"
    */
@@ -90,7 +92,7 @@ export { ControlledEditor };
 export type DiffEditorDidMount = (
   getOriginalEditorValue: () => string,
   getModifiedEditorValue: () => string,
-  monaco: any,
+  editor: any,
 ) => void;
 
 export interface DiffEditorProps {
@@ -124,7 +126,7 @@ export interface DiffEditorProps {
   modifiedLanguage?: string;
 
   /**
-   * Signature: function(getOriginalEditorValue: func, getModifiedEditorValue: func, monaco: object) => void
+   * Signature: function(getOriginalEditorValue: func, getModifiedEditorValue: func, editor: object) => void
    * This function will be called right after monaco editor will be mounted and ready to work.
    * It gets the editor instance as a third argument
    */
@@ -164,3 +166,13 @@ export interface DiffEditorProps {
 declare const DiffEditor: React.FC<DiffEditorProps>;
 
 export { DiffEditor };
+
+// monaco
+
+export type Monaco = any;
+
+declare namespace monaco {
+  function init(): Promise<Monaco>;
+}
+
+export { monaco };
