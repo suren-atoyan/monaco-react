@@ -26,8 +26,8 @@ There also exist solutions for integration with React; e.g [this one](https://gi
 * Usage
 	* [Simple Usage](#simple-usage)
 	* [Get Value](#get-value)
-	* [Monaco Instance](#monaco-inctance)
-	* [Editor Instance](#editor-inctance)
+	* [Monaco Instance](#monaco-instance)
+	* [Editor Instance](#editor-instance)
 	* [Controlled Editor](#controlled-editor)
 * Props
 	* [Editor](#editor)
