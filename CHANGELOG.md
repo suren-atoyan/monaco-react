@@ -1,5 +1,10 @@
 ### Versions
 
+## 1.0.8
+###### *July 24, 2019*
+
+- Export utility 'monaco' to be able to access to the monaco instance
+
 ## 1.0.7
 ###### *July 21, 2019*
 
