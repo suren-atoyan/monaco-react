@@ -28,7 +28,12 @@ const Editor =
   });
 
   useUpdate(_ => {
-    editorRef.current.setValue(value);
+    editorRef.current.executeEdits('', [{
+      range: editorRef.current.getModel().getFullModelRange(),
+      text: value,
+    }]);
+
+    editorRef.current.pushUndoStop();
   }, [value], isEditorReady);
 
   useUpdate(_ => {
