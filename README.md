@@ -242,45 +242,7 @@ But in any case, if you want a controlled one, there is an option for that. The 
 
 Here is `onChange` prop, it will be called each time when the content of the editor is changed. It gets two arguments, first one is the "event" object of monaco, the second one is the current value of the editor.
 
-You can use it like in usual controlled components; see the example (You can play with it [here](https://codesandbox.io/s/monaco-editorreact---controlled-editor-yg5il?fontsize=14))
-
-```js
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
-
-import { ControlledEditor } from "@monaco-editor/react";
-
-const BAD_WORD = "eval";
-const WORNING_MESSAGE = " <- hey man, what's this?";
-
-function App() {
-  const [value, setValue] = useState('');
-
-  const handleEditorChange = (ev, value) => {
-    setValue(
-      value.includes(BAD_WORD) && !value.includes(WORNING_MESSAGE)
-        ? value.replace(BAD_WORD, BAD_WORD + WORNING_MESSAGE)
-        : value.includes(WORNING_MESSAGE) && !value.includes(BAD_WORD)
-          ? value.replace(WORNING_MESSAGE, "")
-          : value
-    );
-  };
-
-  return (
-    <ControlledEditor
-      height="90vh"
-      value={"// try to write e%v%a%l somewere 😈 \n"}
-      onChange={handleEditorChange}
-      language="javascript"
-    />
-  );
-}
-
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
-```
-
-Or without circulating the data, and just by returning it from onChange simple setting the new value; see the example (You can play with it [here](https://codesandbox.io/s/monaco-editorreact---controlled-editor-2-7iqpv?fontsize=14))
+You can use it without circulating the data, and just by returning it from `onChange` simple setting the new value; see the example (You can play with it [here](https://codesandbox.io/s/monaco-editorreact---controlled-editor-2-7iqpv?fontsize=14))
 
 ```js
 import React from "react";
@@ -304,6 +266,44 @@ function App() {
     <ControlledEditor
       height="90vh"
       value={"// try to write e%v%a%l somewere 😈 \n"}
+      onChange={handleEditorChange}
+      language="javascript"
+    />
+  );
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+Or like in usual controlled components; see the example (You can play with it [here](https://codesandbox.io/s/monaco-editorreact---controlled-editor-yg5il?fontsize=14))
+
+```js
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+
+import { ControlledEditor } from "@monaco-editor/react";
+
+const BAD_WORD = "eval";
+const WORNING_MESSAGE = " <- hey man, what's this?";
+
+function App() {
+  const [value, setValue] = useState("// try to write e%v%a%l somewere 😈 \n");
+
+  const handleEditorChange = (ev, value) => {
+    setValue(
+      value.includes(BAD_WORD) && !value.includes(WORNING_MESSAGE)
+        ? value.replace(BAD_WORD, BAD_WORD + WORNING_MESSAGE)
+        : value.includes(WORNING_MESSAGE) && !value.includes(BAD_WORD)
+          ? value.replace(WORNING_MESSAGE, "")
+          : value
+    );
+  };
+
+  return (
+    <ControlledEditor
+      height="90vh"
+      value={value}
       onChange={handleEditorChange}
       language="javascript"
     />
