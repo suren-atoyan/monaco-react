@@ -238,10 +238,49 @@ The default export of the library is uncontrolled react component:
 
 We make it by default uncontrolled to keep the nature of the monaco editor as much as it is possible. And based on our experience we can say that in most cases it will cover your needs, as you can see in the examples above. And we highly recommend using that one.
 
-But in any case, if you want a controlled one, there is an option for that. The library exports `ControlledEditor` (as named export). It is the same as the default one (`Editor`), plus it has `onChange` method. It is working a little bit different comparing with, for example, the controlled `input` field. Usually, by using `value` and `onChange` props, we are `circulating` data inside the component, and thus have full control over the data. In this particular component to avoid possible performance issues in very large code bases (which is going to be the `value` of Editor component), we suggest using this approach for "controlled" component. Here is `onChange` prop, it will be called each time when the content of the editor is changed. It gets two arguments, first one is the "event" object of monaco, the second one is the current value of the editor. You can do with this value whatever you want and return what you want to see. So, the value returned from `onChange` will be set to the editor.
+But in any case, if you want a controlled one, there is an option for that. The library exports `ControlledEditor` (as named export). It is the same as the default one (`Editor`), plus it has `onChange` method. It is working a little bit different comparing with, for example, the controlled `input` field.
 
-Here is the example.
-You can play with it [here](https://codesandbox.io/s/monaco-editorreact---controlled-editor-yg5il?fontsize=14)
+Here is `onChange` prop, it will be called each time when the content of the editor is changed. It gets two arguments, first one is the "event" object of monaco, the second one is the current value of the editor.
+
+You can use it like in usual controlled components; see the example (You can play with it [here](https://codesandbox.io/s/monaco-editorreact---controlled-editor-yg5il?fontsize=14))
+
+```js
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+
+import { ControlledEditor } from "@monaco-editor/react";
+
+const BAD_WORD = "eval";
+const WORNING_MESSAGE = " <- hey man, what's this?";
+
+function App() {
+  const [value, setValue] = useState('');
+
+  const handleEditorChange = (ev, value) => {
+    setValue(
+      value.includes(BAD_WORD) && !value.includes(WORNING_MESSAGE)
+        ? value.replace(BAD_WORD, BAD_WORD + WORNING_MESSAGE)
+        : value.includes(WORNING_MESSAGE) && !value.includes(BAD_WORD)
+          ? value.replace(WORNING_MESSAGE, "")
+          : value
+    );
+  };
+
+  return (
+    <ControlledEditor
+      height="90vh"
+      value={"// try to write e%v%a%l somewere 😈 \n"}
+      onChange={handleEditorChange}
+      language="javascript"
+    />
+  );
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+Or without circulating the data, and just by returning it from onChange simple setting the new value; see the example (You can play with it [here](https://codesandbox.io/s/monaco-editorreact---controlled-editor-2-7iqpv?fontsize=14))
 
 ```js
 import React from "react";
@@ -250,17 +289,15 @@ import ReactDOM from "react-dom";
 import { ControlledEditor } from "@monaco-editor/react";
 
 const BAD_WORD = "eval";
-const WORNING_MESSAGE = ` <- hey, what is this man?`;
+const WORNING_MESSAGE = " <- hey man, what's this?";
 
 function App() {
   const handleEditorChange = (ev, value) => {
-    if (value.includes(BAD_WORD) && !value.includes(WORNING_MESSAGE)) {
-      return value.replace(BAD_WORD, BAD_WORD + WORNING_MESSAGE);
-    } else if (value.includes(WORNING_MESSAGE) && !value.includes(BAD_WORD)) {
-      return value.replace(WORNING_MESSAGE, "");
-    } else {
-      return value;
-    }
+    return value.includes(BAD_WORD) && !value.includes(WORNING_MESSAGE)
+      ? value.replace(BAD_WORD, BAD_WORD + WORNING_MESSAGE)
+      : value.includes(WORNING_MESSAGE) && !value.includes(BAD_WORD)
+        ? value.replace(WORNING_MESSAGE, "")
+        : value;
   };
 
   return (
