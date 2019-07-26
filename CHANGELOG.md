@@ -1,5 +1,11 @@
 ### Versions
 
+## 1.1.0
+###### *July 26, 2019*
+
+- Apply edit by using `executeEdits` method
+- Correct ControlledEditor usage examples in Docs
+
 ## 1.0.8
 ###### *July 24, 2019*
 
