@@ -12,7 +12,6 @@ import Editor from '@monaco-editor/react';
 import { useStore } from 'store';
 import config from 'config';
 import { noop } from 'utils';
-import { useUpdate } from 'utils/hooks';
 
 import useStyles from './useStyles';
 
@@ -20,28 +19,31 @@ const Settings = _ => {
   const classes = useStyles();
   const [isEditorReady, setIsEditorReady] = useState(false);
   const {
-    state: { editor: { selectedLanguageId, options }, themeMode },
-    actions: { editor: { setSelectedLanguageId, setOptions }, showNotification },
+    state: { editor: { selectedLanguageId, options }, monacoTheme },
+    actions: { editor: { setSelectedLanguageId, setOptions, setMonacoTheme }, showNotification },
+    effects: { defineTheme },
   } = useStore();
   const [getEditorValue, setGetEditorValue] = useState(noop);
   const editorRef = useRef();
 
   function handleLanguageChange(ev) {
-    setSelectedLanguageId(ev.target.value);    
+    setSelectedLanguageId(ev.target.value);
+  }
+
+  function handleThemeChange(ev) {
+    const theme = ev.target.value;
+
+    if (config.defaultThemes.includes(theme)) {
+      setMonacoTheme(theme);
+    } else {
+      defineTheme(theme).then(_ => setMonacoTheme(theme));
+    }
   }
 
   function handleEditorDidMount(valueGetter, editor) {
     setGetEditorValue(_ => valueGetter);
     setIsEditorReady(true);
     editorRef.current = editor;
-  }
-
-  useUpdate(_ => {
-    editorRef.current && editorRef.current.getAction('editor.action.formatDocument').run();
-  });
-
-  function handleBeautifyJSON() {
-    editorRef.current.getAction('editor.action.formatDocument').run();
   }
 
   function handleApply() {
@@ -77,6 +79,30 @@ const Settings = _ => {
       </div>
 
       <div>
+        <Typography className={classes.title} variant="h6">Themes</Typography>
+        <TextField
+          select
+          variant="filled"
+          value={monacoTheme}
+          onChange={handleThemeChange}
+          className="full-width"
+          label="Theme"
+        >
+          {config.defaultThemes.map(theme => (
+            <MenuItem key={theme} value={theme}>
+              {theme}
+            </MenuItem>
+          ))}
+          <MenuItem disabled><Divider /></MenuItem>
+          {config.monacoThemes.filter(theme => !theme.includes(' ')).map(theme => (
+            <MenuItem key={theme} value={theme}>
+              {theme}
+            </MenuItem>
+          ))}
+        </TextField>
+      </div>
+
+      <div>
         <Typography className={classes.title} variant="h6">Options</Typography>
         <Typography variant="subtitle2" gutterBottom>
           For full list of options with descriptions visit <Link
@@ -92,7 +118,7 @@ const Settings = _ => {
         </Typography>
         <div className={classes.editor}>
           <Editor
-            theme={themeMode}
+            theme={monacoTheme}
             language="json"
             height={400}
             value={JSON.stringify(options, null, 2)}
@@ -100,7 +126,6 @@ const Settings = _ => {
           />
         </div>
         <Button variant="outlined" disabled={!isEditorReady} onClick={handleApply}>Apply</Button>
-        <Button variant="outlined" disabled={!isEditorReady} onClick={handleBeautifyJSON}>Beautify JSON</Button>
       </div>
     </div>
   );

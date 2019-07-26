@@ -31,6 +31,9 @@ const editor = {
   setOptions({ state }, options) {
     state.editor.options = options;
   },
+  setMonacoTheme({ state }, theme) {
+    state.monacoTheme = theme;
+  },
 };
 
 const diffEditor = {

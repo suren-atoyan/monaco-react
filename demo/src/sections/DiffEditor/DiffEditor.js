@@ -10,7 +10,7 @@ import useStyles from './useStyles';
 
 const DiffEditor = _ => {
   const { state: {
-    themeMode,
+    monacoTheme,
     diffEditor: { selectedLanguageId },
   } } = useStore();
   const classes = useStyles();
@@ -20,7 +20,7 @@ const DiffEditor = _ => {
       original={examples.original}
       modified={examples.modified}
       language={config.supportedLanguages.find(({ id }) => id === selectedLanguageId).name}
-      theme={themeMode}
+      theme={monacoTheme}
     />
   </div>;
 }

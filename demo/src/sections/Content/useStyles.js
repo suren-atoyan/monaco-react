@@ -11,10 +11,10 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: 10,    
   },
   editor: {
-    height: '85vh',
+    height: '100%',
   },
   diffEditor: {
-    height: '85vh',
+    height: '100vh',
   }
 }));
 

@@ -1,7 +1,9 @@
 import config from 'config';
 
+const initalTheme = localStorage.getItem('themeMode') || 'light';
+
 const initialState = {
-  themeMode: localStorage.getItem('themeMode') || 'light',
+  themeMode: initalTheme,
 
   isEditorReady: false,
 
@@ -69,6 +71,8 @@ const initialState = {
       wrappingIndent: 'none',
     },
   },
+
+  monacoTheme: initalTheme,
 
   diffEditor: {
     selectedLanguageId: 24, // 24 is the id of markdown

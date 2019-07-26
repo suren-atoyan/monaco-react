@@ -11,11 +11,12 @@ import useStyles from './useStyles';
 
 const Editor = _ => {
   const classes = useStyles();
-  const { state: { editor: { selectedLanguageId, options }, themeMode } } = useStore();
+  const { state: { editor: { selectedLanguageId, options }, monacoTheme } } = useStore();
 
   return <div className={classes.root}>
     <MonacoEditor
-      theme={themeMode}
+      theme={monacoTheme}
+      height=""
       value={examples[selectedLanguageId] || ''}
       language={config.supportedLanguages.find(({ id }) => id === selectedLanguageId).name}
       options={options}
