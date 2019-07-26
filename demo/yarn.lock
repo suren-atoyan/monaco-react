@@ -1196,10 +1196,10 @@
     prop-types "^15.7.2"
     react-is "^16.8.0"
 
-"@monaco-editor/react@1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@monaco-editor/react/-/react-1.0.6.tgz#3984ad166b69cf6441cc15abdc113b27b172109d"
-  integrity sha512-EoE1lQCY0jQ3VQNquAQVBBSeHM3usUn6DYv/N/WnV+wb6AA7XlDkmMw1qaoKOderPY9gJa0K0JcJLnGR29zs7g==
+"@monaco-editor/react@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@monaco-editor/react/-/react-1.1.0.tgz#7df7c8bd6b9b2b1d5cf22de1a74051c58330248c"
+  integrity sha512-MB/2FcEjzf55v56onnhmPKm6hpUvA5tRQYSSOWJ53acehyaA1LLuVj5QWs79jOSavpDa6wpUbhL0cIIWK9pb1w==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"

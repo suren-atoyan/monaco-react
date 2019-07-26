@@ -26,25 +26,29 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Monaco Editor React</title>
+
+    <style type="text/css">
+      .msc {
+        height: 1px;
+        width: 1px;
+        opacity: 0;
+        position: absolute;
+        z-index: -1;
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <main id="_msc">
-      Monaco editor wrapper for easy/one-line integration with React applications (e.g. powered by create-react-app) without need of webpack (or other module bundler) configuration files.
-
-      You don't need any kind of webpack configuration files and it works great with React apps created by CRA or created by something else.
-
-      <h1>Monaco Editor React</h1><h2>code editor react</h2><h3>create react app</h3><h4>vscode</h4><h5>editor javascript</h5><h6>code editor browser</h6>
-    </main>
+    <main id="_msc" class="msc"></main>
     <script type="text/javascript" src="/polyfill.js"></script>
     <script type="text/javascript">
-      var ss = { height: '1px', width: '1px', opacity: 0, position: 'absolute', zIndex: -1 };
       if ((/bot|googlebot|crawler|spider|robot|crawling/i.test(navigator.userAgent))) {
         var coreJsScript = document.createElement('script');
         coreJsScript.src = 'https://unpkg.com/core-js-bundle@3.0.1/minified.js';
         document.body.insertBefore(coreJsScript, _msc);
-      } else {
-        Object.keys(ss).forEach(function(attr) { _msc.style[attr] = ss[attr] });
+
+        _msc.innerHTML = "Monaco editor wrapper for easy/one-line integration with React applications (e.g. powered by create-react-app) without need of webpack (or other module bundler) configuration files. You don't need any kind of webpack configuration files and it works great with React apps created by CRA or created by something else. <h1>Monaco Editor React</h1><h2>code editor react</h2><h3>create react app</h3><h4>vscode</h4><h5>editor javascript</h5><h6>code editor browser</h6>";
+        _msc.className = '';
       }
     </script>
     <div id="root"></div>

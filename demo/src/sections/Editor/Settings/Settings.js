@@ -20,7 +20,7 @@ const Settings = _ => {
   const classes = useStyles();
   const [isEditorReady, setIsEditorReady] = useState(false);
   const {
-    state: { editor: { selectedLanguageId, options } },
+    state: { editor: { selectedLanguageId, options }, themeMode },
     actions: { editor: { setSelectedLanguageId, setOptions }, showNotification },
   } = useStore();
   const [getEditorValue, setGetEditorValue] = useState(noop);
@@ -31,7 +31,6 @@ const Settings = _ => {
   }
 
   function handleEditorDidMount(valueGetter, editor) {
-    setTimeout(_ => editor.getAction('editor.action.formatDocument').run(), 200);
     setGetEditorValue(_ => valueGetter);
     setIsEditorReady(true);
     editorRef.current = editor;
@@ -93,9 +92,10 @@ const Settings = _ => {
         </Typography>
         <div className={classes.editor}>
           <Editor
+            theme={themeMode}
             language="json"
             height={400}
-            value={JSON.stringify(options)}
+            value={JSON.stringify(options, null, 2)}
             editorDidMount={handleEditorDidMount}
           />
         </div>
