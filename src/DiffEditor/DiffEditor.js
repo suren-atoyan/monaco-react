@@ -6,7 +6,7 @@ import Loading from '../Loading';
 import { monaco, noop } from '../utils';
 import { useMount, useUpdate } from '../utils/hooks';
 
-import config from '../config';
+import themes from '../config/themes';
 import styles from './styles';
 
 const DiffEditor =
@@ -92,7 +92,7 @@ const DiffEditor =
       editorRef.current,
     );
 
-    monacoRef.current.editor.defineTheme('dark', config.theme['night-dark']);
+    monacoRef.current.editor.defineTheme('dark', themes['night-dark']);
     monacoRef.current.editor.setTheme(theme);
 
     setIsEditorReady(true);
