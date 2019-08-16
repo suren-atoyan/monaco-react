@@ -1,5 +1,10 @@
 ### Versions
 
+## 1.2.0
+###### *Aug 16, 2019*
+
+- Add method to modify default config
+
 ## 1.1.0
 ###### *July 26, 2019*
 
