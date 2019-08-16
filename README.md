@@ -27,6 +27,7 @@ There also exist solutions for integration with React; e.g [this one](https://gi
 	* [Simple Usage](#simple-usage)
 	* [Get Value](#get-value)
 	* [Monaco Instance](#monaco-instance)
+  * [Config](#config)
 	* [Editor Instance](#editor-instance)
 	* [Controlled Editor](#controlled-editor)
 * Props
@@ -181,6 +182,19 @@ monaco
   .init()
   .then(monaco => /* here is the instance of monaco, so you can use the `monaco.languages` or whatever you want */)
   .catch(error => console.error('An error occurred during initialization of Monaco: ', error));
+```
+
+#### Config
+
+There is a config file with "urls" to load monaco files (at this moment; this file can be extended in the future). And there is a way to modify it. Here is an example:
+
+NOTE: your passed object will be deeply merged with the [default one](./src/config/index.js).
+
+
+```js
+import { monaco } from '@monaco-editor/react';
+
+monaco.config({ urls: { ... } });
 ```
 
 #### Editor Instance

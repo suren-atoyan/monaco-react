@@ -1,6 +1,19 @@
 import config from '../config';
+import { deepMerge } from '../utils';
 
 class Monaco {
+  constructor(config = {}) {
+    this.__config = config;
+  }
+
+  config(config) {
+    if (config) {
+      this.__config = deepMerge(this.__config, config);
+    }
+
+    return this;
+  }
+
   injectScripts(script) {
     document.body.appendChild(script);
   }
@@ -16,7 +29,7 @@ class Monaco {
   }
 
   createMonacoLoaderScript(mainScript) {
-    const loaderScript = this.createScript(config.urls.monacoLoader);
+    const loaderScript = this.createScript(this.__config.urls.monacoLoader);
     loaderScript.onload = _ => this.injectScripts(mainScript);
 
     loaderScript.onerror = this.reject;
@@ -28,7 +41,7 @@ class Monaco {
     const mainScript = this.createScript();
 
     mainScript.innerHTML = `
-      require.config({ paths: { 'vs': '${config.urls.monacoBase}' } });
+      require.config({ paths: { 'vs': '${this.__config.urls.monacoBase}' } });
       require(['vs/editor/editor.main'], function() {
         document.dispatchEvent(new Event('monaco_init'));
       });
@@ -67,4 +80,4 @@ class Monaco {
   }
 }
 
-export default new Monaco();
+export default new Monaco(config);
