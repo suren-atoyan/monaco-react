@@ -1,5 +1,10 @@
 ### Versions
 
+## 1.2.1
+###### *Aug 20, 2019*
+
+- Set editor value directly in case of read only
+
 ## 1.2.0
 ###### *Aug 16, 2019*
 
