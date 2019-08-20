@@ -27,7 +27,7 @@ There also exist solutions for integration with React; e.g [this one](https://gi
 	* [Simple Usage](#simple-usage)
 	* [Get Value](#get-value)
 	* [Monaco Instance](#monaco-instance)
-  * [Config](#config)
+  	* [Config](#config)
 	* [Editor Instance](#editor-instance)
 	* [Controlled Editor](#controlled-editor)
 * Props
@@ -173,6 +173,7 @@ ReactDOM.render(<App />, rootElement);
 ```
 
 #### Monaco Instance
+
 If you want to create your own language or theme, or modify existing ones you may need to access to the monaco instance. So, to that purpose, there is a utility called "monaco" exported from library and you can use it like this:
 
 ```js
