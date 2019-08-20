@@ -28,12 +28,16 @@ const Editor =
   });
 
   useUpdate(_ => {
-    editorRef.current.executeEdits('', [{
-      range: editorRef.current.getModel().getFullModelRange(),
-      text: value,
-    }]);
+    if (options.readOnly) {
+      editorRef.current.setValue(value);
+    } else {
+      editorRef.current.executeEdits('', [{
+        range: editorRef.current.getModel().getFullModelRange(),
+        text: value,
+      }]);
 
-    editorRef.current.pushUndoStop();
+      editorRef.current.pushUndoStop();
+    }
   }, [value], isEditorReady);
 
   useUpdate(_ => {
