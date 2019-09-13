@@ -181,9 +181,11 @@ import { monaco } from '@monaco-editor/react';
 
 monaco
   .init()
-  .then(monaco => /* here is the instance of monaco, so you can use the `monaco.languages` or whatever you want */)
+  .then(monaco => {/* here is the instance of monaco, so you can use the `monaco.languages` or whatever you want */})
   .catch(error => console.error('An error occurred during initialization of Monaco: ', error));
 ```
+
+You can play with it [here](https://codesandbox.io/s/monaco-editorreact---monaco-instance-nrris?fontsize=14)
 
 #### Config
 
