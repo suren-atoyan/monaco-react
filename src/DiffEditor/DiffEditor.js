@@ -102,7 +102,7 @@ const DiffEditor =
     !isMonacoMounting && !isEditorReady && createEditor();
   }, [isMonacoMounting, isEditorReady, createEditor]);
 
-  const removeEditor = _ => editorRef.current.dispose();
+  const removeEditor = _ => editorRef.current && editorRef.current.dispose();
 
   return (
     <section style={{ ...styles.wrapper, width, height }}>
