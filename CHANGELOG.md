@@ -1,5 +1,12 @@
 ### Versions
 
+## 1.2.2
+###### *Oct 3, 2019*
+
+- update dev dependencies
+- check editor existence in "removeEditor" function
+- replace "jest-dom" with "@testing-library/jest-dom"
+
 ## 1.2.1
 ###### *Aug 20, 2019*
 
