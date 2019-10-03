@@ -1,7 +1,7 @@
 import React from 'react';
 import DiffEditor from '.';
 import { render } from '@testing-library/react';
-import 'jest-dom/extend-expect';
+import '@testing-library/jest-dom/extend-expect';
 
 describe('<DiffEditor />', () => {
   it('should check render with snapshot', () => {
