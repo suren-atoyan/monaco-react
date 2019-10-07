@@ -71,7 +71,7 @@ export default Editor;
 export type ControlledEditorOnChange = (
   ev: any,
   value: string | undefined,
-) => string | undefined | void;
+) => string | void;
 
 export interface ControlledEditorProps extends EditorProps {
   /**
