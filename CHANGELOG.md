@@ -1,5 +1,10 @@
 ### Versions
 
+## 1.2.3
+###### *Oct 7, 2019*
+
+- (TYPES) add "void" to the "ControlledEditorOnChange" return types
+
 ## 1.2.2
 ###### *Oct 3, 2019*
 
