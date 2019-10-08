@@ -1,5 +1,11 @@
 ### Versions
 
+## 2.0.0
+###### *Oct 9, 2019*
+
+- set the default version of monaco to 0.18.1
+- set last value by .setValue method before changing the language
+
 ## 1.2.3
 ###### *Oct 7, 2019*
 
