@@ -93,7 +93,7 @@ export { ControlledEditor };
 export type DiffEditorDidMount = (
   getOriginalEditorValue: () => string,
   getModifiedEditorValue: () => string,
-  editor:  monacoEditor.editor.IStandaloneDiffEditor,
+  editor: monacoEditor.editor.IStandaloneDiffEditor,
 ) => void;
 
 export interface DiffEditorProps {
