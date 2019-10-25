@@ -1,5 +1,11 @@
 ### Versions
 
+## 2.1.0
+###### *Oct 25, 2019*
+
+- add monaco-editor as peer dependency for proper type definitions
+- write more proper types
+
 ## 2.0.0
 ###### *Oct 9, 2019*
 
