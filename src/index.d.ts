@@ -58,9 +58,9 @@ export interface EditorProps {
   loading?: React.ElementType | string;
 
   /**
-   * IEditorOptions
+   * IEditorConstructionOptions
    */
-  options?: object;
+  options?: monacoEditor.editor.IEditorConstructionOptions;
 }
 
 declare const Editor: React.FC<EditorProps>;
@@ -93,7 +93,7 @@ export { ControlledEditor };
 export type DiffEditorDidMount = (
   getOriginalEditorValue: () => string,
   getModifiedEditorValue: () => string,
-  editor: monacoEditor.editor.IStandaloneCodeEditor,
+  editor:  monacoEditor.editor.IStandaloneDiffEditor,
 ) => void;
 
 export interface DiffEditorProps {
@@ -159,9 +159,9 @@ export interface DiffEditorProps {
   loading?: React.ElementType | string;
 
   /**
-   * IDiffEditorOptions
+   * IDiffEditorConstructionOptions
    */
-  options?: object;
+  options?: monacoEditor.editor.IDiffEditorConstructionOptions;
 }
 
 declare const DiffEditor: React.FC<DiffEditorProps>;
