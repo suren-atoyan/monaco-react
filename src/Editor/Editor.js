@@ -10,7 +10,7 @@ import themes from '../config/themes';
 import styles from './styles';
 
 const Editor =
-  ({ value, language, editorDidMount, theme, line, width, height, loading, options }) =>
+  ({ value, language, editorDidMount, theme, line, width, height, loading, options, _isControlledMode }) =>
 {
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [isMonacoMounting, setIsMonacoMounting] = useState(true);
@@ -35,6 +35,12 @@ const Editor =
         range: editorRef.current.getModel().getFullModelRange(),
         text: value,
       }]);
+
+      if (_isControlledMode) {
+        const model = editorRef.current.getModel();
+
+        model.forceTokenization(model.getLineCount());
+      }
 
       editorRef.current.pushUndoStop();
     }
@@ -101,6 +107,7 @@ Editor.propTypes = {
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   loading: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   options: PropTypes.object,
+  _isControlledMode: PropTypes.bool,
 };
 
 Editor.defaultProps = {
@@ -110,6 +117,7 @@ Editor.defaultProps = {
   height: '100%',
   loading: 'Loading...',
   options: {},
+  _isControlledMode: false,
 };
 
 export default Editor;

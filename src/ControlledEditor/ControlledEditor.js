@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import Editor from '..';
 import { noop } from '../utils';
 
 const ControlledEditor = ({ value, onChange, editorDidMount, ...props }) => {
+  const previousValue = useRef(value);
+
   const handleEditorDidMount = (getValue, editor) => {
     editor.onDidChangeModelContent(ev => {
       const currentValue = editor.getValue();
+      if (currentValue !== previousValue.current) {
+        previousValue.current = currentValue;
+        const value = onChange(ev, currentValue);
 
-      const value = onChange(ev, currentValue);
-
-      if (typeof value === 'string') {
-        if (currentValue !== value) {
-          editor.setValue(value);
+        if (typeof value === 'string') {
+          if (currentValue !== value) {
+            editor.setValue(value);
+          }
         }
       }
     });
@@ -24,6 +28,7 @@ const ControlledEditor = ({ value, onChange, editorDidMount, ...props }) => {
   return <Editor
     value={value}
     editorDidMount={handleEditorDidMount}
+    _isControlledMode={true}
     {...props}
   />
 };
