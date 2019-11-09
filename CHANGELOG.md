@@ -1,5 +1,11 @@
 ### Versions
 
+## 2.3.0
+###### *Nov 9, 2019*
+
+- prevent onchange in case of undo/redo (controlled editor)
+- create separate component for MonacoContainer
+
 ## 2.2.0
 ###### *Nov 9, 2019*
 
