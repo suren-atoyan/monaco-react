@@ -1,5 +1,10 @@
 ### Versions
 
+## 2.2.0
+###### *Nov 9, 2019*
+
+- force additional tokenization in controlled mode to avoid blinking
+
 ## 2.1.1
 ###### *Oct 25, 2019*
 
