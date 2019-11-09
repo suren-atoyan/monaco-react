@@ -5,15 +5,18 @@ import Loading from '../Loading';
 
 import styles from './styles';
 
-const MonacoContainer = React.forwardRef(({ width, height, isEditorReady, loading }, ref) => (
+// ** forwardref render functions do not support proptypes or defaultprops **
+// one of the reasons why we use a separate prop for passing ref instead of using forwardref
+
+const MonacoContainer = ({ width, height, isEditorReady, loading, _ref }) => (
   <section style={{ ...styles.wrapper, width, height }}>
     {!isEditorReady && <Loading content={loading} />}
     <div
-      ref={ref}
+      ref={_ref}
       style={{ ...styles.fullWidth, ...(!isEditorReady && styles.hide) }}
     />
   </section>
-));
+);
 
 MonacoContainer.propTypes = {
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,

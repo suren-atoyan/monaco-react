@@ -108,7 +108,7 @@ const DiffEditor =
     height={height}
     isEditorReady={isEditorReady}
     loading={loading}
-    ref={containerRef}
+    _ref={containerRef}
   />;
 };
 

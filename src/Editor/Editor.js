@@ -90,7 +90,7 @@ const Editor =
     height={height}
     isEditorReady={isEditorReady}
     loading={loading}
-    ref={containerRef}
+    _ref={containerRef}
   />;
 };
 
