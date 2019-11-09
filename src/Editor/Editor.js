@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
-import Loading from '../Loading';
+import MonacoContainer from '../MonacoContainer';
 
 import { monaco, noop } from '../utils';
 import { useMount, useUpdate } from '../utils/hooks';
 
 import themes from '../config/themes';
-import styles from './styles';
 
 const Editor =
   ({ value, language, editorDidMount, theme, line, width, height, loading, options, _isControlledMode }) =>
@@ -86,15 +85,13 @@ const Editor =
 
   const removeEditor = _ => editorRef.current && editorRef.current.dispose();
 
-  return (
-    <section style={{ ...styles.wrapper, width, height }}>
-      {!isEditorReady && <Loading content={loading} />}
-      <div
-        ref={containerRef}
-        style={{ ...styles.fullWidth, ...(!isEditorReady && styles.hide) }}
-      />
-    </section>
-  );
+  return <MonacoContainer
+    width={width}
+    height={height}
+    isEditorReady={isEditorReady}
+    loading={loading}
+    ref={containerRef}
+  />;
 };
 
 Editor.propTypes = {
