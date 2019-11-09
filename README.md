@@ -1,7 +1,7 @@
 # monaco-react
 Monaco Editor for React
 
-[![NPM](https://nodei.co/npm/@monaco-editor/react.png.png)](https://nodei.co/npm/@monaco-editor/react/)
+[![NPM](https://nodei.co/npm/@monaco-editor/react.png)](https://nodei.co/npm/@monaco-editor/react/)
 
 ## Synopsis
 
