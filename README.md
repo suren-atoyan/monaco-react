@@ -223,7 +223,7 @@ function App() {
     // in this component whenever you want
   }
 
-  function listenEditorChagnes() {
+  function listenEditorChanges() {
     editorRef.current.onDidChangeModelContent(ev => {
       console.log(editorRef.current.getValue());
     });
@@ -231,7 +231,7 @@ function App() {
 
   return (
     <>
-      <button onClick={listenEditorChagnes} disabled={!!editorRef.current}>
+      <button onClick={listenEditorChanges} disabled={!!editorRef.current}>
         Press to listen editor changes (see console)
       </button>
       <Editor
