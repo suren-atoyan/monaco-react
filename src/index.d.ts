@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api';
+export import MonacoEditorNatives = monacoEditor;
 
 type Theme =
   | "dark"
