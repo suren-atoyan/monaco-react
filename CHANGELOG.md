@@ -1,5 +1,10 @@
 ### Versions
 
+## 2.3.5
+###### *Dec 10, 2019*
+
+- optimize babel build with runtime transform
+
 ## 2.3.4
 ###### *Dec 10, 2019*
 
