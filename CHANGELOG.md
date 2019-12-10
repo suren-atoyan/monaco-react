@@ -1,5 +1,10 @@
 ### Versions
 
+## 2.3.1
+###### *Dec 10, 2019*
+
+- add unnecessary files to npmignore
+
 ## 2.3.0
 ###### *Nov 9, 2019*
 
