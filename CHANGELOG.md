@@ -1,6 +1,6 @@
 ### Versions
 
-## 2.3.2
+## 2.3.2 & 3
 ###### *Dec 10, 2019*
 
 - fix typo in npmignore
