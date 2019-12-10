@@ -39,6 +39,7 @@
     "@babel/cli": "^7.6.2",
     "@babel/core": "^7.6.2",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.7.6",
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
     "@testing-library/jest-dom": "^4.1.0",
@@ -68,7 +69,8 @@
         {
           "loose": false
         }
-      ]
+      ],
+      "@babel/plugin-transform-runtime"
     ]
   },
   "husky": {
