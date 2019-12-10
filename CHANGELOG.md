@@ -1,5 +1,10 @@
 ### Versions
 
+## 2.3.4
+###### *Dec 10, 2019*
+
+- add xxx.spec.js.snap files to npmignore
+
 ## 2.3.2 & 3
 ###### *Dec 10, 2019*
 
