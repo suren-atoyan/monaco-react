@@ -1,5 +1,11 @@
 ### Versions
 
+## 2.4.0
+###### *Dec 11, 2019*
+
+- types: add config into namespace monaco
+- types: change type of "loading" from React.ElementType to React.ReactNode
+
 ## 2.3.5
 ###### *Dec 10, 2019*
 
