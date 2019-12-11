@@ -156,7 +156,7 @@ export interface DiffEditorProps {
   /**
    * The loading screen before the editor will be loaded. Defaults 'loading...'
    */
-  loading?: React.ElementType | string;
+  loading?: React.ReactNode | string;
 
   /**
    * IDiffEditorConstructionOptions
@@ -174,6 +174,12 @@ export type Monaco = typeof monacoEditor;
 
 declare namespace monaco {
   function init(): Promise<Monaco>;
+  function config(params: {
+    urls: {
+      monacoLoader?: string,
+      monacoBase?: string
+    }
+  }): void
 }
 
 export { monaco };
