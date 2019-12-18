@@ -35,7 +35,7 @@ export interface EditorProps {
   /**
    * Default themes of monaco. Defaults to "light"
    */
-  theme?: Theme;
+  theme?: Theme | string;
 
   /**
    * The line to jump on it
