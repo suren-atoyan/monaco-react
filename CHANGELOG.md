@@ -1,5 +1,10 @@
 ### Versions
 
+## 2.5.0
+###### *Dec 19, 2019*
+
+- types: fix type of theme; user should be able to pass any kind of theme (string)
+
 ## 2.4.0
 ###### *Dec 11, 2019*
 
