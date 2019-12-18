@@ -3,6 +3,7 @@
 import * as React from "react";
 import * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api';
 
+// default themes
 type Theme =
   | "dark"
   | "light";
