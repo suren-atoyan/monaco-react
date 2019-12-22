@@ -1,5 +1,10 @@
 ### Versions
 
+## 2.5.1
+###### *Dec 23, 2019*
+
+- types: fix type of "loading"
+
 ## 2.5.0
 ###### *Dec 19, 2019*
 
