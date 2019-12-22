@@ -56,7 +56,7 @@ export interface EditorProps {
   /**
    * The loading screen before the editor will be loaded. Defaults 'loading...'
    */
-  loading?: React.ElementType | string;
+  loading?: React.ReactNode;
 
   /**
    * IEditorConstructionOptions
@@ -157,7 +157,7 @@ export interface DiffEditorProps {
   /**
    * The loading screen before the editor will be loaded. Defaults 'loading...'
    */
-  loading?: React.ReactNode | string;
+  loading?: React.ReactNode;
 
   /**
    * IDiffEditorConstructionOptions
