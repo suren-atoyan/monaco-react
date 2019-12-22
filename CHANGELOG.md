@@ -1,5 +1,11 @@
 ### Versions
 
+
+## 2.6.1
+###### *Dec 23, 2019*
+
+- versions: fix version
+
 ## 2.5.1
 ###### *Dec 23, 2019*
 
