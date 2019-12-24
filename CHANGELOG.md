@@ -1,6 +1,11 @@
 ### Versions
 
 
+## 3.0.0
+###### *Dec 24, 2019*
+
+- monaco: update monaco version to 0.19.0
+
 ## 2.6.1
 ###### *Dec 23, 2019*
 
