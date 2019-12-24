@@ -38,7 +38,12 @@ There also exist solutions for integration with React; e.g [this one](https://gi
 #### Installation
 
 ```bash
-yarn add @monaco-editor/react # or npm install @monaco-editor/react
+yarn add @monaco-editor/react monaco-editor
+```
+- or -
+
+```bash
+npm i @monaco-editor/react monaco-editor
 ```
 
 #### Introduction
