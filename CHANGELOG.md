@@ -1,6 +1,11 @@
 ### Versions
 
 
+## 3.0.1
+###### *Dec 26, 2019*
+
+- readme: update installation section
+
 ## 3.0.0
 ###### *Dec 24, 2019*
 

@@ -38,8 +38,16 @@ There also exist solutions for integration with React; e.g [this one](https://gi
 #### Installation
 
 ```bash
-yarn add @monaco-editor/react # or npm install @monaco-editor/react
+npm install @monaco-editor/react 
 ```
+
+or
+
+```bash
+yarn add @monaco-editor/react
+```
+
+NOTE: for type definitions, this package uses monaco-editor package and it is defined as a peer dependency. So, if you need types and you have not monaco-editor npm package installed in your project, you have to install it by yourself.
 
 #### Introduction
 
