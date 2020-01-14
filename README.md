@@ -193,7 +193,7 @@ monaco
   .catch(error => console.error('An error occurred during initialization of Monaco: ', error));
 ```
 
-You can play with it [here](https://codesandbox.io/s/monaco-editorreact---monaco-instance-nrris?fontsize=14)
+You can play with it [here](https://codesandbox.io/s/monaco-editorreact---monaco-instance-5pbmx?fontsize=14&hidenavigation=1&theme=dark)
 
 #### Config
 
