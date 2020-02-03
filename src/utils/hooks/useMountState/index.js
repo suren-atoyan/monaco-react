@@ -9,9 +9,9 @@ useEffect(_ => {
   };
 });
 
-const useUnmount = {
+const useMountState = {
   isMounted: mountedRef.current,
   isUnmounted: !mountedRef.current,
 };
 
-export default useUnmount;
+export default useMountState;

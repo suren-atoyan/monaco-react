@@ -29,19 +29,11 @@ const DiffEditor =
   const editorRef = useRef();
   const monacoRef = useRef();
   const containerRef = useRef();
-  const mountedRef = useRef(false);
 
-  useEffect(_ => {
-    mountedRef.current = true;
-    return _ => {
-      mountedRef.current = false;
-    }
-  });
-
-  useMount(_ => {
+  useMount(isMounted => {
     monaco
       .init()
-      .then(monaco => (monacoRef.current = monaco) && mountedRef.current && setIsMonacoMounting(false))
+      .then(monaco => isMounted && (monacoRef.current = monaco) && setIsMonacoMounting(false))
       .catch(error => console.error('An error occurred during initialization of Monaco: ', error));
 
     return removeEditor;
