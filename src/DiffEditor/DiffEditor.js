@@ -31,12 +31,13 @@ const DiffEditor =
   const containerRef = useRef();
 
   useMount(_ => {
-    monaco
-      .init()
-      .then(monaco => (monacoRef.current = monaco) && setIsMonacoMounting(false))
-      .catch(error => console.error('An error occurred during initialization of Monaco: ', error));
+    const cancelable = monaco.init();
 
-    return removeEditor;
+    cancelable
+      .then(monaco => ((monacoRef.current = monaco) && setIsMonacoMounting(false)))
+      .catch(error => console.error('An error occurred during initialization of Monaco:', error));
+
+    return _ => editorRef.current ? disposeEditor() : cancelable.cancel();
   });
 
   useUpdate(_ => {
@@ -101,7 +102,7 @@ const DiffEditor =
     !isMonacoMounting && !isEditorReady && createEditor();
   }, [isMonacoMounting, isEditorReady, createEditor]);
 
-  const removeEditor = _ => editorRef.current && editorRef.current.dispose();
+  const disposeEditor = _ => editorRef.current.dispose();
 
   return <MonacoContainer
     width={width}
