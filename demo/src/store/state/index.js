@@ -1,6 +1,6 @@
 import config from 'config';
 
-const initalTheme = localStorage.getItem('themeMode') || 'light';
+const initalTheme = localStorage.getItem('themeMode') || 'dark';
 
 const initialState = {
   themeMode: initalTheme,
