@@ -19,7 +19,7 @@ Object {
       </section>
     </div>
     <script
-      src="https://cdn.jsdelivr.net/npm/monaco-editor@0.19.0/min/vs/loader.js"
+      src="https://cdn.jsdelivr.net/npm/monaco-editor@0.19.3/min/vs/loader.js"
     />
   </body>,
   "container": <div>
