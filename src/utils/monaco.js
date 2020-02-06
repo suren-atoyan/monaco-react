@@ -1,5 +1,5 @@
 import config from '../config';
-import { deepMerge } from '../utils';
+import { deepMerge, makeCancelable } from '../utils';
 
 class Monaco {
   constructor(config = {}) {
@@ -76,7 +76,7 @@ class Monaco {
 
     this.isInitialized = true;
 
-    return this.wrapperPromise;
+    return makeCancelable(this.wrapperPromise);
   }
 }
 
