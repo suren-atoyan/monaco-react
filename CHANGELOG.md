@@ -1,5 +1,12 @@
 ### Versions
 
+## 3.1.0
+###### *Feb 6, 2020*
+
+- monaco: update monaco version to 0.19.0
+- utils: create new util - makeCancelable (for promises)
+- editor/diffEditor: cancel promise before unmount
+- demo: make "dark" default theme, update package version
 
 ## 3.0.1
 ###### *Dec 26, 2019*
