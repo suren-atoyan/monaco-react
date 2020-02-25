@@ -1,5 +1,11 @@
 ### Versions
 
+## 3.1.1
+###### *Feb 25, 2020*
+
+- package: update devDependencies
+- demo: update all dependencies
+
 ## 3.1.0
 ###### *Feb 6, 2020*
 
