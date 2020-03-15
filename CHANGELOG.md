@@ -1,5 +1,10 @@
 ### Versions
 
+## 3.1.2
+###### *Mar 16, 2020*
+
+- diff editor: remove line prop as it's not used (and can't be used)
+
 ## 3.1.1
 ###### *Feb 25, 2020*
 

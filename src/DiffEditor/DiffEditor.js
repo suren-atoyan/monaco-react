@@ -17,7 +17,6 @@ const DiffEditor =
     modifiedLanguage,
     editorDidMount,
     theme,
-    line,
     width,
     height,
     loading,
@@ -54,10 +53,6 @@ const DiffEditor =
     monacoRef.current.editor.setModelLanguage(original, originalLanguage || language);
     monacoRef.current.editor.setModelLanguage(modified, modifiedLanguage || language);
   }, [language, originalLanguage, modifiedLanguage], isEditorReady);
-
-  useUpdate(_ => {
-    editorRef.current.setScrollPosition({ scrollTop: line });
-  }, [line], isEditorReady);
 
   useUpdate(_ => {
     monacoRef.current.editor.setTheme(theme);
@@ -121,7 +116,6 @@ DiffEditor.propTypes = {
   modifiedLanguage: PropTypes.string,
   editorDidMount: PropTypes.func,
   theme: PropTypes.string,
-  line: PropTypes.number,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   loading: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),

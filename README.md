@@ -396,7 +396,6 @@ You can play with it [here](https://codesandbox.io/s/monaco-editorreact---contro
 | modifiedLanguage | enum: ... | *language | This prop gives you the opportunity to specify the language of the `modified` source separately, otherwise, it will get the value of `language` property. (Possible values are the same as `language`) |
 | editorDidMount | func | noop | **Signature: function(getOriginalEditorValue: func, getModifiedEditorValue: func, monaco: object) => void** <br/> This function will be called right after monaco editor is mounted and is ready to work. It will get the editor instance as a third argument |
 | theme | enum: 'light' \| 'dark' | 'light' | Default themes of monaco |
-| line | number |  | The line to jump on it |
 | width | union: number \| string | '100%' | The width of the editor wrapper |
 | height | union: number \| string | '100%' | The height of the editor wrapper |
 | loading | union: React element \| string | 'Loading...' | The loading screen before the editor is loaded |
