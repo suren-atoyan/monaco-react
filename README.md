@@ -211,7 +211,7 @@ monaco.config({ 'vs/nls': { availableLanguages: { '*': 'de' } } });
 // or
 monaco.config({
   paths: {
-    vs: 'monaco-editor/dev/vs',
+    vs: '...',
   },
   'vs/nls' : {
     availableLanguages: {
