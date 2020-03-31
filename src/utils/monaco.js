@@ -8,10 +8,35 @@ class Monaco {
 
   config(config) {
     if (config) {
-      this.__config = deepMerge(this.__config, config);
+      this.__config = deepMerge(
+        this.__config,
+        this.validateConfig(config),
+      );
     }
 
     return this;
+  }
+
+  validateConfig(config) {
+    if (config.urls) {
+      this.informAboutDepreciation();
+      return { paths: { vs: config.urls.monacoBase } };
+    }
+
+    return config;
+  }
+
+  informAboutDepreciation() {
+    console.warn(`Deprecation warning!
+      You are using deprecated way of configuration.
+
+      Instead of using
+        monaco.config({ urls: { monacoBase: '...' } })
+      use
+        monaco.config({ paths: { vs: '...' } })
+
+      For more please check the link https://github.com/suren-atoyan/monaco-react#config
+    `);
   }
 
   injectScripts(script) {
@@ -29,7 +54,7 @@ class Monaco {
   }
 
   createMonacoLoaderScript(mainScript) {
-    const loaderScript = this.createScript(this.__config.urls.monacoLoader);
+    const loaderScript = this.createScript(`${this.__config.paths.vs}/loader.js`);
     loaderScript.onload = _ => this.injectScripts(mainScript);
 
     loaderScript.onerror = this.reject;
@@ -41,7 +66,7 @@ class Monaco {
     const mainScript = this.createScript();
 
     mainScript.innerHTML = `
-      require.config({ paths: { 'vs': '${this.__config.urls.monacoBase}' } });
+      require.config(${JSON.stringify(this.__config)});
       require(['vs/editor/editor.main'], function() {
         document.dispatchEvent(new Event('monaco_init'));
       });
