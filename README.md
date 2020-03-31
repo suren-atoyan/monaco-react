@@ -197,16 +197,31 @@ You can play with it [here](https://codesandbox.io/s/monaco-editorreact---monaco
 
 #### Config
 
-There is a config file with "urls" to load monaco files (at this moment; this file can be extended in the future). And there is a way to modify it. Here is an example:
-
-NOTE: your passed object will be deeply merged with the [default one](./src/config/index.js).
-
+By default, monaco files are being downloaded from CDN. There is an ability to change this behavior, and other things concerning the AMD loader. We have a default [config file](./src/config/index.js) you can modify it by the shown way.
 
 ```js
 import { monaco } from '@monaco-editor/react';
 
-monaco.config({ urls: { ... } });
+// you can change the source of the monaco files
+monaco.config({ paths: { vs: '...' } });
+
+// you can configure the locales
+monaco.config({ 'vs/nls': { availableLanguages: { '*': 'de' } } });
+
+// or
+monaco.config({
+  paths: {
+    vs: 'monaco-editor/dev/vs',
+  },
+  'vs/nls' : {
+    availableLanguages: {
+      '*': 'de',
+    },
+  },
+});
 ```
+
+NOTE: your passed object will be deeply merged with the [default one](./src/config/index.js).
 
 #### Editor Instance
 
