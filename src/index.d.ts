@@ -176,10 +176,12 @@ export type Monaco = typeof monacoEditor;
 declare namespace monaco {
   function init(): Promise<Monaco>;
   function config(params: {
-    urls: {
-      monacoLoader?: string,
-      monacoBase?: string
-    }
+    paths?: {
+      vs?: string,
+    },
+    'vs/nls'?: {
+      availableLanguages?: object,
+    },
   }): void
 }
 
