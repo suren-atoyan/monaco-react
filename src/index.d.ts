@@ -92,8 +92,8 @@ export { ControlledEditor };
 // Diff Editor
 
 export type DiffEditorDidMount = (
-  getOriginalEditorValue: () => string,
   getModifiedEditorValue: () => string,
+  getOriginalEditorValue: () => string,
   editor: monacoEditor.editor.IStandaloneDiffEditor,
 ) => void;
 
@@ -128,7 +128,7 @@ export interface DiffEditorProps {
   modifiedLanguage?: string;
 
   /**
-   * Signature: function(getOriginalEditorValue: func, getModifiedEditorValue: func, editor: object) => void
+   * Signature: function(getModifiedEditorValue: func, getOriginalEditorValue: func, editor: object) => void
    * This function will be called right after monaco editor will be mounted and ready to work.
    * It gets the editor instance as a third argument
    */
