@@ -1,5 +1,10 @@
 ### Versions
 
+## 3.2.1
+###### *Mar 31, 2020*
+
+- types: fix monaco.config types
+
 ## 3.2.0
 ###### *Mar 31, 2020*
 
