@@ -1,5 +1,13 @@
 ### Versions
 
+## 3.2.0
+###### *Mar 31, 2020*
+
+- fix: check the existence of target[key] in deepMerge
+- config: deprecate indirect way of configuration and add deprecation message
+- config: create a new structure of the configuration; the passed object will be directly passed to require.config
+- readme: redesign the config section according to the new structure
+
 ## 3.1.2
 ###### *Mar 16, 2020*
 
