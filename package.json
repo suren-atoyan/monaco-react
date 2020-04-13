@@ -1,6 +1,6 @@
 {
   "name": "@monaco-editor/react",
-  "version": "3.2.1",
+  "version": "3.3.0",
   "description": "Monaco editor wrapper for easy/one-line integration with React applications (e.g. powered by create-react-app) without need of webpack configuration files",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/SurenAt93/monaco-react#readme",
   "peerDependencies": {
-    "monaco-editor": "^0.19.0",
+    "monaco-editor": "^0.20.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"

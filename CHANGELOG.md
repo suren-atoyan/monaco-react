@@ -1,6 +1,11 @@
 ### Versions
 
 ## 3.2.1
+###### *Apr 13, 2020*
+
+- package: update default package version to 0.20.0
+
+## 3.2.1
 ###### *Mar 31, 2020*
 
 - types: fix monaco.config types
