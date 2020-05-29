@@ -62,6 +62,11 @@ export interface EditorProps {
    * IEditorConstructionOptions
    */
   options?: monacoEditor.editor.IEditorConstructionOptions;
+
+  /**
+   * IEditorOverrideServices
+   */
+  overrides?: monacoEditor.editor.IEditorOverrideServices;
 }
 
 declare const Editor: React.FC<EditorProps>;
