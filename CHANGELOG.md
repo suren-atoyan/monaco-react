@@ -1,5 +1,10 @@
 ### Versions
 
+## 3.3.1
+###### *May 30, 2020*
+
+- editor: add overrideServices prop
+
 ## 3.2.1
 ###### *Apr 13, 2020*
 
