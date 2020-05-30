@@ -9,7 +9,7 @@ import { useMount, useUpdate } from '../utils/hooks';
 import themes from '../config/themes';
 
 const Editor =
-  ({ value, language, editorDidMount, theme, line, width, height, loading, options, overrides, _isControlledMode }) =>
+  ({ value, language, editorDidMount, theme, line, width, height, loading, options, overrideServices, _isControlledMode }) =>
 {
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [isMonacoMounting, setIsMonacoMounting] = useState(true);
@@ -70,7 +70,7 @@ const Editor =
       language,
       automaticLayout: true,
       ...options,
-    }, overrides);
+    }, overrideServices);
 
     editorDidMount(editorRef.current.getValue.bind(editorRef.current), editorRef.current);
 
@@ -78,7 +78,7 @@ const Editor =
     monacoRef.current.editor.setTheme(theme);
 
     setIsEditorReady(true);
-  }, [editorDidMount, language, options, overrides, theme, value]);
+  }, [editorDidMount, language, options, overrideServices, theme, value]);
 
   useEffect(_ => {
     !isMonacoMounting && !isEditorReady && createEditor();
@@ -105,7 +105,7 @@ Editor.propTypes = {
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   loading: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   options: PropTypes.object,
-  overrides: PropTypes.object,
+  overrideServices: PropTypes.object,
   _isControlledMode: PropTypes.bool,
 };
 
@@ -116,7 +116,7 @@ Editor.defaultProps = {
   height: '100%',
   loading: 'Loading...',
   options: {},
-  overrides: {},
+  overrideServices: {},
   _isControlledMode: false,
 };
 
