@@ -1,6 +1,11 @@
 ### Versions
 
 ## 3.3.1
+###### *June 20, 2020*
+
+- utils: (monaco) add a possibility to pass src of config script
+
+## 3.3.1
 ###### *May 30, 2020*
 
 - editor: add overrideServices prop

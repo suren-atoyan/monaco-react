@@ -67,6 +67,8 @@ class Monaco {
     const configScript = this.createScript();
 
     if (this.configScriptSrc) {
+      // it will be helpfull in case of CSP, which doesn't allow
+      // inline script execution
       configScript.src = this.configScriptSrc;
     } else {
       configScript.innerHTML = `
