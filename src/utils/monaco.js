@@ -2,17 +2,18 @@ import config from '../config';
 import { deepMerge, makeCancelable } from '../utils';
 
 class Monaco {
-  constructor(config = {}) {
+  constructor({ src, ...config }) {
+    this.configScriptSrc = src;
     this.__config = config;
   }
 
-  config(config) {
-    if (config) {
-      this.__config = deepMerge(
-        this.__config,
-        this.validateConfig(config),
-      );
-    }
+  config({ src, ...config } = {}) {
+    this.configScriptSrc = src;
+
+    this.__config = deepMerge(
+      this.__config,
+      this.validateConfig(config),
+    );
 
     return this;
   }
@@ -43,8 +44,8 @@ class Monaco {
     document.body.appendChild(script);
   }
 
-  handleMainScriptLoad = _ => {
-    document.removeEventListener('monaco_init', this.handleMainScriptLoad);
+  handleConfigScriptLoad = _ => {
+    document.removeEventListener('monaco_init', this.handleConfigScriptLoad);
     this.resolve(window.monaco);
   }
 
@@ -53,28 +54,32 @@ class Monaco {
     return (src && (script.src = src), script);
   }
 
-  createMonacoLoaderScript(mainScript) {
+  createMonacoLoaderScript(configScript) {
     const loaderScript = this.createScript(`${this.__config.paths.vs}/loader.js`);
-    loaderScript.onload = _ => this.injectScripts(mainScript);
+    loaderScript.onload = _ => this.injectScripts(configScript);
 
     loaderScript.onerror = this.reject;
 
     return loaderScript;
   }
 
-  createMainScript() {
-    const mainScript = this.createScript();
+  createConfigScript() {
+    const configScript = this.createScript();
 
-    mainScript.innerHTML = `
-      require.config(${JSON.stringify(this.__config)});
-      require(['vs/editor/editor.main'], function() {
-        document.dispatchEvent(new Event('monaco_init'));
-      });
-    `;
+    if (this.configScriptSrc) {
+      configScript.src = this.configScriptSrc;
+    } else {
+      configScript.innerHTML = `
+        require.config(${JSON.stringify(this.__config)});
+        require(['vs/editor/editor.main'], function() {
+          document.dispatchEvent(new Event('monaco_init'));
+        });
+      `;
+    }
 
-    mainScript.onerror = this.reject;
+    configScript.onerror = this.reject;
 
-    return mainScript;
+    return configScript;
   }
 
   isInitialized = false;
@@ -90,11 +95,11 @@ class Monaco {
         return new Promise((res, rej) => res(window.monaco));
       }
 
-      document.addEventListener('monaco_init', this.handleMainScriptLoad);
+      document.addEventListener('monaco_init', this.handleConfigScriptLoad);
 
-      const mainScript = this.createMainScript();
+      const configScript = this.createConfigScript();
 
-      const loaderScript = this.createMonacoLoaderScript(mainScript);
+      const loaderScript = this.createMonacoLoaderScript(configScript);
 
       this.injectScripts(loaderScript);
     }
