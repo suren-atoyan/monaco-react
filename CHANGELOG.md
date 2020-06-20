@@ -1,6 +1,6 @@
 ### Versions
 
-## 3.3.1
+## 3.3.2
 ###### *June 20, 2020*
 
 - utils: (monaco) add a possibility to pass src of config script
