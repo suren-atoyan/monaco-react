@@ -32,7 +32,7 @@ const Editor =
   }, [options], isEditorReady);
 
   useUpdate(_ => {
-    if (options.readOnly) {
+    if (editorRef.current.getOption(monacoRef.current.editor.EditorOption.readOnly)) {
       editorRef.current.setValue(value);
     } else {
       editorRef.current.executeEdits('', [{
