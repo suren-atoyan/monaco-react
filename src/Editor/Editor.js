@@ -28,7 +28,11 @@ const Editor =
   });
 
   useUpdate(_ => {
-    if (options.readOnly) {
+    editorRef.current.updateOptions(options);
+  }, [options], isEditorReady);
+
+  useUpdate(_ => {
+    if (editorRef.current.getOption(monacoRef.current.editor.EditorOption.readOnly)) {
       editorRef.current.setValue(value);
     } else {
       editorRef.current.executeEdits('', [{
@@ -59,10 +63,6 @@ const Editor =
   useUpdate(_ => {
     monacoRef.current.editor.setTheme(theme);
   }, [theme], isEditorReady);
-
-  useUpdate(_ => {
-    editorRef.current.updateOptions(options);
-  }, [options], isEditorReady);
 
   const createEditor = useCallback(_ => {
     editorRef.current = monacoRef.current.editor.create(containerRef.current, {
