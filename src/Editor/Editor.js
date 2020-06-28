@@ -8,9 +8,21 @@ import { useMount, useUpdate } from '../utils/hooks';
 
 import themes from '../config/themes';
 
-const Editor =
-  ({ value, language, editorDidMount, theme, line, width, height, loading, options, overrideServices, _isControlledMode }) =>
-{
+const Editor = ({
+  value,
+  language,
+  editorDidMount,
+  theme,
+  line,
+  width,
+  height,
+  loading,
+  options,
+  overrideServices,
+  _isControlledMode,
+  className,
+  wrapperClassName,
+}) => {
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [isMonacoMounting, setIsMonacoMounting] = useState(true);
   const editorRef = useRef();
@@ -92,6 +104,8 @@ const Editor =
     isEditorReady={isEditorReady}
     loading={loading}
     _ref={containerRef}
+    className={className}
+    wrapperClassName={wrapperClassName}
   />;
 };
 
@@ -105,6 +119,8 @@ Editor.propTypes = {
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   loading: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   options: PropTypes.object,
+  className: PropTypes.string,
+  wrapperClassName: PropTypes.string,
   overrideServices: PropTypes.object,
   _isControlledMode: PropTypes.bool,
 };

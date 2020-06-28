@@ -21,6 +21,8 @@ const DiffEditor =
     height,
     loading,
     options,
+    className,
+    wrapperClassName,
   }) =>
 {
   const [isEditorReady, setIsEditorReady] = useState(false);
@@ -105,6 +107,8 @@ const DiffEditor =
     isEditorReady={isEditorReady}
     loading={loading}
     _ref={containerRef}
+    className={className}
+    wrapperClassName={wrapperClassName}
   />;
 };
 
@@ -120,6 +124,8 @@ DiffEditor.propTypes = {
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   loading: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   options: PropTypes.object,
+  className: PropTypes.string,
+  wrapperClassName: PropTypes.string,
 };
 
 DiffEditor.defaultProps = {
