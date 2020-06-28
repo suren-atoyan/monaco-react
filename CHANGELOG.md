@@ -1,5 +1,12 @@
 ### Versions
 
+## 3.4.0
+###### *June 28, 2020*
+
+- editor: fix 'readOnly' option check
+- editor: add className and wrapperClassName props
+- diffEditor: add className and wrapperClassName props
+
 ## 3.3.2
 ###### *June 20, 2020*
 
