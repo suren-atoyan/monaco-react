@@ -399,6 +399,8 @@ You can play with it [here](https://codesandbox.io/s/monaco-editorreact---contro
 | height | union: number \| string | '100%' | The height of the editor wrapper |
 | loading | union: React element \| string | 'Loading...' | The loading screen before the editor is loaded |
 | options | object | {} | [IEditorOptions](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditoroptions.html) |
+| className | string || monaco container className |
+| wrapperClassName | string || monaco container wrapper className |
 
 #### DiffEditor
 
@@ -415,6 +417,8 @@ You can play with it [here](https://codesandbox.io/s/monaco-editorreact---contro
 | height | union: number \| string | '100%' | The height of the editor wrapper |
 | loading | union: React element \| string | 'Loading...' | The loading screen before the editor is loaded |
 | options | object | {} | [IDiffEditorOptions](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.idiffeditorconstructionoptions.html) |
+| className | string || monaco container className |
+| wrapperClassName | string || monaco container wrapper className |
 
 #### Controlled Editor
 
