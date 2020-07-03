@@ -1,5 +1,10 @@
 ### Versions
 
+## 3.4.1
+###### *July 3, 2020*
+
+- editor: improve initialization error handling
+
 ## 3.4.0
 ###### *June 28, 2020*
 
