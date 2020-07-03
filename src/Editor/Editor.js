@@ -34,7 +34,8 @@ const Editor = ({
 
     cancelable
       .then(monaco => ((monacoRef.current = monaco) && setIsMonacoMounting(false)))
-      .catch(error => console.error('An error occurred during initialization of Monaco:', error));
+      .catch(error => error?.type !== 'cancelation' &&
+        console.error('Monaco initialization: error:', error));
 
     return _ => editorRef.current ? disposeEditor() : cancelable.cancel();
   });
