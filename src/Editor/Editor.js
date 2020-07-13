@@ -85,7 +85,7 @@ const Editor = ({
       ...options,
     }, overrideServices);
 
-    editorDidMount(editorRef.current.getValue.bind(editorRef.current), editorRef.current);
+    editorDidMount(editorRef.current.getValue.bind(editorRef.current), editorRef.current, monacoRef.current);
 
     monacoRef.current.editor.defineTheme('dark', themes['night-dark']);
     monacoRef.current.editor.setTheme(theme);
