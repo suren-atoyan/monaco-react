@@ -13,6 +13,7 @@ type Theme =
 export type EditorDidMount = (
   getEditorValue: () => string,
   editor: monacoEditor.editor.IStandaloneCodeEditor,
+  monaco: typeof monacoEditor,
 ) => void;
 
 export interface EditorProps {
