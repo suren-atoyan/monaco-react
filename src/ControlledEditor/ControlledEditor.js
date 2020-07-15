@@ -10,14 +10,13 @@ const ControlledEditor = ({ value, onChange, editorDidMount, ...props }) => {
   const handleEditorDidMount = (getValue, editor) => {
     editor.onDidChangeModelContent(ev => {
       const currentValue = editor.getValue();
-      if ((currentValue !== previousValue.current) && !(ev.isUndoing || ev.isRedoing)) {
+
+      if (currentValue !== previousValue.current) {
         previousValue.current = currentValue;
         const value = onChange(ev, currentValue);
 
-        if (typeof value === 'string') {
-          if (currentValue !== value) {
-            editor.setValue(value);
-          }
+        if (typeof value === 'string' && currentValue !== value) {
+          editor.setValue(value);
         }
       }
     });

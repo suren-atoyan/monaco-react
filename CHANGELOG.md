@@ -1,5 +1,10 @@
 ### Versions
 
+## 3.4.2
+###### *July 15, 2020*
+
+- controlled editor: fix undo/redo issue
+
 ## 3.4.1
 ###### *July 3, 2020*
 

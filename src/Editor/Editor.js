@@ -48,18 +48,20 @@ const Editor = ({
     if (editorRef.current.getOption(monacoRef.current.editor.EditorOption.readOnly)) {
       editorRef.current.setValue(value);
     } else {
-      editorRef.current.executeEdits('', [{
-        range: editorRef.current.getModel().getFullModelRange(),
-        text: value,
-      }]);
+      if (value !== editorRef.current.getValue()) {
+        editorRef.current.executeEdits('', [{
+          range: editorRef.current.getModel().getFullModelRange(),
+          text: value,
+        }]);
 
-      if (_isControlledMode) {
-        const model = editorRef.current.getModel();
+        if (_isControlledMode) {
+          const model = editorRef.current.getModel();
 
-        model.forceTokenization(model.getLineCount());
+          model.forceTokenization(model.getLineCount());
+        }
+
+        editorRef.current.pushUndoStop();
       }
-
-      editorRef.current.pushUndoStop();
     }
   }, [value], isEditorReady);
 
