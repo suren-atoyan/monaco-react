@@ -1,5 +1,10 @@
 import defaultConfig from '../config';
-import { deepMerge, makeCancelable, store } from '../utils';
+import {
+  compose,
+  deepMerge,
+  makeCancelable,
+  store,
+} from '../utils';
 
 const { state, setState } = store({
   config: defaultConfig,
@@ -10,6 +15,36 @@ const { state, setState } = store({
 });
 
 const MONACO_INIT = 'monaco_init';
+
+function config({ src, ..._config }) {
+  setState({
+    configScriptSrc: src,
+    config: deepMerge(
+      defaultConfig,
+      validateConfig(config),
+    ),
+  });
+}
+
+function init() {
+  if (!state.isInitialized) {
+    if (window.monaco && window.monaco.editor) {
+      return Promise.resolve(window.monaco);
+    }
+
+    document.addEventListener(MONACO_INIT, handleConfigScriptLoad);
+
+    compose(
+      injectScriptsIntoBody,
+      createMonacoLoaderScript,
+      createConfigScript,
+    )();
+
+    setState({ isInitialized: true });
+  }
+
+  return makeCancelable(wrapperPromise);
+}
 
 function validateConfig(config) {
   if (config.urls) {
@@ -38,7 +73,7 @@ function handleConfigScriptLoad() {
 
 function createMonacoLoaderScript(configScript) {
   const loaderScript = createScript(`${state.config.paths.vs}/loader.js`);
-  loaderScript.onload = _ => injectScriptsIntoBody(configScript);
+  loaderScript.onload = () => injectScriptsIntoBody(configScript);
 
   loaderScript.onerror = state.reject;
 
@@ -80,35 +115,5 @@ function informAboutDepreciation() {
 }
 
 const wrapperPromise = new Promise((resolve, reject) => setState({ resolve, reject }));
-
-function config({ src, ..._config }) {
-  setState({
-    configScriptSrc: src,
-    config: deepMerge(
-      state.config,
-      validateConfig(config),
-    ),
-  });
-}
-
-function init() {
-  if (!state.isInitialized) {
-    if (window.monaco && window.monaco.editor) {
-      return Promise.resolve(window.monaco);
-    }
-
-    document.addEventListener(MONACO_INIT, handleConfigScriptLoad);
-
-    const configScript = createConfigScript();
-
-    const loaderScript = createMonacoLoaderScript(configScript);
-
-    injectScriptsIntoBody(loaderScript);
-  }
-
-  setState({ isInitialized: true });
-
-  return makeCancelable(wrapperPromise);
-}
 
 export default { config, init };
