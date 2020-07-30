@@ -1,5 +1,12 @@
 ### Versions
 
+## 3.5.0
+###### *July 30, 2020*
+
+- utilities (monaco): redesign utility `monaco`; get rid of class, make it more fp
+- utilities: create `compose` utility
+- utilities: create `store` utility; for internal usage (in other utilities)
+
 ## 3.4.2
 ###### *July 15, 2020*
 
