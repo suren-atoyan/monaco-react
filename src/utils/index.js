@@ -1,6 +1,9 @@
-import monaco from './monaco';
 import noop from './noop';
+import compose from './compose';
 import deepMerge from './deepMerge';
 import makeCancelable from './makeCancelable';
 
-export { noop, monaco, deepMerge, makeCancelable };
+import store from './store';
+import monaco from './monaco';
+
+export { noop, compose, deepMerge, makeCancelable, store, monaco };
