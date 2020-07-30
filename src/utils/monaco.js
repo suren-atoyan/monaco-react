@@ -16,7 +16,7 @@ const { state, setState } = store({
 
 const MONACO_INIT = 'monaco_init';
 
-function config({ src, ..._config }) {
+function config({ src, ...config }) {
   setState({
     configScriptSrc: src,
     config: deepMerge(
