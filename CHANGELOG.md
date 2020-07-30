@@ -1,5 +1,10 @@
 ### Versions
 
+## 3.5.1
+###### *July 30, 2020*
+
+- utilities (monaco): correct config obj name
+
 ## 3.5.0
 ###### *July 30, 2020*
 
