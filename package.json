@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/SurenAt93/monaco-react#readme",
   "peerDependencies": {
+    "@babel/runtime": "^7.11.0",
     "monaco-editor": "^0.20.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
@@ -63,10 +64,13 @@
       "@babel/preset-react"
     ],
     "plugins": [
-      ["@babel/transform-runtime", {
-        "helpers": true,
-        "version": "7.11.0"
-      }]
+      [
+        "@babel/transform-runtime",
+        {
+          "helpers": true,
+          "version": "7.11.0"
+        }
+      ]
     ]
   },
   "husky": {
