@@ -1,21 +1,26 @@
-function store(initial, handlers = {}) {
+function createStore(initial, handlers = {}) {
   if (!initial) {
     throw new Error('initial state is required');
   }
 
-  const _ = {
-    state: initial,
-    setState,
-  };
+  const state = { current: initial };
 
-  function setState(changes) {
+  function getState(selector = state => state) {
+    return selector(state.current);
+  }
+
+  function setState(causedChanges) {
+    const changes = typeof causedChanges === 'function'
+      ? causedChanges(state.current)
+      : causedChanges;
+
     // check only in development
     validateChanges(initial, changes);
-    Object.assign(_.state, changes);
+    Object.assign(state.current, changes);
     Object.keys(changes).forEach(field => handlers[field] && handlers[field](changes[field]));
   }
 
-  return _;
+  return [getState, setState];
 }
 
 function validateChanges(initial, changes) {
@@ -24,8 +29,8 @@ function validateChanges(initial, changes) {
   }
 
   if (Object.keys(changes).some(field => !initial.hasOwnProperty(field))) {
-    throw new Error('It seams you want to change a field in the state that is not specified in the "initial" state');
+    throw new Error('It seams you want to change a field in the store which is not specified in the "initial" state');
   }
 }
 
-export default store;
+export default createStore;

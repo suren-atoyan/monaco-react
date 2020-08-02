@@ -3,10 +3,10 @@ import {
   compose,
   deepMerge,
   makeCancelable,
-  store,
+  createStore,
 } from '../utils';
 
-const { state, setState } = store({
+const [getState, setState] = createStore({
   config: defaultConfig,
   isInitialized: false,
   configScriptSrc: null,
@@ -17,16 +17,18 @@ const { state, setState } = store({
 const MONACO_INIT = 'monaco_init';
 
 function config({ src, ...config }) {
-  setState({
+  setState(state => ({
     configScriptSrc: src,
     config: deepMerge(
-      defaultConfig,
+      state.config,
       validateConfig(config),
     ),
-  });
+  }));
 }
 
 function init() {
+  const state = getState(({ isInitialized }) => ({ isInitialized }));
+
   if (!state.isInitialized) {
     if (window.monaco && window.monaco.editor) {
       return Promise.resolve(window.monaco);
@@ -67,11 +69,15 @@ function createScript(src) {
 }
 
 function handleConfigScriptLoad() {
+  const state = getState(({ resolve }) => ({ resolve }));
+
   document.removeEventListener(MONACO_INIT, handleConfigScriptLoad);
   state.resolve(window.monaco);
 }
 
 function createMonacoLoaderScript(configScript) {
+  const state = getState(({ config, reject }) => ({ config, reject }));
+
   const loaderScript = createScript(`${state.config.paths.vs}/loader.js`);
   loaderScript.onload = () => injectScriptsIntoBody(configScript);
 
@@ -81,6 +87,10 @@ function createMonacoLoaderScript(configScript) {
 }
 
 function createConfigScript() {
+  const state = getState(
+    ({ configScriptSrc, config, reject }) => ({ configScriptSrc, config, reject })
+  );
+
   const configScript = createScript();
 
   if (state.configScriptSrc) {
