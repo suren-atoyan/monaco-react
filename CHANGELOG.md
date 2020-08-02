@@ -1,5 +1,10 @@
 ### Versions
 
+## 3.5.5
+###### *Aug 3, 2020*
+
+- dependencies: move `@babel/runtime` from peer dependencies to dependencies
+
 ## 3.5.4
 ###### *Aug 3, 2020*
 
