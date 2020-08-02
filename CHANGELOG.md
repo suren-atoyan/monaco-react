@@ -1,5 +1,10 @@
 ### Versions
 
+## 3.5.4
+###### *Aug 3, 2020*
+
+- dependencies: add `@babel/runtime` as a peer dependency
+
 ## 3.5.3
 ###### *Aug 3, 2020*
 
