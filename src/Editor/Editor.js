@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import MonacoContainer from '../MonacoContainer';
 
 import { monaco, noop } from '../utils';
-import { useMount, useUpdate } from '../utils/hooks';
+import { useMount, useUpdate } from '../hooks';
 
 import themes from '../config/themes';
 
