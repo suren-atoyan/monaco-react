@@ -3,7 +3,7 @@ import compose from './compose';
 import deepMerge from './deepMerge';
 import makeCancelable from './makeCancelable';
 
-import createStore from './store';
+import createState from './local-state';
 import monaco from './monaco';
 
-export { noop, compose, deepMerge, makeCancelable, createStore, monaco };
+export { noop, compose, deepMerge, makeCancelable, createState, monaco };

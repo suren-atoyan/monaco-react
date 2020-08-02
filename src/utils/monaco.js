@@ -3,10 +3,10 @@ import {
   compose,
   deepMerge,
   makeCancelable,
-  createStore,
+  createState,
 } from '../utils';
 
-const [getState, setState] = createStore({
+const [getState, setState] = createState({
   config: defaultConfig,
   isInitialized: false,
   configScriptSrc: null,
