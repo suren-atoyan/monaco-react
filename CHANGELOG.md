@@ -1,5 +1,10 @@
 ### Versions
 
+## 3.5.2
+###### *Aug 2, 2020*
+
+- utilities: redesign `store` utility
+
 ## 3.5.1
 ###### *July 30, 2020*
 
