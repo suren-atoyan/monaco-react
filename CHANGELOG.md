@@ -1,5 +1,12 @@
 ### Versions
 
+## 3.5.3
+###### *Aug 3, 2020*
+
+- babel: update babel version (v.7.11.0) / activate helpers (decrease bundle size)
+- hooks: move out hooks from utils to root
+- utilities: remove utils/store to utils/local-state
+
 ## 3.5.2
 ###### *Aug 2, 2020*
 
