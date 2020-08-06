@@ -1,5 +1,10 @@
 ### Versions
 
+## 3.5.6
+###### *Aug 6, 2020*
+
+- dependencies: add `state-local` as a dependency (replace with `local-state` util)
+
 ## 3.5.5
 ###### *Aug 3, 2020*
 

@@ -1,6 +1,6 @@
 {
   "name": "@monaco-editor/react",
-  "version": "3.5.5",
+  "version": "3.5.6",
   "description": "Monaco editor wrapper for easy/one-line integration with React applications (e.g. powered by create-react-app) without need of webpack configuration files",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -84,6 +84,7 @@
     ]
   },
   "dependencies": {
-    "@babel/runtime": "^7.11.0"
+    "@babel/runtime": "^7.11.0",
+    "state-local": "^1.0.1"
   }
 }
