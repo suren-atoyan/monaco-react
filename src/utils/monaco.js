@@ -1,9 +1,10 @@
+import { create as createState } from 'state-local';
+
 import defaultConfig from '../config';
 import {
   compose,
   deepMerge,
   makeCancelable,
-  createState,
 } from '../utils';
 
 const [getState, setState] = createState({
