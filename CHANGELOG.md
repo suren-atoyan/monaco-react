@@ -1,5 +1,10 @@
 ### Versions
 
+## 3.5.7
+###### *Aug 9, 2020*
+
+- utilities (monaco): remove intermediate function for injecting scripts
+
 ## 3.5.6
 ###### *Aug 6, 2020*
 
