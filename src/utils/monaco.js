@@ -38,7 +38,7 @@ function init() {
     document.addEventListener(MONACO_INIT, handleConfigScriptLoad);
 
     compose(
-      injectScriptsIntoBody,
+      injectScripts,
       createMonacoLoaderScript,
       createConfigScript,
     )();
@@ -58,11 +58,9 @@ function validateConfig(config) {
   return config;
 }
 
-function injectScripts(container) {
-  return script => container.appendChild(script);
+function injectScripts(script) {
+  return document.body.appendChild(script);
 }
-
-const injectScriptsIntoBody = injectScripts(document.body);
 
 function createScript(src) {
   const script = document.createElement('script');
@@ -80,7 +78,7 @@ function createMonacoLoaderScript(configScript) {
   const state = getState(({ config, reject }) => ({ config, reject }));
 
   const loaderScript = createScript(`${state.config.paths.vs}/loader.js`);
-  loaderScript.onload = () => injectScriptsIntoBody(configScript);
+  loaderScript.onload = () => injectScripts(configScript);
 
   loaderScript.onerror = state.reject;
 
