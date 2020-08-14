@@ -9,6 +9,7 @@ import { useMount, useUpdate } from '../hooks';
 import themes from '../config/themes';
 
 const Editor = ({
+  id,
   value,
   language,
   editorDidMount,
@@ -102,6 +103,7 @@ const Editor = ({
   const disposeEditor = _ => editorRef.current.dispose();
 
   return <MonacoContainer
+    containerId={id}
     width={width}
     height={height}
     isEditorReady={isEditorReady}
@@ -113,6 +115,7 @@ const Editor = ({
 };
 
 Editor.propTypes = {
+  id:PropTypes.string,
   value: PropTypes.string,
   language: PropTypes.string,
   editorDidMount: PropTypes.func,

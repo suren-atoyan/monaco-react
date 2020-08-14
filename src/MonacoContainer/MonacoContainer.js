@@ -9,6 +9,7 @@ import styles from './styles';
 // one of the reasons why we use a separate prop for passing ref instead of using forwardref
 
 const MonacoContainer = ({
+  containerId,
   width,
   height,
   isEditorReady,
@@ -17,7 +18,7 @@ const MonacoContainer = ({
   className,
   wrapperClassName,
 }) => (
-  <section style={{ ...styles.wrapper, width, height }} className={wrapperClassName}>
+  <section id={containerId} style={{ ...styles.wrapper, width, height }} className={wrapperClassName}>
     {!isEditorReady && <Loading content={loading} />}
     <div
       ref={_ref}
@@ -33,6 +34,7 @@ MonacoContainer.propTypes = {
   loading: PropTypes.oneOfType([PropTypes.element, PropTypes.string]).isRequired,
   isEditorReady: PropTypes.bool.isRequired,
   className: PropTypes.string,
+  containerId: PropTypes.string,
   wrapperClassName: PropTypes.string,
 };
 

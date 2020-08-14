@@ -17,6 +17,10 @@ export type EditorDidMount = (
 
 export interface EditorProps {
   /**
+   * The editor component HTML document id value
+   */
+  id?:string | null;
+  /**
    * The editor value
    */
   value?: string | null;
@@ -103,6 +107,10 @@ export type DiffEditorDidMount = (
 ) => void;
 
 export interface DiffEditorProps {
+  /**
+   * The editor component HTML document id value
+   */
+  id?: string | null;
   /**
    * The original source (left one) value
    */

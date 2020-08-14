@@ -10,6 +10,7 @@ import themes from '../config/themes';
 
 const DiffEditor =
   ({
+    id,
     original,
     modified,
     language,
@@ -103,6 +104,7 @@ const DiffEditor =
   const disposeEditor = _ => editorRef.current.dispose();
 
   return <MonacoContainer
+    containerId={id}
     width={width}
     height={height}
     isEditorReady={isEditorReady}
@@ -114,6 +116,7 @@ const DiffEditor =
 };
 
 DiffEditor.propTypes = {
+  id: PropTypes.string,
   original: PropTypes.string,
   modified: PropTypes.string,
   language: PropTypes.string,
