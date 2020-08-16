@@ -1,36 +1,52 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import Editor from '..';
 import { noop } from '../utils';
 
-const ControlledEditor = ({ value, onChange, editorDidMount, ...props }) => {
+function ControlledEditor({ value, onChange, editorDidMount, ...props }) {
+  const editor = useRef(null);
+  const listener = useRef(null);
   const previousValue = useRef(value);
 
-  const handleEditorDidMount = (getValue, editor) => {
-    editor.onDidChangeModelContent(ev => {
-      const currentValue = editor.getValue();
+  const handleEditorModelChange = useCallback(event => {
+    const currentValue = editor.current.getValue();
 
-      if (currentValue !== previousValue.current) {
-        previousValue.current = currentValue;
-        const value = onChange(ev, currentValue);
+    if (currentValue !== previousValue.current) {
+      previousValue.current = currentValue;
+      const value = onChange(event, currentValue);
 
-        if (typeof value === 'string' && currentValue !== value) {
-          editor.setValue(value);
-        }
+      if (typeof value === 'string' && currentValue !== value) {
+        editor.current.setValue(value);
       }
-    });
+    }
+  }, [onChange]);
 
-    editorDidMount(getValue, editor);
-  };
+  const attachChangeEventListener = useCallback(() => {
+    listener.current = editor.current?.onDidChangeModelContent(handleEditorModelChange);
+  }, [handleEditorModelChange]);
 
-  return <Editor
-    value={value}
-    editorDidMount={handleEditorDidMount}
-    _isControlledMode={true}
-    {...props}
-  />
-};
+  useEffect(() => {
+    attachChangeEventListener();
+    return () => listener.current?.dispose();
+  }, [onChange, attachChangeEventListener]);
+
+  function handleEditorDidMount(getValue, _editor) {
+    editor.current = _editor;
+    attachChangeEventListener();
+
+    editorDidMount(getValue, _editor);
+  }
+
+  return (
+    <Editor
+      value={value}
+      editorDidMount={handleEditorDidMount}
+      _isControlledMode={true}
+      {...props}
+    />
+  );
+}
 
 ControlledEditor.propTypes = {
   value: PropTypes.string,
