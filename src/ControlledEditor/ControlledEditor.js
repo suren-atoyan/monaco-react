@@ -29,7 +29,7 @@ function ControlledEditor({ value, onChange, editorDidMount, ...props }) {
   useEffect(() => {
     attachChangeEventListener();
     return () => listener.current?.dispose();
-  }, [onChange, attachChangeEventListener]);
+  }, [attachChangeEventListener]);
 
   function handleEditorDidMount(getValue, _editor) {
     editor.current = _editor;
