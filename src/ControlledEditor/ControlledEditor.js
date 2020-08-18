@@ -4,21 +4,28 @@ import PropTypes from 'prop-types';
 import Editor from '..';
 import { noop } from '../utils';
 
-function ControlledEditor({ value, onChange, editorDidMount, ...props }) {
+function ControlledEditor({ value: providedValue, onChange, editorDidMount, ...props }) {
   const editor = useRef(null);
   const listener = useRef(null);
+  const value = useRef(providedValue);
+
+  // to avoid unnecessary updates in `handleEditorModelChange`
+  // (that depends on the `current value` and will trigger to update `attachChangeEventListener`,
+  // thus, the listener will be disposed and attached again for every value change)
+  // the current value is stored in ref (useRef) instead of being a dependency of `handleEditorModelChange`
+  value.current = providedValue;
 
   const handleEditorModelChange = useCallback(event => {
     const editorValue = editor.current.getValue();
 
-    if (value !== editorValue) {
+    if (value.current !== editorValue) {
       const directChange = onChange(event, editorValue);
 
       if (typeof directChange === 'string' && editorValue !== directChange) {
         editor.current.setValue(directChange);
       }
     }
-  }, [value, onChange]);
+  }, [onChange]);
 
   const attachChangeEventListener = useCallback(() => {
     listener.current = editor.current?.onDidChangeModelContent(handleEditorModelChange);
@@ -38,7 +45,7 @@ function ControlledEditor({ value, onChange, editorDidMount, ...props }) {
 
   return (
     <Editor
-      value={value}
+      value={providedValue}
       editorDidMount={handleEditorDidMount}
       _isControlledMode={true}
       {...props}
