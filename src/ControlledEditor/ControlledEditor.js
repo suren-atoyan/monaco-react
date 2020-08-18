@@ -7,20 +7,18 @@ import { noop } from '../utils';
 function ControlledEditor({ value, onChange, editorDidMount, ...props }) {
   const editor = useRef(null);
   const listener = useRef(null);
-  const previousValue = useRef(value);
 
   const handleEditorModelChange = useCallback(event => {
-    const currentValue = editor.current.getValue();
+    const editorValue = editor.current.getValue();
 
-    if (currentValue !== previousValue.current) {
-      previousValue.current = currentValue;
-      const value = onChange(event, currentValue);
+    if (value !== editorValue) {
+      const directChange = onChange(event, editorValue);
 
-      if (typeof value === 'string' && currentValue !== value) {
-        editor.current.setValue(value);
+      if (typeof directChange === 'string' && editorValue !== directChange) {
+        editor.current.setValue(directChange);
       }
     }
-  }, [onChange]);
+  }, [value, onChange]);
 
   const attachChangeEventListener = useCallback(() => {
     listener.current = editor.current?.onDidChangeModelContent(handleEditorModelChange);
@@ -31,12 +29,12 @@ function ControlledEditor({ value, onChange, editorDidMount, ...props }) {
     return () => listener.current?.dispose();
   }, [attachChangeEventListener]);
 
-  function handleEditorDidMount(getValue, _editor) {
+  const handleEditorDidMount = useCallback((getValue, _editor) => {
     editor.current = _editor;
     attachChangeEventListener();
 
     editorDidMount(getValue, _editor);
-  }
+  }, [attachChangeEventListener, editorDidMount]);
 
   return (
     <Editor
