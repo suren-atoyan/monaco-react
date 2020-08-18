@@ -1,5 +1,11 @@
 ### Versions
 
+## 3.6.0
+###### *Aug 18, 2020*
+
+- ControlledEditor: fix onChange handler issue; dispose prev listener and attach a new one for every new onChange
+- ControlledEditor: do not trigger onChange in programmatic changes
+
 ## 3.5.7
 ###### *Aug 9, 2020*
 
