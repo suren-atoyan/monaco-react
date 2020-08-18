@@ -1,5 +1,10 @@
 ### Versions
 
+## 3.6.1
+###### *Aug 18, 2020*
+
+- ControlledEditor: store current value in ref instead of making it a dependency of `handleEditorModelChange`
+
 ## 3.6.0
 ###### *Aug 18, 2020*
 
