@@ -31,7 +31,7 @@ const DiffEditor =
   const monacoRef = useRef();
   const containerRef = useRef();
 
-  useMount(_ => {
+  useMount(() => {
     const cancelable = monaco.init();
 
     cancelable
@@ -39,33 +39,33 @@ const DiffEditor =
       .catch(error => error?.type !== 'cancelation' &&
         console.error('Monaco initialization: error:', error));
 
-    return _ => editorRef.current ? disposeEditor() : cancelable.cancel();
+    return () => editorRef.current ? disposeEditor() : cancelable.cancel();
   });
 
-  useUpdate(_ => {
+  useUpdate(() => {
     editorRef.current.getModel().modified.setValue(modified);
   }, [modified], isEditorReady);
 
-  useUpdate(_ => {
+  useUpdate(() => {
     editorRef.current.getModel().original.setValue(original);
   }, [original], isEditorReady);
 
-  useUpdate(_ => {
+  useUpdate(() => {
     const { original, modified } = editorRef.current.getModel();
 
     monacoRef.current.editor.setModelLanguage(original, originalLanguage || language);
     monacoRef.current.editor.setModelLanguage(modified, modifiedLanguage || language);
   }, [language, originalLanguage, modifiedLanguage], isEditorReady);
 
-  useUpdate(_ => {
+  useUpdate(() => {
     monacoRef.current.editor.setTheme(theme);
   }, [theme], isEditorReady);
 
-  useUpdate(_ => {
+  useUpdate(() => {
     editorRef.current.updateOptions(options);
   }, [options], isEditorReady);
 
-  const setModels = useCallback(_ => {
+  const setModels = useCallback(() => {
     const originalModel = monacoRef.current.editor
       .createModel(original, originalLanguage || language);
 
@@ -75,7 +75,7 @@ const DiffEditor =
     editorRef.current.setModel({ original: originalModel, modified: modifiedModel });
   }, [language, modified, modifiedLanguage, original, originalLanguage]);
 
-  const createEditor = useCallback(_ => {
+  const createEditor = useCallback(() => {
     editorRef.current = monacoRef.current.editor.createDiffEditor(containerRef.current, {
       automaticLayout: true,
       ...options,
@@ -96,11 +96,11 @@ const DiffEditor =
     setIsEditorReady(true);
   }, [editorDidMount, options, theme, setModels]);
 
-  useEffect(_ => {
+  useEffect(() => {
     !isMonacoMounting && !isEditorReady && createEditor();
   }, [isMonacoMounting, isEditorReady, createEditor]);
 
-  const disposeEditor = _ => editorRef.current.dispose();
+  const disposeEditor = () => editorRef.current.dispose();
 
   return <MonacoContainer
     width={width}

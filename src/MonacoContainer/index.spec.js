@@ -7,10 +7,10 @@ describe('<MonacoContainer />', () => {
   it('should check render with snapshot', () => {
     const component = render(
       <MonacoContainer
-      	width="100%"
-      	height="100vh"
-      	loading="loading..."
-      	isEditorReady={false}
+        width="100%"
+        height="100vh"
+        loading="loading..."
+        isEditorReady={false}
       />,
     );
 

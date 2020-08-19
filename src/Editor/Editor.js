@@ -29,7 +29,7 @@ const Editor = ({
   const monacoRef = useRef();
   const containerRef = useRef();
 
-  useMount(_ => {
+  useMount(() => {
     const cancelable = monaco.init();
 
     cancelable
@@ -37,14 +37,14 @@ const Editor = ({
       .catch(error => error?.type !== 'cancelation' &&
         console.error('Monaco initialization: error:', error));
 
-    return _ => editorRef.current ? disposeEditor() : cancelable.cancel();
+    return () => editorRef.current ? disposeEditor() : cancelable.cancel();
   });
 
-  useUpdate(_ => {
+  useUpdate(() => {
     editorRef.current.updateOptions(options);
   }, [options], isEditorReady);
 
-  useUpdate(_ => {
+  useUpdate(() => {
     if (editorRef.current.getOption(monacoRef.current.editor.EditorOption.readOnly)) {
       editorRef.current.setValue(value);
     } else {
@@ -65,21 +65,21 @@ const Editor = ({
     }
   }, [value], isEditorReady);
 
-  useUpdate(_ => {
+  useUpdate(() => {
     // set last value by .setValue method before changing the language
     editorRef.current.setValue(value);
     monacoRef.current.editor.setModelLanguage(editorRef.current.getModel(), language);
   }, [language], isEditorReady);
 
-  useUpdate(_ => {
+  useUpdate(() => {
     editorRef.current.setScrollPosition({ scrollTop: line });
   }, [line], isEditorReady);
 
-  useUpdate(_ => {
+  useUpdate(() => {
     monacoRef.current.editor.setTheme(theme);
   }, [theme], isEditorReady);
 
-  const createEditor = useCallback(_ => {
+  const createEditor = useCallback(() => {
     editorRef.current = monacoRef.current.editor.create(containerRef.current, {
       value,
       language,
@@ -95,11 +95,11 @@ const Editor = ({
     setIsEditorReady(true);
   }, [editorDidMount, language, options, overrideServices, theme, value]);
 
-  useEffect(_ => {
+  useEffect(() => {
     !isMonacoMounting && !isEditorReady && createEditor();
   }, [isMonacoMounting, isEditorReady, createEditor]);
 
-  const disposeEditor = _ => editorRef.current.dispose();
+  const disposeEditor = () => editorRef.current.dispose();
 
   return <MonacoContainer
     width={width}

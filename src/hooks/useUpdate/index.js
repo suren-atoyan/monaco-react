@@ -5,7 +5,7 @@ const useUpdate = (effect, deps, applyChanges = true) => {
 
   useEffect(
     isInitialMount.current || !applyChanges
-      ? _ => { isInitialMount.current = false }
+      ? () => { isInitialMount.current = false }
       : effect,
     deps
   );

@@ -13,7 +13,7 @@ const makeCancelable = promise => {
     promise.catch(reject);
   });
 
-  return (wrappedPromise.cancel = _ => (hasCanceled_ = true), wrappedPromise);
+  return (wrappedPromise.cancel = () => (hasCanceled_ = true), wrappedPromise);
 };
 
 export default makeCancelable;
