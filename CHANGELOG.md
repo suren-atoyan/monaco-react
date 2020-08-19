@@ -1,5 +1,12 @@
 ### Versions
 
+## 3.6.2
+###### *Aug 19, 2020*
+
+- eslint: update eslint rules: add 'eslint:recommended' and 'no-unused-vars' -> 'error'
+- src: refactor according to new eslint rules
+- package.json: update github username, add author email
+
 ## 3.6.1
 ###### *Aug 18, 2020*
 
