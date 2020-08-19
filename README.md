@@ -74,7 +74,7 @@ import ReactDOM from "react-dom";
 
 import Editor from '@monaco-editor/react';
 
-const App = _ => <Editor height="90vh" language="javascript" />;
+const App = () => <Editor height="90vh" language="javascript" />;
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
