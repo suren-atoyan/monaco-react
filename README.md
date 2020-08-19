@@ -31,6 +31,7 @@ There also exist solutions for integration with React; e.g [this one](https://gi
 	* [Notes](#notes)
 		* [For `electron` users](#for-electron-users)
 		* [For `Next.js` users](#for-nextjs-users)
+	* [Create your own editor!](#create-your-own-editor)
 * [Props](#props)
 	* [Editor](#editor)
 	* [Diff Editor](#diffeditor)
@@ -435,6 +436,32 @@ And if you use `electron` with `monaco` and `react` and have faced an issue diff
 Like other React components, this one also works with `Next.js` without a hitch. The part of the source that should be pre-parsed is optimized for server-side rendering, so, in usual cases, it will work fine, but if you want to have access, for example, to [`monacoInstance`]([https://github.com/suren-atoyan/monaco-react#monaco-instance](https://github.com/suren-atoyan/monaco-react#monaco-instance)) you should be aware that it wants to access the `document` object, and it requires browser environment. Basically you just need to avoid running that part out of browser environment, there are several ways to do that. The one is described [here]([https://nextjs.org/docs/advanced-features/dynamic-import#with-no-ssr](https://nextjs.org/docs/advanced-features/dynamic-import#with-no-ssr)).
 
 And if you use `monaco` with `Next.js` and have faced an issue different than the above-described one, please let us know to make this section more helpful.
+
+#### Create your own editor
+
+First, let's understand what exactly the library provides us. There are two major parts exported from the library: the `Editor` component and the `monaco` utility.
+
+The `Editor` is a React component; it's a logic of bindings between monaco editor and the React environment. It receives props and organizes their appliance to the monaco.
+
+The `monaco` utility is a collection of functions that are being used to setup monaco editor into your browser. `monaco.init()`  handles the whole initialization process and returns to you the instance of the monaco editor - `monaco.init().then(monacoInstance => ...)`. The `Editor` component uses this utility, gains access to `monacoInstance`, and creates the editor. Here is the implementation of the `Editor` component. You can use the same technique to create your own `Editor`. You can just import the `monaco` utility, access to `monacoInstance`, and create your own editor with your own custom logic. The shortest way to do it:
+
+```javascript
+import { monaco } from '@monaco-editor/react';
+
+monaco.init().then(monacoInstance => {
+  const wrapper = document.getElementById("root");
+  const properties = {
+    value: "function hello() {\n\talert('Hello world!');\n}",
+	language:  "javascript",
+  }
+  
+  monacoInstance.editor.create(wrapper,  properties);
+});
+```
+
+That's all. You can wrap it into a React component, or Vue, or Angular or leave it as vanilla one or whatever you want; it's written in pure js.
+
+You can play with the example [here](https://codesandbox.io/s/create-your-own-editor-fvi5x?file=/src/index.js)
 
 ### Props
 
