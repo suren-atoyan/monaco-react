@@ -848,6 +848,13 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
+"@babel/runtime@^7.11.0":
+  version "7.11.2"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.11.2.tgz#f549c13c754cc40b87644b9fa9f09a6a95fe0736"
+  integrity sha512-TeWkU52so0mPtDcaCTxNBI/IHiz0pZgr8VEFqXFtZWpYD08ZB6FaSwVAS8MKRQAP3bYKiVjwysOJgMFY28o6Tw==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/template@^7.4.0", "@babel/template@^7.8.3":
   version "7.8.3"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.8.3.tgz#e02ad04fe262a657809327f578056ca15fd4d1b8"
@@ -1166,10 +1173,13 @@
     prop-types "^15.7.2"
     react-is "^16.8.0"
 
-"@monaco-editor/react@^3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@monaco-editor/react/-/react-3.1.0.tgz#16c3838fc54af71a80dde3eebb43477a7fbba77b"
-  integrity sha512-Y+eay0U7MJgax5Fd0CG9k3tgcy/QkKPXSD7BNB0/w/p4ErQCYB5K/Mvm9bfRVwdJmYWihDa9cHOg53fLpJGiiA==
+"@monaco-editor/react@^3.6.2":
+  version "3.6.2"
+  resolved "https://registry.yarnpkg.com/@monaco-editor/react/-/react-3.6.2.tgz#7b6310c28fe681f0fea5165dfa1a0e22f0a611cc"
+  integrity sha512-KA91FasOYLJwPz2Sp4ANoEZp9+9wCglF/f3p/aENjcG/v3s4vzcUxKEWI6X5S9z+tz0s79tUy8JTZ5gT/WCsSA==
+  dependencies:
+    "@babel/runtime" "^7.11.0"
+    state-local "^1.0.1"
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -8671,6 +8681,11 @@ regenerator-runtime@^0.13.2, regenerator-runtime@^0.13.3:
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.3.tgz#7cf6a77d8f5c6f60eb73c5fc1955b2ceb01e6bf5"
   integrity sha512-naKIZz2GQ8JWh///G7L3X6LaQUAMp2lvb1rvwwsURe/VXwD6VMfr+/1NuNw3ag8v2kY1aQ/go5SNn79O9JU7yw==
 
+regenerator-runtime@^0.13.4:
+  version "0.13.7"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.7.tgz#cac2dacc8a1ea675feaabaeb8ae833898ae46f55"
+  integrity sha512-a54FxoJDIr27pgf7IgeQGxmqUNYrcV338lf/6gH456HZ/PhX+5BcwHXG9ajESmwe6WRO0tAzRUrRmNONWgkrew==
+
 regenerator-transform@^0.14.0:
   version "0.14.1"
   resolved "https://registry.yarnpkg.com/regenerator-transform/-/regenerator-transform-0.14.1.tgz#3b2fce4e1ab7732c08f665dfdb314749c7ddd2fb"
@@ -9462,6 +9477,11 @@ stack-utils@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/stack-utils/-/stack-utils-1.0.2.tgz#33eba3897788558bebfc2db059dc158ec36cebb8"
   integrity sha512-MTX+MeG5U994cazkjd/9KNAapsHnibjMLnfXodlkXw76JEea0UiNzrqidzo1emMwk7w5Qhc9jd4Bn9TBb1MFwA==
+
+state-local@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/state-local/-/state-local-1.0.1.tgz#0d3c0a2bb610d3b81699b30e98fafa00bcf4ac9c"
+  integrity sha512-CkiwT61ZhZd0/z183fcceu7+RSws/Sq5BT3RNQ2xK/Se9A/jn/4Z/eIe1bawoI9wNYC9wrcG2Drz+6GnjtKynA==
 
 static-extend@^0.1.1:
   version "0.1.2"
