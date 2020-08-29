@@ -8,6 +8,7 @@ import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
 
 import Editor from '@monaco-editor/react';
+import monacoThemes from 'monaco-themes/themes/themelist';
 
 import { useStore } from 'store';
 import config from 'config';
@@ -94,9 +95,9 @@ const Settings = _ => {
             </MenuItem>
           ))}
           <MenuItem disabled><Divider /></MenuItem>
-          {config.monacoThemes.filter(theme => !theme.includes(' ')).map(theme => (
-            <MenuItem key={theme} value={theme}>
-              {theme}
+          {Object.entries(monacoThemes).map(([themeId, themeName]) => (
+            <MenuItem key={themeId} value={themeId}>
+              {themeName}
             </MenuItem>
           ))}
         </TextField>

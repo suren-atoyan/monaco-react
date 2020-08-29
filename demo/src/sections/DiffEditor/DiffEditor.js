@@ -17,10 +17,10 @@ const DiffEditor = _ => {
 
   return <div className={classes.root}>
     <MonacoDiffEditor
+      theme={monacoTheme}
       original={examples.original}
       modified={examples.modified}
       language={config.supportedLanguages.find(({ id }) => id === selectedLanguageId).name}
-      theme={monacoTheme}
     />
   </div>;
 }
