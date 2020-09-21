@@ -69,7 +69,7 @@ export interface EditorProps {
   overrideServices?: monacoEditor.editor.IEditorOverrideServices;
 }
 
-declare const Editor: React.FC<EditorProps>;
+declare const Editor: React.FC<EditorProps & React.HTMLAttributes<HTMLDivElement>>;
 
 export default Editor;
 
@@ -90,7 +90,7 @@ export interface ControlledEditorProps extends EditorProps {
   onChange?: ControlledEditorOnChange;
 }
 
-declare const ControlledEditor: React.FC<ControlledEditorProps>;
+declare const ControlledEditor: React.FC<ControlledEditorProps & React.HTMLAttributes<HTMLDivElement>>;
 
 export { ControlledEditor };
 
@@ -170,7 +170,7 @@ export interface DiffEditorProps {
   options?: monacoEditor.editor.IDiffEditorConstructionOptions;
 }
 
-declare const DiffEditor: React.FC<DiffEditorProps>;
+declare const DiffEditor: React.FC<DiffEditorProps & React.HTMLAttributes<HTMLDivElement>>;
 
 export { DiffEditor };
 
