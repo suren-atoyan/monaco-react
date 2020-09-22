@@ -1,5 +1,10 @@
 ### Versions
 
+## 3.6.3
+###### *Sep 22, 2020*
+
+- types: add missing props; `className` and `wrapperClassName`
+
 ## 3.6.2
 ###### *Aug 19, 2020*
 

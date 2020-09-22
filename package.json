@@ -1,6 +1,6 @@
 {
   "name": "@monaco-editor/react",
-  "version": "3.6.2",
+  "version": "3.6.3",
   "description": "Monaco editor wrapper for easy/one-line integration with React applications (e.g. powered by create-react-app) without need of webpack configuration files",
   "author": "Suren Atoyan <contact@surenatoyan.com>",
   "main": "lib/index.js",
@@ -24,7 +24,6 @@
     "code",
     "text"
   ],
-  "author": "suren_at",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/suren-atoyan/monaco-react/issues"
