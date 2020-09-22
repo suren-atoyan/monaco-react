@@ -67,9 +67,19 @@ export interface EditorProps {
    * IEditorOverrideServices
    */
   overrideServices?: monacoEditor.editor.IEditorOverrideServices;
+
+  /**
+   * Class name for the editor container
+   */
+  className?: string;
+
+  /**
+   * Class name for the editor container wrapper
+   */
+  wrapperClassName?: string;
 }
 
-declare const Editor: React.FC<EditorProps & React.HTMLAttributes<HTMLDivElement>>;
+declare const Editor: React.FC<EditorProps>;
 
 export default Editor;
 
@@ -90,7 +100,7 @@ export interface ControlledEditorProps extends EditorProps {
   onChange?: ControlledEditorOnChange;
 }
 
-declare const ControlledEditor: React.FC<ControlledEditorProps & React.HTMLAttributes<HTMLDivElement>>;
+declare const ControlledEditor: React.FC<ControlledEditorProps>;
 
 export { ControlledEditor };
 
@@ -168,9 +178,19 @@ export interface DiffEditorProps {
    * IDiffEditorConstructionOptions
    */
   options?: monacoEditor.editor.IDiffEditorConstructionOptions;
+
+  /**
+   * Class name for the editor container
+   */
+  className?: string;
+
+  /**
+   * Class name for the editor container wrapper
+   */
+  wrapperClassName?: string;
 }
 
-declare const DiffEditor: React.FC<DiffEditorProps & React.HTMLAttributes<HTMLDivElement>>;
+declare const DiffEditor: React.FC<DiffEditorProps>;
 
 export { DiffEditor };
 
