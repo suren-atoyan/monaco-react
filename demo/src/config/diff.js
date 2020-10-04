@@ -368,14 +368,14 @@ const examples = {
     import { ControlledEditor } from "@monaco-editor/react";
 
     const BAD_WORD = "eval";
-    const WORNING_MESSAGE = " <- hey man, what's this?";
+    const WARNING_MESSAGE = " <- hey man, what's this?";
 
     function App() {
       const handleEditorChange = (ev, value) => {
-        return value.includes(BAD_WORD) && !value.includes(WORNING_MESSAGE)
-          ? value.replace(BAD_WORD, BAD_WORD + WORNING_MESSAGE)
-          : value.includes(WORNING_MESSAGE) && !value.includes(BAD_WORD)
-            ? value.replace(WORNING_MESSAGE, "")
+        return value.includes(BAD_WORD) && !value.includes(WARNING_MESSAGE)
+          ? value.replace(BAD_WORD, BAD_WORD + WARNING_MESSAGE)
+          : value.includes(WARNING_MESSAGE) && !value.includes(BAD_WORD)
+            ? value.replace(WARNING_MESSAGE, "")
             : value;
       };
 
@@ -402,17 +402,17 @@ const examples = {
     import { ControlledEditor } from "@monaco-editor/react";
 
     const BAD_WORD = "eval";
-    const WORNING_MESSAGE = " <- hey man, what's this?";
+    const WARNING_MESSAGE = " <- hey man, what's this?";
 
     function App() {
       const [value, setValue] = useState("// try to write e%v%a%l somewere 😈 \n");
 
       const handleEditorChange = (ev, value) => {
         setValue(
-          value.includes(BAD_WORD) && !value.includes(WORNING_MESSAGE)
-            ? value.replace(BAD_WORD, BAD_WORD + WORNING_MESSAGE)
-            : value.includes(WORNING_MESSAGE) && !value.includes(BAD_WORD)
-              ? value.replace(WORNING_MESSAGE, "")
+          value.includes(BAD_WORD) && !value.includes(WARNING_MESSAGE)
+            ? value.replace(BAD_WORD, BAD_WORD + WARNING_MESSAGE)
+            : value.includes(WARNING_MESSAGE) && !value.includes(BAD_WORD)
+              ? value.replace(WARNING_MESSAGE, "")
               : value
         );
       };
