@@ -67,6 +67,16 @@ export interface EditorProps {
    * IEditorOverrideServices
    */
   overrideServices?: monacoEditor.editor.IEditorOverrideServices;
+
+  /**
+   * Class name for the editor container
+   */
+  className?: string;
+
+  /**
+   * Class name for the editor container wrapper
+   */
+  wrapperClassName?: string;
 }
 
 declare const Editor: React.FC<EditorProps>;
@@ -168,6 +178,16 @@ export interface DiffEditorProps {
    * IDiffEditorConstructionOptions
    */
   options?: monacoEditor.editor.IDiffEditorConstructionOptions;
+
+  /**
+   * Class name for the editor container
+   */
+  className?: string;
+
+  /**
+   * Class name for the editor container wrapper
+   */
+  wrapperClassName?: string;
 }
 
 declare const DiffEditor: React.FC<DiffEditorProps>;
