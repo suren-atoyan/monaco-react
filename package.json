@@ -1,6 +1,6 @@
 {
   "name": "@monaco-editor/react",
-  "version": "3.7.1",
+  "version": "3.7.0",
   "description": "Monaco editor wrapper for easy/one-line integration with React applications (e.g. powered by create-react-app) without need of webpack configuration files",
   "author": "Suren Atoyan <contact@surenatoyan.com>",
   "main": "lib/index.js",
@@ -11,9 +11,6 @@
     "build": "npx babel src --out-dir lib && cp ./src/index.d.ts ./lib/",
     "prepublish": "npm test && npm run lint && npm run build",
     "test": "npx jest"
-  },
-  "publishConfig": {
-    "registry": "http://apsrd01886:8081/repository/npm-private-production/"
   },
   "repository": {
     "type": "git",
