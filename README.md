@@ -141,7 +141,7 @@ You can play with it [here](https://codesandbox.io/s/monaco-editor-react-u0fyv?f
 
 #### Get Value
 
-You may ask how we can get the value of the editor. There is a prop called `editorDidMount`. It gets two arguments: the first one is a function to get editor value, the second one is the editor instance.
+You may ask how we can get the value of the editor. There is a prop called `editorDidMount`. It gets three arguments: the first one is a function to get editor value, the second one is the editor instance, the third one is the monaco instance.
 Here is an example of how you can implement it.
 You can play with it [here](https://codesandbox.io/s/example-for-issue-2-1hzz8?fontsize=14)
 
@@ -471,7 +471,7 @@ You can play with the example [here](https://codesandbox.io/s/create-your-own-ed
 |:----------|:-------------|:------|:------|
 | value | string || The editor value |
 | language | enum: ... | | All languages that are [supported](https://github.com/microsoft/monaco-languages) by monaco-editor |
-| editorDidMount | func | noop | **Signature: function(getEditorValue: func, monaco: object) => void** <br/> This function will be called right after monaco editor is mounted and is ready to work. It will get the editor instance as a second argument |
+| editorDidMount | func | noop | **Signature: function(getEditorValue: func, editor: object, monaco: object) => void** <br/> This function will be called right after monaco editor is mounted and is ready to work. It will get the editor instance as a second argument |
 | theme | enum: 'light' \| 'dark' | 'light' | Default themes of monaco |
 | line | number |  | The line to jump on it |
 | width | union: number \| string | '100%' | The width of the editor wrapper |
@@ -490,7 +490,7 @@ You can play with the example [here](https://codesandbox.io/s/create-your-own-ed
 | language | enum: ... | | All languages that are [supported](https://github.com/microsoft/monaco-languages) by monaco-editor |
 | originalLanguage | enum: ... | *language | This prop gives you the opportunity to specify the language of the `original` source separately, otherwise, it will get the value of `language` property. (Possible values are the same as `language`) |
 | modifiedLanguage | enum: ... | *language | This prop gives you the opportunity to specify the language of the `modified` source separately, otherwise, it will get the value of `language` property. (Possible values are the same as `language`) |
-| editorDidMount | func | noop | **Signature: function(getModifiedEditorValue: func, getOriginalEditorValue: func, monaco: object) => void** <br/> This function will be called right after monaco editor is mounted and is ready to work. It will get the editor instance as a third argument |
+| editorDidMount | func | noop | **Signature: function(getModifiedEditorValue: func, getOriginalEditorValue: func, editor: object, monaco: object) => void** <br/> This function will be called right after monaco editor is mounted and is ready to work. It will get the editor instance as a third argument |
 | theme | enum: 'light' \| 'dark' | 'light' | Default themes of monaco |
 | width | union: number \| string | '100%' | The width of the editor wrapper |
 | height | union: number \| string | '100%' | The height of the editor wrapper |
