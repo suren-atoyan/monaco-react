@@ -6,6 +6,7 @@ import { noop } from '../utils';
 
 function ControlledEditor({ value: providedValue, onChange, editorDidMount, ...props }) {
   const editor = useRef(null);
+  const monaco = useRef(null);
   const listener = useRef(null);
   const value = useRef(providedValue);
 
@@ -36,11 +37,12 @@ function ControlledEditor({ value: providedValue, onChange, editorDidMount, ...p
     return () => listener.current?.dispose();
   }, [attachChangeEventListener]);
 
-  const handleEditorDidMount = useCallback((getValue, _editor) => {
+  const handleEditorDidMount = useCallback((getValue, _editor, _monaco) => {
     editor.current = _editor;
+    monaco.current = _monaco;
     attachChangeEventListener();
 
-    editorDidMount(getValue, _editor);
+    editorDidMount(getValue, _editor, _monaco);
   }, [attachChangeEventListener, editorDidMount]);
 
   return (
