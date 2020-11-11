@@ -24,14 +24,13 @@
     "code",
     "text"
   ],
-  "author": "suren_at",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/suren-atoyan/monaco-react/issues"
   },
   "homepage": "https://github.com/suren-atoyan/monaco-react#readme",
   "peerDependencies": {
-    "monaco-editor": "^0.20.0",
+    "monaco-editor": "^0.21.2",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
