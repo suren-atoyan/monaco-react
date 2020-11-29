@@ -1,5 +1,10 @@
 ### Versions
 
+## 3.7.1
+###### *Nov 29, 2020*
+
+-editor: fix - remove unnecessary `value set` before language update
+
 ## 3.7.0
 ###### *Nov 11, 2020*
 
