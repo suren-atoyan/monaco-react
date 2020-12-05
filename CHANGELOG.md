@@ -1,5 +1,10 @@
 ### Versions
 
+## 3.7.2
+###### *Dec 5, 2020*
+
+-package: add react/react-dom 17 version as a peer dependency
+
 ## 3.7.1
 ###### *Nov 29, 2020*
 
