@@ -32,8 +32,8 @@
   "peerDependencies": {
     "monaco-editor": "^0.21.2",
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react": "^16.8.0 || ^17.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
