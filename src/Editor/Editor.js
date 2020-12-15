@@ -52,6 +52,7 @@ const Editor = ({
         editorRef.current.executeEdits('', [{
           range: editorRef.current.getModel().getFullModelRange(),
           text: value,
+          forceMoveMarkers: true,
         }]);
 
         if (_isControlledMode) {
