@@ -1,14 +1,19 @@
 ### Versions
 
+## 3.7.3
+###### *Dec 15, 2020*
+
+- Editor component: set `forceMoveMarkers` `true` in `executeEdits`
+
 ## 3.7.2
 ###### *Dec 5, 2020*
 
--package: add react/react-dom 17 version as a peer dependency
+- package: add react/react-dom 17 version as a peer dependency
 
 ## 3.7.1
 ###### *Nov 29, 2020*
 
--editor: fix - remove unnecessary `value set` before language update
+- editor: fix - remove unnecessary `value set` before language update
 
 ## 3.7.0
 ###### *Nov 11, 2020*
