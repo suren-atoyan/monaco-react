@@ -8,7 +8,7 @@ Monaco editor wrapper for easy/one-line integration with React applications with
 ## Motivation
 There is a well-known web technology based code editor called [Monaco Editor](https://microsoft.github.io/monaco-editor/) that powers [VS Code](https://code.visualstudio.com/). [There are also many ways to integrate](https://github.com/Microsoft/monaco-editor-samples/) it provided by monaco creators. But there were tons of problems with the integration of monaco with modern technologies; e.g React.
 
-There does already exist solutions for integration with React; e.g [this one](https://github.com/react-monaco-editor/react-monaco-editor) and [this one](https://github.com/jaywcjlove/react-monacoeditor). But they need custom webpack configuration for Monaco to fully work, which is not the "best" solution for things like create-react-app - [CRA](https://facebook.github.io/create-react-app/).
+There do already exist solutions for integration with React; e.g [this one](https://github.com/react-monaco-editor/react-monaco-editor) and [this one](https://github.com/jaywcjlove/react-monacoeditor). But they need custom webpack configuration for Monaco to fully work, which is not the "best" solution for things like create-react-app - [CRA](https://facebook.github.io/create-react-app/).
 
 **With this solution, you don't need webpack configuration files and it works great with React apps created by CRA or anything else.**
 
