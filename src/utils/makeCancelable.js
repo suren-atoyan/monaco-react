@@ -5,7 +5,7 @@ const CANCELATION_MESSAGE = {
   msg: 'operation is manually canceled',
 };
 
-const makeCancelable = promise => {
+function makeCancelable(promise) {
   let hasCanceled_ = false;
 
   const wrappedPromise = new Promise((resolve, reject) => {
@@ -14,6 +14,6 @@ const makeCancelable = promise => {
   });
 
   return (wrappedPromise.cancel = () => (hasCanceled_ = true), wrappedPromise);
-};
+}
 
 export default makeCancelable;

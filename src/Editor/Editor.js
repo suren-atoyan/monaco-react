@@ -8,7 +8,7 @@ import { useMount, useUpdate } from '../hooks';
 
 import themes from '../config/themes';
 
-const Editor = ({
+function Editor({
   value,
   language,
   editorDidMount,
@@ -22,12 +22,13 @@ const Editor = ({
   _isControlledMode,
   className,
   wrapperClassName,
-}) => {
+}) {
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [isMonacoMounting, setIsMonacoMounting] = useState(true);
-  const editorRef = useRef();
-  const monacoRef = useRef();
-  const containerRef = useRef();
+  const editorRef = useRef(null);
+  const monacoRef = useRef(null);
+  const containerRef = useRef(null);
+  const editorDidMountRef = useRef(editorDidMount);
 
   useMount(() => {
     const cancelable = monaco.init();
@@ -86,13 +87,20 @@ const Editor = ({
       ...options,
     }, overrideServices);
 
-    editorDidMount(editorRef.current.getValue.bind(editorRef.current), editorRef.current);
-
     monacoRef.current.editor.defineTheme('dark', themes['night-dark']);
     monacoRef.current.editor.setTheme(theme);
 
     setIsEditorReady(true);
-  }, [editorDidMount, language, options, overrideServices, theme, value]);
+  }, [language, options, overrideServices, theme, value]);
+
+  useEffect(() => {
+    if (isEditorReady) {
+      editorDidMountRef.current(
+        editorRef.current.getValue.bind(editorRef.current),
+        editorRef.current,
+      );
+    }
+  }, [isEditorReady]);
 
   useEffect(() => {
     !isMonacoMounting && !isEditorReady && createEditor();
@@ -100,16 +108,18 @@ const Editor = ({
 
   const disposeEditor = () => editorRef.current.dispose();
 
-  return <MonacoContainer
-    width={width}
-    height={height}
-    isEditorReady={isEditorReady}
-    loading={loading}
-    _ref={containerRef}
-    className={className}
-    wrapperClassName={wrapperClassName}
-  />;
-};
+  return (
+    <MonacoContainer
+      width={width}
+      height={height}
+      isEditorReady={isEditorReady}
+      loading={loading}
+      _ref={containerRef}
+      className={className}
+      wrapperClassName={wrapperClassName}
+    />
+  );
+}
 
 Editor.propTypes = {
   value: PropTypes.string,

@@ -8,7 +8,7 @@ import styles from './styles';
 // ** forwardref render functions do not support proptypes or defaultprops **
 // one of the reasons why we use a separate prop for passing ref instead of using forwardref
 
-const MonacoContainer = ({
+function MonacoContainer({
   width,
   height,
   isEditorReady,
@@ -16,16 +16,18 @@ const MonacoContainer = ({
   _ref,
   className,
   wrapperClassName,
-}) => (
-  <section style={{ ...styles.wrapper, width, height }} className={wrapperClassName}>
-    {!isEditorReady && <Loading content={loading} />}
-    <div
-      ref={_ref}
-      style={{ ...styles.fullWidth, ...(!isEditorReady && styles.hide) }}
-      className={className}
-    />
-  </section>
-);
+}) {
+  return (
+    <section style={{ ...styles.wrapper, width, height }} className={wrapperClassName}>
+      {!isEditorReady && <Loading content={loading} />}
+      <div
+        ref={_ref}
+        style={{ ...styles.fullWidth, ...(!isEditorReady && styles.hide) }}
+        className={className}
+      />
+    </section>
+  );
+}
 
 MonacoContainer.propTypes = {
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,

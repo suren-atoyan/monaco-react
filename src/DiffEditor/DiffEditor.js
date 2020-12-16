@@ -8,28 +8,27 @@ import { useMount, useUpdate } from '../hooks';
 
 import themes from '../config/themes';
 
-const DiffEditor =
-  ({
-    original,
-    modified,
-    language,
-    originalLanguage,
-    modifiedLanguage,
-    editorDidMount,
-    theme,
-    width,
-    height,
-    loading,
-    options,
-    className,
-    wrapperClassName,
-  }) =>
-{
+function DiffEditor ({
+  original,
+  modified,
+  language,
+  originalLanguage,
+  modifiedLanguage,
+  editorDidMount,
+  theme,
+  width,
+  height,
+  loading,
+  options,
+  className,
+  wrapperClassName,
+}) {
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [isMonacoMounting, setIsMonacoMounting] = useState(true);
-  const editorRef = useRef();
-  const monacoRef = useRef();
-  const containerRef = useRef();
+  const editorRef = useRef(null);
+  const monacoRef = useRef(null);
+  const containerRef = useRef(null);
+  const editorDidMountRef = useRef(editorDidMount);
 
   useMount(() => {
     const cancelable = monaco.init();
@@ -83,18 +82,23 @@ const DiffEditor =
 
     setModels();
 
-    const { original, modified } = editorRef.current.getModel();
-    editorDidMount(
-      modified.getValue.bind(modified),
-      original.getValue.bind(original),
-      editorRef.current,
-    );
-
     monacoRef.current.editor.defineTheme('dark', themes['night-dark']);
     monacoRef.current.editor.setTheme(theme);
 
     setIsEditorReady(true);
-  }, [editorDidMount, options, theme, setModels]);
+  }, [options, theme, setModels]);
+
+  useEffect(() => {
+    if (isEditorReady) {
+      const { original, modified } = editorRef.current.getModel();
+
+      editorDidMountRef.current(
+        modified.getValue.bind(modified),
+        original.getValue.bind(original),
+        editorRef.current,
+      );
+    }
+  }, [isEditorReady]);
 
   useEffect(() => {
     !isMonacoMounting && !isEditorReady && createEditor();
@@ -102,16 +106,18 @@ const DiffEditor =
 
   const disposeEditor = () => editorRef.current.dispose();
 
-  return <MonacoContainer
-    width={width}
-    height={height}
-    isEditorReady={isEditorReady}
-    loading={loading}
-    _ref={containerRef}
-    className={className}
-    wrapperClassName={wrapperClassName}
-  />;
-};
+  return (
+    <MonacoContainer
+      width={width}
+      height={height}
+      isEditorReady={isEditorReady}
+      loading={loading}
+      _ref={containerRef}
+      className={className}
+      wrapperClassName={wrapperClassName}
+    />
+  );
+}
 
 DiffEditor.propTypes = {
   original: PropTypes.string,
