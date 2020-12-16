@@ -1,5 +1,11 @@
 ### Versions
 
+## 3.7.4
+###### *Dec 16, 2020*
+
+- Editor/Diff Editor components: fix `componentDidMount` call order
+- src: (minor) some corrections according to coding style
+
 ## 3.7.3
 ###### *Dec 15, 2020*
 
