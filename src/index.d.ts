@@ -59,9 +59,9 @@ export interface EditorProps {
   loading?: React.ReactNode;
 
   /**
-   * IEditorConstructionOptions
+   * IStandaloneEditorConstructionOptions
    */
-  options?: monacoEditor.editor.IEditorConstructionOptions;
+  options?: monacoEditor.editor.IStandaloneEditorConstructionOptions;
 
   /**
    * IEditorOverrideServices
