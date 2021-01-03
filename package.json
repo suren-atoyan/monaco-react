@@ -1,6 +1,6 @@
 {
   "name": "@monaco-editor/react",
-  "version": "3.7.4",
+  "version": "3.7.5",
   "description": "Monaco editor wrapper for easy/one-line integration with React applications (e.g. powered by create-react-app) without need of webpack configuration files",
   "author": "Suren Atoyan <contact@surenatoyan.com>",
   "main": "lib/index.js",

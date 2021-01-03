@@ -1,5 +1,10 @@
 ### Versions
 
+## 3.7.5
+###### *Jan 3, 2021*
+
+- utilities (monaco): fix `state-local` import
+
 ## 3.7.4
 ###### *Dec 16, 2020*
 
