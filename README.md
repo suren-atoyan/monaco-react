@@ -3,14 +3,14 @@ Monaco Editor for React
 
 ## Synopsis
 
-Monaco editor wrapper for easy/one-line integration with React applications without need of webpack (or other module bundler) configuration files.
+Monaco editor wrapper for easy/one-line integration with React applications without needing to use webpack's (or any other module bundler's) configuration files.
 
 ## Motivation
-There is a well-known web technology based code editor called [Monaco Editor](https://microsoft.github.io/monaco-editor/) that powers [VS Code](https://code.visualstudio.com/). [There are also many ways to integrate](https://github.com/Microsoft/monaco-editor-samples/) it provided by monaco creators. But there were tons of problems with integration of monaco with modern technologies; e.g React.
+There is a well-known web technology based code editor called [Monaco Editor](https://microsoft.github.io/monaco-editor/) that powers [VS Code](https://code.visualstudio.com/). [There are also many ways to integrate](https://github.com/Microsoft/monaco-editor-samples/) it provided by monaco creators. But there were tons of problems with the integration of monaco with modern technologies; e.g React.
 
-There also exist solutions for integration with React; e.g [this one](https://github.com/react-monaco-editor/react-monaco-editor) and [this one](https://github.com/jaywcjlove/react-monacoeditor). But they need some custom webpack configuration to make Monaco fully work, which is not the "best" solution for such kind of things like create-react-app - [CRA](https://facebook.github.io/create-react-app/).
+There do already exist solutions for integration with React; e.g [this one](https://github.com/react-monaco-editor/react-monaco-editor) and [this one](https://github.com/jaywcjlove/react-monacoeditor). But they need custom webpack configuration for Monaco to fully work, which is not the "best" solution for things like create-react-app - [CRA](https://facebook.github.io/create-react-app/).
 
-**With this solution, you don't need any kind of webpack configuration files and it works great with React apps created by CRA or created by something else.**
+**With this solution, you don't need webpack configuration files and it works great with React apps created by CRA or anything else.**
 
 #### Demo
 [Check it out!](https://monaco-react.surenatoyan.com/)
@@ -49,17 +49,17 @@ or
 yarn add @monaco-editor/react
 ```
 
-NOTE: for type definitions, this package uses monaco-editor package and it is defined as a peer dependency. So, if you need types and you have not monaco-editor npm package installed in your project, you have to install it by yourself.
+NOTE: For TypeScript type definitions, this package uses the [monaco-editor](https://www.npmjs.com/package/monaco-editor) package as a peer dependency. So, if you need types and don't already have the [monaco-editor](https://www.npmjs.com/package/monaco-editor) package installed, you will need to do so.
 
 ### Introduction
 
-Besides types three main components are also exported from the package:
+Besides types, three main components are also exported from the package:
 
 * Editor
 * DiffEditor
 * ControlledEditor
 
-And the utility that gives ability to access to monaco instance (simply called "monaco")
+As well as the utility which gives you the ability to access the monaco instance (simply called "monaco")
 
 ### Usage
 
@@ -141,8 +141,8 @@ You can play with it [here](https://codesandbox.io/s/monaco-editor-react-u0fyv?f
 
 #### Get Value
 
-You may ask how we can get the value of the editor. There is a prop called `editorDidMount`. It gets two arguments: the first one is a function to get editor value, the second one is the editor instance.
-Here is an example of how you can implement it.
+You may ask, "how can we get the value of the editor". There is a prop called `editorDidMount`. It gets two arguments: the first is a function to get the editor value, the second is the editor instance.
+Here is an example of how you can implement it:
 You can play with it [here](https://codesandbox.io/s/example-for-issue-2-1hzz8?fontsize=14)
 
 ```js
