@@ -1,4 +1,4 @@
-import { create as createState } from 'state-local';
+import state from 'state-local';
 
 import defaultConfig from '../config';
 import {
@@ -7,7 +7,7 @@ import {
   makeCancelable,
 } from '../utils';
 
-const [getState, setState] = createState({
+const [getState, setState] = state.create({
   config: defaultConfig,
   isInitialized: false,
   configScriptSrc: null,
