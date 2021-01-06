@@ -1,4 +1,4 @@
-# monaco-react &middot; [![monthly downloads](https://img.shields.io/npm/dm/@monaco-editor/react)](https://www.npmjs.com/package/@monaco-editor/react) [![gitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/suren-atoyan/monaco-react/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/@monaco-editor/react.svg?style=flat)](https://www.npmjs.com/package/@monaco-editor/react) [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/suren-atoyan/state-local/pulls)
+# @monaco-editor/react &middot; [![monthly downloads](https://img.shields.io/npm/dm/@monaco-editor/react)](https://www.npmjs.com/package/@monaco-editor/react) [![gitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/suren-atoyan/monaco-react/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/@monaco-editor/react.svg?style=flat)](https://www.npmjs.com/package/@monaco-editor/react) [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/suren-atoyan/monaco-react/pulls)
 Monaco Editor for React
 
 ## Synopsis
@@ -395,7 +395,7 @@ You can play with it [here](https://codesandbox.io/s/monaco-editorreact---contro
 As a usual React component, this one also works fine with an electron-react environment, without need to have a webpack configuration or other extra things. But there are several cases that developers usually face to and sometimes it can be confusing. Here they are:
 
 1) **You see loading screen stuck**
-Usually, it's because your environment doesn't allow you to load external sources. By default, it loads monaco sources from CDN. You can see the [default configuration]([https://github.com/suren-atoyan/monaco-react/blob/master/src/config/index.js#L3](https://github.com/suren-atoyan/monaco-react/blob/master/src/config/index.js#L3)). But sure you can change that behavior; the library is fully configurable. Read about it [here]([https://github.com/suren-atoyan/monaco-react#config](https://github.com/suren-atoyan/monaco-react#config)). So, if you want to download it from your local files, you can do it like this:
+Usually, it's because your environment doesn't allow you to load external sources. By default, it loads monaco sources from CDN. You can see the [default configuration](https://github.com/suren-atoyan/monaco-react/blob/master/src/config/index.js#L3). But sure you can change that behavior; the library is fully configurable. Read about it [here](https://github.com/suren-atoyan/monaco-react#config). So, if you want to download it from your local files, you can do it like this:
 
 ```javascript
 import { monaco } from '@monaco-editor/react';
@@ -404,7 +404,7 @@ monaco.config({ paths: { vs: '../path-to-monaco' } });
 ```
 
 2) **Based on your electron environment it can be required to have an absolute URL**
-The utility function taken from [here]([https://github.com/microsoft/monaco-editor-samples/blob/master/electron-amd-nodeIntegration/electron-index.html](https://github.com/microsoft/monaco-editor-samples/blob/master/electron-amd-nodeIntegration/electron-index.html)) can help you to achieve that. Let's imagine you have `monaco-editor` package installed and you want to load monaco from the `node_modules` rather than from CDN: in that case, you can write something like this:
+The utility function taken from [here](https://github.com/microsoft/monaco-editor-samples/blob/master/electron-amd-nodeIntegration/electron-index.html) can help you to achieve that. Let's imagine you have `monaco-editor` package installed and you want to load monaco from the `node_modules` rather than from CDN: in that case, you can write something like this:
 
 ```javascript
 function ensureFirstBackSlash(str) {
@@ -427,13 +427,13 @@ monaco.config({
 });
 ```
 
-There were several issues about this topic that can be helpful too - [1]([https://github.com/suren-atoyan/monaco-react/issues/48](https://github.com/suren-atoyan/monaco-react/issues/48)) [2]([https://github.com/suren-atoyan/monaco-react/issues/12](https://github.com/suren-atoyan/monaco-react/issues/12)) [3]([https://github.com/suren-atoyan/monaco-react/issues/58](https://github.com/suren-atoyan/monaco-react/issues/58)) [4]([https://github.com/suren-atoyan/monaco-react/issues/87](https://github.com/suren-atoyan/monaco-react/issues/87))
+There were several issues about this topic that can be helpful too - [1](https://github.com/suren-atoyan/monaco-react/issues/48) [2](https://github.com/suren-atoyan/monaco-react/issues/12) [3](https://github.com/suren-atoyan/monaco-react/issues/58) [4](https://github.com/suren-atoyan/monaco-react/issues/87)
 
 And if you use `electron` with `monaco` and `react` and have faced an issue different than the above-discribed ones, please let us know to make this section more helpful.
 
 ##### For `Next.js` users
 
-Like other React components, this one also works with `Next.js` without a hitch. The part of the source that should be pre-parsed is optimized for server-side rendering, so, in usual cases, it will work fine, but if you want to have access, for example, to [`monacoInstance`]([https://github.com/suren-atoyan/monaco-react#monaco-instance](https://github.com/suren-atoyan/monaco-react#monaco-instance)) you should be aware that it wants to access the `document` object, and it requires browser environment. Basically you just need to avoid running that part out of browser environment, there are several ways to do that. The one is described [here](https://nextjs.org/docs/advanced-features/dynamic-import#with-no-ssr).
+Like other React components, this one also works with `Next.js` without a hitch. The part of the source that should be pre-parsed is optimized for server-side rendering, so, in usual cases, it will work fine, but if you want to have access, for example, to [`monacoInstance`](https://github.com/suren-atoyan/monaco-react#monaco-instance) you should be aware that it wants to access the `document` object, and it requires browser environment. Basically you just need to avoid running that part out of browser environment, there are several ways to do that. The one is described [here](https://nextjs.org/docs/advanced-features/dynamic-import#with-no-ssr).
 
 And if you use `monaco` with `Next.js` and have faced an issue different than the above-described one, please let us know to make this section more helpful.
 
