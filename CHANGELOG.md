@@ -1,6 +1,6 @@
 ### Versions
 
-## 3.8.1
+## 3.8.2
 ###### *Jan 7, 2021*
 
 - package.json: add `@monaco-editor/loader` as a dependency
