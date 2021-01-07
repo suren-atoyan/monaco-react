@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import monaco from '@monaco-editor/loader';
 
 import MonacoContainer from '../MonacoContainer';
-
-import { monaco, noop } from '../utils';
-import { useMount, useUpdate } from '../hooks';
-
+import useMount from '../hooks/useMount';
+import useUpdate from '../hooks/useUpdate';
+import { noop } from '../utils';
 import themes from '../config/themes';
 
 function Editor({
@@ -87,6 +87,10 @@ function Editor({
       ...options,
     }, overrideServices);
 
+    // the next line is here historically
+    // by default, monaco-editor provides two themes: 'light' and 'vs-dark'
+    // so, now you have one as a bonus: 'dark' :)
+    // I don't want to delete it, just to not make breaking changes
     monacoRef.current.editor.defineTheme('dark', themes['night-dark']);
     monacoRef.current.editor.setTheme(theme);
 

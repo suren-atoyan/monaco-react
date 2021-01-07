@@ -1,11 +1,11 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import monaco from '@monaco-editor/loader';
 
 import MonacoContainer from '../MonacoContainer';
-
-import { monaco, noop } from '../utils';
-import { useMount, useUpdate } from '../hooks';
-
+import useMount from '../hooks/useMount';
+import useUpdate from '../hooks/useUpdate';
+import { noop } from '../utils';
 import themes from '../config/themes';
 
 function DiffEditor ({
