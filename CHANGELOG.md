@@ -8,7 +8,7 @@
 - utilities: remove utilities that were being replaced by the `@monaco-editor/loader`
 - utilities: collect remaining utilities all in the entry file / add some new ones for the next version
 - config: remove config as it's already replaced by the `@monaco-editor/loader`
-- hooks: create `usePrevious hook`
+- hooks: create `usePrevious` hook
 - cs: coding style fixes
 - build: use `Rollup` as a build system; now, we have bundles for `cjs/es/umd`
 
