@@ -3,9 +3,10 @@
   "version": "3.8.0",
   "description": "Monaco editor wrapper for easy/one-line integration with React applications (e.g. powered by create-react-app) without need of webpack configuration files",
   "author": "Suren Atoyan <contact@surenatoyan.com>",
-  "main": "lib/index.js",
-  "module": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "lib/cjs/index.js",
+  "module": "lib/es/index.js",
+  "unpkg": "lib/umd/monaco-editor.min.js",
+  "jsdelivr": "lib/umd/monaco-editor.min.js",
   "scripts": {
     "lint": "npx eslint src",
     "build": "rollup -c && cp ./src/index.d.ts ./lib/",
