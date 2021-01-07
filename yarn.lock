@@ -1411,6 +1411,13 @@
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
 
+"@monaco-editor/loader@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@monaco-editor/loader/-/loader-0.1.2.tgz#d9c221e9892c28357feda83186e20372a6942721"
+  integrity sha512-JL4ZctA07613CFh2vR+vjM3uQQc6rohjXwrLGCONZc7WmzMA2OTmTd4n2bKvmBBKHxCKsgSYAgAU2nno6diI2w==
+  dependencies:
+    state-local "^1.0.6"
+
 "@sheerun/mutationobserver-shim@^0.3.2":
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/@sheerun/mutationobserver-shim/-/mutationobserver-shim-0.3.2.tgz#8013f2af54a2b7d735f71560ff360d3a8176a87b"
@@ -5681,6 +5688,11 @@ state-local@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/state-local/-/state-local-1.0.1.tgz#0d3c0a2bb610d3b81699b30e98fafa00bcf4ac9c"
   integrity sha512-CkiwT61ZhZd0/z183fcceu7+RSws/Sq5BT3RNQ2xK/Se9A/jn/4Z/eIe1bawoI9wNYC9wrcG2Drz+6GnjtKynA==
+
+state-local@^1.0.6:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/state-local/-/state-local-1.0.7.tgz#da50211d07f05748d53009bee46307a37db386d5"
+  integrity sha512-HTEHMNieakEnoe33shBYcZ7NX83ACUjCu8c40iOGEZsngj9zRnkqS9j1pqQPXwobB0ZcVTk27REb7COQ0UR59w==
 
 static-extend@^0.1.1:
   version "0.1.2"

@@ -6,7 +6,6 @@ import MonacoContainer from '../MonacoContainer';
 import useMount from '../hooks/useMount';
 import useUpdate from '../hooks/useUpdate';
 import { noop } from '../utils';
-import themes from '../config/themes';
 
 function DiffEditor ({
   original,
@@ -82,7 +81,6 @@ function DiffEditor ({
 
     setModels();
 
-    monacoRef.current.editor.defineTheme('dark', themes['night-dark']);
     monacoRef.current.editor.setTheme(theme);
 
     setIsEditorReady(true);
