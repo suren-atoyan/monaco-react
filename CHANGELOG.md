@@ -1,5 +1,17 @@
 ### Versions
 
+## 3.8.0
+###### *Jan 7, 2021*
+
+- package.json: add `@monaco-editor/loader` as a dependency
+- Editor/Diff Editor components: use `@monaco-editor/loader` instead of `monaco` utility
+- utilities: remove utilities that were being replaced by the `@monaco-editor/loader`
+- utilities: collect remaining utilities all in the entry file / add some new ones for the next version
+- config: remove config as it's already replaced by the `@monaco-editor/loader`
+- hooks: create `usePrevious hook`
+- cs: coding style fixes
+- build: use `Rollup` as a build system; now, we have bundles for `cjs/es/umd`
+
 ## 3.7.5
 ###### *Jan 3, 2021*
 
