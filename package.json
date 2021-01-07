@@ -85,6 +85,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.11.0",
+    "@monaco-editor/loader": "^0.1.2",
     "state-local": "^1.0.1"
   }
 }
