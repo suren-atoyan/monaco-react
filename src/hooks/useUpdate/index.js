@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-const useUpdate = (effect, deps, applyChanges = true) => {
+function useUpdate(effect, deps, applyChanges = true) {
   const isInitialMount = useRef(true);
 
   useEffect(
@@ -9,6 +9,6 @@ const useUpdate = (effect, deps, applyChanges = true) => {
       : effect,
     deps
   );
-};
+}
 
 export default useUpdate;

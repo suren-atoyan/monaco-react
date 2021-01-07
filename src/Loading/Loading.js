@@ -9,7 +9,9 @@ const loadingStyles = {
 };
 
 function Loading({ content }) {
-  return <div style={loadingStyles}>{content}</div>;
+  return (
+    <div style={loadingStyles}>{content}</div>
+  );
 }
 
 export default Loading;
