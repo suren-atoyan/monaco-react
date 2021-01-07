@@ -1,6 +1,8 @@
 # @monaco-editor/react &middot; [![monthly downloads](https://img.shields.io/npm/dm/@monaco-editor/react)](https://www.npmjs.com/package/@monaco-editor/react) [![gitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/suren-atoyan/monaco-react/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/@monaco-editor/react.svg?style=flat)](https://www.npmjs.com/package/@monaco-editor/react) [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/suren-atoyan/monaco-react/pulls)
 Monaco Editor for React
 
+:tada: :tada: :tada: &middot; version **v3.8.2** is here and it's already integrated with [@monaco-editor/loader](https://github.com/suren-atoyan/monaco-loader)
+
 ## Synopsis
 
 Monaco editor wrapper for easy/one-line integration with React applications without needing to use webpack's (or any other module bundler's) configuration files.
