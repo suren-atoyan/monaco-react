@@ -8,7 +8,8 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "lint": "npx eslint src",
-    "build": "npx babel src --out-dir lib && cp ./src/index.d.ts ./lib/",
+    "build-old": "npx babel src --out-dir lib && cp ./src/index.d.ts ./lib/",
+    "build": "rollup -c && cp ./src/index.d.ts ./lib/",
     "prepublish": "npm test && npm run lint && npm run build",
     "test": "npx jest"
   },
@@ -41,6 +42,10 @@
     "@babel/plugin-transform-runtime": "^7.11.0",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
+    "@rollup/plugin-babel": "^5.2.2",
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.1",
+    "@rollup/plugin-replace": "^2.3.4",
     "@testing-library/jest-dom": "^5.1.1",
     "@testing-library/react": "^9.4.0",
     "babel-eslint": "10.0.3",
@@ -55,21 +60,14 @@
     "husky": "^4.2.3",
     "jest": "^25.1.0",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "rollup": "^2.36.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4"
   },
   "babel": {
     "presets": [
       "@babel/preset-env",
       "@babel/preset-react"
-    ],
-    "plugins": [
-      [
-        "@babel/transform-runtime",
-        {
-          "helpers": true,
-          "version": "7.11.0"
-        }
-      ]
     ]
   },
   "husky": {
@@ -84,8 +82,6 @@
     ]
   },
   "dependencies": {
-    "@babel/runtime": "^7.11.0",
-    "@monaco-editor/loader": "^0.1.2",
-    "state-local": "^1.0.1"
+    "@monaco-editor/loader": "^0.1.2"
   }
 }

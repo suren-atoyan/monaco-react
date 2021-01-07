@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
-import Editor from '..';
+import Editor from '../Editor';
 import { noop } from '../utils';
 
 function ControlledEditor({ value: providedValue, onChange, editorDidMount, ...props }) {
