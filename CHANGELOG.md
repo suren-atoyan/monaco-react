@@ -1,5 +1,11 @@
 ### Versions
 
+## 3.8.3
+###### *Jan 8, 2021*
+
+- README: fix DiffEditor `options` prop type name
+- types: rename index.d.ts to types.d.ts
+
 ## 3.8.2
 ###### *Jan 7, 2021*
 
