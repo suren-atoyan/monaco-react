@@ -497,7 +497,7 @@ You can play with the example [here](https://codesandbox.io/s/create-your-own-ed
 | width | union: number \| string | '100%' | The width of the editor wrapper |
 | height | union: number \| string | '100%' | The height of the editor wrapper |
 | loading | union: React element \| string | 'Loading...' | The loading screen before the editor is loaded |
-| options | object | {} | [IDiffEditorOptions](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.idiffeditorconstructionoptions.html) |
+| options | object | {} | [IDiffEditorConstructionOptions](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.idiffeditorconstructionoptions.html) |
 | className | string || monaco container className |
 | wrapperClassName | string || monaco container wrapper className |
 
