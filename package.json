@@ -5,12 +5,12 @@
   "author": "Suren Atoyan <contact@surenatoyan.com>",
   "main": "lib/cjs/index.js",
   "module": "lib/es/index.js",
-  "types": "lib/index.d.ts",
   "unpkg": "lib/umd/monaco-react.min.js",
   "jsdelivr": "lib/umd/monaco-react.min.js",
+  "types": "lib/types.d.ts",
   "scripts": {
     "lint": "npx eslint src",
-    "build": "rollup -c && cp ./src/index.d.ts ./lib/",
+    "build": "rollup -c && cp ./src/types.d.ts ./lib/",
     "prepublish": "npm test && npm run lint && npm run build",
     "test": "npx jest"
   },
