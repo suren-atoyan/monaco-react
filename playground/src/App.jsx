@@ -1,8 +1,6 @@
 import React from 'react'
 
-import Editor, { x } from '../../lib/es'
-
-console.log(x);
+import Editor from '../../lib/es'
 
 function App() {
   return (
