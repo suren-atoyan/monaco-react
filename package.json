@@ -11,6 +11,7 @@
   "scripts": {
     "lint": "npx eslint src",
     "build": "rollup -c && cp ./src/types.d.ts ./lib/",
+    "build-dev": "rollup -c -w && cp ./src/types.d.ts ./lib/",
     "prepublish": "npm test && npm run lint && npm run build",
     "test": "npx jest"
   },
@@ -63,7 +64,8 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "rollup": "^2.36.1",
-    "rollup-plugin-peer-deps-external": "^2.2.4"
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-terser": "^7.0.2"
   },
   "babel": {
     "presets": [
@@ -79,7 +81,8 @@
   "jest": {
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "/demo/"
+      "/demo/",
+      "/playground/"
     ]
   },
   "dependencies": {

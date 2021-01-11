@@ -1,0 +1,17 @@
+{
+  "name": "playground",
+  "version": "0.0.0",
+  "scripts": {
+    "run-dev-build": "cd .. && yarn build-dev & cd -",
+    "dev": "yarn run-dev-build & vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
+  },
+  "devDependencies": {
+    "vite": "^2.0.0-beta.12"
+  }
+}
