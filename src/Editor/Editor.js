@@ -93,12 +93,17 @@ function Editor({
       snippets.forEach(({ language, suggestions }) => {
         monacoRef.current.languages.registerCompletionItemProvider(language, {
           provideCompletionItems: () => {
+            let formattedSuggestion = JSON.stringify(suggestions);
+
+            formattedSuggestion = JSON.parse(formattedSuggestion).map((suggestion) => {
+              suggestion.kind = monacoRef.current.languages.CompletionItemKind[suggestion.kind || 'Snippet'];
+              suggestion.insertTextRules = monacoRef.current.languages.CompletionItemInsertTextRule.InsertAsSnippet;
+              return suggestion
+            })
+
             return {
-              suggestions: suggestions.map((suggestion) => {
-                suggestion.kind = monacoRef.current.languages.CompletionItemKind[suggestion.kind || 'Snippet'];
-                return suggestion
-              })
-            };
+              suggestions: formattedSuggestion
+            }
           }
         });
       });
