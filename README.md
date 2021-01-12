@@ -1,7 +1,9 @@
 # @monaco-editor/react &middot; [![monthly downloads](https://img.shields.io/npm/dm/@monaco-editor/react)](https://www.npmjs.com/package/@monaco-editor/react) [![gitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/suren-atoyan/monaco-react/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/@monaco-editor/react.svg?style=flat)](https://www.npmjs.com/package/@monaco-editor/react) [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/suren-atoyan/monaco-react/pulls)
 Monaco Editor for React
 
-:tada: :tada: :tada: &middot; version **v3.8.2** is here and it's already integrated with [@monaco-editor/loader](https://github.com/suren-atoyan/monaco-loader)
+:tada: the new section [Development / Playground](#development-playground) has been created - now you can run the playground and play with the internals of the library
+<br />
+:tada: &middot; version **v3.8.2** is here and it's already integrated with [@monaco-editor/loader](https://github.com/suren-atoyan/monaco-loader)
 
 ## Synopsis
 
@@ -34,6 +36,7 @@ There do already exist solutions for integration with React; e.g [this one](http
 		* [For `electron` users](#for-electron-users)
 		* [For `Next.js` users](#for-nextjs-users)
 	* [Create your own editor!](#create-your-own-editor)
+* [Development / Playground](#development-playground)
 * [Props](#props)
 	* [Editor](#editor)
 	* [Diff Editor](#diffeditor)
@@ -175,7 +178,7 @@ function App() {
       <Editor
         height="90vh"
         language="javascript"
-        value={"// write your code here"}
+        value="// write your code here"
         editorDidMount={handleEditorDidMount}
       />
     </>
@@ -311,7 +314,7 @@ function App() {
   return (
     <ControlledEditor
       height="90vh"
-      value={"// try to write e%v%a%l somewhere 😈 \n"}
+      value="// try to write e%v%a%l somewhere 😈 \n"
       onChange={handleEditorChange}
       language="javascript"
     />
@@ -464,6 +467,54 @@ monaco.init().then(monacoInstance => {
 That's all. You can wrap it into a React component, or Vue, or Angular or leave it as vanilla one or whatever you want; it's written in pure js.
 
 You can play with the example [here](https://codesandbox.io/s/create-your-own-editor-fvi5x?file=/src/index.js)
+
+### Development-Playground
+
+It's always important to have a place, where you can play with the internals of the library. The `playground` is a minimal `React` app that directly uses the sources of the library. So, if you are going to open a PR, or want to check something, or just want to try the freshest state of the library, you can run the playground and enjoy it
+
+ - clone the repository
+
+ ```bash
+ git clone https://github.com/suren-atoyan/monaco-react.git
+ ```
+
+ - go to the library folder
+
+```bash
+ cd monaco-react
+ ```
+
+ - install the library's dependencies
+
+```bash
+ npm install # yarn
+ ```
+
+ - go to the playground
+
+```bash
+ cd playground
+ ```
+
+- install the playground's dependencies
+
+```bash
+npm install # yarn
+```
+
+- and run the playground
+
+```bash
+npm run dev # yarn dev
+```
+
+    monaco-react
+    ├── playground
+    │   ├── src/      # playground sources
+    ├── src/          # library sources
+    └── ...
+
+If you want to change something in the library, go to `monaco-react/src/...`, the library will be automatically re-built and the playground will use the latest build
 
 ### Props
 

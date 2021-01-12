@@ -1,10 +1,8 @@
 import nodeResolve from '@rollup/plugin-node-resolve';
-import RollupTerser from 'rollup-plugin-terser';
 import replace from '@rollup/plugin-replace';
 import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
-
-const { terser } = RollupTerser;
+import { terser } from 'rollup-plugin-terser';
 
 const defaultNodeResolveConfig = {};
 const nodeResolvePlugin = nodeResolve(defaultNodeResolveConfig);
