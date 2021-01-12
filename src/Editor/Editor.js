@@ -17,6 +17,7 @@ function Editor({
   height,
   loading,
   options,
+  snippets,
   overrideServices,
   _isControlledMode,
   className,
@@ -88,8 +89,28 @@ function Editor({
 
     monacoRef.current.editor.setTheme(theme);
 
+    if (snippets.length > 0) {
+      snippets.forEach(({ language, suggestions }) => {
+        monacoRef.current.languages.registerCompletionItemProvider(language, {
+          provideCompletionItems: () => {
+            let formattedSuggestion = JSON.stringify(suggestions);
+
+            formattedSuggestion = JSON.parse(formattedSuggestion).map((suggestion) => {
+              suggestion.kind = monacoRef.current.languages.CompletionItemKind[suggestion.kind || 'Snippet'];
+              suggestion.insertTextRules = monacoRef.current.languages.CompletionItemInsertTextRule.InsertAsSnippet;
+              return suggestion
+            })
+
+            return {
+              suggestions: formattedSuggestion
+            }
+          }
+        });
+      });
+    }
+
     setIsEditorReady(true);
-  }, [language, options, overrideServices, theme, value]);
+  }, [language, options, overrideServices, theme, value, snippets]);
 
   useEffect(() => {
     if (isEditorReady) {
