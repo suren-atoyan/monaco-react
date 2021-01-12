@@ -1,7 +1,8 @@
 # @monaco-editor/react &middot; [![monthly downloads](https://img.shields.io/npm/dm/@monaco-editor/react)](https://www.npmjs.com/package/@monaco-editor/react) [![gitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/suren-atoyan/monaco-react/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/@monaco-editor/react.svg?style=flat)](https://www.npmjs.com/package/@monaco-editor/react) [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/suren-atoyan/monaco-react/pulls)
 Monaco Editor for React
 
-:tada: the new section [Development/Playground](#development-playground) has been created - now you can run the playground and play with the internals of the library
+:tada: the new section [Development / Playground](#development-playground) has been created - now you can run the playground and play with the internals of the library
+<br />
 :tada: &middot; version **v3.8.2** is here and it's already integrated with [@monaco-editor/loader](https://github.com/suren-atoyan/monaco-loader)
 
 ## Synopsis
@@ -35,7 +36,7 @@ There do already exist solutions for integration with React; e.g [this one](http
 		* [For `electron` users](#for-electron-users)
 		* [For `Next.js` users](#for-nextjs-users)
 	* [Create your own editor!](#create-your-own-editor)
-* [Development/Playground](#development-playground)
+* [Development / Playground](#development-playground)
 * [Props](#props)
 	* [Editor](#editor)
 	* [Diff Editor](#diffeditor)
@@ -467,7 +468,7 @@ That's all. You can wrap it into a React component, or Vue, or Angular or leave 
 
 You can play with the example [here](https://codesandbox.io/s/create-your-own-editor-fvi5x?file=/src/index.js)
 
-### Development/Playground
+### Development-Playground
 
 It's always important to have a place, where you can play with the internals of the library. The `playground` is a minimal `React` app that directly uses the sources of the library. So, if you are going to open a PR, or want to check something, or just want to try the freshest state of the library, you can run the playground and enjoy it
 
@@ -475,6 +476,12 @@ It's always important to have a place, where you can play with the internals of 
 
  ```bash
  git clone https://github.com/suren-atoyan/monaco-react.git
+ ```
+
+ - go to the library folder
+
+```bash
+ cd monaco-react
  ```
 
  - install the library's dependencies
