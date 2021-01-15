@@ -19,7 +19,6 @@ function Editor({
   loading,
   options,
   overrideServices,
-  _isControlledMode,
   className,
   wrapperClassName,
   beforeMount,
@@ -28,8 +27,8 @@ function Editor({
 }) {
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [isMonacoMounting, setIsMonacoMounting] = useState(true);
-  const editorRef = useRef(null);
   const monacoRef = useRef(null);
+  const editorRef = useRef(null);
   const containerRef = useRef(null);
   const onMountRef = useRef(onMount);
   const beforeMountRef = useRef(beforeMount);
@@ -61,12 +60,6 @@ function Editor({
           text: value,
           forceMoveMarkers: true,
         }]);
-
-        if (_isControlledMode) {
-          const model = editorRef.current.getModel();
-
-          model.forceTokenization(model.getLineCount());
-        }
 
         editorRef.current.pushUndoStop();
       }
@@ -175,7 +168,6 @@ Editor.propTypes = {
   className: PropTypes.string,
   wrapperClassName: PropTypes.string,
   overrideServices: PropTypes.object,
-  _isControlledMode: PropTypes.bool,
   beforeMount: PropTypes.func,
   onMount: PropTypes.func,
   onChange: PropTypes.func,
@@ -189,7 +181,6 @@ Editor.defaultProps = {
   loading: 'Loading...',
   options: {},
   overrideServices: {},
-  _isControlledMode: false,
   beforeMount: noop,
   onMount: noop,
 };
