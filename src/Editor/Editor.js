@@ -8,6 +8,7 @@ import useUpdate from '../hooks/useUpdate';
 import { noop } from '../utils';
 
 function Editor({
+  defaultValue,
   value,
   language,
   beforeMount,
@@ -84,7 +85,7 @@ function Editor({
   const createEditor = useCallback(() => {
     beforeMountRef.current(monacoRef.current);
     const defaultModel = monacoRef.current.editor.createModel(
-      value,
+      defaultValue || value,
       language,
       monacoRef.current.Uri.parse(defaultModelPath),
     );
@@ -98,7 +99,15 @@ function Editor({
     monacoRef.current.editor.setTheme(theme);
 
     setIsEditorReady(true);
-  }, [language, options, overrideServices, theme, value, defaultModelPath]);
+  }, [
+    language,
+    options,
+    overrideServices,
+    theme,
+    value,
+    defaultValue,
+    defaultModelPath,
+  ]);
 
   useEffect(() => {
     if (isEditorReady) {
@@ -129,6 +138,7 @@ function Editor({
 }
 
 Editor.propTypes = {
+  defaultValue: PropTypes.string,
   value: PropTypes.string,
   language: PropTypes.string,
   beforeMount: PropTypes.func,
