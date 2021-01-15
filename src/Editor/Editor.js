@@ -98,7 +98,7 @@ function Editor({
     monacoRef.current.editor.setTheme(theme);
 
     setIsEditorReady(true);
-  }, [language, options, overrideServices, theme, value]);
+  }, [language, options, overrideServices, theme, value, defaultModelPath]);
 
   useEffect(() => {
     if (isEditorReady) {

@@ -13,7 +13,10 @@ function DiffEditor ({
   language,
   originalLanguage,
   modifiedLanguage,
-  editorDidMount,
+  originalModelPath,
+  modifiedModelPath,
+  beforeMount,
+  onMount,
   theme,
   width,
   height,
@@ -27,7 +30,8 @@ function DiffEditor ({
   const editorRef = useRef(null);
   const monacoRef = useRef(null);
   const containerRef = useRef(null);
-  const editorDidMountRef = useRef(editorDidMount);
+  const onMountRef = useRef(onMount);
+  const beforeMountRef = useRef(beforeMount);
 
   useMount(() => {
     const cancelable = loader.init();
@@ -64,14 +68,23 @@ function DiffEditor ({
   }, [options], isEditorReady);
 
   const setModels = useCallback(() => {
+    beforeMountRef.current(monacoRef.current);
     const originalModel = monacoRef.current.editor
-      .createModel(original, originalLanguage || language);
+      .createModel(
+        original,
+        originalLanguage || language,
+        monacoRef.current.Uri.parse(originalModelPath),
+      );
 
     const modifiedModel = monacoRef.current.editor
-      .createModel(modified, modifiedLanguage || language);
+      .createModel(
+        modified,
+        modifiedLanguage || language,
+        monacoRef.current.Uri.parse(modifiedModelPath),
+      );
 
     editorRef.current.setModel({ original: originalModel, modified: modifiedModel });
-  }, [language, modified, modifiedLanguage, original, originalLanguage]);
+  }, [language, modified, modifiedLanguage, original, originalLanguage, originalModelPath, modifiedModelPath]);
 
   const createEditor = useCallback(() => {
     editorRef.current = monacoRef.current.editor.createDiffEditor(containerRef.current, {
@@ -88,12 +101,9 @@ function DiffEditor ({
 
   useEffect(() => {
     if (isEditorReady) {
-      const { original, modified } = editorRef.current.getModel();
-
-      editorDidMountRef.current(
-        modified.getValue.bind(modified),
-        original.getValue.bind(original),
+      onMountRef.current(
         editorRef.current,
+        monacoRef.current,
       );
     }
   }, [isEditorReady]);
@@ -123,7 +133,10 @@ DiffEditor.propTypes = {
   language: PropTypes.string,
   originalLanguage: PropTypes.string,
   modifiedLanguage: PropTypes.string,
-  editorDidMount: PropTypes.func,
+  originalModelPath: PropTypes.string,
+  modifiedModelPath: PropTypes.string,
+  beforeMount: PropTypes.func,
+  onMount: PropTypes.func,
   theme: PropTypes.string,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -134,7 +147,10 @@ DiffEditor.propTypes = {
 };
 
 DiffEditor.defaultProps = {
-  editorDidMount: noop,
+  beforeMount: noop,
+  onMount: noop,
+  originalModelPath: 'inmemory://model/1',
+  modifiedModelPath: 'inmemory://model/2',
   theme: 'light',
   width: '100%',
   height: '100%',
