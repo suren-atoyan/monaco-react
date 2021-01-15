@@ -11,16 +11,19 @@ function Editor({
   defaultValue,
   value,
   language,
+  /* === */
   defaultModelPath,
   theme,
   line,
-  width,
-  height,
   loading,
   options,
   overrideServices,
+  /* === */
+  width,
+  height,
   className,
   wrapperClassName,
+  /* === */
   beforeMount,
   onMount,
   onChange,
@@ -158,16 +161,19 @@ Editor.propTypes = {
   defaultValue: PropTypes.string,
   value: PropTypes.string,
   language: PropTypes.string,
+  /* === */
   defaultModelPath: PropTypes.string,
   theme: PropTypes.string,
   line: PropTypes.number,
-  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   loading: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   options: PropTypes.object,
+  overrideServices: PropTypes.object,
+  /* === */
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   className: PropTypes.string,
   wrapperClassName: PropTypes.string,
-  overrideServices: PropTypes.object,
+  /* === */
   beforeMount: PropTypes.func,
   onMount: PropTypes.func,
   onChange: PropTypes.func,
@@ -176,11 +182,13 @@ Editor.propTypes = {
 Editor.defaultProps = {
   defaultModelPath: 'inmemory://model/1',
   theme: 'light',
-  width: '100%',
-  height: '100%',
   loading: 'Loading...',
   options: {},
   overrideServices: {},
+  /* === */
+  width: '100%',
+  height: '100%',
+  /* === */
   beforeMount: noop,
   onMount: noop,
 };

@@ -13,17 +13,20 @@ function DiffEditor ({
   language,
   originalLanguage,
   modifiedLanguage,
+  /* === */
   originalModelPath,
   modifiedModelPath,
-  beforeMount,
-  onMount,
   theme,
-  width,
-  height,
   loading,
   options,
+  /* === */
+  height,
+  width,
   className,
   wrapperClassName,
+  /* === */
+  beforeMount,
+  onMount,
 }) {
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [isMonacoMounting, setIsMonacoMounting] = useState(true);
@@ -133,29 +136,34 @@ DiffEditor.propTypes = {
   language: PropTypes.string,
   originalLanguage: PropTypes.string,
   modifiedLanguage: PropTypes.string,
+  /* === */
   originalModelPath: PropTypes.string,
   modifiedModelPath: PropTypes.string,
-  beforeMount: PropTypes.func,
-  onMount: PropTypes.func,
   theme: PropTypes.string,
-  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   loading: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   options: PropTypes.object,
+  /* === */
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   className: PropTypes.string,
   wrapperClassName: PropTypes.string,
+  /* === */
+  beforeMount: PropTypes.func,
+  onMount: PropTypes.func,
 };
 
 DiffEditor.defaultProps = {
-  beforeMount: noop,
-  onMount: noop,
   originalModelPath: 'inmemory://model/1',
   modifiedModelPath: 'inmemory://model/2',
   theme: 'light',
-  width: '100%',
-  height: '100%',
   loading: 'Loading...',
   options: {},
+  /* === */
+  width: '100%',
+  height: '100%',
+  /* === */
+  beforeMount: noop,
+  onMount: noop,
 };
 
 export default DiffEditor;
