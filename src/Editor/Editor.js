@@ -10,7 +10,9 @@ import { noop } from '../utils';
 function Editor({
   value,
   language,
-  editorDidMount,
+  beforeMount,
+  onMount,
+  defaultModelPath,
   theme,
   line,
   width,
@@ -27,7 +29,8 @@ function Editor({
   const editorRef = useRef(null);
   const monacoRef = useRef(null);
   const containerRef = useRef(null);
-  const editorDidMountRef = useRef(editorDidMount);
+  const onMountRef = useRef(onMount);
+  const beforeMountRef = useRef(beforeMount);
 
   useMount(() => {
     const cancelable = loader.init();
@@ -79,9 +82,15 @@ function Editor({
   }, [theme], isEditorReady);
 
   const createEditor = useCallback(() => {
-    editorRef.current = monacoRef.current.editor.create(containerRef.current, {
+    beforeMountRef.current(monacoRef.current);
+    const defaultModel = monacoRef.current.editor.createModel(
       value,
       language,
+      monacoRef.current.Uri.parse(defaultModelPath),
+    );
+
+    editorRef.current = monacoRef.current.editor.create(containerRef.current, {
+      model: defaultModel,
       automaticLayout: true,
       ...options,
     }, overrideServices);
@@ -93,9 +102,9 @@ function Editor({
 
   useEffect(() => {
     if (isEditorReady) {
-      editorDidMountRef.current(
-        editorRef.current.getValue.bind(editorRef.current),
+      onMountRef.current(
         editorRef.current,
+        monacoRef.current,
       );
     }
   }, [isEditorReady]);
@@ -122,7 +131,9 @@ function Editor({
 Editor.propTypes = {
   value: PropTypes.string,
   language: PropTypes.string,
-  editorDidMount: PropTypes.func,
+  beforeMount: PropTypes.func,
+  onMount: PropTypes.func,
+  defaultModelPath: PropTypes.string,
   theme: PropTypes.string,
   line: PropTypes.number,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -136,7 +147,9 @@ Editor.propTypes = {
 };
 
 Editor.defaultProps = {
-  editorDidMount: noop,
+  beforeMount: noop,
+  onMount: noop,
+  defaultModelPath: 'inmemory://model/1',
   theme: 'light',
   width: '100%',
   height: '100%',
