@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import monaco from '@monaco-editor/loader';
+import loader from '@monaco-editor/loader';
 
 import MonacoContainer from '../MonacoContainer';
 import useMount from '../hooks/useMount';
@@ -30,7 +30,7 @@ function DiffEditor ({
   const editorDidMountRef = useRef(editorDidMount);
 
   useMount(() => {
-    const cancelable = monaco.init();
+    const cancelable = loader.init();
 
     cancelable
       .then(monaco => ((monacoRef.current = monaco) && setIsMonacoMounting(false)))
