@@ -34,7 +34,6 @@
   "homepage": "https://github.com/suren-atoyan/monaco-react#readme",
   "peerDependencies": {
     "monaco-editor": "^0.21.2",
-    "prop-types": "^15.7.2",
     "react": "^16.8.0 || ^17.0.0",
     "react-dom": "^16.8.0 || ^17.0.0"
   },
@@ -86,6 +85,7 @@
     ]
   },
   "dependencies": {
+    "prop-types": "^15.7.2",
     "@monaco-editor/loader": "^1.0.0"
   }
 }
