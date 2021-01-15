@@ -1,5 +1,23 @@
 ### Versions
 
+## 4.0.0
+###### *Jan 16, 2021*
+
+- package.json: update dependency (`@monaco-editor/loader`) version to - `v1.0.0`
+- hooks: create `useMonaco` hook
+- lib: export (named) `useMonaco` from the entry file
+- monaco: rename the main utility: monaco -> loader
+- Editor/Diff: rename `editorDidMount` to `onMount`
+- Editor/Diff: expose monaco instance from `onMount` as a second argument (first is the editor instance)
+- Editor/Diff: add `beforeMount` prop: function with a single argument -> monaco instance
+- Editor: add `defaultModelPath` prop, use it as a default model path
+- Editor: add `defaultValue` prop and use it during default model creation
+- Editor: add subscription (`onChange` prop) to listen default model content change
+- Editor: remove `_isControlledMode` prop
+- Diff: add `originalModelPath` and `modifiedModelPath` props, use them as model paths for original/modified models
+- ControlledEditor: remove; the `Editor` component, now, handles both controlled and uncontrolled modes
+- package.json: move `prop-types` to dependencies
+
 ## 3.8.3
 ###### *Jan 8, 2021*
 
