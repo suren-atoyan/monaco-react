@@ -86,6 +86,6 @@
     ]
   },
   "dependencies": {
-    "@monaco-editor/loader": "^0.1.2"
+    "@monaco-editor/loader": "^1.0.0"
   }
 }
