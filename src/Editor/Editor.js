@@ -11,8 +11,6 @@ function Editor({
   defaultValue,
   value,
   language,
-  beforeMount,
-  onMount,
   defaultModelPath,
   theme,
   line,
@@ -24,6 +22,9 @@ function Editor({
   _isControlledMode,
   className,
   wrapperClassName,
+  beforeMount,
+  onMount,
+  onChange,
 }) {
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [isMonacoMounting, setIsMonacoMounting] = useState(true);
@@ -32,6 +33,8 @@ function Editor({
   const containerRef = useRef(null);
   const onMountRef = useRef(onMount);
   const beforeMountRef = useRef(beforeMount);
+  const subscriptionRef = useRef(null);
+  const valueRef = useRef(value);
 
   useMount(() => {
     const cancelable = loader.init();
@@ -122,7 +125,28 @@ function Editor({
     !isMonacoMounting && !isEditorReady && createEditor();
   }, [isMonacoMounting, isEditorReady, createEditor]);
 
-  const disposeEditor = () => editorRef.current.dispose();
+  // subscription
+
+  // to avoid unnecessary updates (attach - dispose listener) in subscription
+  valueRef.current = value;
+
+  useEffect(() => {
+    if (isEditorReady && onChange) {
+      subscriptionRef.current?.dispose();
+      subscriptionRef.current = editorRef.current?.onDidChangeModelContent(event => {
+        const editorValue = editorRef.current.getValue();
+
+        if (valueRef.current !== editorValue) {
+          onChange(editorValue, event);
+        }
+      });
+    }
+  }, [isEditorReady, onChange]);
+
+  function disposeEditor() {
+    subscriptionRef.current?.dispose();
+    editorRef.current.dispose();
+  }
 
   return (
     <MonacoContainer
@@ -141,8 +165,6 @@ Editor.propTypes = {
   defaultValue: PropTypes.string,
   value: PropTypes.string,
   language: PropTypes.string,
-  beforeMount: PropTypes.func,
-  onMount: PropTypes.func,
   defaultModelPath: PropTypes.string,
   theme: PropTypes.string,
   line: PropTypes.number,
@@ -154,11 +176,12 @@ Editor.propTypes = {
   wrapperClassName: PropTypes.string,
   overrideServices: PropTypes.object,
   _isControlledMode: PropTypes.bool,
+  beforeMount: PropTypes.func,
+  onMount: PropTypes.func,
+  onChange: PropTypes.func,
 };
 
 Editor.defaultProps = {
-  beforeMount: noop,
-  onMount: noop,
   defaultModelPath: 'inmemory://model/1',
   theme: 'light',
   width: '100%',
@@ -167,6 +190,8 @@ Editor.defaultProps = {
   options: {},
   overrideServices: {},
   _isControlledMode: false,
+  beforeMount: noop,
+  onMount: noop,
 };
 
 export default Editor;

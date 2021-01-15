@@ -1,12 +1,12 @@
 // TODO: the whole content should be improved in the next version.
 
-import * as React from "react";
+import * as React from 'react';
 import * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api';
 
 // default themes
 type Theme =
-  | "dark"
-  | "light";
+  | 'dark'
+  | 'light';
 
 // Editor
 
@@ -198,7 +198,7 @@ export { DiffEditor };
 
 export type Monaco = typeof monacoEditor;
 
-declare namespace monaco {
+declare namespace loader {
   function init(): Promise<Monaco>;
   function config(params: {
     paths?: {
@@ -210,4 +210,4 @@ declare namespace monaco {
   }): void
 }
 
-export { monaco };
+export { loader };
