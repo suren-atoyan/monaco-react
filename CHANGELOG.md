@@ -17,6 +17,8 @@
 - Diff: add `originalModelPath` and `modifiedModelPath` props, use them as model paths for original/modified models
 - ControlledEditor: remove; the `Editor` component, now, handles both controlled and uncontrolled modes
 - package.json: move `prop-types` to dependencies
+- types: fix types according to changed
+- Editor: add `onValidate` prop: an event emitted when the length of the model markers of the current model isn't 0
 
 ## 3.8.3
 ###### *Jan 8, 2021*
