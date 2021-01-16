@@ -27,6 +27,7 @@ function Editor({
   beforeMount,
   onMount,
   onChange,
+  onValidate,
 }) {
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [isMonacoMounting, setIsMonacoMounting] = useState(true);
@@ -37,6 +38,7 @@ function Editor({
   const beforeMountRef = useRef(beforeMount);
   const subscriptionRef = useRef(null);
   const valueRef = useRef(value);
+  const setModelMarkersBackupRef = useRef(null);
 
   useMount(() => {
     const cancelable = loader.init();
@@ -96,6 +98,7 @@ function Editor({
     }, overrideServices);
 
     monacoRef.current.editor.setTheme(theme);
+    setModelMarkersBackupRef.current = monacoRef.current.editor.setModelMarkers;
 
     setIsEditorReady(true);
   }, [
@@ -122,7 +125,6 @@ function Editor({
   }, [isMonacoMounting, isEditorReady, createEditor]);
 
   // subscription
-
   // to avoid unnecessary updates (attach - dispose listener) in subscription
   valueRef.current = value;
 
@@ -138,6 +140,24 @@ function Editor({
       });
     }
   }, [isEditorReady, onChange]);
+
+  // onValidate
+  useEffect(() => {
+    if (isEditorReady) {
+      monacoRef.current.editor.setModelMarkers = function(model, owner, markers) {
+        setModelMarkersBackupRef.current.call(
+          monacoRef.current.editor,
+          model,
+          owner,
+          markers,
+        );
+
+        if (markers.length !== 0) {
+          onValidate?.(markers);
+        }
+      }
+    }
+  }, [isEditorReady, onValidate]);
 
   function disposeEditor() {
     subscriptionRef.current?.dispose();
@@ -177,6 +197,7 @@ Editor.propTypes = {
   beforeMount: PropTypes.func,
   onMount: PropTypes.func,
   onChange: PropTypes.func,
+  onValidate: PropTypes.func,
 };
 
 Editor.defaultProps = {
@@ -191,6 +212,7 @@ Editor.defaultProps = {
   /* === */
   beforeMount: noop,
   onMount: noop,
+  onValidate: noop,
 };
 
 export default Editor;

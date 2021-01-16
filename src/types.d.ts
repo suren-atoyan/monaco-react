@@ -26,6 +26,10 @@ export type OnChange = (
   ev: monacoEditor.editor.IModelContentChangedEvent,
 ) => void;
 
+export type OnValidate = (
+  markers: monacoEditor.editor.IMarker[],
+) => void;
+
 export interface EditorProps {
   /**
    * The initial value of the default (auto created) model
@@ -121,6 +125,12 @@ export interface EditorProps {
    * An event emitted when the content of the current model has changed
    */
   onChange?: ControlledEditorOnChange;
+
+  /**
+   * Signature: function(markers: monacoEditor.editor.IMarker[]) => void
+   * An event emitted when the length of the model markers of the current model isn't 0
+   */
+  onValidate?: OnValidate;
 }
 
 declare const Editor: React.FC<EditorProps>;
