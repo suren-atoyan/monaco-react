@@ -1,7 +1,7 @@
 // TODO: the whole content should be improved in the next version.
 
 import * as React from 'react';
-import * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api';
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 
 // default themes
 type Theme =
@@ -9,11 +9,11 @@ type Theme =
   | 'light';
 
 // monaco
-export type Monaco = typeof monacoEditor;
+export type Monaco = typeof monaco;
 
 // Editor
 export type OnMount = (
-  editor: monacoEditor.editor.IStandaloneCodeEditor,
+  editor: monaco.editor.IStandaloneCodeEditor,
   monaco: Monaco,
 ) => void;
 
@@ -23,11 +23,11 @@ export type BeforeMount = (
 
 export type OnChange = (
   value: string | undefined,
-  ev: monacoEditor.editor.IModelContentChangedEvent,
+  ev: monaco.editor.IModelContentChangedEvent,
 ) => void;
 
 export type OnValidate = (
-  markers: monacoEditor.editor.IMarker[],
+  markers: monaco.editor.IMarker[],
 ) => void;
 
 export interface EditorProps {
@@ -47,8 +47,8 @@ export interface EditorProps {
   language?: string;
 
   /**
-   * path for the default (auto create) model
-   * will be passed as a third argument to `.createModel` method
+   * Path for the default (auto create) model
+   * Will be passed as a third argument to `.createModel` method
    * `monaco.editor.createModel(..., ..., monaco.Uri.parse(defaultModelPath))`
    */
   defaultModelPath?: string;
@@ -75,12 +75,12 @@ export interface EditorProps {
   /**
    * IStandaloneEditorConstructionOptions
    */
-  options?: monacoEditor.editor.IStandaloneEditorConstructionOptions;
+  options?: monaco.editor.IStandaloneEditorConstructionOptions;
 
   /**
    * IEditorOverrideServices
    */
-  overrideServices?: monacoEditor.editor.IEditorOverrideServices;
+  overrideServices?: monaco.editor.IEditorOverrideServices;
 
   /**
    * Width of the editor wrapper
@@ -105,7 +105,7 @@ export interface EditorProps {
   wrapperClassName?: string;
 
   /**
-   * Signature: function(monaco: object) => void
+   * Signature: function(monaco: Monaco) => void
    * An event emitted before the editor mounted
    * It gets the monaco instance as a first argument
    * Defaults to "noop"
@@ -113,7 +113,7 @@ export interface EditorProps {
   beforeMount?: BeforeMount;
 
   /**
-   * Signature: function(editor: object, monaco: object) => void
+   * Signature: function(editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => void
    * An event emitted when the editor has been mounted
    * It gets the editor instance as a first argument and the monaco instance as a second
    * Defaults to "noop"
@@ -121,13 +121,13 @@ export interface EditorProps {
   onMount?: OnMount;
 
   /**
-   * Signature: function(value: string | undefined, ev: monacoEditor.editor.IModelContentChangedEvent) => void
+   * Signature: function(value: string | undefined, ev: monaco.editor.IModelContentChangedEvent) => void
    * An event emitted when the content of the current model has changed
    */
-  onChange?: ControlledEditorOnChange;
+  onChange?: OnChange;
 
   /**
-   * Signature: function(markers: monacoEditor.editor.IMarker[]) => void
+   * Signature: function(markers: monaco.editor.IMarker[]) => void
    * An event emitted when the length of the model markers of the current model isn't 0
    */
   onValidate?: OnValidate;
@@ -140,7 +140,7 @@ export default Editor;
 // Diff Editor
 
 export type DiffOnMount = (
-  editor: monacoEditor.editor.IStandaloneDiffEditor,
+  editor: monaco.editor.IStandaloneDiffEditor,
   monaco: Monaco,
 ) => void;
 
@@ -177,16 +177,16 @@ export interface DiffEditorProps {
   modifiedLanguage?: string;
 
   /**
-   * path for the "original" model
-   * will be passed as a third argument to `.createModel` method
-   * `monaco.editor.createModel(..., ..., monaco.Uri.parse(defaultModelPath))`
+   * Path for the "original" model
+   * Will be passed as a third argument to `.createModel` method
+   * `monaco.editor.createModel(..., ..., monaco.Uri.parse(originalModelPath))`
    */
   originalModelPath?: string;
 
   /**
-   * path for the "modified" model
-   * will be passed as a third argument to `.createModel` method
-   * `monaco.editor.createModel(..., ..., monaco.Uri.parse(defaultModelPath))`
+   * Path for the "modified" model
+   * Will be passed as a third argument to `.createModel` method
+   * `monaco.editor.createModel(..., ..., monaco.Uri.parse(modifiedModelPath))`
    */
   modifiedModelPath?: string;
 
@@ -207,7 +207,7 @@ export interface DiffEditorProps {
   /**
    * IDiffEditorConstructionOptions
    */
-  options?: monacoEditor.editor.IDiffEditorConstructionOptions;
+  options?: monaco.editor.IDiffEditorConstructionOptions;
 
   /**
    * Width of the editor wrapper
@@ -232,7 +232,7 @@ export interface DiffEditorProps {
   wrapperClassName?: string;
 
   /**
-   * Signature: function(monaco: object) => void
+   * Signature: function(monaco: Monaco) => void
    * An event emitted before the editor mounted
    * It gets the monaco instance as a first argument
    * Defaults to "noop"
@@ -240,7 +240,7 @@ export interface DiffEditorProps {
   beforeMount?: DiffBeforeMount;
 
   /**
-   * Signature: function(editor: object, monaco: object) => void
+   * Signature: function(editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => void
    * An event emitted when the editor has been mounted
    * It gets the editor instance as a first argument and the monaco instance as a second
    * Defaults to "noop"
