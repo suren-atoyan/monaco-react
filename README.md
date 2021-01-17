@@ -407,7 +407,7 @@ loader.config({
 
 #### `uncontrolled-controlled modes`
 
-Like usual `input` element, `monaco` editor also maintains its state. But, unlike usual `input` element, it's uncommon to circulate the whole state of the editor in your component. Usually you don't need it. If you specify the `value` property, the component behaves in `controlled` mode, otherwise - in `uncontrolled` mode. Usually `uncontrolled` mode is used to keep the nature of the `monaco` editor as much as it is possible. And based on our experience we can say that in most cases it will cover your needs. And we highly recommend using that one.
+Like usual `input` element, `monaco` editor also maintains its state. But, unlike `input` element, it's uncommon to circulate the whole state of the editor in your component. Usually you don't need it. If you specify the `value` property, the component behaves in `controlled` mode, otherwise - in `uncontrolled` mode. Generally `uncontrolled` mode is used to keep the nature of the `monaco` editor as much as it is possible. And based on our experience we can say that in most cases it will cover your needs. And we highly recommend using that one.
 
 So, if you want to get the current value, you always can use the `editor` instance to do so - `editor.getValue()` or use `onChange` prop to get it. [Here](#get-value) are the examples. But in any case `controlled` mode is also available
 
