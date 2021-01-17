@@ -473,7 +473,7 @@ It's important to mention that according to [monaco-editor](https://microsoft.gi
 
 **As you can guess, `onValidate` prop will work only with the languages from the first group**
 
-#### notes
+#### Notes
 
 ##### For `electron` users
 
