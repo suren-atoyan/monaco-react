@@ -47,8 +47,8 @@ export interface EditorProps {
   language?: string;
 
   /**
-   * Path for the default (auto create) model
-   * Will be passed as a third argument to `.createModel` method
+   * Path for the default (auto created) model
+   * Will be passed as the third argument to `.createModel` method
    * `monaco.editor.createModel(..., ..., monaco.Uri.parse(defaultModelPath))`
    */
   defaultModelPath?: string;
@@ -106,7 +106,7 @@ export interface EditorProps {
 
   /**
    * Signature: function(monaco: Monaco) => void
-   * An event emitted before the editor mounted
+   * An event is emitted before the editor is mounted
    * It gets the monaco instance as a first argument
    * Defaults to "noop"
    */
@@ -114,7 +114,7 @@ export interface EditorProps {
 
   /**
    * Signature: function(editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => void
-   * An event emitted when the editor has been mounted
+   * An event is emitted when the editor is mounted
    * It gets the editor instance as a first argument and the monaco instance as a second
    * Defaults to "noop"
    */
@@ -122,13 +122,13 @@ export interface EditorProps {
 
   /**
    * Signature: function(value: string | undefined, ev: monaco.editor.IModelContentChangedEvent) => void
-   * An event emitted when the content of the current model has changed
+   * An event is emitted when the content of the current model is changed
    */
   onChange?: OnChange;
 
   /**
    * Signature: function(markers: monaco.editor.IMarker[]) => void
-   * An event emitted when the length of the model markers of the current model isn't 0
+   * An event is emitted when the length of the model markers of the current model isn't 0
    */
   onValidate?: OnValidate;
 }
@@ -233,7 +233,7 @@ export interface DiffEditorProps {
 
   /**
    * Signature: function(monaco: Monaco) => void
-   * An event emitted before the editor mounted
+   * An event is emitted before the editor is mounted
    * It gets the monaco instance as a first argument
    * Defaults to "noop"
    */
@@ -241,7 +241,7 @@ export interface DiffEditorProps {
 
   /**
    * Signature: function(editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => void
-   * An event emitted when the editor has been mounted
+   * An event is emitted when the editor is mounted
    * It gets the editor instance as a first argument and the monaco instance as a second
    * Defaults to "noop"
    */
