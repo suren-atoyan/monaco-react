@@ -96,7 +96,7 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 ```
 
-[codesandbox]()
+[codesandbox](https://codesandbox.io/s/simple-usage-uyf5n?file=/src/App.js)
 
 <details><summary>Extended example</summary>
 
@@ -142,7 +142,7 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 ```
 
-[codesandbox]()
+[codesandbox](https://codesandbox.io/s/simple-usage-extended-3ivw2?file=/src/App.js)
 
 </details>
 
@@ -171,7 +171,7 @@ function App() {
 
   return (
    <>
-     <button onClick={showValue} disabled={!editorRef.current}>Show value</button>
+     <button onClick={showValue}>Show value</button>
      <Editor
        height="90vh"
        language="javascript"
@@ -186,7 +186,7 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 ```
 
-[codesandbox]()
+[codesandbox](https://codesandbox.io/s/get-value-r9be5?file=/src/App.js)
 
 2) get the current model value via `onChange` prop
 
@@ -215,7 +215,7 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 ```
 
-[codesandbox]()
+[codesandbox](https://codesandbox.io/s/onchange-4nf6g?file=/src/App.js)
 
 #### `editor instance`
 
@@ -249,6 +249,8 @@ function App() {
 const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 ```
+
+[codesandbox](https://codesandbox.io/s/editor-instance-354cr?file=/src/App.js)
 
 #### `monaco instance`
 
@@ -292,6 +294,8 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 ```
 
+[codesandbox](https://codesandbox.io/s/simple-usage-forked-il8kt?file=/src/App.js)
+
 2) via `loader` utility
 
 ```javascript
@@ -299,6 +303,8 @@ import { loader } from "@monaco-editor/react";
 
 loader.init().then(monaco => console.log("here is the monaco isntance:", monaco));
 ```
+
+[codesandbox](https://codesandbox.io/s/monaco-instance-loader-ndzu9?file=/src/App.js)
 
 3) via `useMonaco` hook
 
@@ -330,14 +336,14 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 ```
 
-[codesandbox]()
+[codesandbox](https://codesandbox.io/s/monaco-instance-usemonaco-88eml?file=/src/App.js)
 
 #### `useMonaco`
 
 `useMonaco` is a `React` hook that returns the instance of the `monaco`. But there is an important note that should be considered: the initialization process is being handled by the `loader` utility (the reference of [@monaco-editor/loader](https://github.com/suren-atoyan/monaco-loader)): that process is being done asynchronously and only once. So, if the first initiator of the initialization is `useMonaco` hook, the first returned value will be null, due to its asynchronous installation. Just check the returned value of `useMonaco`
 
 ```javascript
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 
 import Editor, { useMonaco } from "@monaco-editor/react";
@@ -367,7 +373,7 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 ```
 
-[codesandbox]()
+[codesandbox](https://codesandbox.io/s/usemonaco-9rpc4)
 
 #### `loader-config`
 
@@ -395,6 +401,8 @@ loader.config({
 });
 ```
 
+[codesandbox](https://codesandbox.io/s/loader-ry1bb?file=/src/App.js)
+
 **NOTE**: your passed object will be deeply merged with the [default one](https://github.com/suren-atoyan/monaco-loader/blob/master/src/config/index.js)
 
 #### `uncontrolled-controlled modes`
@@ -408,7 +416,7 @@ So, if you want to get the current value, you always can use the `editor` instan
 `onValidate` is an additional property. An event is emitted when the length of the model markers of the current model isn't 0. After each change, if you have some syntax error or some kind of warnings, it will be fired with the current markers
 
 ```js
-import React, { useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 
 import Editor from "@monaco-editor/react";
@@ -433,7 +441,7 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 ```
 
-[codesandbox]()
+[codesandbox](https://codesandbox.io/s/onvalidate-4t5c2?file=/src/App.js)
 
 It's important to mention that according to [monaco-editor](https://microsoft.github.io/monaco-editor/), the whole supported languages are divided into two groups:
 
@@ -531,18 +539,19 @@ import loader from '@monaco-editor/loader';
 
 loader.init().then(monaco => {
   const wrapper = document.getElementById("root");
+  wrapper.style.height = "100vh";
   const properties = {
     value: "function hello() {\n\talert('Hello world!');\n}",
   language:  "javascript",
   }
   
-  monacao.editor.create(wrapper,  properties);
+  monaco.editor.create(wrapper,  properties);
 });
 ```
 
 That's all. You can wrap it into a `React` component, or `Vue`, or `Angular` or leave it as vanilla one or whatever you want; it's written in pure `js`
 
-[codesandbox]()
+[codesandbox](https://codesandbox.io/s/create-your-own-editor-pd01u?file=/src/index.js)
 
 ### Development-Playground
 
