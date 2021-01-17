@@ -1,11 +1,16 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import loader from '@monaco-editor/loader';
+import state from 'state-local';
 
 import MonacoContainer from '../MonacoContainer';
 import useMount from '../hooks/useMount';
 import useUpdate from '../hooks/useUpdate';
-import { noop } from '../utils';
+import { noop, getOrCreateModel } from '../utils';
+
+const [getModelMarkersSetter, setModelMarkersSetter] = state.create({
+  backup: null,
+});
 
 function Editor({
   defaultValue,
@@ -38,7 +43,6 @@ function Editor({
   const beforeMountRef = useRef(beforeMount);
   const subscriptionRef = useRef(null);
   const valueRef = useRef(value);
-  const setModelMarkersBackupRef = useRef(null);
 
   useMount(() => {
     const cancelable = loader.init();
@@ -85,10 +89,11 @@ function Editor({
 
   const createEditor = useCallback(() => {
     beforeMountRef.current(monacoRef.current);
-    const defaultModel = monacoRef.current.editor.createModel(
+    const defaultModel = getOrCreateModel(
+      monacoRef.current,
       defaultValue || value,
       language,
-      monacoRef.current.Uri.parse(defaultModelPath),
+      defaultModelPath,
     );
 
     editorRef.current = monacoRef.current.editor.create(containerRef.current, {
@@ -98,7 +103,12 @@ function Editor({
     }, overrideServices);
 
     monacoRef.current.editor.setTheme(theme);
-    setModelMarkersBackupRef.current = monacoRef.current.editor.setModelMarkers;
+
+    if (!getModelMarkersSetter().backup) {
+      setModelMarkersSetter({
+        backup: monacoRef.current.editor.setModelMarkers,
+      });
+    }
 
     setIsEditorReady(true);
   }, [
@@ -145,7 +155,7 @@ function Editor({
   useEffect(() => {
     if (isEditorReady) {
       monacoRef.current.editor.setModelMarkers = function(model, owner, markers) {
-        setModelMarkersBackupRef.current.call(
+        getModelMarkersSetter().backup?.call(
           monacoRef.current.editor,
           model,
           owner,
