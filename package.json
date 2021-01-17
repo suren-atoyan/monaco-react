@@ -1,6 +1,6 @@
 {
   "name": "@monaco-editor/react",
-  "version": "4.0.0-rc.1",
+  "version": "4.0.0-rc.2",
   "description": "Monaco editor wrapper for easy/one-line integration with React applications (e.g. powered by create-react-app) without need of webpack configuration files",
   "author": "Suren Atoyan <contact@surenatoyan.com>",
   "main": "lib/cjs/index.js",
@@ -85,7 +85,8 @@
     ]
   },
   "dependencies": {
+    "@monaco-editor/loader": "^1.0.0",
     "prop-types": "^15.7.2",
-    "@monaco-editor/loader": "^1.0.0"
+    "state-local": "^1.0.7"
   }
 }
