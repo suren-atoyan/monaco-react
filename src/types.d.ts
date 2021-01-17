@@ -1,40 +1,63 @@
 // TODO: the whole content should be improved in the next version.
 
-import * as React from "react";
-import * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api';
+import * as React from 'react';
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 
 // default themes
 type Theme =
-  | "dark"
-  | "light";
+  | 'dark'
+  | 'light';
+
+// monaco
+export type Monaco = typeof monaco;
 
 // Editor
+export type OnMount = (
+  editor: monaco.editor.IStandaloneCodeEditor,
+  monaco: Monaco,
+) => void;
 
-export type EditorDidMount = (
-  getEditorValue: () => string,
-  editor: monacoEditor.editor.IStandaloneCodeEditor,
+export type BeforeMount = (
+  monaco: Monaco,
+) => void;
+
+export type OnChange = (
+  value: string | undefined,
+  ev: monaco.editor.IModelContentChangedEvent,
+) => void;
+
+export type OnValidate = (
+  markers: monaco.editor.IMarker[],
 ) => void;
 
 export interface EditorProps {
   /**
-   * The editor value
+   * The initial value of the default (auto created) model
    */
-  value?: string | null;
+  defaultValue?: string;
 
   /**
-   * All languages that are supported by monaco-editor
+   * Value of the current model
+   */
+  value?: string;
+
+  /**
+   * Language of the current model
    */
   language?: string;
 
   /**
-   * Signature: function(getEditorValue: func, editor: object) => void
-   * This function will be called right after monaco editor will be mounted and ready to work.
-   * It gets the editor instance as a second argument. Defaults to "noop"
+   * Path for the default (auto created) model
+   * Will be passed as the third argument to `.createModel` method
+   * `monaco.editor.createModel(..., ..., monaco.Uri.parse(defaultModelPath))`
    */
-  editorDidMount?: EditorDidMount;
+  defaultModelPath?: string;
 
   /**
-   * Default themes of monaco. Defaults to "light"
+   * The theme for the monaco
+   * Available options "vs-dark" | "light"
+   * Define new themes by `monaco.editor.defineTheme`
+   * Defaults to "light"
    */
   theme?: Theme | string;
 
@@ -44,29 +67,32 @@ export interface EditorProps {
   line?: number;
 
   /**
-   * The width of the editor wrapper. Defaults 100%
-   */
-  width?: number | string;
-
-  /**
-   * The height of the editor wrapper. Defaults 100%
-   */
-  height?: number | string;
-
-  /**
-   * The loading screen before the editor will be loaded. Defaults 'loading...'
+   * The loading screen before the editor will be mounted
+   * Defaults to 'loading...'
    */
   loading?: React.ReactNode;
 
   /**
    * IStandaloneEditorConstructionOptions
    */
-  options?: monacoEditor.editor.IStandaloneEditorConstructionOptions;
+  options?: monaco.editor.IStandaloneEditorConstructionOptions;
 
   /**
    * IEditorOverrideServices
    */
-  overrideServices?: monacoEditor.editor.IEditorOverrideServices;
+  overrideServices?: monaco.editor.IEditorOverrideServices;
+
+  /**
+   * Width of the editor wrapper
+   * Defaults to 100%
+   */
+  width?: number | string;
+
+  /**
+   * Height of the editor wrapper
+   * Defaults to 100%
+   */
+  height?: number | string;
 
   /**
    * Class name for the editor container
@@ -77,107 +103,123 @@ export interface EditorProps {
    * Class name for the editor container wrapper
    */
   wrapperClassName?: string;
+
+  /**
+   * Signature: function(monaco: Monaco) => void
+   * An event is emitted before the editor is mounted
+   * It gets the monaco instance as a first argument
+   * Defaults to "noop"
+   */
+  beforeMount?: BeforeMount;
+
+  /**
+   * Signature: function(editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => void
+   * An event is emitted when the editor is mounted
+   * It gets the editor instance as a first argument and the monaco instance as a second
+   * Defaults to "noop"
+   */
+  onMount?: OnMount;
+
+  /**
+   * Signature: function(value: string | undefined, ev: monaco.editor.IModelContentChangedEvent) => void
+   * An event is emitted when the content of the current model is changed
+   */
+  onChange?: OnChange;
+
+  /**
+   * Signature: function(markers: monaco.editor.IMarker[]) => void
+   * An event is emitted when the length of the model markers of the current model isn't 0
+   */
+  onValidate?: OnValidate;
 }
 
 declare const Editor: React.FC<EditorProps>;
 
 export default Editor;
 
-// Controlled Editor
-
-export type ControlledEditorOnChange = (
-  ev: monacoEditor.editor.IModelContentChangedEvent,
-  value: string | undefined,
-) => string | void;
-
-export interface ControlledEditorProps extends EditorProps {
-  /**
-   * Signature: function(ev: monacoEditor.editor.IModelContentChangedEvent, value: string | undefined) => string | undefined;
-   * onChange method of monaco editor. It will be called right after content of current model will be changed.
-   * It gets two arguments: first one is the "event" object of monaco, second one the current value
-   * NOTE: onChange can return the new value, which will be inserted to editor
-   */
-  onChange?: ControlledEditorOnChange;
-}
-
-declare const ControlledEditor: React.FC<ControlledEditorProps>;
-
-export { ControlledEditor };
-
 // Diff Editor
 
-export type DiffEditorDidMount = (
-  getModifiedEditorValue: () => string,
-  getOriginalEditorValue: () => string,
-  editor: monacoEditor.editor.IStandaloneDiffEditor,
+export type DiffOnMount = (
+  editor: monaco.editor.IStandaloneDiffEditor,
+  monaco: Monaco,
+) => void;
+
+export type DiffBeforeMount = (
+  monaco: Monaco,
 ) => void;
 
 export interface DiffEditorProps {
   /**
    * The original source (left one) value
    */
-  original?: string | null;
+  original?: string;
 
   /**
    * The modified source (right one) value
    */
-  modified?: string | null;
+  modified?: string;
 
   /**
-   * All languages that are supported by monaco-editor
+   * Language for the both models - original and modified
    */
   language?: string;
 
   /**
    * This prop gives you the opportunity to specify the language of the
-   * original source separately, otherwise, it will get the value of language property.
-   * (Possible values are the same as language)
+   * original source separately, otherwise, it will get the value of the language property
    */
   originalLanguage?: string;
 
   /**
    * This prop gives you the opportunity to specify the language of the
-   * modified source separately, otherwise, it will get the value of language property.
-   * (Possible values are the same as language)
+   * modified source separately, otherwise, it will get the value of language property
    */
   modifiedLanguage?: string;
 
   /**
-   * Signature: function(getModifiedEditorValue: func, getOriginalEditorValue: func, editor: object) => void
-   * This function will be called right after monaco editor will be mounted and ready to work.
-   * It gets the editor instance as a third argument
+   * Path for the "original" model
+   * Will be passed as a third argument to `.createModel` method
+   * `monaco.editor.createModel(..., ..., monaco.Uri.parse(originalModelPath))`
    */
-  editorDidMount?: DiffEditorDidMount;
+  originalModelPath?: string;
 
   /**
-   * Default themes of monaco. Defaults to "light"
+   * Path for the "modified" model
+   * Will be passed as a third argument to `.createModel` method
+   * `monaco.editor.createModel(..., ..., monaco.Uri.parse(modifiedModelPath))`
    */
-  theme?: Theme;
+  modifiedModelPath?: string;
 
   /**
-   * The line to jump on it
+   * The theme for the monaco
+   * Available options "vs-dark" | "light"
+   * Define new themes by `monaco.editor.defineTheme`
+   * Defaults to "light"
    */
-  line?: number;
+  theme?: Theme | string;
 
   /**
-   * The width of the editor wrapper. Defaults 100%
-   */
-  width?: number | string;
-
-  /**
-   * The height of the editor wrapper. Defaults 100%
-   */
-  height?: number | string;
-
-  /**
-   * The loading screen before the editor will be loaded. Defaults 'loading...'
+   * The loading screen before the editor will be mounted
+   * Defaults to 'loading...'
    */
   loading?: React.ReactNode;
 
   /**
    * IDiffEditorConstructionOptions
    */
-  options?: monacoEditor.editor.IDiffEditorConstructionOptions;
+  options?: monaco.editor.IDiffEditorConstructionOptions;
+
+  /**
+   * Width of the editor wrapper
+   * Defaults to 100%
+   */
+  width?: number | string;
+
+  /**
+   * Height of the editor wrapper
+   * Defaults to 100%
+   */
+  height?: number | string;
 
   /**
    * Class name for the editor container
@@ -188,17 +230,30 @@ export interface DiffEditorProps {
    * Class name for the editor container wrapper
    */
   wrapperClassName?: string;
+
+  /**
+   * Signature: function(monaco: Monaco) => void
+   * An event is emitted before the editor is mounted
+   * It gets the monaco instance as a first argument
+   * Defaults to "noop"
+   */
+  beforeMount?: DiffBeforeMount;
+
+  /**
+   * Signature: function(editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => void
+   * An event is emitted when the editor is mounted
+   * It gets the editor instance as a first argument and the monaco instance as a second
+   * Defaults to "noop"
+   */
+  onMount?: DiffOnMount;
 }
 
 declare const DiffEditor: React.FC<DiffEditorProps>;
 
 export { DiffEditor };
 
-// monaco
-
-export type Monaco = typeof monacoEditor;
-
-declare namespace monaco {
+// loader
+declare namespace loader {
   function init(): Promise<Monaco>;
   function config(params: {
     paths?: {
@@ -210,4 +265,4 @@ declare namespace monaco {
   }): void
 }
 
-export { monaco };
+export { loader };

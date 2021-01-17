@@ -1,36 +1,51 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import monaco from '@monaco-editor/loader';
+import loader from '@monaco-editor/loader';
+import state from 'state-local';
 
 import MonacoContainer from '../MonacoContainer';
 import useMount from '../hooks/useMount';
 import useUpdate from '../hooks/useUpdate';
-import { noop } from '../utils';
+import { noop, getOrCreateModel } from '../utils';
+
+const [getModelMarkersSetter, setModelMarkersSetter] = state.create({
+  backup: null,
+});
 
 function Editor({
+  defaultValue,
   value,
   language,
-  editorDidMount,
+  /* === */
+  defaultModelPath,
   theme,
   line,
-  width,
-  height,
   loading,
   options,
   overrideServices,
-  _isControlledMode,
+  /* === */
+  width,
+  height,
   className,
   wrapperClassName,
+  /* === */
+  beforeMount,
+  onMount,
+  onChange,
+  onValidate,
 }) {
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [isMonacoMounting, setIsMonacoMounting] = useState(true);
-  const editorRef = useRef(null);
   const monacoRef = useRef(null);
+  const editorRef = useRef(null);
   const containerRef = useRef(null);
-  const editorDidMountRef = useRef(editorDidMount);
+  const onMountRef = useRef(onMount);
+  const beforeMountRef = useRef(beforeMount);
+  const subscriptionRef = useRef(null);
+  const valueRef = useRef(value);
 
   useMount(() => {
-    const cancelable = monaco.init();
+    const cancelable = loader.init();
 
     cancelable
       .then(monaco => ((monacoRef.current = monaco) && setIsMonacoMounting(false)))
@@ -55,12 +70,6 @@ function Editor({
           forceMoveMarkers: true,
         }]);
 
-        if (_isControlledMode) {
-          const model = editorRef.current.getModel();
-
-          model.forceTokenization(model.getLineCount());
-        }
-
         editorRef.current.pushUndoStop();
       }
     }
@@ -79,23 +88,44 @@ function Editor({
   }, [theme], isEditorReady);
 
   const createEditor = useCallback(() => {
-    editorRef.current = monacoRef.current.editor.create(containerRef.current, {
-      value,
+    beforeMountRef.current(monacoRef.current);
+    const defaultModel = getOrCreateModel(
+      monacoRef.current,
+      defaultValue || value,
       language,
+      defaultModelPath,
+    );
+
+    editorRef.current = monacoRef.current.editor.create(containerRef.current, {
+      model: defaultModel,
       automaticLayout: true,
       ...options,
     }, overrideServices);
 
     monacoRef.current.editor.setTheme(theme);
 
+    if (!getModelMarkersSetter().backup) {
+      setModelMarkersSetter({
+        backup: monacoRef.current.editor.setModelMarkers,
+      });
+    }
+
     setIsEditorReady(true);
-  }, [language, options, overrideServices, theme, value]);
+  }, [
+    language,
+    options,
+    overrideServices,
+    theme,
+    value,
+    defaultValue,
+    defaultModelPath,
+  ]);
 
   useEffect(() => {
     if (isEditorReady) {
-      editorDidMountRef.current(
-        editorRef.current.getValue.bind(editorRef.current),
+      onMountRef.current(
         editorRef.current,
+        monacoRef.current,
       );
     }
   }, [isEditorReady]);
@@ -104,7 +134,45 @@ function Editor({
     !isMonacoMounting && !isEditorReady && createEditor();
   }, [isMonacoMounting, isEditorReady, createEditor]);
 
-  const disposeEditor = () => editorRef.current.dispose();
+  // subscription
+  // to avoid unnecessary updates (attach - dispose listener) in subscription
+  valueRef.current = value;
+
+  useEffect(() => {
+    if (isEditorReady && onChange) {
+      subscriptionRef.current?.dispose();
+      subscriptionRef.current = editorRef.current?.onDidChangeModelContent(event => {
+        const editorValue = editorRef.current.getValue();
+
+        if (valueRef.current !== editorValue) {
+          onChange(editorValue, event);
+        }
+      });
+    }
+  }, [isEditorReady, onChange]);
+
+  // onValidate
+  useEffect(() => {
+    if (isEditorReady) {
+      monacoRef.current.editor.setModelMarkers = function(model, owner, markers) {
+        getModelMarkersSetter().backup?.call(
+          monacoRef.current.editor,
+          model,
+          owner,
+          markers,
+        );
+
+        if (markers.length !== 0) {
+          onValidate?.(markers);
+        }
+      }
+    }
+  }, [isEditorReady, onValidate]);
+
+  function disposeEditor() {
+    subscriptionRef.current?.dispose();
+    editorRef.current.dispose();
+  }
 
   return (
     <MonacoContainer
@@ -120,30 +188,41 @@ function Editor({
 }
 
 Editor.propTypes = {
+  defaultValue: PropTypes.string,
   value: PropTypes.string,
   language: PropTypes.string,
-  editorDidMount: PropTypes.func,
+  /* === */
+  defaultModelPath: PropTypes.string,
   theme: PropTypes.string,
   line: PropTypes.number,
-  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   loading: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   options: PropTypes.object,
+  overrideServices: PropTypes.object,
+  /* === */
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   className: PropTypes.string,
   wrapperClassName: PropTypes.string,
-  overrideServices: PropTypes.object,
-  _isControlledMode: PropTypes.bool,
+  /* === */
+  beforeMount: PropTypes.func,
+  onMount: PropTypes.func,
+  onChange: PropTypes.func,
+  onValidate: PropTypes.func,
 };
 
 Editor.defaultProps = {
-  editorDidMount: noop,
+  defaultModelPath: 'inmemory://model/1',
   theme: 'light',
-  width: '100%',
-  height: '100%',
   loading: 'Loading...',
   options: {},
   overrideServices: {},
-  _isControlledMode: false,
+  /* === */
+  width: '100%',
+  height: '100%',
+  /* === */
+  beforeMount: noop,
+  onMount: noop,
+  onValidate: noop,
 };
 
 export default Editor;
