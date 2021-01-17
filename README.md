@@ -542,7 +542,7 @@ loader.init().then(monaco => {
   wrapper.style.height = "100vh";
   const properties = {
     value: "function hello() {\n\talert('Hello world!');\n}",
-  language:  "javascript",
+    language:  "javascript",
   }
   
   monaco.editor.create(wrapper,  properties);
