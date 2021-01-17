@@ -1,5 +1,10 @@
 ### Versions
 
+## 4.0.1
+###### *Jan 18, 2021*
+
+- Editor: dispose the current model if the Editor component is unmounted
+
 ## 4.0.0
 ###### *Jan 16, 2021*
 

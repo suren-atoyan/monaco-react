@@ -171,6 +171,7 @@ function Editor({
 
   function disposeEditor() {
     subscriptionRef.current?.dispose();
+    editorRef.current.getModel()?.dispose();
     editorRef.current.dispose();
   }
 
