@@ -32,9 +32,21 @@ export type OnValidate = (
 
 export interface EditorProps {
   /**
-   * The initial value of the default (auto created) model
+   * Default value of the current model
    */
   defaultValue?: string;
+
+  /**
+   * Default language of the current model
+   */
+  defaultLanguage?: string;
+
+  /**
+   * Default path of the current model
+   * Will be passed as the third argument to `.createModel` method
+   * `monaco.editor.createModel(..., ..., monaco.Uri.parse(defaultPath))`
+   */
+  defaultPath?: string;
 
   /**
    * Value of the current model
@@ -47,11 +59,11 @@ export interface EditorProps {
   language?: string;
 
   /**
-   * Path for the default (auto created) model
+   * Path of the current model
    * Will be passed as the third argument to `.createModel` method
-   * `monaco.editor.createModel(..., ..., monaco.Uri.parse(defaultModelPath))`
+   * `monaco.editor.createModel(..., ..., monaco.Uri.parse(defaultPath))`
    */
-  defaultModelPath?: string;
+  path?: string;
 
   /**
    * The theme for the monaco
@@ -81,6 +93,12 @@ export interface EditorProps {
    * IEditorOverrideServices
    */
   overrideServices?: monaco.editor.IEditorOverrideServices;
+
+  /**
+   * Indicator whether to save the models' view states between model changes or not
+   * Defaults to true
+   */
+  saveViewState?: boolean;
 
   /**
    * Width of the editor wrapper
