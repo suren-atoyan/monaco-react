@@ -102,7 +102,7 @@ ReactDOM.render(<App />, rootElement);
 
 <details><summary>Extended example</summary>
 
-```js
+```javascript
 import React from "react";
 import ReactDOM from "react-dom";
 
@@ -442,15 +442,15 @@ import ReactDOM from "react-dom";
 import Editor from "@monaco-editor/react";
 
 function App() {
-  const [fileName, setFileName] = useState('script.js');
+  const [fileName, setFileName] = useState("script.js");
 
   const file = files[fileName];
 
   return (
     <>
-      <button disabled={fileName === 'script.js'} onClick={() => setFileName('script.js')}>script.js</button>
-      <button disabled={fileName === 'style.css'} onClick={() => setFileName('style.css')}>style.css</button>
-      <button disabled={fileName === 'index.html'} onClick={() => setFileName('index.html')}>index.html</button>
+      <button disabled={fileName === "script.js"} onClick={() => setFileName("script.js")}>script.js</button>
+      <button disabled={fileName === "style.css"} onClick={() => setFileName("style.css")}>style.css</button>
+      <button disabled={fileName === "index.html"} onClick={() => setFileName("index.html")}>index.html</button>
       <Editor
         height="80vh"
         theme="vs-dark"
@@ -493,7 +493,7 @@ import Editor from "@monaco-editor/react";
 function App() {
   function handleEditorValidation(markers) {
     // model markers
-    markers.forEach(marker => console.log('onValidate:', marker.message));
+    markers.forEach(marker => console.log("onValidate:", marker.message));
   }
 
   return (
@@ -560,9 +560,9 @@ As a usual `React` component, this one also works fine with an electron-react en
 Usually, it's because your environment doesn't allow you to load external sources. By default, it loads `monaco` sources from `CDN`. You can see the [default configuration](https://github.com/suren-atoyan/monaco-loader/blob/master/src/config/index.js). But sure you can change that behavior; the library is fully configurable. Read about it [here](https://github.com/suren-atoyan/monaco-react#config). So, if you want to download it from your local files, you can do it like this:
 
 ```javascript
-import { loader } from '@monaco-editor/react';
+import { loader } from "@monaco-editor/react";
 
-loader.config({ paths: { vs: '../path-to-monaco' } });
+loader.config({ paths: { vs: "../path-to-monaco" } });
 ```
 
 2) **Based on your electron environment it can be required to have an absolute URL**
@@ -570,20 +570,20 @@ The utility function taken from [here](https://github.com/microsoft/monaco-edito
 
 ```javascript
 function ensureFirstBackSlash(str) {
-    return str.length > 0 && str.charAt(0) !== '/'
-        ? '/' + str
+    return str.length > 0 && str.charAt(0) !== "/"
+        ? "/" + str
         : str;
 }
 
 function uriFromPath(_path) {
-    const pathName = path.resolve(_path).replace(/\\/g, '/');
-    return encodeURI('file://' + ensureFirstBackSlash(pathName));
+    const pathName = path.resolve(_path).replace(/\\/g, "/");
+    return encodeURI("file://" + ensureFirstBackSlash(pathName));
 }
 
 loader.config({
   paths: {
     vs: uriFromPath(
-      path.join(__dirname, '../node_modules/monaco-editor/min/vs')
+      path.join(__dirname, "../node_modules/monaco-editor/min/vs")
     )
   }
 });
@@ -604,13 +604,13 @@ And if you use `monaco` with `Next.js` and have faced an issue different than th
 Under the hood this library uses [@monaco-editor/loader](https://github.com/suren-atoyan/monaco-loader) that provides a utility called `loader`. The `loader` utility is a collection of functions that are being used to setup `monaco` editor into your browser. `loader.init()`  handles the whole initialization process and returns the instance of the `monaco` - `loader.init().then(monaco => console.log("here is the monaco isntance:", monaco))`. The `Editor` component uses this utility, gains access to `monaco instance` and creates the editor. [Here](https://github.com/suren-atoyan/monaco-react/blob/master/src/Editor/Editor.js) is the implementation of the `Editor` component. You can use the same technique to create your own `Editor`. You can just import the `loader` utility, access to `monaco instance`, and create your own editor with your own custom logic. The shortest way to do it:
 
 ```javascript
-import loader from '@monaco-editor/loader';
+import loader from "@monaco-editor/loader";
 
 loader.init().then(monaco => {
   const wrapper = document.getElementById("root");
   wrapper.style.height = "100vh";
   const properties = {
-    value: "function hello() {\n\talert('Hello world!');\n}",
+    value: "function hello() {\n\talert(\"Hello world!\");\n}",
     language:  "javascript",
   }
   
