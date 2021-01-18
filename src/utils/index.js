@@ -13,7 +13,7 @@ function getModel(monaco, path) {
 function createModel(monaco, value, language, path) {
   return monaco
     .editor
-    .createModel(value, language, crateModelUri(monaco, path));
+    .createModel(value, language, path && crateModelUri(monaco, path));
 }
 
 function crateModelUri(monaco, path) {
