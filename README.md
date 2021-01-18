@@ -3,6 +3,7 @@ Monaco Editor for React &middot; use the [monaco-editor](https://microsoft.githu
 
 <hr />
 
+:zap: [multi-model editor](#multi-model-editor) is already supported; enjoy it :tada:
 :tada: version `v4` is here - to see what's new in the new version and how to migrate from `v3`, please read this [doc](./v4.changes.md)
 <br />
 :tada: the new section [Development / Playground](#development-playground) has been created - now you can run the playground and play with the internals of the library
@@ -86,7 +87,7 @@ function App() {
   return (
    <Editor
      height="90vh"
-     language="javascript"
+     defaultLanguage="javascript"
      defaultValue="// some comment"
    />
   );
@@ -128,7 +129,7 @@ function App() {
   return (
     <Editor
       height="90vh"
-      language="javascript"
+      defaultLanguage="javascript"
       defaultValue="// some comment"
       onChange={handleEditorChange}
       onMount={handleEditorDidMount}
@@ -174,7 +175,7 @@ function App() {
      <button onClick={showValue}>Show value</button>
      <Editor
        height="90vh"
-       language="javascript"
+       defaultLanguage="javascript"
        defaultValue="// some comment"
        onMount={handleEditorDidMount}
      />
@@ -204,7 +205,7 @@ function App() {
   return (
    <Editor
      height="90vh"
-     language="javascript"
+     defaultLanguage="javascript"
      defaultValue="// some comment"
      onChange={handleEditorChange}
    />
@@ -239,7 +240,7 @@ function App() {
   return (
     <Editor
       height="90vh"
-      language="javascript"
+      defaultLanguage="javascript"
       defaultValue="// some comment"
       onMount={handleEditorDidMount}
     />
@@ -282,7 +283,7 @@ function App() {
   return (
     <Editor
       height="90vh"
-      language="javascript"
+      defaultLanguage="javascript"
       defaultValue="// some comment"
       beforeMount={handleEditorWillMount}
       onMount={handleEditorDidMount}
@@ -327,7 +328,7 @@ function App() {
     <Editor
       height="90vh"
       defaultValue="// some comment"
-      language="javascript"
+      defaultLanguage="javascript"
     />
   );
 }
@@ -364,7 +365,7 @@ function App() {
     <Editor
       height="90vh"
       defaultValue="// some comment"
-      language="javascript"
+      defaultLanguage="javascript"
     />
   );
 }
@@ -407,7 +408,7 @@ loader.config({
 
 #### Multi-model editor
 
-When you render the `Editor` component, a default model is being created. It's important to mention that when you change the `language` or `value` props, they affect the same model that has been auto-created at the mount of the component. In most cases it's okay, but the developers face problems when they want to implement a multi-model editor to support tabs/files like in `IDE`s. And previously to handle multiple models they had to do it manually and out of the component. Now, the multi-model `API` is supported :tada: Let's check how it works. There are three parameters to create a model - `value`, `language` and `path` (`monaco.editor.createModel(value, language, monaco.Uri.parse(path))`). You can consider last one (`path`) as an identifier for the model. The `Editor` component, now, has a `path` prop. When you specify a `path` prop, the `Editor` component checks if it has a model by that path or not. If yes, the existing model will be shown, otherwise, a new one will be created (and stored). Using this technique you can correspond your files with paths, and create a fully multi-model editor. You can open your file, do some changes, choose another file, and when you come back to the first one the previous model will be shown with the whole view state, text selection, undo stack, scroll position, etc.
+When you render the `Editor` component, a default model is being created. It's important to mention that when you change the `language` or `value` props, they affect the same model that has been auto-created at the mount of the component. In most cases it's okay, but the developers face problems when they want to implement a multi-model editor to support tabs/files like in `IDE`s. And previously to handle multiple models they had to do it manually and out of the component. Now, the multi-model `API` is supported :tada: Let's check how it works. There are three parameters to create a model - `value`, `language` and `path` (`monaco.editor.createModel(value, language, monaco.Uri.parse(path))`). You can consider last one (`path`) as an identifier for the model. The `Editor` component, now, has a `path` prop. When you specify a `path` prop, the `Editor` component checks if it has a model by that path or not. If yes, the existing model will be shown, otherwise, a new one will be created (and stored). Using this technique you can correspond your files with paths, and create a fully multi-model editor. You can open your file, do some changes, choose another file, and when you come back to the first one the previous model will be shown with the whole view state, text selection, undo stack, scroll position, etc. ([simple demo](https://codesandbox.io/s/multi-model-editor-kugi6?file=/src/App.js))
 
 Here is a simple example: let's imagine we have a `JSON` like representation of some file structure, something like this:
 
@@ -476,6 +477,8 @@ The properties:
 
 will give you more flexibility in working with a multi-model editor
 
+[codesandbox](https://codesandbox.io/s/multi-model-editor-kugi6?file=/src/App.js)
+
 #### `onValidate`
 
 `onValidate` is an additional property. An event is emitted when the length of the model markers of the current model isn't 0. After each change, if you have some syntax error or some kind of warnings, it will be fired with the current markers
@@ -495,7 +498,7 @@ function App() {
   return (
     <Editor
       height="90vh"
-      language="javascript"
+      defaultLanguage="javascript"
       defaultValue="// let's write some broken code 😈"
       onValidate={handleEditorValidation}
     />
