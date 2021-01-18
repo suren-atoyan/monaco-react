@@ -1,5 +1,10 @@
 ### Versions
 
+## 4.0.4
+###### *Jan 18, 2021*
+
+- package.json: update husky precommit hook to remove lib folder
+
 ## 4.0.3
 ###### *Jan 18, 2021*
 
