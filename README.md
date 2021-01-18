@@ -33,7 +33,7 @@ The [monaco-editor](https://microsoft.github.io/monaco-editor/) is a well-known 
   * [`monaco instance`](#monaco-instance)
   * [`useMonaco`](#usemonaco)
   * [`loader/config`](#loader-config)
-  * [`uncontrolled/controlled` modes](#uncontrolled-controlled-modes)
+  * [Multi-model editor](#multi-model-editor)
   * [`onValidate`](#onvalidate)
   * [Notes](#notes)
     * [For `electron` users](#for-electron-users)
@@ -405,11 +405,76 @@ loader.config({
 
 **NOTE**: your passed object will be deeply merged with the [default one](https://github.com/suren-atoyan/monaco-loader/blob/master/src/config/index.js)
 
-#### `uncontrolled-controlled modes`
+#### Multi-model editor
 
-Like usual `input` element, `monaco` editor also maintains its state. But, unlike `input` element, it's uncommon to circulate the whole state of the editor in your component. Usually you don't need it. If you specify the `value` property, the component behaves in `controlled` mode, otherwise - in `uncontrolled` mode. Generally `uncontrolled` mode is used to keep the nature of the `monaco` editor as much as it is possible. And based on our experience we can say that in most cases it will cover your needs. And we highly recommend using that one.
+When you render the `Editor` component, a default model is being created. It's important to mention that when you change the `language` or `value` props, they affect the same model that has been auto-created at the mount of the component. In most cases it's okay, but the developers face problems when they want to implement a multi-model editor to support tabs/files like in `IDE`s. And previously to handle multiple models they had to do it manually and out of the component. Now, the multi-model `API` is supported :tada: Let's check how it works. There are three parameters to create a model - `value`, `language` and `path` (`monaco.editor.createModel(value, language, monaco.Uri.parse(path))`). You can consider last one (`path`) as an identifier for the model. The `Editor` component, now, has a `path` prop. When you specify a `path` prop, the `Editor` component checks if it has a model by that path or not. If yes, the existing model will be shown, otherwise, a new one will be created (and stored). Using this technique you can correspond your files with paths, and create a fully multi-model editor. You can open your file, do some changes, choose another file, and when you come back to the first one the previous model will be shown with the whole view state, text selection, undo stack, scroll position, etc.
 
-So, if you want to get the current value, you always can use the `editor` instance to do so - `editor.getValue()` or use `onChange` prop to get it. [Here](#get-value) are the examples. But in any case `controlled` mode is also available
+Here is a simple example: let's imagine we have a `JSON` like representation of some file structure, something like this:
+
+```javascript
+const files = {
+  "script.js": {
+    name: "script.js",
+    language: "javascript",
+    value: someJSCodeExample,
+  },
+  "style.css": {
+    name: "style.css",
+    language: "css",
+    value: someCSSCodeExample,
+  },
+  "index.html": {
+    name: "index.html",
+    language: "html",
+    value: someHTMLCodeExample,
+  },
+}
+```
+
+And here is our simple multi-model editor implementation:
+
+```javascript
+import React from "react";
+import ReactDOM from "react-dom";
+
+import Editor from "@monaco-editor/react";
+
+function App() {
+  const [fileName, setFileName] = useState('script.js');
+
+  const file = files[fileName];
+
+  return (
+    <>
+      <button disabled={fileName === 'script.js'} onClick={() => setFileName('script.js')}>script.js</button>
+      <button disabled={fileName === 'style.css'} onClick={() => setFileName('style.css')}>style.css</button>
+      <button disabled={fileName === 'index.html'} onClick={() => setFileName('index.html')}>index.html</button>
+      <Editor
+        height="80vh"
+        theme="vs-dark"
+        path={file.name}
+        defaultLanguage={file.language}
+        defaultValue={file.value}
+      />
+    </>
+  );
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+The properties:
+
+- `defaultValue`
+- `defaultLanguage`
+- `defaultPath`
+- `value`
+- `language`
+- `path`
+- `saveViewState`
+
+will give you more flexibility in working with a multi-model editor
 
 #### `onValidate`
 
@@ -607,15 +672,18 @@ If you want to change something in the library, go to `monaco-react/src/...`, th
 
 | Name   |      Type      |  Default |  Description |
 |:----------|:-------------|:------|:------|
-| defaultValue | string || The initial value of the default (auto created) model |
+| defaultValue | string || Default value of the current model |
+| defaultLanguage | string || Default language of the current model |
+| defaultPath | string || Default path of the current model. Will be passed as the third argument to `.createModel` method - `monaco.editor.createModel(..., ..., monaco.Uri.parse(defaultPath))` |
 | value | string || Value of the current model |
 | language | enum: ... | | Language of the current model (all languages that are [supported](https://github.com/microsoft/monaco-languages) by monaco-editor) |
-| defaultModelPath | string || Path for the default (auto created) model. Will be passed as the third argument to `.createModel` method - `monaco.editor.createModel(..., ..., monaco.Uri.parse(defaultModelPath))` |
+| path | string || Path of the current model. Will be passed as the third argument to `.createModel` method - `monaco.editor.createModel(..., ..., monaco.Uri.parse(defaultPath))` |
 | theme | enum: "light" \| "vs-dark" | "light" | The theme for the monaco. Available options "vs-dark" \| "light". Define new themes by `monaco.editor.defineTheme` |
 | line | number |  | The line to jump on it |
 | loading | React Node | "Loading..." | The loading screen before the editor will be mounted
 | options | object | {} | [IStandaloneEditorConstructionOptions](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.istandaloneeditorconstructionoptions.html) |
 | overrideServices | object | {} | [IEditorOverrideServices ](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditoroverrideservices.html) |
+| saveViewState | boolean | true | Indicator whether to save the models' view states between model changes or not |
 | width | union: number \| string | "100%" | Width of the editor wrapper |
 | height | union: number \| string | "100%" | Height of the editor wrapper |
 | className | string || Class name for the editor container |
