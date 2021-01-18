@@ -1,5 +1,11 @@
 ### Versions
 
+## 4.0.3
+###### *Jan 18, 2021*
+
+- Editor: enable multi-model support
+- types: add `path`, `defaultLanguage` and `saveViewState` for multi-model support
+
 ## 4.0.2
 ###### *Jan 18, 2021*
 
