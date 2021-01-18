@@ -252,6 +252,11 @@ declare const DiffEditor: React.FC<DiffEditorProps>;
 
 export { DiffEditor };
 
+// useMonaco
+declare const useMonaco: () => Monaco | null;
+
+export { useMonaco };
+
 // loader
 declare namespace loader {
   function init(): Promise<Monaco>;
