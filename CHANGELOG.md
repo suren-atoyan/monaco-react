@@ -1,5 +1,11 @@
 ### Versions
 
+## 4.0.5
+###### *Jan 19, 2021*
+
+- utils: check if `path` exists in `createModel` utility function
+- Editor: remove `defaultPath` from `defaultProps`
+
 ## 4.0.4
 ###### *Jan 18, 2021*
 
