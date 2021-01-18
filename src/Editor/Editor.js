@@ -239,8 +239,6 @@ Editor.propTypes = {
 };
 
 Editor.defaultProps = {
-  defaultPath: 'inmemory://model/1',
-  /* === */
   theme: 'light',
   loading: 'Loading...',
   options: {},
