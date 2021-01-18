@@ -7,9 +7,14 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.57",
+    "@monaco-editor/react": "3.6.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react-dom": "^17.0.0",
+    "state-local": "^1.0.7"
   },
   "devDependencies": {
     "concurrently": "^5.3.0",
