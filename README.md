@@ -491,9 +491,9 @@ As a usual `React` component, this one also works fine with an electron-react en
 Usually, it's because your environment doesn't allow you to load external sources. By default, it loads `monaco` sources from `CDN`. You can see the [default configuration](https://github.com/suren-atoyan/monaco-loader/blob/master/src/config/index.js). But sure you can change that behavior; the library is fully configurable. Read about it [here](https://github.com/suren-atoyan/monaco-react#config). So, if you want to download it from your local files, you can do it like this:
 
 ```javascript
-import { monaco } from '@monaco-editor/react';
+import { loader } from '@monaco-editor/react';
 
-monaco.config({ paths: { vs: '../path-to-monaco' } });
+loader.config({ paths: { vs: '../path-to-monaco' } });
 ```
 
 2) **Based on your electron environment it can be required to have an absolute URL**
@@ -511,7 +511,7 @@ function uriFromPath(_path) {
     return encodeURI('file://' + ensureFirstBackSlash(pathName));
 }
 
-monaco.config({
+loader.config({
   paths: {
     vs: uriFromPath(
       path.join(__dirname, '../node_modules/monaco-editor/min/vs')
