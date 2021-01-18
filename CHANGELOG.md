@@ -1,5 +1,10 @@
 ### Versions
 
+## 4.0.2
+###### *Jan 18, 2021*
+
+- types: declare and export `useMonaco` type
+
 ## 4.0.1
 ###### *Jan 18, 2021*
 
