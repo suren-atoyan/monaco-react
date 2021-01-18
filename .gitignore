@@ -4,3 +4,4 @@ node_modules/
 yarn-error.log
 npm-debug.log
 lib/
+playground/

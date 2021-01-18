@@ -11,6 +11,7 @@ yarn-error.log
 /src/
 /coverage/
 /node_modules/
+/playground/
 
 __snapshots__
 *.spec.js
