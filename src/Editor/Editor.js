@@ -6,23 +6,29 @@ import state from 'state-local';
 import MonacoContainer from '../MonacoContainer';
 import useMount from '../hooks/useMount';
 import useUpdate from '../hooks/useUpdate';
+import usePrevious from '../hooks/usePrevious';
 import { noop, getOrCreateModel } from '../utils';
 
 const [getModelMarkersSetter, setModelMarkersSetter] = state.create({
   backup: null,
 });
 
+const viewStates = new Map();
+
 function Editor({
   defaultValue,
+  defaultLanguage,
+  defaultPath,
   value,
   language,
+  path,
   /* === */
-  defaultModelPath,
   theme,
   line,
   loading,
   options,
   overrideServices,
+  saveViewState,
   /* === */
   width,
   height,
@@ -43,6 +49,7 @@ function Editor({
   const beforeMountRef = useRef(beforeMount);
   const subscriptionRef = useRef(null);
   const valueRef = useRef(value);
+  const previousPath = usePrevious(path);
 
   useMount(() => {
     const cancelable = loader.init();
@@ -54,6 +61,21 @@ function Editor({
 
     return () => editorRef.current ? disposeEditor() : cancelable.cancel();
   });
+
+  useUpdate(() => {
+    const model = getOrCreateModel(
+      monacoRef.current,
+      defaultValue || value,
+      defaultLanguage || language,
+      path,
+    );
+
+    if (model !== editorRef.current.getModel()) {
+      saveViewState && viewStates.set(previousPath, editorRef.current.saveViewState());
+      editorRef.current.setModel(model);
+      saveViewState && editorRef.current.restoreViewState(viewStates.get(path));
+    }
+  }, [path], isEditorReady);
 
   useUpdate(() => {
     editorRef.current.updateOptions(options);
@@ -91,9 +113,9 @@ function Editor({
     beforeMountRef.current(monacoRef.current);
     const defaultModel = getOrCreateModel(
       monacoRef.current,
-      defaultValue || value,
-      language,
-      defaultModelPath,
+      value || defaultValue,
+      defaultLanguage || language,
+      path || defaultPath,
     );
 
     editorRef.current = monacoRef.current.editor.create(containerRef.current, {
@@ -112,13 +134,15 @@ function Editor({
 
     setIsEditorReady(true);
   }, [
+    defaultValue,
+    defaultLanguage,
+    defaultPath,
+    value,
     language,
+    path,
     options,
     overrideServices,
     theme,
-    value,
-    defaultValue,
-    defaultModelPath,
   ]);
 
   useEffect(() => {
@@ -190,15 +214,18 @@ function Editor({
 
 Editor.propTypes = {
   defaultValue: PropTypes.string,
+  defaultPath: PropTypes.string,
+  defaultLanguage: PropTypes.string,
   value: PropTypes.string,
   language: PropTypes.string,
+  path: PropTypes.string,
   /* === */
-  defaultModelPath: PropTypes.string,
   theme: PropTypes.string,
   line: PropTypes.number,
   loading: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   options: PropTypes.object,
   overrideServices: PropTypes.object,
+  saveViewState: PropTypes.bool,
   /* === */
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -212,11 +239,13 @@ Editor.propTypes = {
 };
 
 Editor.defaultProps = {
-  defaultModelPath: 'inmemory://model/1',
+  defaultPath: 'inmemory://model/1',
+  /* === */
   theme: 'light',
   loading: 'Loading...',
   options: {},
   overrideServices: {},
+  saveViewState: true,
   /* === */
   width: '100%',
   height: '100%',
