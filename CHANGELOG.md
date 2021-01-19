@@ -1,5 +1,11 @@
 ### Versions
 
+## 4.0.6
+###### *Jan 19, 2021*
+
+- DiffEditor: check if `originalModelPath` and `modifiedModelPath` exist in `setModels` function
+- DiffEditor: remove `originalModelPath` and `modifiedModelPath` from `defaultProps`
+
 ## 4.0.5
 ###### *Jan 19, 2021*
 
