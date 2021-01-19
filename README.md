@@ -476,7 +476,15 @@ The properties:
 - `path`
 - `saveViewState`
 
-will give you more flexibility in working with a multi-model editor
+will give you more flexibility in working with a multi-model editor.
+
+**NOTE**
+
+`defaultValue`, `defaultLanguage`, and `defaultPath` are being considered **only** during a new model creation
+<br />
+`value`, `language`, and `path` are being tracked the **whole time**
+<br />
+`saveViewState` is an indicator whether to save the models' view states between model changes or not
 
 [codesandbox](https://codesandbox.io/s/multi-model-editor-kugi6?file=/src/App.js)
 
