@@ -76,14 +76,14 @@ function DiffEditor ({
       .createModel(
         original,
         originalLanguage || language,
-        monacoRef.current.Uri.parse(originalModelPath),
+        originalModelPath && monacoRef.current.Uri.parse(originalModelPath),
       );
 
     const modifiedModel = monacoRef.current.editor
       .createModel(
         modified,
         modifiedLanguage || language,
-        monacoRef.current.Uri.parse(modifiedModelPath),
+        modifiedModelPath && monacoRef.current.Uri.parse(modifiedModelPath),
       );
 
     editorRef.current.setModel({ original: originalModel, modified: modifiedModel });
@@ -115,7 +115,12 @@ function DiffEditor ({
     !isMonacoMounting && !isEditorReady && createEditor();
   }, [isMonacoMounting, isEditorReady, createEditor]);
 
-  const disposeEditor = () => editorRef.current.dispose();
+  const disposeEditor = () => {
+    const models = editorRef.current.getModel();
+    models.original?.dispose();
+    models.modified?.dispose();
+    editorRef.current.dispose();
+  }
 
   return (
     <MonacoContainer
@@ -153,8 +158,6 @@ DiffEditor.propTypes = {
 };
 
 DiffEditor.defaultProps = {
-  originalModelPath: 'inmemory://model/1',
-  modifiedModelPath: 'inmemory://model/2',
   theme: 'light',
   loading: 'Loading...',
   options: {},
