@@ -9,6 +9,10 @@ const setThemeMode = ({ state }, themeMode) => {
   // to sync state (or a field of state) with localStorage
 };
 
+const setEditorMode = ({ state }, editorMode) => {
+  state.editorMode = editorMode;
+};
+
 const showNotification = ({ state }, { message, variant = 'info', opt = {} }) => {
   state.notifications = {
     isActive: true,
@@ -43,6 +47,7 @@ const diffEditor = {
 export {
   hideNotification,
   setThemeMode,
+  setEditorMode,
   setIsEditorReady,
   showNotification,
   editor, diffEditor,

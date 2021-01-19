@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import Notifications from 'notifications';
 
 import { useStore } from 'store';
+import { isMobile } from 'utils';
 
 import config from 'config';
 
@@ -15,10 +16,17 @@ import useStyles from './useStyles';
 
 const Header = _ => {
   const classes = useStyles();
-  const { state: { themeMode }, actions: { setThemeMode } } = useStore();
+  const {
+    state: { themeMode, editorMode },
+    actions: { setThemeMode, setEditorMode },
+  } = useStore();
 
   function handleThemeSwitch(ev) {
     setThemeMode(themeMode === 'light' ? 'dark' : 'light');
+  }
+
+  function handleEditorModeSwitch() {
+    setEditorMode(editorMode === 'editor' ? 'diffEditor' : 'editor');
   }
 
   return (
@@ -27,10 +35,28 @@ const Header = _ => {
         <Toolbar>
           <Typography className={classes.logo}>
             {"<MR />"}
-          </Typography>        
-          <Typography variant="h6" className={classes.title}>
-            Monaco Editor React
           </Typography>
+          {
+            !isMobile && (
+              <Typography variant="h6" className={classes.title}>
+                Monaco Editor React
+              </Typography>
+            )
+          }
+          <Button
+            onClick={handleEditorModeSwitch}
+            variant={editorMode === 'editor' ? 'outlined' : 'text'}
+            disabled={editorMode === 'editor'}
+          >
+            Editor
+          </Button>
+          <Button
+            onClick={handleEditorModeSwitch}
+            variant={editorMode === 'diffEditor' ? 'outlined' : 'text'}
+            disabled={editorMode === 'diffEditor'}
+          >
+            Diff Editor
+          </Button>
           <Button onClick={handleThemeSwitch}>
             <span className={classNames(classes.stars, { [classes.activate]: themeMode === 'dark' })} />
             <span className={classNames(classes.stars, { [classes.activate]: themeMode === 'dark' })} />

@@ -1,11 +1,11 @@
-import { monaco } from '@monaco-editor/react';
+import { loader } from '@monaco-editor/react';
 import monacoThemes from 'monaco-themes/themes/themelist';
 
 const defineTheme = theme => {
   return new Promise(res => {
     Promise.all(
       [
-        monaco.init(),
+        loader.init(),
         import(`monaco-themes/themes/${monacoThemes[theme]}.json`),
       ]
     ).then(

@@ -12,12 +12,12 @@ import monacoThemes from 'monaco-themes/themes/themelist';
 
 import { useStore } from 'store';
 import config from 'config';
-import { noop } from 'utils';
+import { noop, isMobile } from 'utils';
 
 import useStyles from './useStyles';
 
 const Settings = _ => {
-  const classes = useStyles();
+  const classes = useStyles({ isMobile });
   const [isEditorReady, setIsEditorReady] = useState(false);
   const {
     state: { editor: { selectedLanguageId, options }, monacoTheme },

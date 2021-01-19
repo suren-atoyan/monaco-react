@@ -5,8 +5,8 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     height: '88%',
     display: 'flex',
-    marginTop: 20,
-    marginBottom: 20,
+    padding: 5,
+    'padding-top': 15,
   },
 }));
 

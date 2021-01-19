@@ -72,7 +72,9 @@ const initialState = {
     },
   },
 
-  monacoTheme: initalTheme,
+  editorMode: 'editor',
+
+  monacoTheme: initalTheme === 'dark' ? 'vs-dark' : initalTheme,
 
   diffEditor: {
     selectedLanguageId: 24, // 24 is the id of markdown

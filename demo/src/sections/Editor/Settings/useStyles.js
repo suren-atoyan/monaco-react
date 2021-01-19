@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    paddingLeft: 20,
+    paddingLeft: ({ isMobile }) => isMobile ? 0 : 20,
     '& button': {
       marginRight: 10,
     },

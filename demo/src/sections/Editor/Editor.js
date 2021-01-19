@@ -4,6 +4,7 @@ import MonacoEditor from '@monaco-editor/react';
 import Settings from './Settings';
 
 import { useStore } from 'store';
+import { isMobile } from 'utils';
 import examples from 'config/examples';
 import config from 'config';
 
@@ -13,14 +14,21 @@ const Editor = _ => {
   const classes = useStyles();
   const { state: { editor: { selectedLanguageId, options }, monacoTheme } } = useStore();
 
+  const language = config.supportedLanguages.find(({ id }) => id === selectedLanguageId).name;
+
   return <div className={classes.root}>
-    <MonacoEditor
-      theme={monacoTheme}
-      height=""
-      value={examples[selectedLanguageId] || ''}
-      language={config.supportedLanguages.find(({ id }) => id === selectedLanguageId).name}
-      options={options}
-    />
+    {
+      !isMobile && (
+        <MonacoEditor
+          theme={monacoTheme}
+          height="100vh"
+          path={language}
+          defaultValue={examples[selectedLanguageId] || ''}
+          defaultLanguage={language}
+          options={options}
+        />
+      )
+    }
     <Settings />
   </div>;
 }
