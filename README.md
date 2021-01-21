@@ -490,7 +490,7 @@ will give you more flexibility in working with a multi-model editor.
 
 #### `onValidate`
 
-`onValidate` is an additional property. An event is emitted when the length of the model markers of the current model isn't 0. After each change, if you have some syntax error or some kind of warnings, it will be fired with the current markers
+`onValidate` is an additional property. An event is emitted when the content of the current model is changed and the current model markers are ready. It will be fired with the current model markers
 
 ```js
 import React from "react";
@@ -703,7 +703,7 @@ If you want to change something in the library, go to `monaco-react/src/...`, th
 | beforeMount | func | noop | **Signature: function(monaco: Monaco) => void** <br/> An event is emitted before the editor is mounted. It gets the `monaco` instance as a first argument|
 | onMount | func | noop | **Signature: function(editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => void** <br/> An event is emitted when the editor is mounted. It gets the `editor` instance as a first argument and the `monaco` instance as a second|
 | onChange | func || **Signature: function(value: string \| undefined, ev: monaco.editor.IModelContentChangedEvent) => void** <br/> An event is emitted when the content of the current model is changed|
-| onValidate | func | noop | **Signature: function(markers: monaco.editor.IMarker[]) => void** <br/> An event is emitted when the length of the model markers of the current model isn't 0|
+| onValidate | func | noop | **Signature: function(markers: monaco.editor.IMarker[]) => void** <br/> An event is emitted when the content of the current model is changed and the current model markers are ready|
 
 #### `DiffEditor`
 

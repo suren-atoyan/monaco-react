@@ -146,7 +146,9 @@ export interface EditorProps {
 
   /**
    * Signature: function(markers: monaco.editor.IMarker[]) => void
-   * An event is emitted when the length of the model markers of the current model isn't 0
+   * An event is emitted when the content of the current model is changed
+   * and tthe current model markers are ready
+   * Defaults to "noop"
    */
   onValidate?: OnValidate;
 }

@@ -186,9 +186,7 @@ function Editor({
           markers,
         );
 
-        if (markers.length !== 0) {
-          onValidate?.(markers);
-        }
+        onValidate?.(markers);
       }
     }
   }, [isEditorReady, onValidate]);
