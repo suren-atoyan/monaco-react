@@ -1,5 +1,10 @@
 ### Versions
 
+## 4.0.7
+###### *Jan 21, 2021*
+
+- Editor: fire `onValidate` unconditionally, always, with the current model markers
+
 ## 4.0.6
 ###### *Jan 19, 2021*
 
