@@ -5,7 +5,7 @@ Monaco Editor for React &middot; use the [monaco-editor](https://microsoft.githu
 
 :zap: [multi-model editor](#multi-model-editor) is already supported; enjoy it :tada:
 <br />
-:tada: version `v4` is here - to see what's new in the new version and how to migrate from `v3`, please read this [doc](./v4.changes.md)
+:tada: version `v4` is here - to see what's new in the new version and how to migrate from `v3`, please read this [doc](./v4.changes.md) (also, if you need the old version README, it's [here](https://github.com/suren-atoyan/monaco-react/blob/v3.8.3/README.md))
 <br />
 :tada: the new section [Development / Playground](#development-playground) has been created - now you can run the playground and play with the internals of the library
 <br />
