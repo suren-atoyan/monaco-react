@@ -696,6 +696,7 @@ If you want to change something in the library, go to `monaco-react/src/...`, th
 | options | object | {} | [IStandaloneEditorConstructionOptions](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.istandaloneeditorconstructionoptions.html) |
 | overrideServices | object | {} | [IEditorOverrideServices ](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditoroverrideservices.html) |
 | saveViewState | boolean | true | Indicator whether to save the models' view states between model changes or not |
+| keepCurrentModel | boolean | false | Indicator whether to dispose the current model when the Editor is unmounted or not |
 | width | union: number \| string | "100%" | Width of the editor wrapper |
 | height | union: number \| string | "100%" | Height of the editor wrapper |
 | className | string || Class name for the editor container |

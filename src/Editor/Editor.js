@@ -29,6 +29,7 @@ function Editor({
   options,
   overrideServices,
   saveViewState,
+  keepCurrentModel,
   /* === */
   width,
   height,
@@ -193,7 +194,11 @@ function Editor({
 
   function disposeEditor() {
     subscriptionRef.current?.dispose();
-    editorRef.current.getModel()?.dispose();
+
+    if (!keepCurrentModel) {
+      editorRef.current.getModel()?.dispose();
+    }
+
     editorRef.current.dispose();
   }
 
@@ -224,6 +229,7 @@ Editor.propTypes = {
   options: PropTypes.object,
   overrideServices: PropTypes.object,
   saveViewState: PropTypes.bool,
+  keepCurrentModel: PropTypes.bool,
   /* === */
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -242,6 +248,7 @@ Editor.defaultProps = {
   options: {},
   overrideServices: {},
   saveViewState: true,
+  keepCurrentModel: false,
   /* === */
   width: '100%',
   height: '100%',

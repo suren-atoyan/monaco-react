@@ -101,6 +101,12 @@ export interface EditorProps {
   saveViewState?: boolean;
 
   /**
+   * Indicator whether to dispose the current model when the Editor is unmounted or not
+   * Defaults to false
+   */
+  keepCurrentModel?: boolean;
+
+  /**
    * Width of the editor wrapper
    * Defaults to 100%
    */
