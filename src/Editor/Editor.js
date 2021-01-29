@@ -112,11 +112,13 @@ function Editor({
 
   const createEditor = useCallback(() => {
     beforeMountRef.current(monacoRef.current);
+    const autoCreatedModelPath = path || defaultPath;
+
     const defaultModel = getOrCreateModel(
       monacoRef.current,
       value || defaultValue,
       defaultLanguage || language,
-      path || defaultPath,
+      autoCreatedModelPath,
     );
 
     editorRef.current = monacoRef.current.editor.create(containerRef.current, {
@@ -124,6 +126,8 @@ function Editor({
       automaticLayout: true,
       ...options,
     }, overrideServices);
+
+    saveViewState && editorRef.current.restoreViewState(viewStates.get(autoCreatedModelPath));
 
     monacoRef.current.editor.setTheme(theme);
 
@@ -143,6 +147,7 @@ function Editor({
     path,
     options,
     overrideServices,
+    saveViewState,
     theme,
   ]);
 
@@ -195,7 +200,9 @@ function Editor({
   function disposeEditor() {
     subscriptionRef.current?.dispose();
 
-    if (!keepCurrentModel) {
+    if (keepCurrentModel) {
+      saveViewState && viewStates.set(path, editorRef.current.saveViewState());
+    } else {
       editorRef.current.getModel()?.dispose();
     }
 
