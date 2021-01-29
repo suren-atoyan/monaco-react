@@ -1,5 +1,10 @@
 ### Versions
 
+## 4.0.8
+###### *Jan 29, 2021*
+
+- Editor: add `keepCurrentModel` property to the `Editor` component; indicator whether to dispose the current model when the Editor is unmounted or not
+
 ## 4.0.7
 ###### *Jan 21, 2021*
 
