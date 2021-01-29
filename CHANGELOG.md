@@ -1,5 +1,10 @@
 ### Versions
 
+## 4.0.9
+###### *Jan 29, 2021*
+
+- Editor: save and restore current model view state, if `keepCurrentModel` is true
+
 ## 4.0.8
 ###### *Jan 29, 2021*
 
