@@ -103,7 +103,7 @@ function Editor({
   }, [language], isEditorReady);
 
   useUpdate(() => {
-    editorRef.current.setScrollPosition({ scrollTop: line });
+    editorRef.current.revealLine(line);
   }, [line], isEditorReady);
 
   useUpdate(() => {
