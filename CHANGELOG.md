@@ -1,5 +1,10 @@
 ### Versions
 
+## 4.0.10
+###### *Feb 16, 2021*
+
+- Editor: use `revealLine` for line update instead of `setScrollPosition`
+
 ## 4.0.9
 ###### *Jan 29, 2021*
 
