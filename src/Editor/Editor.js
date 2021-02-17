@@ -7,7 +7,7 @@ import MonacoContainer from '../MonacoContainer';
 import useMount from '../hooks/useMount';
 import useUpdate from '../hooks/useUpdate';
 import usePrevious from '../hooks/usePrevious';
-import { noop, getOrCreateModel } from '../utils';
+import { noop, getOrCreateModel, isUndefined } from '../utils';
 
 const [getModelMarkersSetter, setModelMarkersSetter] = state.create({
   backup: null,
@@ -103,7 +103,10 @@ function Editor({
   }, [language], isEditorReady);
 
   useUpdate(() => {
-    editorRef.current.revealLine(line);
+    // reason for undefined check: https://github.com/suren-atoyan/monaco-react/pull/188
+    if(!isUndefined(line)) {
+      editorRef.current.revealLine(line);
+    }
   }, [line], isEditorReady);
 
   useUpdate(() => {
