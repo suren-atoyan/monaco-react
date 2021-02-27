@@ -20,4 +20,8 @@ function crateModelUri(monaco, path) {
   return monaco.Uri.parse(path);
 }
 
-export { noop, getOrCreateModel };
+function isUndefined(input) {
+  return input === undefined;
+}
+
+export { noop, getOrCreateModel, isUndefined };
