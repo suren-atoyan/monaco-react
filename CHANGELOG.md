@@ -1,5 +1,10 @@
 ### Versions
 
+## 4.0.11
+###### *Feb 27, 2021*
+
+- Editor: add an additional check in case if `line` is undefined
+
 ## 4.0.10
 ###### *Feb 16, 2021*
 
