@@ -260,8 +260,9 @@ function App() {
 const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 ```
-[getmodifiededitor](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.idiffeditor.html#getmodifiededitor)
-[getoriginaleditor](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.idiffeditor.html#getoriginaleditor)
+- [codesandbox](https://codesandbox.io/s/simple-usage-forked-z31tj)
+- [getmodifiededitor](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.idiffeditor.html#getmodifiededitor)
+- [getoriginaleditor](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.idiffeditor.html#getoriginaleditor)
 
 #### `editor instance`
 
