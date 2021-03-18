@@ -1,5 +1,11 @@
 ### Versions
 
+## 4.1.0
+###### *Mar 15, 2021*
+
+- loader: update @monaco-editor/loader dependency to version 1.0.1
+- types: fix Theme type; vs-dark instead of dark
+
 ## 4.0.11
 ###### *Feb 27, 2021*
 
