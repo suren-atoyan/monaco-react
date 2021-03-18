@@ -5,7 +5,7 @@ import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 
 // default themes
 type Theme =
-  | 'dark'
+  | 'vs-dark'
   | 'light';
 
 // monaco
