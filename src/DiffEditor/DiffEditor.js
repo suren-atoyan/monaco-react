@@ -48,7 +48,20 @@ function DiffEditor ({
   });
 
   useUpdate(() => {
-    editorRef.current.getModel().modified.setValue(modified);
+    const modifiedEditor = editorRef.current.getModifiedEditor();
+    if (modifiedEditor.getOption(monacoRef.current.editor.EditorOption.readOnly)) {
+      modifiedEditor.setValue(modified);
+    } else {
+      if (modified !== modifiedEditor.getValue()) {
+        modifiedEditor.executeEdits('', [{
+          range: modifiedEditor.getModel().getFullModelRange(),
+          text: modified,
+          forceMoveMarkers: true,
+        }]);
+
+        modifiedEditor.pushUndoStop();
+      }
+    }
   }, [modified], isEditorReady);
 
   useUpdate(() => {
