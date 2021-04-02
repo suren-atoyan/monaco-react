@@ -219,13 +219,13 @@ ReactDOM.render(<App />, rootElement);
 
 [codesandbox](https://codesandbox.io/s/onchange-4nf6g?file=/src/App.js)
 
-3) get the diffEditor value via `onMount` prop
+<details><summary>(get the `DiffEditor` values via `editor` instance)</summary>
 
 ```javascript
-import React, { useRef } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useRef } from "react";
+import ReactDOM from "react-dom";
 
-import { DiffEditor } from '@monaco-editor/react';
+import { DiffEditor } from "@monaco-editor/react";
 
 function App() {
   const diffEditorRef = useRef(null);
@@ -257,12 +257,13 @@ function App() {
   );
 }
 
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 ```
-- [codesandbox](https://codesandbox.io/s/simple-usage-forked-z31tj)
-- [getmodifiededitor](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.idiffeditor.html#getmodifiededitor)
-- [getoriginaleditor](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.idiffeditor.html#getoriginaleditor)
+
+[codesandbox](https://codesandbox.io/s/get-values-diffeditor-c6xrg?file=/src/App.js)
+
+</details>
 
 #### `editor instance`
 

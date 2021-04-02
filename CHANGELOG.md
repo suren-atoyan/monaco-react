@@ -1,5 +1,11 @@
 ### Versions
 
+## 4.1.1
+###### *Apr 2, 2021*
+
+- DiffEditor: update `DiffEditor`'s `modified` value by `executeEdits`
+- README: add an example for getting the values of `DiffEditor`
+
 ## 4.1.0
 ###### *Mar 15, 2021*
 
