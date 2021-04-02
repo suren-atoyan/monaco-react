@@ -219,6 +219,51 @@ ReactDOM.render(<App />, rootElement);
 
 [codesandbox](https://codesandbox.io/s/onchange-4nf6g?file=/src/App.js)
 
+3) get the diffEditor value via `onMount` prop
+
+```javascript
+import React, { useRef } from 'react';
+import ReactDOM from 'react-dom';
+
+import { DiffEditor } from '@monaco-editor/react';
+
+function App() {
+  const diffEditorRef = useRef(null);
+
+  function handleEditorDidMount(editor, monaco) {
+    diffEditorRef.current = editor;
+  }
+
+  function showOriginalValue() {
+    alert(diffEditorRef.current.getOriginalEditor().getValue());
+  }
+
+  function showModifiedValue() {
+    alert(diffEditorRef.current.getModifiedEditor().getValue());
+  }
+
+  return (
+    <>
+      <button onClick={showOriginalValue}>show original value</button>
+      <button onClick={showModifiedValue}>show modified value</button>
+      <DiffEditor
+        height="90vh"
+        defaultLanguage="javascript"
+        original="// the original code"
+        modified="// the modified code"
+        onMount={handleEditorDidMount}
+      />
+    </>
+  );
+}
+
+const rootElement = document.getElementById('root');
+ReactDOM.render(<App />, rootElement);
+```
+- [codesandbox](https://codesandbox.io/s/simple-usage-forked-z31tj)
+- [getmodifiededitor](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.idiffeditor.html#getmodifiededitor)
+- [getoriginaleditor](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.idiffeditor.html#getoriginaleditor)
+
 #### `editor instance`
 
 The `editor` instance is exposed from the `onMount` prop as a first parameter, the second is the `monaco` instance
