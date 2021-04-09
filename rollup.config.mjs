@@ -4,16 +4,15 @@ import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 
+console.log(babel);
+
 const defaultNodeResolveConfig = {};
 const nodeResolvePlugin = nodeResolve(defaultNodeResolveConfig);
 
 const commonPlugins = [
   nodeResolvePlugin,
-  babel.default({
-    presets: [['@babel/preset-env', { targets: '> 2%, not dead' }], '@babel/preset-react'],
-    babelHelpers: 'bundled',
-  }),
-  commonjs(),
+  babel.default({ babelHelpers: 'bundled' }), 
+    commonjs(),
 ];
 
 const developmentPlugins = [
