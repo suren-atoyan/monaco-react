@@ -1,5 +1,11 @@
 ### Versions
 
+## 4.1.2
+###### *Apr 19, 2021*
+
+- DiffEditor: add `keepCurrentOriginalModel` and `keepCurrentModifiedModel` properties; indicator whether to dispose the current original/modified model when the DiffEditor is unmounted or not
+- package.json: update monaco-editor peerDependency to the lates one (0.23.0)
+
 ## 4.1.1
 ###### *Apr 2, 2021*
 
