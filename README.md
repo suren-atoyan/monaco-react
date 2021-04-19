@@ -763,6 +763,8 @@ If you want to change something in the library, go to `monaco-react/src/...`, th
 | modifiedLanguage | enum: ... | | This prop gives you the opportunity to specify the language of the modified source separately, otherwise, it will get the value of language property |
 | originalModelPath | string || Path for the "original" model. Will be passed as a third argument to `.createModel` method - `monaco.editor.createModel(..., ..., monaco.Uri.parse(originalModelPath))` |
 | modifiedModelPath | string || Path for the "modified" model. Will be passed as a third argument to `.createModel` method - `monaco.editor.createModel(..., ..., monaco.Uri.parse(modifiedModelPath))` |
+| keepCurrentOriginalModel | boolean | false | Indicator whether to dispose the current original model when the DiffEditor is unmounted or not |
+| keepCurrentModifiedModel | boolean | false | Indicator whether to dispose the current modified model when the DiffEditor is unmounted or not |
 | theme | enum: "light" \| "vs-dark" | "light" | The theme for the monaco. Available options "vs-dark" \| "light". Define new themes by `monaco.editor.defineTheme` |
 | line | number |  | The line to jump on it |
 | loading | React Node | "Loading..." | The loading screen before the editor will be mounted

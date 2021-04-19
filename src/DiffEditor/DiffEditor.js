@@ -16,6 +16,8 @@ function DiffEditor ({
   /* === */
   originalModelPath,
   modifiedModelPath,
+  keepCurrentOriginalModel,
+  keepCurrentModifiedModel,
   theme,
   loading,
   options,
@@ -128,10 +130,17 @@ function DiffEditor ({
     !isMonacoMounting && !isEditorReady && createEditor();
   }, [isMonacoMounting, isEditorReady, createEditor]);
 
-  const disposeEditor = () => {
+  function disposeEditor() {
     const models = editorRef.current.getModel();
-    models.original?.dispose();
-    models.modified?.dispose();
+
+    if (!keepCurrentOriginalModel) {
+      models.original?.dispose();
+    }
+
+    if (!keepCurrentModifiedModel) {
+      models.modified?.dispose();
+    }
+
     editorRef.current.dispose();
   }
 
@@ -157,6 +166,8 @@ DiffEditor.propTypes = {
   /* === */
   originalModelPath: PropTypes.string,
   modifiedModelPath: PropTypes.string,
+  keepCurrentOriginalModel: PropTypes.bool,
+  keepCurrentModifiedModel: PropTypes.bool,
   theme: PropTypes.string,
   loading: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   options: PropTypes.object,
@@ -174,6 +185,8 @@ DiffEditor.defaultProps = {
   theme: 'light',
   loading: 'Loading...',
   options: {},
+  keepCurrentOriginalModel: false,
+  keepCurrentModifiedModel: false,
   /* === */
   width: '100%',
   height: '100%',
