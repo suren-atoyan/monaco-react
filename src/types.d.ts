@@ -217,6 +217,16 @@ export interface DiffEditorProps {
   modifiedModelPath?: string;
 
   /**
+   * Indicator whether to dispose the current original model when the DiffEditor is unmounted or not
+   */
+  keepCurrentOriginalModel?: boolean;
+
+  /**
+   * Indicator whether to dispose the current modified model when the DiffEditor is unmounted or not
+   */
+  keepCurrentModifiedModel?: boolean;
+
+  /**
    * The theme for the monaco
    * Available options "vs-dark" | "light"
    * Define new themes by `monaco.editor.defineTheme`
