@@ -1,5 +1,10 @@
 ### Versions
 
+## 4.1.3
+###### *Apr 21, 2021*
+
+- types: add `keepCurrentOriginalModel` and `keepCurrentModifiedModel` to type definition
+
 ## 4.1.2
 ###### *Apr 19, 2021*
 
