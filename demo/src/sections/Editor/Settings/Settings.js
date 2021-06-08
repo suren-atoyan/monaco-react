@@ -12,7 +12,7 @@ import monacoThemes from 'monaco-themes/themes/themelist';
 
 import { useStore } from 'store';
 import config from 'config';
-import { noop, isMobile } from 'utils';
+import { isMobile } from 'utils';
 
 import useStyles from './useStyles';
 
@@ -24,7 +24,7 @@ const Settings = _ => {
     actions: { editor: { setSelectedLanguageId, setOptions, setMonacoTheme }, showNotification },
     effects: { defineTheme },
   } = useStore();
-  const [getEditorValue, setGetEditorValue] = useState(noop);
+
   const editorRef = useRef();
 
   function handleLanguageChange(ev) {
@@ -41,19 +41,26 @@ const Settings = _ => {
     }
   }
 
-  function handleEditorDidMount(valueGetter, editor) {
-    setGetEditorValue(_ => valueGetter);
+  function getEditorValue() {
+    return editorRef.current?.getValue();
+  }
+
+  function handleEditorDidMount(editor, monaco) {
     setIsEditorReady(true);
     editorRef.current = editor;
   }
 
   function handleApply() {
+    const currentValue = getEditorValue();
     let oprions;
     try {
-      oprions = JSON.parse(getEditorValue());
+      oprions = JSON.parse(currentValue);
       setOptions(oprions);
     } catch {
-      showNotification({ message: config.messages.invalidOptions, variant: 'error'})
+      showNotification({
+        message: config.messages.invalidOptions,
+        variant: "error",
+      });
     }
   }
 
@@ -123,7 +130,7 @@ const Settings = _ => {
             language="json"
             height={400}
             value={JSON.stringify(options, null, 2)}
-            editorDidMount={handleEditorDidMount}
+            onMount={handleEditorDidMount}
           />
         </div>
         <Button variant="outlined" disabled={!isEditorReady} onClick={handleApply}>Apply</Button>
