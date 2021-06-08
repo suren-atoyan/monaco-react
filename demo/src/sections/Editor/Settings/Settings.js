@@ -55,7 +55,6 @@ const Settings = _ => {
     let oprions;
     try {
       oprions = JSON.parse(currentValue);
-      console.log(oprions);
       setOptions(oprions);
     } catch {
       showNotification({
