@@ -31,12 +31,11 @@ const productionPlugins = [
   terser({ mangle: false }),
 ];
 
-const external = ['@monaco-editor/loader', 'state-local', 'react', 'prop-types'];
+const external = ['@monaco-editor/loader', 'react', 'prop-types'];
 const globalsForUMD = {
   'react': 'React',
   'prop-types': 'PropTypes',
   '@monaco-editor/loader': 'monaco_loader',
-  'state-local': 'state',
 };
 
 export default [

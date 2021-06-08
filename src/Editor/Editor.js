@@ -1,17 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import loader from '@monaco-editor/loader';
-import state from 'state-local';
 
 import MonacoContainer from '../MonacoContainer';
 import useMount from '../hooks/useMount';
 import useUpdate from '../hooks/useUpdate';
 import usePrevious from '../hooks/usePrevious';
 import { noop, getOrCreateModel, isUndefined } from '../utils';
-
-const [getModelMarkersSetter, setModelMarkersSetter] = state.create({
-  backup: null,
-});
 
 const viewStates = new Map();
 
@@ -134,12 +129,6 @@ function Editor({
 
     monacoRef.current.editor.setTheme(theme);
 
-    if (!getModelMarkersSetter().backup) {
-      setModelMarkersSetter({
-        backup: monacoRef.current.editor.setModelMarkers,
-      });
-    }
-
     setIsEditorReady(true);
   }, [
     defaultValue,
@@ -187,16 +176,20 @@ function Editor({
   // onValidate
   useEffect(() => {
     if (isEditorReady) {
-      monacoRef.current.editor.setModelMarkers = function(model, owner, markers) {
-        getModelMarkersSetter().backup?.call(
-          monacoRef.current.editor,
-          model,
-          owner,
-          markers,
-        );
-
-        onValidate?.(markers);
-      }
+      const changeMarkersListener = monacoRef.current.editor.onDidChangeMarkers(uris => {
+        const editorUri = editorRef.current?.getModel()?.uri;
+        if (editorUri) {
+          const currentEditorHasMarkerChanges = uris.find((uri) => uri.path === editorUri.path);
+          if (currentEditorHasMarkerChanges) {
+            const markers = monacoRef.current.editor.getModelMarkers({ resource: editorUri });
+            onValidate?.(markers);
+          }
+        }
+      });
+   
+      return () => {
+        changeMarkersListener?.dispose();
+      };
     }
   }, [isEditorReady, onValidate]);
 
