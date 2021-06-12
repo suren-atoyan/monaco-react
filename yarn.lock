@@ -1411,10 +1411,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
 
-"@monaco-editor/loader@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@monaco-editor/loader/-/loader-1.0.1.tgz#7068c9b07bbc65387c0e7a4df6dac0a326155905"
-  integrity sha512-hycGOhLqLYjnD0A/FHs56covEQWnDFrSnm/qLKkB/yoeayQ7ju+Vaj4SdTojGrXeY6jhMDx59map0+Jqwquh1Q==
+"@monaco-editor/loader@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@monaco-editor/loader/-/loader-1.1.0.tgz#24106ea29201f2fd1d8eeb769b4d067c77d7e7b5"
+  integrity sha512-ovAId70jC5k7cYYPC9M/nhANI9pgB/+WD7FC0xWy1bcO/D0/3qIb7iU4mYw7xLqW5dKXfoyT1V8cIWfRSE0wag==
   dependencies:
     state-local "^1.0.6"
 
