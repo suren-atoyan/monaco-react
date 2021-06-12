@@ -1166,19 +1166,19 @@
     prop-types "^15.7.2"
     react-is "^16.8.0"
 
-"@monaco-editor/loader@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@monaco-editor/loader/-/loader-1.0.0.tgz#c7ea78ef07cebcae83d92bbfe2bddab563468102"
-  integrity sha512-CA35bf5Y7wFWfeJZfkLslOxiatln3oTBKkfbdo+TF5H+UdPP96qHvhOUjjd1DeQ2NWsRkVPSnoSYek7NE5B26w==
+"@monaco-editor/loader@^1.0.1":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@monaco-editor/loader/-/loader-1.1.0.tgz#24106ea29201f2fd1d8eeb769b4d067c77d7e7b5"
+  integrity sha512-ovAId70jC5k7cYYPC9M/nhANI9pgB/+WD7FC0xWy1bcO/D0/3qIb7iU4mYw7xLqW5dKXfoyT1V8cIWfRSE0wag==
   dependencies:
     state-local "^1.0.6"
 
-"@monaco-editor/react@^4.0.6":
-  version "4.0.6"
-  resolved "https://registry.yarnpkg.com/@monaco-editor/react/-/react-4.0.6.tgz#dff5fe8d4328806708a85242d9a0e48d5147b36c"
-  integrity sha512-jsjvpy4T8h23o7qx+mNfAOkdl50rDC6uIKRumlZJ6GBbgv379fTZwDqjwd2GSvZjmJQOoMZVeHsn80e345znKQ==
+"@monaco-editor/react@^4.1.3":
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/@monaco-editor/react/-/react-4.1.3.tgz#7dcaa584f2a4e8bd8f5298604f0b5368f8ebca55"
+  integrity sha512-kqcjVuoy6btcgALAk4RV/SlasveM+WTw5lzzlyq5FhKXjF8wu5tSe/2oCQ1uhLpcdtxcHfx3L0HrcAPWnejFnQ==
   dependencies:
-    "@monaco-editor/loader" "^1.0.0"
+    "@monaco-editor/loader" "^1.0.1"
     prop-types "^15.7.2"
     state-local "^1.0.7"
 
