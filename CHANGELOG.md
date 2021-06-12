@@ -1,5 +1,12 @@
 ### Versions
 
+## 4.2.0
+###### *Jun 13, 2021*
+
+- loader: update @monaco-editor/loader package version to the latest one (v1.1.0)
+- demo: update demo examples
+- tests: update snapshots
+
 ## 4.1.3
 ###### *Apr 21, 2021*
 
