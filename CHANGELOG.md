@@ -1,9 +1,16 @@
 ### Versions
 
+## 4.2.1
+###### *Jun 21, 2021*
+
+- loader: update `@monaco-editor/loader` package version to the latest one (v1.1.1)
+- monaco-editor: set `monaco-editor` peerDependency version to `>= 0.25.0 < 1`
+- tests: update snapshots
+
 ## 4.2.0
 ###### *Jun 13, 2021*
 
-- loader: update @monaco-editor/loader package version to the latest one (v1.1.0)
+- loader: update `@monaco-editor/loader` package version to the latest one (v1.1.0)
 - demo: update demo examples
 - tests: update snapshots
 
