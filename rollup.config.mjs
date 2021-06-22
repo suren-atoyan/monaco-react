@@ -9,11 +9,8 @@ const nodeResolvePlugin = nodeResolve(defaultNodeResolveConfig);
 
 const commonPlugins = [
   nodeResolvePlugin,
-  babel.default({
-    presets: [['@babel/preset-env', { targets: '> 2%, not dead' }], '@babel/preset-react'],
-    babelHelpers: 'bundled',
-  }),
-  commonjs(),
+  babel.default({ babelHelpers: 'bundled' }), 
+    commonjs(),
 ];
 
 const developmentPlugins = [
