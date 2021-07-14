@@ -3,6 +3,7 @@ const styles = {
     display: 'flex',
     position: 'relative',
     textAlign: 'initial',
+    overflow: 'hidden',
   },
   fullWidth: {
     width: '100%',
