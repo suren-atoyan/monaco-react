@@ -349,7 +349,7 @@ ReactDOM.render(<App />, rootElement);
 ```javascript
 import { loader } from "@monaco-editor/react";
 
-loader.init().then(monaco => console.log("here is the monaco isntance:", monaco));
+loader.init().then(monaco => console.log("here is the monaco instance:", monaco));
 ```
 
 [codesandbox](https://codesandbox.io/s/monaco-instance-loader-ndzu9?file=/src/App.js)
