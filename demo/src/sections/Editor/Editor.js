@@ -16,6 +16,15 @@ const Editor = _ => {
 
   const language = config.supportedLanguages.find(({ id }) => id === selectedLanguageId).name;
 
+  function handleEditorWillMount(monaco) {
+    monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
+      target: monaco.languages.typescript.ScriptTarget.Latest,
+      module: monaco.languages.typescript.ModuleKind.ES2015,
+      allowNonTsExtensions: true,
+      lib: ['es2018'],
+    });
+  }
+
   return <div className={classes.root}>
     {
       !isMobile && (
@@ -26,6 +35,7 @@ const Editor = _ => {
           defaultValue={examples[selectedLanguageId] || ''}
           defaultLanguage={language}
           options={options}
+          beforeMount={handleEditorWillMount}
         />
       )
     }

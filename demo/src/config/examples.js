@@ -573,56 +573,61 @@ const examples = {
      }
   `),
   19: rTabs(`
-    // @monaco-editor/react is Monaco editor wrapper for easy/one-line integration with React
-    // applications without need of webpack (or other module bundler)
-    // configuration files.
+    // the code example from https://github.com/suren-atoyan/state-local
 
-    import React, { useState } from "react";
-    import ReactDOM from "react-dom";
-
-    import Editor from "@monaco-editor/react";
-    import examples from "./examples";
-
-    function App() {
-      const [theme, setTheme] = useState("light");
-      const [language, setLanguage] = useState("javascript");
-      const [isEditorReady, setIsEditorReady] = useState(false);
-
-      function handleEditorDidMount() {
-        setIsEditorReady(true);
+    import { compose, curry, isFunction } from '../utils';
+    import validators from '../validators';
+    
+    function create(initial, handler = {}) {
+      validators.initial(initial);
+      validators.handler(handler);
+    
+      const state = { current: initial };
+    
+      const didUpdate = curry(didStateUpdate)(state, handler);
+      const update = curry(updateState)(state);
+      const validate = curry(validators.changes)(initial);
+      const getChanges = curry(extractChanges)(state);
+    
+      function getState(selector = state => state) {
+        validators.selector(selector);
+        return selector(state.current);
       }
-
-      function toggleTheme() {
-        setTheme(theme === "light" ? "dark" : "light");
+    
+      function setState(causedChanges) {
+        compose(
+          didUpdate,
+          update,
+          validate,
+          getChanges,
+        )(causedChanges);
       }
-
-      function toggleLanguage() {
-        setLanguage(language === "javascript" ? "python" : "javascript");
-      }
-
-      return (
-        <>
-          <button onClick={toggleTheme} disabled={!isEditorReady}>
-            Toggle theme
-          </button>
-          <button onClick={toggleLanguage} disabled={!isEditorReady}>
-            Toggle language
-          </button>
-
-          <Editor
-            height="90vh" // By default, it fully fits with its parent
-            theme={theme}
-            language={language}
-            value={examples[language]}
-            editorDidMount={handleEditorDidMount}
-            loading={"Loading..."}
-          />
-        </>
-      );
+    
+      return [getState, setState];
     }
-
-    const rootElement = document.getElementById("root");
-    ReactDOM.render(<App />, rootElement);
+    
+    function extractChanges(state, causedChanges) {
+      return isFunction(causedChanges)
+        ? causedChanges(state.current)
+        : causedChanges;
+    }
+    
+    function updateState(state, changes) {
+      state.current = { ...state.current, ...changes };
+    
+      return changes;
+    }
+    
+    function didStateUpdate(state, handler, changes) {
+      isFunction(handler)
+        ? handler(state.current)
+        : Object.keys(changes)
+            .forEach(field => handler[field]?.(state.current[field]));
+    
+      return changes;
+    }
+    
+    export { create };   
   `),
   20: rTabs(`
     {
