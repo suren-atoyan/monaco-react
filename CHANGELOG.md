@@ -1,5 +1,11 @@
 ### Versions
 
+## 4.2.2
+###### *Aug 9, 2021*
+
+- Editor: `onValidate` integrate `onDidChangeMarkers` (released in `v0.22.0`)
+- package.json: after `onDidChangeMarkers` integration `state-local` became redundant; remove it
+
 ## 4.2.1
 ###### *Jun 21, 2021*
 
