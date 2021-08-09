@@ -177,7 +177,8 @@ function Editor({
   useEffect(() => {
     if (isEditorReady) {
       const changeMarkersListener = monacoRef.current.editor.onDidChangeMarkers(uris => {
-        const editorUri = editorRef.current?.getModel()?.uri;
+        const editorUri = editorRef.current.getModel()?.uri;
+
         if (editorUri) {
           const currentEditorHasMarkerChanges = uris.find((uri) => uri.path === editorUri.path);
           if (currentEditorHasMarkerChanges) {
