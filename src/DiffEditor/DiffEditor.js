@@ -25,7 +25,7 @@ function DiffEditor ({
   height,
   width,
   className,
-  wrapperClassName,
+  wrapperProps,
   /* === */
   beforeMount,
   onMount,
@@ -152,7 +152,7 @@ function DiffEditor ({
       loading={loading}
       _ref={containerRef}
       className={className}
-      wrapperClassName={wrapperClassName}
+      wrapperProps={wrapperProps}
     />
   );
 }
@@ -175,7 +175,7 @@ DiffEditor.propTypes = {
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   className: PropTypes.string,
-  wrapperClassName: PropTypes.string,
+  wrapperProps: PropTypes.object,
   /* === */
   beforeMount: PropTypes.func,
   onMount: PropTypes.func,
@@ -190,6 +190,7 @@ DiffEditor.defaultProps = {
   /* === */
   width: '100%',
   height: '100%',
+  wrapperProps: {},
   /* === */
   beforeMount: noop,
   onMount: noop,
