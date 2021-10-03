@@ -15,10 +15,10 @@ function MonacoContainer({
   loading,
   _ref,
   className,
-  wrapperClassName,
+  wrapperProps,
 }) {
   return (
-    <section style={{ ...styles.wrapper, width, height }} className={wrapperClassName}>
+    <section style={{ ...styles.wrapper, width, height }} {...wrapperProps}>
       {!isEditorReady && <Loading content={loading} />}
       <div
         ref={_ref}
@@ -35,7 +35,7 @@ MonacoContainer.propTypes = {
   loading: PropTypes.oneOfType([PropTypes.element, PropTypes.string]).isRequired,
   isEditorReady: PropTypes.bool.isRequired,
   className: PropTypes.string,
-  wrapperClassName: PropTypes.string,
+  wrapperProps: PropTypes.object,
 };
 
 export default MonacoContainer;
