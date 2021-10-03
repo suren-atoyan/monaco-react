@@ -1,5 +1,10 @@
 ### Versions
 
+## 4.3.1
+###### *Oct 3, 2021*
+
+- types: update types according to the new `loader` version and the new `wrapperProps` property
+
 ## 4.3.0
 ###### *Oct 3, 2021*
 
