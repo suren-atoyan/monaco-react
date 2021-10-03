@@ -85,7 +85,7 @@
     ]
   },
   "dependencies": {
-    "@monaco-editor/loader": "^1.1.1",
+    "@monaco-editor/loader": "^1.2.0",
     "prop-types": "^15.7.2"
   }
 }
