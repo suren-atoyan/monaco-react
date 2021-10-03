@@ -1,5 +1,12 @@
 ### Versions
 
+## 4.3.0
+###### *Oct 3, 2021*
+
+- Editor/DiffEditor: add `wrapperProps` property
+- DiffEditor: allow `DiffEditor` to use existing models
+- package.json: update `@monaco-editor/loader` version to `v1.2.0` (monaco version 0.28.1)
+
 ## 4.2.2
 ###### *Aug 9, 2021*
 
