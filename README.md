@@ -746,7 +746,7 @@ If you want to change something in the library, go to `monaco-react/src/...`, th
 | width | union: number \| string | "100%" | Width of the editor wrapper |
 | height | union: number \| string | "100%" | Height of the editor wrapper |
 | className | string || Class name for the editor container |
-| wrapperClassName | string || Class name for the editor container wrapper |
+| wrapperProps | object | {} | Props applied to the wrapper element |
 | beforeMount | func | noop | **Signature: function(monaco: Monaco) => void** <br/> An event is emitted before the editor is mounted. It gets the `monaco` instance as a first argument|
 | onMount | func | noop | **Signature: function(editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => void** <br/> An event is emitted when the editor is mounted. It gets the `editor` instance as a first argument and the `monaco` instance as a second|
 | onChange | func || **Signature: function(value: string \| undefined, ev: monaco.editor.IModelContentChangedEvent) => void** <br/> An event is emitted when the content of the current model is changed|
@@ -772,7 +772,7 @@ If you want to change something in the library, go to `monaco-react/src/...`, th
 | width | union: number \| string | "100%" | Width of the editor wrapper |
 | height | union: number \| string | "100%" | Height of the editor wrapper |
 | className | string || Class name for the editor container |
-| wrapperClassName | string || Class name for the editor container wrapper |
+| wrapperProps | object | {} | Props applied to the wrapper element |
 | beforeMount | func | noop | **Signature: function(monaco: Monaco) => void** <br/> An event is emitted before the editor mounted. It gets the `monaco` instance as a first argument|
 | onMount | func | noop | **Signature: function(editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => void** <br/> An event is emitted when the editor is mounted. It gets the `editor` instance as a first argument and the `monaco` instance as a second|
 
