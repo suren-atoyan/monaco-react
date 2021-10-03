@@ -124,9 +124,9 @@ export interface EditorProps {
   className?: string;
 
   /**
-   * Class name for the editor container wrapper
+   * Props applied to the wrapper element
    */
-  wrapperClassName?: string;
+  wrapperProps?: object;
 
   /**
    * Signature: function(monaco: Monaco) => void
@@ -263,9 +263,9 @@ export interface DiffEditorProps {
   className?: string;
 
   /**
-   * Class name for the editor container wrapper
+   * Props applied to the wrapper element
    */
-  wrapperClassName?: string;
+  wrapperProps?: object;
 
   /**
    * Signature: function(monaco: Monaco) => void
@@ -294,8 +294,14 @@ declare const useMonaco: () => Monaco | null;
 export { useMonaco };
 
 // loader
+
+// TODO (Suren): import loader namespace from @monaco-editor/loader
+interface CancelablePromise<T> extends Promise<T> {
+  cancel: () => void;
+}
+
 declare namespace loader {
-  function init(): Promise<Monaco>;
+  function init(): CancelablePromise<Monaco>;
   function config(params: {
     paths?: {
       vs?: string,
@@ -303,7 +309,8 @@ declare namespace loader {
     'vs/nls'?: {
       availableLanguages?: object,
     },
-  }): void
+  }): void;
+  function __getMonacoInstance(): Monaco | null;
 }
 
 export { loader };
