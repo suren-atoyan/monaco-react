@@ -5,7 +5,7 @@ import loader from '@monaco-editor/loader';
 import MonacoContainer from '../MonacoContainer';
 import useMount from '../hooks/useMount';
 import useUpdate from '../hooks/useUpdate';
-import { noop } from '../utils';
+import { noop, getOrCreateModel } from '../utils';
 
 function DiffEditor ({
   original,
@@ -87,19 +87,19 @@ function DiffEditor ({
 
   const setModels = useCallback(() => {
     beforeMountRef.current(monacoRef.current);
-    const originalModel = monacoRef.current.editor
-      .createModel(
-        original,
-        originalLanguage || language,
-        originalModelPath && monacoRef.current.Uri.parse(originalModelPath),
-      );
+    const originalModel = getOrCreateModel(
+      monacoRef.current,
+      original,
+      originalLanguage || language,
+      originalModelPath,
+    );
 
-    const modifiedModel = monacoRef.current.editor
-      .createModel(
-        modified,
-        modifiedLanguage || language,
-        modifiedModelPath && monacoRef.current.Uri.parse(modifiedModelPath),
-      );
+    const modifiedModel = getOrCreateModel(
+      monacoRef.current,
+      modified,
+      modifiedLanguage || language,
+      modifiedModelPath,
+    );
 
     editorRef.current.setModel({ original: originalModel, modified: modifiedModel });
   }, [language, modified, modifiedLanguage, original, originalLanguage, originalModelPath, modifiedModelPath]);
