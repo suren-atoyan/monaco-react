@@ -248,7 +248,7 @@ function App() {
       <button onClick={showModifiedValue}>show modified value</button>
       <DiffEditor
         height="90vh"
-        defaultLanguage="javascript"
+        language="javascript"
         original="// the original code"
         modified="// the modified code"
         onMount={handleEditorDidMount}
