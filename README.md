@@ -611,7 +611,7 @@ It's important to mention that according to [monaco-editor](https://microsoft.gi
 As a usual `React` component, this one also works fine with an electron-react environment, without need to have a `webpack` configuration or other extra things. But there are several cases that developers usually face to and sometimes it can be confusing. Here they are:
 
 1) **You see loading screen stuck**
-Usually, it's because your environment doesn't allow you to load external sources. By default, it loads `monaco` sources from `CDN`. You can see the [default configuration](https://github.com/suren-atoyan/monaco-loader/blob/master/src/config/index.js). But sure you can change that behavior; the library is fully configurable. Read about it [here](https://github.com/suren-atoyan/monaco-react#config). So, if you want to download it from your local files, you can do it like this:
+Usually, it's because your environment doesn't allow you to load external sources. By default, it loads `monaco` sources from `CDN`. You can see the [default configuration](https://github.com/suren-atoyan/monaco-loader/blob/master/src/config/index.js). But sure you can change that behavior; the library is fully configurable. Read about it [here](https://github.com/suren-atoyan/monaco-react#loader-config). So, if you want to download it from your local files, you can do it like this:
 
 ```javascript
 import { loader } from "@monaco-editor/react";
