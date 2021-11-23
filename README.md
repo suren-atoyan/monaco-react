@@ -739,7 +739,7 @@ If you want to change something in the library, go to `monaco-react/src/...`, th
 | theme | enum: "light" \| "vs-dark" | "light" | The theme for the monaco. Available options "vs-dark" \| "light". Define new themes by `monaco.editor.defineTheme` |
 | line | number |  | The line to jump on it |
 | loading | React Node | "Loading..." | The loading screen before the editor will be mounted
-| options | object | {} | [IStandaloneEditorConstructionOptions](https://blutorange.github.io/primefaces-monaco/typedoc/interfaces/monaco.editor.istandaloneeditorconstructionoptions.html) |
+| options | object | {} | [IStandaloneEditorConstructionOptions](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.IStandaloneEditorConstructionOptions.html) |
 | overrideServices | object | {} | [IEditorOverrideServices ](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.IEditorOverrideServices.html) |
 | saveViewState | boolean | true | Indicator whether to save the models' view states between model changes or not |
 | keepCurrentModel | boolean | false | Indicator whether to dispose the current model when the Editor is unmounted or not |
