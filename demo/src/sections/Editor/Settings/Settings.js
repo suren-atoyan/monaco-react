@@ -52,10 +52,10 @@ const Settings = _ => {
 
   function handleApply() {
     const currentValue = getEditorValue();
-    let oprions;
+    let options;
     try {
-      oprions = JSON.parse(currentValue);
-      setOptions(oprions);
+      options = JSON.parse(currentValue);
+      setOptions(options);
     } catch {
       showNotification({
         message: config.messages.invalidOptions,
