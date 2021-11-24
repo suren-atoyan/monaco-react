@@ -768,7 +768,7 @@ If you want to change something in the library, go to `monaco-react/src/...`, th
 | theme | enum: "light" \| "vs-dark" | "light" | The theme for the monaco. Available options "vs-dark" \| "light". Define new themes by `monaco.editor.defineTheme` |
 | line | number |  | The line to jump on it |
 | loading | React Node | "Loading..." | The loading screen before the editor will be mounted
-| options | object | {} | [IDiffEditorConstructionOptions](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.idiffeditorconstructionoptions.html) |
+| options | object | {} | [IDiffEditorConstructionOptions](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.IDiffEditorConstructionOptions.html) |
 | width | union: number \| string | "100%" | Width of the editor wrapper |
 | height | union: number \| string | "100%" | Height of the editor wrapper |
 | className | string || Class name for the editor container |
