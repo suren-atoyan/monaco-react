@@ -35,6 +35,7 @@ The [monaco-editor](https://microsoft.github.io/monaco-editor/) is a well-known 
   * [`monaco instance`](#monaco-instance)
   * [`useMonaco`](#usemonaco)
   * [`loader/config`](#loader-config)
+  * [`offline usage`](#offline-usage)
   * [Multi-model editor](#multi-model-editor)
   * [`onValidate`](#onvalidate)
   * [Notes](#notes)
@@ -452,6 +453,52 @@ loader.config({
 [codesandbox](https://codesandbox.io/s/loader-ry1bb?file=/src/App.js)
 
 **NOTE**: your passed object will be deeply merged with the [default one](https://github.com/suren-atoyan/monaco-loader/blob/master/src/config/index.js)
+
+
+#### `offline-usage`
+
+By default, the monaco editor will be loaded from a CDN, so it will not work offline.  It can be configured to load from local sources, using the loader described above.
+
+In order for the editor to be loaded locally, the following two conditions must be met:
+
+1. The monaco editor sources must be served via localhost.  The sources can be found in the [monnaco node module](https://www.npmjs.com/package/monaco-editor) in the directory `/min/vs`.
+
+2. The loader config must be set with the route to the local directory as the value of `paths.vs`.
+
+So one way to achieve this is to simply copy the monaco sources into the `./public` directory of your react project.
+
+From the root directory of your react project do the following:
+
+Download the node package for monaco-react:
+
+    yarn add monaco-editor # (npm install monaco-editor)
+
+Move the relevant sources into `./public`:
+
+    cp -R node_modules/monaco-editor/min/vs/ ./public/vs
+
+This works because everything in `./public` is served as static web content.
+
+To check whether this has been done correctly, you can `curl` the sources to make sure they're being served in the way which will be expected by the loader:
+
+    yarn start
+    curl localhost:3000/vs/loader.js
+
+When running this command with your server running, you should see the contents of `./public/vs/loader.js`, which will be minified javascript, dumped to the console.
+
+Once you've confirmed that monaco is being loaded correctly, you can set your loader config to load from the local route instead of the CDN.
+
+This can be achieved by putting this code at the top level of the file where you are using the editor:
+
+    import { loader } from "@monaco-editor/react";
+
+    loader.config({
+        paths: {
+            vs:  '/vs'
+        },
+    });
+
+And that's it, after following these steps you should be able to use monaco offline.
 
 #### Multi-model editor
 
