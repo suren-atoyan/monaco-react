@@ -28,7 +28,7 @@ const config = {
   urls: {
     octocatIcon: '/icons/octocat.png',
     themeModeIcon: '/icons/theme-mode.png',
-    IEditorOptions: 'https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditoroptions.html#acceptsuggestiononcommitcharacter',
+    IEditorOptions: 'https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.IEditorOptions.html#acceptSuggestionOnCommitCharacter',
   },
 
   defaultThemes: ['vs-dark', 'light'],
