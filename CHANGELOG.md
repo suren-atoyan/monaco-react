@@ -1,5 +1,11 @@
 ### Versions
 
+## 4.4.0
+###### *Mar 28, 2022*
+
+- loader: update `@monaco-editor/loader` version (1.3.0); using `monaco` from `node_modules` is supported
+- playground: update playground packages
+
 ## 4.3.1
 ###### *Oct 3, 2021*
 
