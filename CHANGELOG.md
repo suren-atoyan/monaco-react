@@ -1,5 +1,10 @@
 ### Versions
 
+## 4.4.1
+###### *Mar 29, 2022*
+
+- types: add missing type `monaco` in `loader.config`
+
 ## 4.4.0
 ###### *Mar 28, 2022*
 
