@@ -309,6 +309,7 @@ declare namespace loader {
     'vs/nls'?: {
       availableLanguages?: object,
     },
+    monaco?: Monaco,
   }): void;
   function __getMonacoInstance(): Monaco | null;
 }
