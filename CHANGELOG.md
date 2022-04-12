@@ -1,5 +1,10 @@
 ### Versions
 
+## 4.4.2
+###### *Apr 12, 2022*
+
+- package: support react/react-dom v18 as a peer dependency
+
 ## 4.4.1
 ###### *Mar 29, 2022*
 
