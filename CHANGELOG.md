@@ -1,5 +1,10 @@
 ### Versions
 
+## 4.4.4
+###### *Apr 23, 2022*
+
+- package: fix npm prepublish step
+
 ## 4.4.3
 ###### *Apr 23, 2022*
 
