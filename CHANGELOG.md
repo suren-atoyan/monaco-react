@@ -1,5 +1,10 @@
 ### Versions
 
+## 4.4.3
+###### *Apr 23, 2022*
+
+- loader: update `@monaco-editor/loader` version (1.3.1)
+
 ## 4.4.2
 ###### *Apr 12, 2022*
 
