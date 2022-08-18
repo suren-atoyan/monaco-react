@@ -145,7 +145,7 @@ function Editor({
 
   useEffect(() => {
     if (isEditorReady) {
-      onMountRef.current(
+      return onMountRef.current(
         editorRef.current,
         monacoRef.current,
       );
