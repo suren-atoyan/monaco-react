@@ -160,15 +160,12 @@ function Editor({
   // to avoid unnecessary updates (attach - dispose listener) in subscription
   valueRef.current = value;
 
+  // onChange
   useEffect(() => {
     if (isEditorReady && onChange) {
       subscriptionRef.current?.dispose();
       subscriptionRef.current = editorRef.current?.onDidChangeModelContent(event => {
-        const editorValue = editorRef.current.getValue();
-
-        if (valueRef.current !== editorValue) {
-          onChange(editorValue, event);
-        }
+        onChange(editorRef.current.getValue(), event);
       });
     }
   }, [isEditorReady, onChange]);
