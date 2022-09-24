@@ -1,5 +1,12 @@
 ### Versions
 
+## 4.4.6
+###### *Sep 24, 2022*
+
+- fix onChange: unconditionally call onChange inside onDidChangeModelContent
+- add preventCreation flag
+- update lock files
+
 ## 4.4.5
 ###### *May 11, 2022*
 
