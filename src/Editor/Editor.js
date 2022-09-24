@@ -46,6 +46,7 @@ function Editor({
   const subscriptionRef = useRef(null);
   const valueRef = useRef(value);
   const previousPath = usePrevious(path);
+  const preventCreation = useRef(false);
 
   useMount(() => {
     const cancelable = loader.init();
@@ -109,27 +110,30 @@ function Editor({
   }, [theme], isEditorReady);
 
   const createEditor = useCallback(() => {
-    beforeMountRef.current(monacoRef.current);
-    const autoCreatedModelPath = path || defaultPath;
+    if (!preventCreation.current) {
+      beforeMountRef.current(monacoRef.current);
+      const autoCreatedModelPath = path || defaultPath;
 
-    const defaultModel = getOrCreateModel(
-      monacoRef.current,
-      value || defaultValue,
-      defaultLanguage || language,
-      autoCreatedModelPath,
-    );
+      const defaultModel = getOrCreateModel(
+        monacoRef.current,
+        value || defaultValue,
+        defaultLanguage || language,
+        autoCreatedModelPath,
+      );
 
-    editorRef.current = monacoRef.current.editor.create(containerRef.current, {
-      model: defaultModel,
-      automaticLayout: true,
-      ...options,
-    }, overrideServices);
+      editorRef.current = monacoRef.current.editor.create(containerRef.current, {
+        model: defaultModel,
+        automaticLayout: true,
+        ...options,
+      }, overrideServices);
 
-    saveViewState && editorRef.current.restoreViewState(viewStates.get(autoCreatedModelPath));
+      saveViewState && editorRef.current.restoreViewState(viewStates.get(autoCreatedModelPath));
 
-    monacoRef.current.editor.setTheme(theme);
+      monacoRef.current.editor.setTheme(theme);
 
-    setIsEditorReady(true);
+      setIsEditorReady(true);
+      preventCreation.current = true;
+    }
   }, [
     defaultValue,
     defaultLanguage,
