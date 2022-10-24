@@ -35,6 +35,7 @@ function Editor({
   onMount,
   onChange,
   onValidate,
+  onEditorModuleLoaded,
 }) {
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [isMonacoMounting, setIsMonacoMounting] = useState(true);
@@ -43,6 +44,7 @@ function Editor({
   const containerRef = useRef(null);
   const onMountRef = useRef(onMount);
   const beforeMountRef = useRef(beforeMount);
+  const onEditorModuleLoadedRef = useRef(onEditorModuleLoaded);
   const subscriptionRef = useRef(null);
   const valueRef = useRef(value);
   const previousPath = usePrevious(path);
@@ -52,7 +54,11 @@ function Editor({
     const cancelable = loader.init();
 
     cancelable
-      .then(monaco => ((monacoRef.current = monaco) && setIsMonacoMounting(false)))
+      .then(monaco => {
+        monacoRef.current = monaco;
+        onEditorModuleLoadedRef.current(monaco);
+        setIsMonacoMounting(false);
+      })
       .catch(error => error?.type !== 'cancelation' &&
         console.error('Monaco initialization: error:', error));
 
@@ -245,6 +251,7 @@ Editor.propTypes = {
   onMount: PropTypes.func,
   onChange: PropTypes.func,
   onValidate: PropTypes.func,
+  onEditorModuleLoaded: PropTypes.func,
 };
 
 Editor.defaultProps = {
@@ -262,6 +269,7 @@ Editor.defaultProps = {
   beforeMount: noop,
   onMount: noop,
   onValidate: noop,
+  onEditorModuleLoaded: noop,
 };
 
 export default Editor;

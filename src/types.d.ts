@@ -30,6 +30,10 @@ export type OnValidate = (
   markers: monaco.editor.IMarker[],
 ) => void;
 
+export type OnEditorModuleLoaded =  (
+  monaco: Monaco,
+) => void;
+
 export interface EditorProps {
   /**
    * Default value of the current model
@@ -157,6 +161,14 @@ export interface EditorProps {
    * Defaults to "noop"
    */
   onValidate?: OnValidate;
+
+    /**
+   * Signature: function(monaco: Monaco) => void
+   * An event is emitted immediately after editor module (monaco) is loaded
+   * It gets the monaco instance as a first argument
+   * Defaults to "noop"
+   */
+  onEditorModuleLoaded?: OnEditorModuleLoaded;
 }
 
 declare const Editor: React.FC<EditorProps>;
@@ -171,6 +183,10 @@ export type DiffOnMount = (
 ) => void;
 
 export type DiffBeforeMount = (
+  monaco: Monaco,
+) => void;
+
+export type DiffOnEditorModuleLoaded =  (
   monaco: Monaco,
 ) => void;
 
@@ -282,6 +298,14 @@ export interface DiffEditorProps {
    * Defaults to "noop"
    */
   onMount?: DiffOnMount;
+
+  /**
+   * Signature: function(monaco: Monaco) => void
+   * An event is emitted immediately after editor module (monaco) is loaded
+   * It gets the monaco instance as a first argument
+   * Defaults to "noop"
+   */
+  onEditorModuleLoaded?: DiffOnEditorModuleLoaded;
 }
 
 declare const DiffEditor: React.FC<DiffEditorProps>;

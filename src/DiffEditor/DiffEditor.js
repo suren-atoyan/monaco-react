@@ -29,6 +29,7 @@ function DiffEditor ({
   /* === */
   beforeMount,
   onMount,
+  onEditorModuleLoaded,
 }) {
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [isMonacoMounting, setIsMonacoMounting] = useState(true);
@@ -37,12 +38,18 @@ function DiffEditor ({
   const containerRef = useRef(null);
   const onMountRef = useRef(onMount);
   const beforeMountRef = useRef(beforeMount);
+  const onEditorModuleLoadedRef = useRef(onEditorModuleLoaded);
+
 
   useMount(() => {
     const cancelable = loader.init();
 
     cancelable
-      .then(monaco => ((monacoRef.current = monaco) && setIsMonacoMounting(false)))
+      .then(monaco => {
+        monacoRef.current = monaco;
+        onEditorModuleLoadedRef.current(monaco);
+        setIsMonacoMounting(false);
+      })
       .catch(error => error?.type !== 'cancelation' &&
         console.error('Monaco initialization: error:', error));
 
@@ -179,6 +186,7 @@ DiffEditor.propTypes = {
   /* === */
   beforeMount: PropTypes.func,
   onMount: PropTypes.func,
+  onEditorModuleLoaded: PropTypes.func,
 };
 
 DiffEditor.defaultProps = {
@@ -194,6 +202,7 @@ DiffEditor.defaultProps = {
   /* === */
   beforeMount: noop,
   onMount: noop,
+  onEditorModuleLoaded: noop,
 };
 
 export default DiffEditor;
