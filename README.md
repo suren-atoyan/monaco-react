@@ -808,6 +808,7 @@ If you want to change something in the library, go to `monaco-react/src/...`, th
 | onMount | func | noop | **Signature: function(editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => void** <br/> An event is emitted when the editor is mounted. It gets the `editor` instance as a first argument and the `monaco` instance as a second|
 | onChange | func || **Signature: function(value: string \| undefined, ev: monaco.editor.IModelContentChangedEvent) => void** <br/> An event is emitted when the content of the current model is changed|
 | onValidate | func | noop | **Signature: function(markers: monaco.editor.IMarker[]) => void** <br/> An event is emitted when the content of the current model is changed and the current model markers are ready|
+| onEditorModuleLoaded | func | noop | **Signature: function(monaco: Monaco) => void** <br/> An event is emitted immediately after the editor module (monaco) is loaded. It gets the `monaco` instance as a first argument|
 
 #### `DiffEditor`
 
@@ -832,6 +833,7 @@ If you want to change something in the library, go to `monaco-react/src/...`, th
 | wrapperProps | object | {} | Props applied to the wrapper element |
 | beforeMount | func | noop | **Signature: function(monaco: Monaco) => void** <br/> An event is emitted before the editor mounted. It gets the `monaco` instance as a first argument|
 | onMount | func | noop | **Signature: function(editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => void** <br/> An event is emitted when the editor is mounted. It gets the `editor` instance as a first argument and the `monaco` instance as a second|
+| onEditorModuleLoaded | func | noop | **Signature: function(monaco: Monaco) => void** <br/> An event is emitted immediately after the editor module (monaco) is loaded. It gets the `monaco` instance as a first argument|
 
 ## License
 
