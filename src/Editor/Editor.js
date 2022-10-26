@@ -6,7 +6,7 @@ import MonacoContainer from '../MonacoContainer';
 import useMount from '../hooks/useMount';
 import useUpdate from '../hooks/useUpdate';
 import usePrevious from '../hooks/usePrevious';
-import { noop, getOrCreateModel, isUndefined } from '../utils';
+import { noop, getOrCreateModel, isUndefined, disposeModel } from '../utils';
 
 const viewStates = new Map();
 
@@ -69,6 +69,9 @@ function Editor({
 
     if (model !== editorRef.current.getModel()) {
       saveViewState && viewStates.set(previousPath, editorRef.current.saveViewState());
+      if (!keepCurrentModel) {
+        disposeModel(editorRef.current.getModel())
+      }
       editorRef.current.setModel(model);
       saveViewState && editorRef.current.restoreViewState(viewStates.get(path));
     }
@@ -201,7 +204,7 @@ function Editor({
     if (keepCurrentModel) {
       saveViewState && viewStates.set(path, editorRef.current.saveViewState());
     } else {
-      editorRef.current.getModel()?.dispose();
+      disposeModel(editorRef.current.getModel());
     }
 
     editorRef.current.dispose();
