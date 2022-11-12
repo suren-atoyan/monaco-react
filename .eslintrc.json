@@ -1,7 +1,0 @@
-{
-  "extends": ["eslint:recommended", "react-app"],
-  "rules": {
-    "no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }],
-    "no-unused-expressions": 0
-  }
-}
