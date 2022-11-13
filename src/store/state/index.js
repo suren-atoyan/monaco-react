@@ -10,7 +10,7 @@ const initialState = {
   notifications: config.notifications.defaultState,
 
   editor: {
-    selectedLanguageId: 19, // 19 is the id of javasctipt
+    selectedLanguageId: 6,
     options: {
       acceptSuggestionOnCommitCharacter: true,
       acceptSuggestionOnEnter: "on",

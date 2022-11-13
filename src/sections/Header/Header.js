@@ -1,5 +1,7 @@
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
+import MenuItem from "@material-ui/core/MenuItem";
+import TextField from "@material-ui/core/TextField";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -17,12 +19,24 @@ import useStyles from "./useStyles";
 const Header = (_) => {
   const classes = useStyles();
   const {
-    state: { themeMode },
-    actions: { setThemeMode },
+    state: {
+      themeMode,
+      monacoTheme,
+      editor: { selectedLanguageId },
+    },
+    actions: {
+      setThemeMode,
+      editor: { setSelectedLanguageId, setMonacoTheme },
+    },
   } = useStore();
 
   function handleThemeSwitch(ev) {
     setThemeMode(themeMode === "light" ? "dark" : "light");
+    setMonacoTheme(themeMode === "light" ? "vs-dark" : "light");
+  }
+
+  function handleLanguageChange(ev) {
+    setSelectedLanguageId(ev.target.value);
   }
 
   return (
@@ -35,6 +49,20 @@ const Header = (_) => {
               React IDE
             </Typography>
           )}
+          <TextField
+            select
+            variant="filled"
+            value={selectedLanguageId}
+            onChange={handleLanguageChange}
+            className="text-width"
+            label="Language"
+          >
+            {config.supportedLanguages.map((language) => (
+              <MenuItem key={language.id} value={language.id}>
+                {language.name}
+              </MenuItem>
+            ))}
+          </TextField>
           <Button onClick={handleThemeSwitch}>
             <span
               className={classNames(classes.stars, {

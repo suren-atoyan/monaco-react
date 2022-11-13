@@ -1,6 +1,6 @@
 {
-  "short_name": "Monaco-React",
-  "name": "Monaco Editor React",
+  "short_name": "React-IDE",
+  "name": "React IDE",
   "icons": [
     {
       "src": "favicon.ico",

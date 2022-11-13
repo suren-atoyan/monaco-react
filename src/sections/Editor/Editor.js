@@ -1,7 +1,7 @@
 import React from 'react';
 
 import MonacoEditor from '@monaco-editor/react';
-import Settings from './Settings';
+import IO from './IO';
 
 import { useStore } from 'store';
 import { isMobile } from 'utils';
@@ -39,7 +39,7 @@ const Editor = _ => {
         />
       )
     }
-    <Settings />
+    <IO />
   </div>;
 }
 
