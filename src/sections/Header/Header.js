@@ -1,67 +1,55 @@
-import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import classNames from 'classnames';
+import React from "react";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import classNames from "classnames";
 
-import Notifications from 'notifications';
+import Notifications from "notifications";
 
-import { useStore } from 'store';
-import { isMobile } from 'utils';
+import { useStore } from "store";
+import { isMobile } from "utils";
 
-import config from 'config';
+import config from "config";
 
-import useStyles from './useStyles';
+import useStyles from "./useStyles";
 
-const Header = _ => {
+const Header = (_) => {
   const classes = useStyles();
   const {
-    state: { themeMode, editorMode },
-    actions: { setThemeMode, setEditorMode },
+    state: { themeMode },
+    actions: { setThemeMode },
   } = useStore();
 
   function handleThemeSwitch(ev) {
-    setThemeMode(themeMode === 'light' ? 'dark' : 'light');
-  }
-
-  function handleEditorModeSwitch() {
-    setEditorMode(editorMode === 'editor' ? 'diffEditor' : 'editor');
+    setThemeMode(themeMode === "light" ? "dark" : "light");
   }
 
   return (
     <>
       <AppBar color="default">
         <Toolbar>
-          <Typography className={classes.logo}>
-            {"<MR />"}
-          </Typography>
-          {
-            !isMobile && (
-              <Typography variant="h6" className={classes.title}>
-                Monaco Editor React
-              </Typography>
-            )
-          }
-          <Button
-            onClick={handleEditorModeSwitch}
-            variant={editorMode === 'editor' ? 'outlined' : 'text'}
-            disabled={editorMode === 'editor'}
-          >
-            Editor
-          </Button>
-          <Button
-            onClick={handleEditorModeSwitch}
-            variant={editorMode === 'diffEditor' ? 'outlined' : 'text'}
-            disabled={editorMode === 'diffEditor'}
-          >
-            Diff Editor
-          </Button>
+          <Typography className={classes.logo}>{"<MR />"}</Typography>
+          {!isMobile && (
+            <Typography variant="h6" className={classes.title}>
+              React IDE
+            </Typography>
+          )}
           <Button onClick={handleThemeSwitch}>
-            <span className={classNames(classes.stars, { [classes.activate]: themeMode === 'dark' })} />
-            <span className={classNames(classes.stars, { [classes.activate]: themeMode === 'dark' })} />
+            <span
+              className={classNames(classes.stars, {
+                [classes.activate]: themeMode === "dark",
+              })}
+            />
+            <span
+              className={classNames(classes.stars, {
+                [classes.activate]: themeMode === "dark",
+              })}
+            />
             <img
-              className={classNames(classes.themeSwitcher, { [classes.rotate]: themeMode === 'dark' })}
+              className={classNames(classes.themeSwitcher, {
+                [classes.rotate]: themeMode === "dark",
+              })}
               width="40"
               src={config.urls.themeModeIcon}
               alt="theme mode icon"
@@ -76,6 +64,6 @@ const Header = _ => {
       <Notifications />
     </>
   );
-}
+};
 
 export default Header;

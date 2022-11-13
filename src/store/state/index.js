@@ -1,6 +1,6 @@
-import config from 'config';
+import config from "config";
 
-const initalTheme = localStorage.getItem('themeMode') || 'dark';
+const initalTheme = localStorage.getItem("themeMode") || "dark";
 
 const initialState = {
   themeMode: initalTheme,
@@ -13,22 +13,22 @@ const initialState = {
     selectedLanguageId: 19, // 19 is the id of javasctipt
     options: {
       acceptSuggestionOnCommitCharacter: true,
-      acceptSuggestionOnEnter: 'on',
-      accessibilitySupport: 'auto',
+      acceptSuggestionOnEnter: "on",
+      accessibilitySupport: "auto",
       autoIndent: false,
       automaticLayout: true,
       codeLens: true,
       colorDecorators: true,
       contextmenu: true,
-      cursorBlinking: 'blink',
+      cursorBlinking: "blink",
       cursorSmoothCaretAnimation: false,
-      cursorStyle: 'line',
+      cursorStyle: "line",
       disableLayerHinting: false,
       disableMonospaceOptimizations: false,
       dragAndDrop: false,
       fixedOverflowWidgets: false,
       folding: true,
-      foldingStrategy: 'auto',
+      foldingStrategy: "auto",
       fontLigatures: false,
       formatOnPaste: false,
       formatOnType: false,
@@ -37,7 +37,7 @@ const initialState = {
       links: true,
       mouseWheelZoom: false,
       multiCursorMergeOverlapping: true,
-      multiCursorModifier: 'alt',
+      multiCursorModifier: "alt",
       overviewRulerBorder: true,
       overviewRulerLanes: 2,
       quickSuggestions: true,
@@ -46,8 +46,8 @@ const initialState = {
       renderControlCharacters: false,
       renderFinalNewline: true,
       renderIndentGuides: true,
-      renderLineHighlight: 'all',
-      renderWhitespace: 'none',
+      renderLineHighlight: "all",
+      renderWhitespace: "none",
       revealHorizontalRightPadding: 30,
       roundedSelection: true,
       rulers: [],
@@ -56,29 +56,23 @@ const initialState = {
       selectOnLineNumbers: true,
       selectionClipboard: true,
       selectionHighlight: true,
-      showFoldingControls: 'mouseover',
+      showFoldingControls: "mouseover",
       smoothScrolling: false,
       suggestOnTriggerCharacters: true,
       wordBasedSuggestions: true,
       // eslint-disable-next-line
       wordSeparators: `~!@#$%^&*()-=+[{]}\|;:'",.<>/?`,
-      wordWrap: 'off',
-      wordWrapBreakAfterCharacters: '\t})]?|&,;',
-      wordWrapBreakBeforeCharacters: '{([+',
-      wordWrapBreakObtrusiveCharacters: '.',
+      wordWrap: "off",
+      wordWrapBreakAfterCharacters: "\t})]?|&,;",
+      wordWrapBreakBeforeCharacters: "{([+",
+      wordWrapBreakObtrusiveCharacters: ".",
       wordWrapColumn: 80,
       wordWrapMinified: true,
-      wrappingIndent: 'none',
+      wrappingIndent: "none",
     },
   },
 
-  editorMode: 'editor',
-
-  monacoTheme: initalTheme === 'dark' ? 'vs-dark' : initalTheme,
-
-  diffEditor: {
-    selectedLanguageId: 24, // 24 is the id of markdown
-  },
+  monacoTheme: initalTheme === "dark" ? "vs-dark" : initalTheme,
 };
 
 export { initialState };

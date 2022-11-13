@@ -4,16 +4,15 @@ const setIsEditorReady = ({ state }, isReady) => {
 
 const setThemeMode = ({ state }, themeMode) => {
   state.themeMode = themeMode;
-  localStorage.setItem('themeMode', themeMode); // Current solution is temporary
+  localStorage.setItem("themeMode", themeMode); // Current solution is temporary
   // TODO: Design proper solution
   // to sync state (or a field of state) with localStorage
 };
 
-const setEditorMode = ({ state }, editorMode) => {
-  state.editorMode = editorMode;
-};
-
-const showNotification = ({ state }, { message, variant = 'info', opt = {} }) => {
+const showNotification = (
+  { state },
+  { message, variant = "info", opt = {} }
+) => {
   state.notifications = {
     isActive: true,
     message,
@@ -26,12 +25,14 @@ const hideNotification = ({ state }) => {
   state.notifications.isActive = false;
 };
 
-const setSelectedLanguageId = type => ({ state }, id) => {
-  state[type].selectedLanguageId = id;
-};
+const setSelectedLanguageId =
+  (type) =>
+  ({ state }, id) => {
+    state[type].selectedLanguageId = id;
+  };
 
 const editor = {
-  setSelectedLanguageId: setSelectedLanguageId('editor'),
+  setSelectedLanguageId: setSelectedLanguageId("editor"),
   setOptions({ state }, options) {
     state.editor.options = options;
   },
@@ -40,15 +41,10 @@ const editor = {
   },
 };
 
-const diffEditor = {
-  setSelectedLanguageId: setSelectedLanguageId('diffEditor'),
-};
-
 export {
   hideNotification,
   setThemeMode,
-  setEditorMode,
   setIsEditorReady,
   showNotification,
-  editor, diffEditor,
+  editor,
 };
