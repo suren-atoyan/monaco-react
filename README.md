@@ -791,7 +791,7 @@ If you want to change something in the library, go to `monaco-react/src/...`, th
 | defaultLanguage | string || Default language of the current model |
 | defaultPath | string || Default path of the current model. Will be passed as the third argument to `.createModel` method - `monaco.editor.createModel(..., ..., monaco.Uri.parse(defaultPath))` |
 | value | string || Value of the current model |
-| language | enum: ... | | Language of the current model (all languages that are [supported](https://github.com/microsoft/monaco-languages) by monaco-editor) |
+| language | enum: ... | | Language of the current model (all languages that are [supported](https://github.com/microsoft/monaco-editor/tree/main/src/basic-languages) by monaco-editor) |
 | path | string || Path of the current model. Will be passed as the third argument to `.createModel` method - `monaco.editor.createModel(..., ..., monaco.Uri.parse(defaultPath))` |
 | theme | enum: "light" \| "vs-dark" | "light" | The theme for the monaco. Available options "vs-dark" \| "light". Define new themes by `monaco.editor.defineTheme` |
 | line | number |  | The line to jump on it |
