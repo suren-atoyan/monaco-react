@@ -331,7 +331,7 @@ function App() {
   function handleEditorDidMount(editor, monaco) {
     // here is another way to get monaco instance
     // you can also store it in `useRef` for further usage
-    monacoRef.current = editor; 
+    monacoRef.current = monaco; 
   }
 
   return (
