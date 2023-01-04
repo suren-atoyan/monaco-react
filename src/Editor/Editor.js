@@ -100,7 +100,7 @@ function Editor({
 
   useUpdate(() => {
     // reason for undefined check: https://github.com/suren-atoyan/monaco-react/pull/188
-    if(!isUndefined(line)) {
+    if (!isUndefined(line)) {
       editorRef.current.revealLine(line);
     }
   }, [line], isEditorReady);
@@ -124,6 +124,7 @@ function Editor({
       editorRef.current = monacoRef.current.editor.create(containerRef.current, {
         model: defaultModel,
         automaticLayout: true,
+        theme,
         ...options,
       }, overrideServices);
 
@@ -188,7 +189,7 @@ function Editor({
           }
         }
       });
-   
+
       return () => {
         changeMarkersListener?.dispose();
       };
