@@ -1,5 +1,10 @@
 ### Versions
 
+## 4.4.7
+###### *TBD*
+
+- add preventCreation flag to diff editor
+
 ## 4.4.6
 ###### *Sep 24, 2022*
 
