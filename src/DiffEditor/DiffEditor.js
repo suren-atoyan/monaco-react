@@ -37,6 +37,7 @@ function DiffEditor ({
   const containerRef = useRef(null);
   const onMountRef = useRef(onMount);
   const beforeMountRef = useRef(beforeMount);
+  const preventCreation = useRef(false);
 
   useMount(() => {
     const cancelable = loader.init();
@@ -105,16 +106,19 @@ function DiffEditor ({
   }, [language, modified, modifiedLanguage, original, originalLanguage, originalModelPath, modifiedModelPath]);
 
   const createEditor = useCallback(() => {
-    editorRef.current = monacoRef.current.editor.createDiffEditor(containerRef.current, {
-      automaticLayout: true,
-      ...options,
-    });
+    if (!preventCreation.current) {
+      editorRef.current = monacoRef.current.editor.createDiffEditor(containerRef.current, {
+        automaticLayout: true,
+        ...options,
+      });
 
-    setModels();
+      setModels();
 
-    monacoRef.current.editor.setTheme(theme);
+      monacoRef.current.editor.setTheme(theme);
 
-    setIsEditorReady(true);
+      setIsEditorReady(true);
+      preventCreation.current = true;
+    }
   }, [options, theme, setModels]);
 
   useEffect(() => {
