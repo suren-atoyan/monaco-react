@@ -1,5 +1,7 @@
-import { memo } from 'react';
+import { memo } from "react";
 
-import Editor from './Editor';
+import Editor from "./Editor";
+
+export * from "./types";
 
 export default memo(Editor);

@@ -1,4 +1,4 @@
-import { Monaco } from "../types";
+import type { Monaco } from "..";
 
 function noop() {
   /** no-op */

@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import loader from "@monaco-editor/loader";
-import { type editor } from "monaco-editor";
 
 import useMount from "../hooks/useMount";
 import useUpdate from "../hooks/useUpdate";
 import usePrevious from "../hooks/usePrevious";
 import { noop, getOrCreateModel } from "../utils";
-import { EditorProps, Monaco } from "../types";
+import type { CodeEditor, EditorProps } from "./types";
+import type { Monaco } from "..";
 import MonacoContainer from "../MonacoContainer";
 
 const viewStates = new Map();
@@ -40,7 +40,7 @@ function Editor({
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [isMonacoMounting, setIsMonacoMounting] = useState(true);
   const monacoRef = useRef<Monaco | null>(null);
-  const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
+  const editorRef = useRef<CodeEditor | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const onMountRef = useRef(onMount);
   const beforeMountRef = useRef(beforeMount);

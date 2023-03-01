@@ -1,7 +1,21 @@
-import loader from '@monaco-editor/loader';
-import DiffEditor from './DiffEditor';
+import loader from "@monaco-editor/loader";
+export { loader };
 
-import useMonaco from './hooks/useMonaco';
+import DiffEditor from "./DiffEditor";
+export * from "./DiffEditor/types";
+export { DiffEditor };
 
-export { DiffEditor, loader, useMonaco };
-export { default } from './Editor';
+import useMonaco from "./hooks/useMonaco";
+export { useMonaco };
+
+import Editor from "./Editor";
+export * from "./Editor/types";
+export { Editor };
+export default Editor;
+
+// Monaco
+import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
+export type Monaco = typeof monaco;
+
+// Default themes
+export type Theme = "vs-dark" | "light";
