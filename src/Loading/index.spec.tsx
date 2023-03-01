@@ -9,13 +9,16 @@ describe("<Loading />", () => {
     expect(component).toMatchSnapshot();
   });
 
-  it.skip("should check is it wrapped with <div />", () => {
+  it("should check is it wrapped with <div />", () => {
     const component = render(<Loading />);
 
-    // eslint-disable-next-line no-unused-vars
     const { container } = component;
 
-    // expect(container.firstChild.tagName).toBe("DIV");
+    expect(container.firstChild).toMatchInlineSnapshot(`
+    <div
+      style="display: flex; height: 100%; width: 100%; justify-content: center; align-items: center;"
+    />
+    `);
   });
 
   it("should check content", () => {
