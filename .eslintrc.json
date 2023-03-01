@@ -1,7 +1,9 @@
 {
-  "extends": ["eslint:recommended", "react-app"],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
   "rules": {
-    "no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }],
-    "no-unused-expressions": 0
-  }
+    "@typescript-eslint/no-non-null-assertion": "off"
+  },
+  "root": true
 }
