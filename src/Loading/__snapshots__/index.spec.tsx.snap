@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`<Loading /> > should check render with snapshot 1`] = `
-{
+Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
