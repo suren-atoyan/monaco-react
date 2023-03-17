@@ -2,19 +2,10 @@ import React from "react";
 
 import styles from "./styles";
 import Loading from "../Loading";
+import { type ContainerProps } from "./types";
 
 // ** forwardref render functions do not support proptypes or defaultprops **
 // one of the reasons why we use a separate prop for passing ref instead of using forwardref
-
-type ContainerProps = {
-  width: number | string;
-  height: number | string;
-  isEditorReady: boolean;
-  loading: React.ReactNode | string;
-  _ref: React.RefObject<HTMLDivElement>;
-  className?: string;
-  wrapperProps?: object;
-};
 
 function MonacoContainer({
   width,

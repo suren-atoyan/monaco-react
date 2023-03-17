@@ -1,5 +1,5 @@
-import type { editor } from "monaco-editor";
-import type { Monaco, Theme } from "..";
+import  { type editor } from "monaco-editor";
+import  { type Monaco, type Theme } from "..";
 
 export type CodeEditor = editor.IStandaloneCodeEditor;
 

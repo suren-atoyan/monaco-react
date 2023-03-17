@@ -1,9 +1,9 @@
 import { type editor } from "monaco-editor";
-import { Monaco, Theme } from "..";
+import { type Monaco, type Theme } from "..";
 
-export type DiffEditor = editor.IStandaloneDiffEditor;
+export type MonacoDiffEditor = editor.IStandaloneDiffEditor;
 
-export type DiffOnMount = (editor: DiffEditor, monaco: Monaco) => void;
+export type DiffOnMount = (editor: MonacoDiffEditor, monaco: Monaco) => void;
 
 export type DiffBeforeMount = (monaco: Monaco) => void;
 

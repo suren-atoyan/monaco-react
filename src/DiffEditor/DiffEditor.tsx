@@ -5,8 +5,8 @@ import MonacoContainer from "../MonacoContainer";
 import useMount from "../hooks/useMount";
 import useUpdate from "../hooks/useUpdate";
 import { noop, getOrCreateModel } from "../utils";
-import type { DiffEditorProps, DiffEditor } from "./types";
-import type { Monaco } from "..";
+import { type DiffEditorProps, type MonacoDiffEditor } from "./types";
+import { type Monaco } from "..";
 
 function DiffEditor({
   original,
@@ -33,7 +33,7 @@ function DiffEditor({
 }: DiffEditorProps) {
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [isMonacoMounting, setIsMonacoMounting] = useState(true);
-  const editorRef = useRef<DiffEditor | null>(null);
+  const editorRef = useRef<MonacoDiffEditor | null>(null);
   const monacoRef = useRef<Monaco | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const onMountRef = useRef(onMount);

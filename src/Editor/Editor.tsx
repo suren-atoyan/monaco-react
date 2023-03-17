@@ -5,8 +5,8 @@ import useMount from "../hooks/useMount";
 import useUpdate from "../hooks/useUpdate";
 import usePrevious from "../hooks/usePrevious";
 import { noop, getOrCreateModel } from "../utils";
-import type { CodeEditor, EditorProps } from "./types";
-import type { Monaco } from "..";
+import  { type CodeEditor, type EditorProps } from "./types";
+import  { type Monaco } from "..";
 import MonacoContainer from "../MonacoContainer";
 
 const viewStates = new Map();
