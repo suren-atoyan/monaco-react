@@ -1,6 +1,6 @@
 import React from "react";
 
-import Editor from "../../dist";
+import Editor from "../..";
 
 function App() {
   return (
