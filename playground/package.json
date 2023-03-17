@@ -2,7 +2,7 @@
   "name": "playground",
   "version": "1.0.0",
   "scripts": {
-    "lib-build-dev": "cd .. && npm run build-dev",
+    "lib-build-dev": "cd .. && npm run dev",
     "dev": "concurrently \"npm run lib-build-dev\" \"vite\"",
     "build": "vite build"
   },

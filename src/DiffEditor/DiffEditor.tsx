@@ -14,7 +14,6 @@ function DiffEditor({
   language,
   originalLanguage,
   modifiedLanguage,
-  /* === */
   originalModelPath,
   modifiedModelPath,
   keepCurrentOriginalModel = false,
@@ -22,12 +21,10 @@ function DiffEditor({
   theme = "light",
   loading = "Loading...",
   options = {},
-  /* === */
   height = "100%",
   width = "100%",
   className,
   wrapperProps = {},
-  /* === */
   beforeMount = noop,
   onMount = noop,
 }: DiffEditorProps) {
