@@ -8,7 +8,7 @@ export type DiffOnMount = (editor: MonacoDiffEditor, monaco: Monaco) => void;
 
 export type DiffBeforeMount = (monaco: Monaco) => void;
 
-export interface DiffEditorProps {
+export type DiffEditorProps = {
   /**
    * The original source (left one) value
    */
@@ -118,4 +118,4 @@ export interface DiffEditorProps {
    * Defaults to "noop"
    */
   onMount?: DiffOnMount;
-}
+};

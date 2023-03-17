@@ -15,7 +15,7 @@ export type OnChange = (
 
 export type OnValidate = (markers: editor.IMarker[]) => void;
 
-export interface EditorProps {
+export type EditorProps = {
   /**
    * Default value of the current model
    */
@@ -142,4 +142,4 @@ export interface EditorProps {
    * Defaults to "noop"
    */
   onValidate?: OnValidate;
-}
+};
