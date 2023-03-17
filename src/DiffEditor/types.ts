@@ -1,4 +1,5 @@
 import { type editor } from "monaco-editor";
+import { type ReactNode } from "react";
 import { type Monaco, type Theme } from "..";
 
 export type MonacoDiffEditor = editor.IStandaloneDiffEditor;
@@ -73,7 +74,7 @@ export interface DiffEditorProps {
    * The loading screen before the editor will be mounted
    * @default "loading..."
    */
-  loading?: React.ReactNode;
+  loading?: ReactNode;
 
   /**
    * IDiffEditorConstructionOptions

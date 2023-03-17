@@ -1,5 +1,6 @@
-import  { type editor } from "monaco-editor";
-import  { type Monaco, type Theme } from "..";
+import { type editor } from "monaco-editor";
+import { type Monaco, type Theme } from "..";
+import { type ReactNode } from "react";
 
 export type CodeEditor = editor.IStandaloneCodeEditor;
 
@@ -66,7 +67,7 @@ export interface EditorProps {
    * The loading screen before the editor will be mounted
    * @default "Loading..."
    */
-  loading?: React.ReactNode;
+  loading?: ReactNode;
 
   /**
    * IStandaloneEditorConstructionOptions

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { type ReactNode } from "react";
 
 const loadingStyles = {
   display: "flex",
@@ -8,7 +8,7 @@ const loadingStyles = {
   alignItems: "center",
 };
 
-function Loading({ children }: { children?: React.ReactNode }) {
+function Loading({ children }: { children?: ReactNode }) {
   return <div style={loadingStyles}>{children}</div>;
 }
 

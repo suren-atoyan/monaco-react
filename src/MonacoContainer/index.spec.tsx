@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createRef } from "react";
 import MonacoContainer from ".";
 import { render } from "@testing-library/react";
 
@@ -8,7 +8,7 @@ describe("<MonacoContainer />", () => {
       <MonacoContainer
         width="100%"
         height="100vh"
-        _ref={React.createRef()}
+        _ref={createRef()}
         loading="loading..."
         isEditorReady={false}
       />
