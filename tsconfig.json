@@ -16,5 +16,6 @@
     "moduleResolution": "node",
     "jsx": "react",
     "esModuleInterop": true
-  }
+  },
+  "include": ["src", "tsup.config.ts", "setupTests.ts", "vitest.config.ts"]
 }
