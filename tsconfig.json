@@ -5,7 +5,7 @@
     "target": "es2020",
     "declaration": true,
     "declarationMap": true,
-    "outDir": "./lib/types",
+    "outDir": "./dist",
     "strict": true,
     "skipLibCheck": true,
     "noUnusedLocals": true,
