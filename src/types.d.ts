@@ -11,6 +11,8 @@ type Theme =
 // monaco
 export type Monaco = typeof monaco;
 
+export { monaco }
+
 // Editor
 export type OnMount = (
   editor: monaco.editor.IStandaloneCodeEditor,
