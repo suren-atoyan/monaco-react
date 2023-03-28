@@ -18,12 +18,11 @@ function MonacoContainer({
   wrapperProps,
 }) {
   return (
-    <section style={{ ...styles.wrapper, width, height }} {...wrapperProps}>
+    <section className={className} style={{ ...styles.wrapper, width, height }} {...wrapperProps}>
       {!isEditorReady && <Loading content={loading} />}
       <div
         ref={_ref}
         style={{ ...styles.fullWidth, ...(!isEditorReady && styles.hide) }}
-        className={className}
       />
     </section>
   );
