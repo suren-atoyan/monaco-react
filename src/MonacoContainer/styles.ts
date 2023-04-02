@@ -1,16 +1,16 @@
-import { type CSSProperties } from "react";
+import { type CSSProperties } from 'react';
 
 const styles: Record<string, CSSProperties> = {
   wrapper: {
-    display: "flex",
-    position: "relative",
-    textAlign: "initial",
+    display: 'flex',
+    position: 'relative',
+    textAlign: 'initial',
   },
   fullWidth: {
-    width: "100%",
+    width: '100%',
   },
   hide: {
-    display: "none",
+    display: 'none',
   },
 };
 

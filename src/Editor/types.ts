@@ -1,6 +1,6 @@
-import { type editor } from "monaco-editor";
-import { type Monaco, type Theme } from "..";
-import { type ReactNode } from "react";
+import { type editor } from 'monaco-editor';
+import { type Monaco, type Theme } from '..';
+import { type ReactNode } from 'react';
 
 export type CodeEditor = editor.IStandaloneCodeEditor;
 
@@ -8,10 +8,7 @@ export type OnMount = (editor: CodeEditor, monaco: Monaco) => void;
 
 export type BeforeMount = (monaco: Monaco) => void;
 
-export type OnChange = (
-  value: string | undefined,
-  ev: editor.IModelContentChangedEvent
-) => void;
+export type OnChange = (value: string | undefined, ev: editor.IModelContentChangedEvent) => void;
 
 export type OnValidate = (markers: editor.IMarker[]) => void;
 

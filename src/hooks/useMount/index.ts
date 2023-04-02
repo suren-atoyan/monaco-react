@@ -1,4 +1,4 @@
-import { useEffect, type EffectCallback } from "react";
+import { useEffect, type EffectCallback } from 'react';
 
 function useMount(effect: EffectCallback) {
   useEffect(effect, []);

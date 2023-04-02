@@ -1,6 +1,6 @@
-import { type editor } from "monaco-editor";
-import { type ReactNode } from "react";
-import { type Monaco, type Theme } from "..";
+import { type editor } from 'monaco-editor';
+import { type ReactNode } from 'react';
+import { type Monaco, type Theme } from '..';
 
 export type MonacoDiffEditor = editor.IStandaloneDiffEditor;
 

@@ -1,7 +1,7 @@
-import { useState } from "react";
-import loader from "@monaco-editor/loader";
+import { useState } from 'react';
+import loader from '@monaco-editor/loader';
 
-import useMount from "../useMount";
+import useMount from '../useMount';
 
 function useMonaco() {
   const [monaco, setMonaco] = useState(loader.__getMonacoInstance());

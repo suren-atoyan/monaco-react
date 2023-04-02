@@ -1,15 +1,15 @@
-import React from "react";
-import Loading from ".";
-import { render } from "@testing-library/react";
+import React from 'react';
+import Loading from '.';
+import { render } from '@testing-library/react';
 
-describe("<Loading />", () => {
-  it("should check render with snapshot", () => {
+describe('<Loading />', () => {
+  it('should check render with snapshot', () => {
     const component = render(<Loading />);
 
     expect(component).toMatchSnapshot();
   });
 
-  it("should check is it wrapped with <div />", () => {
+  it('should check is it wrapped with <div />', () => {
     const component = render(<Loading />);
 
     const { container } = component;
@@ -21,8 +21,8 @@ describe("<Loading />", () => {
     `);
   });
 
-  it("should check content", () => {
-    const content = "Loading...";
+  it('should check content', () => {
+    const content = 'Loading...';
 
     const component = render(<Loading>{content}</Loading>);
 

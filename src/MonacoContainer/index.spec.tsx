@@ -1,9 +1,9 @@
-import React, { createRef } from "react";
-import MonacoContainer from ".";
-import { render } from "@testing-library/react";
+import React, { createRef } from 'react';
+import MonacoContainer from '.';
+import { render } from '@testing-library/react';
 
-describe("<MonacoContainer />", () => {
-  it("should check render with snapshot", () => {
+describe('<MonacoContainer />', () => {
+  it('should check render with snapshot', () => {
     const component = render(
       <MonacoContainer
         width="100%"
@@ -11,7 +11,7 @@ describe("<MonacoContainer />", () => {
         _ref={createRef()}
         loading="loading..."
         isEditorReady={false}
-      />
+      />,
     );
 
     expect(component).toMatchSnapshot();

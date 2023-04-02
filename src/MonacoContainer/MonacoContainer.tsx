@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import styles from "./styles";
-import Loading from "../Loading";
-import { type ContainerProps } from "./types";
+import styles from './styles';
+import Loading from '../Loading';
+import { type ContainerProps } from './types';
 
 // ** forwardref render functions do not support proptypes or defaultprops **
 // one of the reasons why we use a separate prop for passing ref instead of using forwardref

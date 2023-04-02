@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import loader from "@monaco-editor/loader";
-import useMount from "../hooks/useMount";
-import useUpdate from "../hooks/useUpdate";
-import usePrevious from "../hooks/usePrevious";
-import { noop, getOrCreateModel } from "../utils";
-import { type CodeEditor, type EditorProps } from "./types";
-import { type Monaco } from "..";
-import MonacoContainer from "../MonacoContainer";
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import loader from '@monaco-editor/loader';
+import useMount from '../hooks/useMount';
+import useUpdate from '../hooks/useUpdate';
+import usePrevious from '../hooks/usePrevious';
+import { noop, getOrCreateModel } from '../utils';
+import { type CodeEditor, type EditorProps } from './types';
+import { type Monaco } from '..';
+import MonacoContainer from '../MonacoContainer';
 
 const viewStates = new Map();
 
@@ -18,16 +18,16 @@ function Editor({
   language,
   path,
   /* === */
-  theme = "light",
+  theme = 'light',
   line,
-  loading = "Loading...",
+  loading = 'Loading...',
   options = {},
   overrideServices = {},
   saveViewState = true,
   keepCurrentModel = false,
   /* === */
-  width = "100%",
-  height = "100%",
+  width = '100%',
+  height = '100%',
   className,
   wrapperProps = {},
   /* === */
@@ -52,13 +52,10 @@ function Editor({
     const cancelable = loader.init();
 
     cancelable
-      .then(
-        (monaco) => (monacoRef.current = monaco) && setIsMonacoMounting(false)
-      )
+      .then((monaco) => (monacoRef.current = monaco) && setIsMonacoMounting(false))
       .catch(
         (error) =>
-          error?.type !== "cancelation" &&
-          console.error("Monaco initialization: error:", error)
+          error?.type !== 'cancelation' && console.error('Monaco initialization: error:', error),
       );
 
     return () => (editorRef.current ? disposeEditor() : cancelable.cancel());
@@ -68,21 +65,19 @@ function Editor({
     () => {
       const model = getOrCreateModel(
         monacoRef.current!,
-        defaultValue || value || "",
-        defaultLanguage || language || "",
-        path || defaultPath || ""
+        defaultValue || value || '',
+        defaultLanguage || language || '',
+        path || defaultPath || '',
       );
 
       if (model !== editorRef.current?.getModel()) {
-        if (saveViewState)
-          viewStates.set(previousPath, editorRef.current?.saveViewState());
+        if (saveViewState) viewStates.set(previousPath, editorRef.current?.saveViewState());
         editorRef.current?.setModel(model);
-        if (saveViewState)
-          editorRef.current?.restoreViewState(viewStates.get(path));
+        if (saveViewState) editorRef.current?.restoreViewState(viewStates.get(path));
       }
     },
     [path],
-    isEditorReady
+    isEditorReady,
   );
 
   useUpdate(
@@ -90,20 +85,16 @@ function Editor({
       editorRef.current?.updateOptions(options);
     },
     [options],
-    isEditorReady
+    isEditorReady,
   );
 
   useUpdate(
     () => {
       if (!editorRef.current || value === undefined) return;
-      if (
-        editorRef.current.getOption(
-          monacoRef.current!.editor.EditorOption.readOnly
-        )
-      ) {
+      if (editorRef.current.getOption(monacoRef.current!.editor.EditorOption.readOnly)) {
         editorRef.current.setValue(value);
       } else if (value !== editorRef.current.getValue()) {
-        editorRef.current.executeEdits("", [
+        editorRef.current.executeEdits('', [
           {
             range: editorRef.current.getModel()!.getFullModelRange(),
             text: value,
@@ -115,17 +106,16 @@ function Editor({
       }
     },
     [value],
-    isEditorReady
+    isEditorReady,
   );
 
   useUpdate(
     () => {
       const model = editorRef.current?.getModel();
-      if (model && language)
-        monacoRef.current?.editor.setModelLanguage(model, language);
+      if (model && language) monacoRef.current?.editor.setModelLanguage(model, language);
     },
     [language],
-    isEditorReady
+    isEditorReady,
   );
 
   useUpdate(
@@ -136,7 +126,7 @@ function Editor({
       }
     },
     [line],
-    isEditorReady
+    isEditorReady,
   );
 
   useUpdate(
@@ -144,7 +134,7 @@ function Editor({
       monacoRef.current?.editor.setTheme(theme);
     },
     [theme],
-    isEditorReady
+    isEditorReady,
   );
 
   const createEditor = useCallback(() => {
@@ -155,9 +145,9 @@ function Editor({
 
       const defaultModel = getOrCreateModel(
         monacoRef.current,
-        value || defaultValue || "",
-        defaultLanguage || language || "",
-        autoCreatedModelPath || ""
+        value || defaultValue || '',
+        defaultLanguage || language || '',
+        autoCreatedModelPath || '',
       );
 
       editorRef.current = monacoRef.current?.editor.create(
@@ -167,13 +157,10 @@ function Editor({
           automaticLayout: true,
           ...options,
         },
-        overrideServices
+        overrideServices,
       );
 
-      saveViewState &&
-        editorRef.current.restoreViewState(
-          viewStates.get(autoCreatedModelPath)
-        );
+      saveViewState && editorRef.current.restoreViewState(viewStates.get(autoCreatedModelPath));
 
       monacoRef.current.editor.setTheme(theme);
 
@@ -211,33 +198,28 @@ function Editor({
   useEffect(() => {
     if (isEditorReady && onChange) {
       subscriptionRef.current?.dispose();
-      subscriptionRef.current = editorRef.current?.onDidChangeModelContent(
-        (event) => {
-          onChange(editorRef.current!.getValue(), event);
-        }
-      );
+      subscriptionRef.current = editorRef.current?.onDidChangeModelContent((event) => {
+        onChange(editorRef.current!.getValue(), event);
+      });
     }
   }, [isEditorReady, onChange]);
 
   // onValidate
   useEffect(() => {
     if (isEditorReady) {
-      const changeMarkersListener =
-        monacoRef.current!.editor.onDidChangeMarkers((uris) => {
-          const editorUri = editorRef.current!.getModel()?.uri;
+      const changeMarkersListener = monacoRef.current!.editor.onDidChangeMarkers((uris) => {
+        const editorUri = editorRef.current!.getModel()?.uri;
 
-          if (editorUri) {
-            const currentEditorHasMarkerChanges = uris.find(
-              (uri) => uri.path === editorUri.path
-            );
-            if (currentEditorHasMarkerChanges) {
-              const markers = monacoRef.current!.editor.getModelMarkers({
-                resource: editorUri,
-              });
-              onValidate?.(markers);
-            }
+        if (editorUri) {
+          const currentEditorHasMarkerChanges = uris.find((uri) => uri.path === editorUri.path);
+          if (currentEditorHasMarkerChanges) {
+            const markers = monacoRef.current!.editor.getModelMarkers({
+              resource: editorUri,
+            });
+            onValidate?.(markers);
           }
-        });
+        }
+      });
 
       return () => {
         changeMarkersListener?.dispose();

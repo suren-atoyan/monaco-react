@@ -1,4 +1,4 @@
-import { type ReactNode, type RefObject } from "react";
+import { type ReactNode, type RefObject } from 'react';
 
 export type ContainerProps = {
   width: number | string;
