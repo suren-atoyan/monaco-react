@@ -10,6 +10,8 @@ Monaco Editor for React &middot; use the [monaco-editor](https://microsoft.githu
 
 <hr />
 
+:keyboard: rewritten with `TypeScript`
+<br />
 :zap: [multi-model editor](#multi-model-editor) is already supported; enjoy it :tada:
 <br />
 :tada: version `v4` is here - to see what's new in the new version and how to migrate from `v3`, please read this [doc](./v4.changes.md) (also, if you need the old version `README`, it's [here](https://github.com/suren-atoyan/monaco-react/blob/v3.8.3/README.md))
@@ -29,34 +31,35 @@ Monaco Editor for React &middot; use the [monaco-editor](https://microsoft.githu
 The [monaco-editor](https://microsoft.github.io/monaco-editor/) is a well-known web technology based code editor that powers [VS Code](https://code.visualstudio.com/). This library handles the setup process of the `monaco-editor` and provides a clean `API` to interact with `monaco` from any `React` environment
 
 #### Demo
+
 [Check it out!](https://monaco-react.surenatoyan.com/)
 
 ## Documentation
 
-* [Installation](#installation)
-* [Introduction](#introduction)
-* [Usage](#usage)
-  * [Simple usage](#simple-usage)
-  * [Get value](#get-value)
-  * [`editor instance`](#editor-instance)
-  * [`monaco instance`](#monaco-instance)
-  * [`useMonaco`](#usemonaco)
-  * [`loader/config`](#loader-config)
-  * [Multi-model editor](#multi-model-editor)
-  * [`onValidate`](#onvalidate)
-  * [Notes](#notes)
-    * [For `electron` users](#for-electron-users)
-    * [For `Next.js` users](#for-nextjs-users)
-  * [Create your own editor!](#create-your-own-editor)
-* [Development / Playground](#development-playground)
-* [Props](#props)
-  * [`Editor`](#editor)
-  * [`Diff Editor`](#diffeditor)
+- [Installation](#installation)
+- [Introduction](#introduction)
+- [Usage](#usage)
+  - [Simple usage](#simple-usage)
+  - [Get value](#get-value)
+  - [`editor instance`](#editor-instance)
+  - [`monaco instance`](#monaco-instance)
+  - [`useMonaco`](#usemonaco)
+  - [`loader/config`](#loader-config)
+  - [Multi-model editor](#multi-model-editor)
+  - [`onValidate`](#onvalidate)
+  - [Notes](#notes)
+    - [For `electron` users](#for-electron-users)
+    - [For `Next.js` users](#for-nextjs-users)
+  - [Create your own editor!](#create-your-own-editor)
+- [Development / Playground](#development-playground)
+- [Props](#props)
+  - [`Editor`](#editor)
+  - [`Diff Editor`](#diffeditor)
 
 ### Installation
 
 ```bash
-npm install @monaco-editor/react 
+npm install @monaco-editor/react
 ```
 
 or
@@ -74,7 +77,7 @@ or you can use `CDN`. [Here is an example](https://codesandbox.io/s/cdn-example-
 Besides types, the library exports `Editor`and `DiffEditor` components, as well as the `loader` utility and the `useMonaco` hook:
 
 ```javascript
-import Editor, { DiffEditor, useMonaco, loader } from "@monaco-editor/react";
+import Editor, { DiffEditor, useMonaco, loader } from '@monaco-editor/react';
 ```
 
 ### Usage
@@ -86,22 +89,16 @@ Here is an example of a simple integration of `monaco` editor with a `React` pro
 You just need to import and render the `Editor` component:
 
 ```javascript
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import Editor from "@monaco-editor/react";
+import Editor from '@monaco-editor/react';
 
 function App() {
-  return (
-   <Editor
-     height="90vh"
-     defaultLanguage="javascript"
-     defaultValue="// some comment"
-   />
-  );
+  return <Editor height="90vh" defaultLanguage="javascript" defaultValue="// some comment" />;
 }
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 ```
 
@@ -110,10 +107,10 @@ ReactDOM.render(<App />, rootElement);
 <details><summary>Extended example</summary>
 
 ```javascript
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import Editor from "@monaco-editor/react";
+import Editor from '@monaco-editor/react';
 
 function App() {
   function handleEditorChange(value, event) {
@@ -121,12 +118,12 @@ function App() {
   }
 
   function handleEditorDidMount(editor, monaco) {
-    console.log("onMount: the editor instance:", editor);
-    console.log("onMount: the monaco instance:", monaco)
+    console.log('onMount: the editor instance:', editor);
+    console.log('onMount: the monaco instance:', monaco);
   }
 
   function handleEditorWillMount(monaco) {
-    console.log("beforeMount: the monaco instance:", monaco);
+    console.log('beforeMount: the monaco instance:', monaco);
   }
 
   function handleEditorValidation(markers) {
@@ -147,7 +144,7 @@ function App() {
   );
 }
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 ```
 
@@ -159,68 +156,68 @@ ReactDOM.render(<App />, rootElement);
 
 There are two options to get the current value:
 
-1) get the current model value from the `editor` instance
+1. get the current model value from the `editor` instance
 
 ```javascript
-import React, { useRef } from "react";
-import ReactDOM from "react-dom";
+import React, { useRef } from 'react';
+import ReactDOM from 'react-dom';
 
-import Editor from "@monaco-editor/react";
+import Editor from '@monaco-editor/react';
 
 function App() {
   const editorRef = useRef(null);
 
   function handleEditorDidMount(editor, monaco) {
-    editorRef.current = editor; 
+    editorRef.current = editor;
   }
-  
+
   function showValue() {
     alert(editorRef.current.getValue());
   }
 
   return (
-   <>
-     <button onClick={showValue}>Show value</button>
-     <Editor
-       height="90vh"
-       defaultLanguage="javascript"
-       defaultValue="// some comment"
-       onMount={handleEditorDidMount}
-     />
-   </>
+    <>
+      <button onClick={showValue}>Show value</button>
+      <Editor
+        height="90vh"
+        defaultLanguage="javascript"
+        defaultValue="// some comment"
+        onMount={handleEditorDidMount}
+      />
+    </>
   );
 }
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 ```
 
 [codesandbox](https://codesandbox.io/s/get-value-r9be5?file=/src/App.js)
 
-2) get the current model value via `onChange` prop
+2. get the current model value via `onChange` prop
 
 ```javascript
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import Editor from "@monaco-editor/react";
+import Editor from '@monaco-editor/react';
 
 function App() {
   function handleEditorChange(value, event) {
-    console.log("here is the current model value:", value);
+    console.log('here is the current model value:', value);
   }
 
   return (
-   <Editor
-     height="90vh"
-     defaultLanguage="javascript"
-     defaultValue="// some comment"
-     onChange={handleEditorChange}
-   />
+    <Editor
+      height="90vh"
+      defaultLanguage="javascript"
+      defaultValue="// some comment"
+      onChange={handleEditorChange}
+    />
   );
 }
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 ```
 
@@ -229,10 +226,10 @@ ReactDOM.render(<App />, rootElement);
 <details><summary>(get the `DiffEditor` values via `editor` instance)</summary>
 
 ```javascript
-import React, { useRef } from "react";
-import ReactDOM from "react-dom";
+import React, { useRef } from 'react';
+import ReactDOM from 'react-dom';
 
-import { DiffEditor } from "@monaco-editor/react";
+import { DiffEditor } from '@monaco-editor/react';
 
 function App() {
   const diffEditorRef = useRef(null);
@@ -264,7 +261,7 @@ function App() {
   );
 }
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 ```
 
@@ -277,10 +274,10 @@ ReactDOM.render(<App />, rootElement);
 The `editor` instance is exposed from the `onMount` prop as a first parameter, the second is the `monaco` instance
 
 ```javascript
-import React, { useRef } from "react";
-import ReactDOM from "react-dom";
+import React, { useRef } from 'react';
+import ReactDOM from 'react-dom';
 
-import Editor from "@monaco-editor/react";
+import Editor from '@monaco-editor/react';
 
 function App() {
   const editorRef = useRef(null);
@@ -288,7 +285,7 @@ function App() {
   function handleEditorDidMount(editor, monaco) {
     // here is the editor instance
     // you can store it in `useRef` for further usage
-    editorRef.current = editor; 
+    editorRef.current = editor;
   }
 
   return (
@@ -301,7 +298,7 @@ function App() {
   );
 }
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 ```
 
@@ -311,13 +308,13 @@ ReactDOM.render(<App />, rootElement);
 
 There are three options to get the `monaco` instance:
 
-1) via `onMount/beforeMount`
+1. via `onMount/beforeMount`
 
 ```javascript
-import React, { useRef } from "react";
-import ReactDOM from "react-dom";
+import React, { useRef } from 'react';
+import ReactDOM from 'react-dom';
 
-import Editor from "@monaco-editor/react";
+import Editor from '@monaco-editor/react';
 
 function App() {
   const monacoRef = useRef(null);
@@ -331,7 +328,7 @@ function App() {
   function handleEditorDidMount(editor, monaco) {
     // here is another way to get monaco instance
     // you can also store it in `useRef` for further usage
-    monacoRef.current = monaco; 
+    monacoRef.current = monaco;
   }
 
   return (
@@ -345,49 +342,43 @@ function App() {
   );
 }
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 ```
 
 [codesandbox](https://codesandbox.io/s/simple-usage-forked-il8kt?file=/src/App.js)
 
-2) via `loader` utility
+2. via `loader` utility
 
 ```javascript
-import { loader } from "@monaco-editor/react";
+import { loader } from '@monaco-editor/react';
 
-loader.init().then(monaco => console.log("here is the monaco instance:", monaco));
+loader.init().then((monaco) => console.log('here is the monaco instance:', monaco));
 ```
 
 [codesandbox](https://codesandbox.io/s/monaco-instance-loader-ndzu9?file=/src/App.js)
 
-3) via `useMonaco` hook
+3. via `useMonaco` hook
 
 ```javascript
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import Editor, { useMonaco } from "@monaco-editor/react";
+import Editor, { useMonaco } from '@monaco-editor/react';
 
 function App() {
   const monaco = useMonaco();
-  
+
   useEffect(() => {
     if (monaco) {
-      console.log("here is the monaco instance:", monaco);
+      console.log('here is the monaco instance:', monaco);
     }
   }, [monaco]);
 
-  return (
-    <Editor
-      height="90vh"
-      defaultValue="// some comment"
-      defaultLanguage="javascript"
-    />
-  );
+  return <Editor height="90vh" defaultValue="// some comment" defaultLanguage="javascript" />;
 }
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 ```
 
@@ -398,33 +389,27 @@ ReactDOM.render(<App />, rootElement);
 `useMonaco` is a `React` hook that returns the instance of the `monaco`. But there is an important note that should be considered: the initialization process is being handled by the `loader` utility (the reference of [@monaco-editor/loader](https://github.com/suren-atoyan/monaco-loader)): that process is being done asynchronously and only once. So, if the first initiator of the initialization is `useMonaco` hook, the first returned value will be null, due to its asynchronous installation. Just check the returned value of `useMonaco`
 
 ```javascript
-import React, { useEffect } from "react";
-import ReactDOM from "react-dom";
+import React, { useEffect } from 'react';
+import ReactDOM from 'react-dom';
 
-import Editor, { useMonaco } from "@monaco-editor/react";
+import Editor, { useMonaco } from '@monaco-editor/react';
 
 function App() {
   const monaco = useMonaco();
-  
+
   useEffect(() => {
     // do conditional chaining
     monaco?.languages.typescript.javascriptDefaults.setEagerModelSync(true);
     // or make sure that it exists by other ways
     if (monaco) {
-      console.log("here is the monaco instance:", monaco);
+      console.log('here is the monaco instance:', monaco);
     }
   }, [monaco]);
 
-  return (
-    <Editor
-      height="90vh"
-      defaultValue="// some comment"
-      defaultLanguage="javascript"
-    />
-  );
+  return <Editor height="90vh" defaultValue="// some comment" defaultLanguage="javascript" />;
 }
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 ```
 
@@ -435,22 +420,22 @@ ReactDOM.render(<App />, rootElement);
 The library exports (named) the utility called `loader`. Basically, it's the reference of [@monaco-editor/loader](https://github.com/suren-atoyan/monaco-loader). By default, `monaco` files are being downloaded from `CDN`. There is an ability to change this behavior, and other things concerning the `AMD` loader of `monaco`. We have a default [config file](https://github.com/suren-atoyan/monaco-loader/blob/master/src/config/index.js) that you can modify by the way shown below:
 
 ```js
-import { loader } from "@monaco-editor/react";
+import { loader } from '@monaco-editor/react';
 
 // you can change the source of the monaco files
-loader.config({ paths: { vs: "..." } });
+loader.config({ paths: { vs: '...' } });
 
 // you can configure the locales
-loader.config({ "vs/nls": { availableLanguages: { "*": "de" } } });
+loader.config({ 'vs/nls': { availableLanguages: { '*': 'de' } } });
 
 // or
 loader.config({
   paths: {
-    vs: "...",
+    vs: '...',
   },
-  "vs/nls" : {
+  'vs/nls': {
     availableLanguages: {
-      "*": "de",
+      '*': 'de',
     },
   },
 });
@@ -461,8 +446,8 @@ loader.config({
 Starting from version `v4.4.0` it's possible to use `monaco-editor` as an `npm` package; import it from `node_modules` and include `monaco` sources into your bundle (instead of using CDN). To make it work you can do the following:
 
 ```javascript
-import * as monaco from "monaco-editor";
-import { loader } from "@monaco-editor/react";
+import * as monaco from 'monaco-editor';
+import { loader } from '@monaco-editor/react';
 
 loader.config({ monaco });
 
@@ -474,32 +459,32 @@ NOTE: you should be aware that this may require additional `webpack` plugins, li
 If you use [Vite](https://vitejs.dev/), you need to do this:
 
 ```javascript
-import { loader } from "@monaco-editor/react";
+import { loader } from '@monaco-editor/react';
 
-import * as monaco from "monaco-editor";
-import editorWorker from "monaco-editor/esm/vs/editor/editor.worker?worker"
-import jsonWorker from "monaco-editor/esm/vs/language/json/json.worker?worker"
-import cssWorker from "monaco-editor/esm/vs/language/css/css.worker?worker"
-import htmlWorker from "monaco-editor/esm/vs/language/html/html.worker?worker"
-import tsWorker from "monaco-editor/esm/vs/language/typescript/ts.worker?worker"
+import * as monaco from 'monaco-editor';
+import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
+import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker';
+import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker';
+import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker';
+import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
 
 self.MonacoEnvironment = {
   getWorker(_, label) {
-    if (label === "json") {
-      return new jsonWorker()
+    if (label === 'json') {
+      return new jsonWorker();
     }
-    if (label === "css" || label === "scss" || label === "less") {
-      return new cssWorker()
+    if (label === 'css' || label === 'scss' || label === 'less') {
+      return new cssWorker();
     }
-    if (label === "html" || label === "handlebars" || label === "razor") {
-      return new htmlWorker()
+    if (label === 'html' || label === 'handlebars' || label === 'razor') {
+      return new htmlWorker();
     }
-    if (label === "typescript" || label === "javascript") {
-      return new tsWorker()
+    if (label === 'typescript' || label === 'javascript') {
+      return new tsWorker();
     }
-    return new editorWorker()
-  }
-}
+    return new editorWorker();
+  },
+};
 
 loader.config({ monaco });
 
@@ -518,42 +503,48 @@ Here is a simple example: let's imagine we have a `JSON` like representation of 
 
 ```javascript
 const files = {
-  "script.js": {
-    name: "script.js",
-    language: "javascript",
+  'script.js': {
+    name: 'script.js',
+    language: 'javascript',
     value: someJSCodeExample,
   },
-  "style.css": {
-    name: "style.css",
-    language: "css",
+  'style.css': {
+    name: 'style.css',
+    language: 'css',
     value: someCSSCodeExample,
   },
-  "index.html": {
-    name: "index.html",
-    language: "html",
+  'index.html': {
+    name: 'index.html',
+    language: 'html',
     value: someHTMLCodeExample,
   },
-}
+};
 ```
 
 And here is our simple multi-model editor implementation:
 
 ```javascript
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import Editor from "@monaco-editor/react";
+import Editor from '@monaco-editor/react';
 
 function App() {
-  const [fileName, setFileName] = useState("script.js");
+  const [fileName, setFileName] = useState('script.js');
 
   const file = files[fileName];
 
   return (
     <>
-      <button disabled={fileName === "script.js"} onClick={() => setFileName("script.js")}>script.js</button>
-      <button disabled={fileName === "style.css"} onClick={() => setFileName("style.css")}>style.css</button>
-      <button disabled={fileName === "index.html"} onClick={() => setFileName("index.html")}>index.html</button>
+      <button disabled={fileName === 'script.js'} onClick={() => setFileName('script.js')}>
+        script.js
+      </button>
+      <button disabled={fileName === 'style.css'} onClick={() => setFileName('style.css')}>
+        style.css
+      </button>
+      <button disabled={fileName === 'index.html'} onClick={() => setFileName('index.html')}>
+        index.html
+      </button>
       <Editor
         height="80vh"
         theme="vs-dark"
@@ -565,7 +556,7 @@ function App() {
   );
 }
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 ```
 
@@ -596,15 +587,15 @@ will give you more flexibility in working with a multi-model editor.
 `onValidate` is an additional property. An event is emitted when the content of the current model is changed and the current model markers are ready. It will be fired with the current model markers
 
 ```js
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import Editor from "@monaco-editor/react";
+import Editor from '@monaco-editor/react';
 
 function App() {
   function handleEditorValidation(markers) {
     // model markers
-    markers.forEach(marker => console.log("onValidate:", marker.message));
+    markers.forEach((marker) => console.log('onValidate:', marker.message));
   }
 
   return (
@@ -617,7 +608,7 @@ function App() {
   );
 }
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 ```
 
@@ -625,7 +616,7 @@ ReactDOM.render(<App />, rootElement);
 
 It's important to mention that according to [monaco-editor](https://microsoft.github.io/monaco-editor/), the whole supported languages are divided into two groups:
 
-1) languages that have rich `IntelliSense` and validation
+1. languages that have rich `IntelliSense` and validation
 
 - `TypeScript`
 - `JavaScript`
@@ -635,7 +626,7 @@ It's important to mention that according to [monaco-editor](https://microsoft.gi
 - `JSON`
 - `HTML`
 
-2) languages with only basic syntax colorization
+2. languages with only basic syntax colorization
 
 - `XML`
 - `PHP`
@@ -667,36 +658,32 @@ It's important to mention that according to [monaco-editor](https://microsoft.gi
 
 As a usual `React` component, this one also works fine with an electron-react environment, without need to have a `webpack` configuration or other extra things. But there are several cases that developers usually face to and sometimes it can be confusing. Here they are:
 
-1) **You see loading screen stuck**
-Usually, it's because your environment doesn't allow you to load external sources. By default, it loads `monaco` sources from `CDN`. You can see the [default configuration](https://github.com/suren-atoyan/monaco-loader/blob/master/src/config/index.js). But sure you can change that behavior; the library is fully configurable. Read about it [here](https://github.com/suren-atoyan/monaco-react#loader-config). So, if you want to download it from your local files, you can do it like this:
+1. **You see loading screen stuck**
+   Usually, it's because your environment doesn't allow you to load external sources. By default, it loads `monaco` sources from `CDN`. You can see the [default configuration](https://github.com/suren-atoyan/monaco-loader/blob/master/src/config/index.js). But sure you can change that behavior; the library is fully configurable. Read about it [here](https://github.com/suren-atoyan/monaco-react#loader-config). So, if you want to download it from your local files, you can do it like this:
 
 ```javascript
-import { loader } from "@monaco-editor/react";
+import { loader } from '@monaco-editor/react';
 
-loader.config({ paths: { vs: "../path-to-monaco" } });
+loader.config({ paths: { vs: '../path-to-monaco' } });
 ```
 
-2) **Based on your electron environment it can be required to have an absolute URL**
-The utility function taken from [here](https://github.com/microsoft/monaco-editor-samples/blob/master/electron-amd-nodeIntegration/electron-index.html) can help you to achieve that. Let's imagine you have `monaco-editor` package installed and you want to load monaco from the `node_modules` rather than from CDN: in that case, you can write something like this:
+2. **Based on your electron environment it can be required to have an absolute URL**
+   The utility function taken from [here](https://github.com/microsoft/monaco-editor-samples/blob/master/electron-amd-nodeIntegration/electron-index.html) can help you to achieve that. Let's imagine you have `monaco-editor` package installed and you want to load monaco from the `node_modules` rather than from CDN: in that case, you can write something like this:
 
 ```javascript
 function ensureFirstBackSlash(str) {
-    return str.length > 0 && str.charAt(0) !== "/"
-        ? "/" + str
-        : str;
+  return str.length > 0 && str.charAt(0) !== '/' ? '/' + str : str;
 }
 
 function uriFromPath(_path) {
-    const pathName = path.resolve(_path).replace(/\\/g, "/");
-    return encodeURI("file://" + ensureFirstBackSlash(pathName));
+  const pathName = path.resolve(_path).replace(/\\/g, '/');
+  return encodeURI('file://' + ensureFirstBackSlash(pathName));
 }
 
 loader.config({
   paths: {
-    vs: uriFromPath(
-      path.join(__dirname, "../node_modules/monaco-editor/min/vs")
-    )
-  }
+    vs: uriFromPath(path.join(__dirname, '../node_modules/monaco-editor/min/vs')),
+  },
 });
 ```
 
@@ -712,20 +699,20 @@ And if you use `monaco` with `Next.js` and have faced an issue different than th
 
 #### Create your own editor
 
-Under the hood this library uses [@monaco-editor/loader](https://github.com/suren-atoyan/monaco-loader) that provides a utility called `loader`. The `loader` utility is a collection of functions that are being used to setup `monaco` editor into your browser. `loader.init()`  handles the whole initialization process and returns the instance of the `monaco` - `loader.init().then(monaco => console.log("here is the monaco instance:", monaco))`. The `Editor` component uses this utility, gains access to `monaco instance` and creates the editor. [Here](https://github.com/suren-atoyan/monaco-react/blob/master/src/Editor/Editor.js) is the implementation of the `Editor` component. You can use the same technique to create your own `Editor`. You can just import the `loader` utility, access to `monaco instance`, and create your own editor with your own custom logic. The shortest way to do it:
+Under the hood this library uses [@monaco-editor/loader](https://github.com/suren-atoyan/monaco-loader) that provides a utility called `loader`. The `loader` utility is a collection of functions that are being used to setup `monaco` editor into your browser. `loader.init()` handles the whole initialization process and returns the instance of the `monaco` - `loader.init().then(monaco => console.log("here is the monaco instance:", monaco))`. The `Editor` component uses this utility, gains access to `monaco instance` and creates the editor. [Here](https://github.com/suren-atoyan/monaco-react/blob/master/src/Editor/Editor.js) is the implementation of the `Editor` component. You can use the same technique to create your own `Editor`. You can just import the `loader` utility, access to `monaco instance`, and create your own editor with your own custom logic. The shortest way to do it:
 
 ```javascript
-import loader from "@monaco-editor/loader";
+import loader from '@monaco-editor/loader';
 
-loader.init().then(monaco => {
-  const wrapper = document.getElementById("root");
-  wrapper.style.height = "100vh";
+loader.init().then((monaco) => {
+  const wrapper = document.getElementById('root');
+  wrapper.style.height = '100vh';
   const properties = {
-    value: "function hello() {\n\talert(\"Hello world!\");\n}",
-    language:  "javascript",
-  }
-  
-  monaco.editor.create(wrapper,  properties);
+    value: 'function hello() {\n\talert("Hello world!");\n}',
+    language: 'javascript',
+  };
+
+  monaco.editor.create(wrapper, properties);
 });
 ```
 
@@ -737,29 +724,29 @@ That's all. You can wrap it into a `React` component, or `Vue`, or `Angular` or 
 
 It's always important to have a place, where you can play with the internals of the library. The `playground` is a minimal `React` app that directly uses the sources of the library. So, if you are going to open a `PR`, or want to check something, or just want to try the freshest state of the library, you can run the playground and enjoy it
 
- - clone the repository
+- clone the repository
 
- ```bash
- git clone https://github.com/suren-atoyan/monaco-react.git
- ```
+```bash
+git clone https://github.com/suren-atoyan/monaco-react.git
+```
 
- - go to the library folder
+- go to the library folder
 
 ```bash
  cd monaco-react
- ```
+```
 
- - install the library's dependencies
+- install the library's dependencies
 
 ```bash
  npm install # yarn
- ```
+```
 
- - go to the playground
+- go to the playground
 
 ```bash
  cd playground
- ```
+```
 
 - install the playground's dependencies
 
@@ -785,53 +772,53 @@ If you want to change something in the library, go to `monaco-react/src/...`, th
 
 #### `Editor`
 
-| Name   |      Type      |  Default |  Description |
-|:----------|:-------------|:------|:------|
-| defaultValue | string || Default value of the current model |
-| defaultLanguage | string || Default language of the current model |
-| defaultPath | string || Default path of the current model. Will be passed as the third argument to `.createModel` method - `monaco.editor.createModel(..., ..., monaco.Uri.parse(defaultPath))` |
-| value | string || Value of the current model |
-| language | enum: ... | | Language of the current model (all languages that are [supported](https://github.com/microsoft/monaco-editor/tree/main/src/basic-languages) by monaco-editor) |
-| path | string || Path of the current model. Will be passed as the third argument to `.createModel` method - `monaco.editor.createModel(..., ..., monaco.Uri.parse(defaultPath))` |
-| theme | enum: "light" \| "vs-dark" | "light" | The theme for the monaco. Available options "vs-dark" \| "light". Define new themes by `monaco.editor.defineTheme` |
-| line | number |  | The line to jump on it |
-| loading | React Node | "Loading..." | The loading screen before the editor will be mounted
-| options | object | {} | [IStandaloneEditorConstructionOptions](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.IStandaloneEditorConstructionOptions.html) |
-| overrideServices | object | {} | [IEditorOverrideServices ](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.IEditorOverrideServices.html) |
-| saveViewState | boolean | true | Indicator whether to save the models' view states between model changes or not |
-| keepCurrentModel | boolean | false | Indicator whether to dispose the current model when the Editor is unmounted or not |
-| width | union: number \| string | "100%" | Width of the editor wrapper |
-| height | union: number \| string | "100%" | Height of the editor wrapper |
-| className | string || Class name for the editor container |
-| wrapperProps | object | {} | Props applied to the wrapper element |
-| beforeMount | func | noop | **Signature: function(monaco: Monaco) => void** <br/> An event is emitted before the editor is mounted. It gets the `monaco` instance as a first argument|
-| onMount | func | noop | **Signature: function(editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => void** <br/> An event is emitted when the editor is mounted. It gets the `editor` instance as a first argument and the `monaco` instance as a second|
-| onChange | func || **Signature: function(value: string \| undefined, ev: monaco.editor.IModelContentChangedEvent) => void** <br/> An event is emitted when the content of the current model is changed|
-| onValidate | func | noop | **Signature: function(markers: monaco.editor.IMarker[]) => void** <br/> An event is emitted when the content of the current model is changed and the current model markers are ready|
+| Name             | Type                       | Default      | Description                                                                                                                                                                                                                                |
+| :--------------- | :------------------------- | :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| defaultValue     | string                     |              | Default value of the current model                                                                                                                                                                                                         |
+| defaultLanguage  | string                     |              | Default language of the current model                                                                                                                                                                                                      |
+| defaultPath      | string                     |              | Default path of the current model. Will be passed as the third argument to `.createModel` method - `monaco.editor.createModel(..., ..., monaco.Uri.parse(defaultPath))`                                                                    |
+| value            | string                     |              | Value of the current model                                                                                                                                                                                                                 |
+| language         | enum: ...                  |              | Language of the current model (all languages that are [supported](https://github.com/microsoft/monaco-editor/tree/main/src/basic-languages) by monaco-editor)                                                                              |
+| path             | string                     |              | Path of the current model. Will be passed as the third argument to `.createModel` method - `monaco.editor.createModel(..., ..., monaco.Uri.parse(defaultPath))`                                                                            |
+| theme            | enum: "light" \| "vs-dark" | "light"      | The theme for the monaco. Available options "vs-dark" \| "light". Define new themes by `monaco.editor.defineTheme`                                                                                                                         |
+| line             | number                     |              | The line to jump on it                                                                                                                                                                                                                     |
+| loading          | React Node                 | "Loading..." | The loading screen before the editor will be mounted                                                                                                                                                                                       |
+| options          | object                     | {}           | [IStandaloneEditorConstructionOptions](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.IStandaloneEditorConstructionOptions.html)                                                                                   |
+| overrideServices | object                     | {}           | [IEditorOverrideServices ](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.IEditorOverrideServices.html)                                                                                                            |
+| saveViewState    | boolean                    | true         | Indicator whether to save the models' view states between model changes or not                                                                                                                                                             |
+| keepCurrentModel | boolean                    | false        | Indicator whether to dispose the current model when the Editor is unmounted or not                                                                                                                                                         |
+| width            | union: number \| string    | "100%"       | Width of the editor wrapper                                                                                                                                                                                                                |
+| height           | union: number \| string    | "100%"       | Height of the editor wrapper                                                                                                                                                                                                               |
+| className        | string                     |              | Class name for the editor container                                                                                                                                                                                                        |
+| wrapperProps     | object                     | {}           | Props applied to the wrapper element                                                                                                                                                                                                       |
+| beforeMount      | func                       | noop         | **Signature: function(monaco: Monaco) => void** <br/> An event is emitted before the editor is mounted. It gets the `monaco` instance as a first argument                                                                                  |
+| onMount          | func                       | noop         | **Signature: function(editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => void** <br/> An event is emitted when the editor is mounted. It gets the `editor` instance as a first argument and the `monaco` instance as a second |
+| onChange         | func                       |              | **Signature: function(value: string \| undefined, ev: monaco.editor.IModelContentChangedEvent) => void** <br/> An event is emitted when the content of the current model is changed                                                        |
+| onValidate       | func                       | noop         | **Signature: function(markers: monaco.editor.IMarker[]) => void** <br/> An event is emitted when the content of the current model is changed and the current model markers are ready                                                       |
 
 #### `DiffEditor`
 
-| Name   |      Type      |  Default |  Description |
-|:----------|:-------------|:------|:------|
-| original | string || The original source (left one) value |
-| modified | string || The modified source (right one) value |
-| language | enum: ... | | Language for the both models - original and modified (all languages that are [supported](https://github.com/microsoft/monaco-languages) by monaco-editor) |
-| originalLanguage | enum: ... | | This prop gives you the opportunity to specify the language of the original source separately, otherwise, it will get the value of the language property |
-| modifiedLanguage | enum: ... | | This prop gives you the opportunity to specify the language of the modified source separately, otherwise, it will get the value of language property |
-| originalModelPath | string || Path for the "original" model. Will be passed as a third argument to `.createModel` method - `monaco.editor.createModel(..., ..., monaco.Uri.parse(originalModelPath))` |
-| modifiedModelPath | string || Path for the "modified" model. Will be passed as a third argument to `.createModel` method - `monaco.editor.createModel(..., ..., monaco.Uri.parse(modifiedModelPath))` |
-| keepCurrentOriginalModel | boolean | false | Indicator whether to dispose the current original model when the DiffEditor is unmounted or not |
-| keepCurrentModifiedModel | boolean | false | Indicator whether to dispose the current modified model when the DiffEditor is unmounted or not |
-| theme | enum: "light" \| "vs-dark" | "light" | The theme for the monaco. Available options "vs-dark" \| "light". Define new themes by `monaco.editor.defineTheme` |
-| line | number |  | The line to jump on it |
-| loading | React Node | "Loading..." | The loading screen before the editor will be mounted
-| options | object | {} | [IDiffEditorConstructionOptions](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.IDiffEditorConstructionOptions.html) |
-| width | union: number \| string | "100%" | Width of the editor wrapper |
-| height | union: number \| string | "100%" | Height of the editor wrapper |
-| className | string || Class name for the editor container |
-| wrapperProps | object | {} | Props applied to the wrapper element |
-| beforeMount | func | noop | **Signature: function(monaco: Monaco) => void** <br/> An event is emitted before the editor mounted. It gets the `monaco` instance as a first argument|
-| onMount | func | noop | **Signature: function(editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => void** <br/> An event is emitted when the editor is mounted. It gets the `editor` instance as a first argument and the `monaco` instance as a second|
+| Name                     | Type                       | Default      | Description                                                                                                                                                                                                                                |
+| :----------------------- | :------------------------- | :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| original                 | string                     |              | The original source (left one) value                                                                                                                                                                                                       |
+| modified                 | string                     |              | The modified source (right one) value                                                                                                                                                                                                      |
+| language                 | enum: ...                  |              | Language for the both models - original and modified (all languages that are [supported](https://github.com/microsoft/monaco-languages) by monaco-editor)                                                                                  |
+| originalLanguage         | enum: ...                  |              | This prop gives you the opportunity to specify the language of the original source separately, otherwise, it will get the value of the language property                                                                                   |
+| modifiedLanguage         | enum: ...                  |              | This prop gives you the opportunity to specify the language of the modified source separately, otherwise, it will get the value of language property                                                                                       |
+| originalModelPath        | string                     |              | Path for the "original" model. Will be passed as a third argument to `.createModel` method - `monaco.editor.createModel(..., ..., monaco.Uri.parse(originalModelPath))`                                                                    |
+| modifiedModelPath        | string                     |              | Path for the "modified" model. Will be passed as a third argument to `.createModel` method - `monaco.editor.createModel(..., ..., monaco.Uri.parse(modifiedModelPath))`                                                                    |
+| keepCurrentOriginalModel | boolean                    | false        | Indicator whether to dispose the current original model when the DiffEditor is unmounted or not                                                                                                                                            |
+| keepCurrentModifiedModel | boolean                    | false        | Indicator whether to dispose the current modified model when the DiffEditor is unmounted or not                                                                                                                                            |
+| theme                    | enum: "light" \| "vs-dark" | "light"      | The theme for the monaco. Available options "vs-dark" \| "light". Define new themes by `monaco.editor.defineTheme`                                                                                                                         |
+| line                     | number                     |              | The line to jump on it                                                                                                                                                                                                                     |
+| loading                  | React Node                 | "Loading..." | The loading screen before the editor will be mounted                                                                                                                                                                                       |
+| options                  | object                     | {}           | [IDiffEditorConstructionOptions](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.IDiffEditorConstructionOptions.html)                                                                                               |
+| width                    | union: number \| string    | "100%"       | Width of the editor wrapper                                                                                                                                                                                                                |
+| height                   | union: number \| string    | "100%"       | Height of the editor wrapper                                                                                                                                                                                                               |
+| className                | string                     |              | Class name for the editor container                                                                                                                                                                                                        |
+| wrapperProps             | object                     | {}           | Props applied to the wrapper element                                                                                                                                                                                                       |
+| beforeMount              | func                       | noop         | **Signature: function(monaco: Monaco) => void** <br/> An event is emitted before the editor mounted. It gets the `monaco` instance as a first argument                                                                                     |
+| onMount                  | func                       | noop         | **Signature: function(editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => void** <br/> An event is emitted when the editor is mounted. It gets the `editor` instance as a first argument and the `monaco` instance as a second |
 
 ## License
 
