@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`<Loading /> should check render with snapshot 1`] = `
+exports[`<Loading /> > should check render with snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
