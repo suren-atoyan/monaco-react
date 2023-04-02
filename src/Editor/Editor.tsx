@@ -3,8 +3,9 @@ import loader from '@monaco-editor/loader';
 import useMount from '../hooks/useMount';
 import useUpdate from '../hooks/useUpdate';
 import usePrevious from '../hooks/usePrevious';
+import { type IDisposable, type editor } from 'monaco-editor';
 import { noop, getOrCreateModel } from '../utils';
-import { type CodeEditor, type EditorProps } from './types';
+import { type EditorProps } from './types';
 import { type Monaco } from '..';
 import MonacoContainer from '../MonacoContainer';
 
@@ -39,11 +40,11 @@ function Editor({
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [isMonacoMounting, setIsMonacoMounting] = useState(true);
   const monacoRef = useRef<Monaco | null>(null);
-  const editorRef = useRef<CodeEditor | null>(null);
+  const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const onMountRef = useRef(onMount);
   const beforeMountRef = useRef(beforeMount);
-  const subscriptionRef = useRef<any>(null);
+  const subscriptionRef = useRef<IDisposable>();
   const valueRef = useRef(value);
   const previousPath = usePrevious(path);
   const preventCreation = useRef(false);

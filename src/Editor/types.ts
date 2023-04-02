@@ -2,9 +2,7 @@ import { type editor } from 'monaco-editor';
 import { type Monaco, type Theme } from '..';
 import { type ReactNode } from 'react';
 
-export type CodeEditor = editor.IStandaloneCodeEditor;
-
-export type OnMount = (editor: CodeEditor, monaco: Monaco) => void;
+export type OnMount = (editor: editor.IStandaloneCodeEditor, monaco: Monaco) => void;
 
 export type BeforeMount = (monaco: Monaco) => void;
 
