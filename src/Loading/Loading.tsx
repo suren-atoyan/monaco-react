@@ -1,15 +1,9 @@
-import React, { type ReactNode } from "react";
+import React, { type PropsWithChildren } from 'react';
 
-const loadingStyles = {
-  display: "flex",
-  height: "100%",
-  width: "100%",
-  justifyContent: "center",
-  alignItems: "center",
-};
+import styles from './styles';
 
-function Loading({ children }: { children?: ReactNode }) {
-  return <div style={loadingStyles}>{children}</div>;
+function Loading({ children }: PropsWithChildren) {
+  return <div style={styles.container}>{children}</div>;
 }
 
 export default Loading;
