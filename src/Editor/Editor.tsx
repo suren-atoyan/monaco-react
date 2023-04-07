@@ -48,6 +48,7 @@ function Editor({
   const valueRef = useRef(value);
   const previousPath = usePrevious(path);
   const preventCreation = useRef(false);
+  const preventTriggerChangeEvent = useRef<boolean>(false);
 
   useMount(() => {
     const cancelable = loader.init();
@@ -95,6 +96,7 @@ function Editor({
       if (editorRef.current.getOption(monacoRef.current!.editor.EditorOption.readOnly)) {
         editorRef.current.setValue(value);
       } else if (value !== editorRef.current.getValue()) {
+        preventTriggerChangeEvent.current = true;
         editorRef.current.executeEdits('', [
           {
             range: editorRef.current.getModel()!.getFullModelRange(),
@@ -104,6 +106,7 @@ function Editor({
         ]);
 
         editorRef.current.pushUndoStop();
+        preventTriggerChangeEvent.current = false;
       }
     },
     [value],
@@ -200,7 +203,9 @@ function Editor({
     if (isEditorReady && onChange) {
       subscriptionRef.current?.dispose();
       subscriptionRef.current = editorRef.current?.onDidChangeModelContent((event) => {
-        onChange(editorRef.current!.getValue(), event);
+        if (!preventTriggerChangeEvent.current) {
+          onChange(editorRef.current!.getValue(), event);
+        }
       });
     }
   }, [isEditorReady, onChange]);
