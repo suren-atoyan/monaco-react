@@ -1,10 +1,26 @@
 ### Versions
 
-## 4.4.7
+## 4.5.0
 
-###### _TBD_
+###### _Apr 7, 2023_
 
-- add preventCreation flag to diff editor
+- Editor: implement `preventTriggerChangeEvent` flag
+
+from `4.5.0-beta.0`
+
+- DiffEditor: add preventCreation flag to diff editor
+- project: rewrite with TypeScript
+- project: implement prettier
+- loader: update `@monaco-editor/loader` version (1.3.2)
+
+## 4.5.0-beta.0
+
+###### _Apr 2, 2023_
+
+- DiffEditor: add preventCreation flag to diff editor
+- project: rewrite with TypeScript
+- project: implement prettier
+- loader: update `@monaco-editor/loader` version (1.3.2)
 
 ## 4.4.6
 
