@@ -59,4 +59,4 @@ function createModelUri(monaco: Monaco, path: string) {
   return monaco.Uri.parse(path);
 }
 
-export { noop, getOrCreateModel, getModel };
+export { noop, getOrCreateModel };

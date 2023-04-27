@@ -4,7 +4,7 @@ import loader from '@monaco-editor/loader';
 import MonacoContainer from '../MonacoContainer';
 import useMount from '../hooks/useMount';
 import useUpdate from '../hooks/useUpdate';
-import { noop, getOrCreateModel, getModel } from '../utils';
+import { noop, getOrCreateModel } from '../utils';
 import { type DiffEditorProps, type MonacoDiffEditor } from './types';
 import { type Monaco } from '..';
 
@@ -53,12 +53,6 @@ function DiffEditor({
   useUpdate(
     () => {
       const modifiedEditor = editorRef.current!.getModifiedEditor();
-      if (keepCurrentModifiedModel && modifiedModelPath) {
-        const model = getModel(monacoRef.current!, modifiedModelPath);
-        if (model !== modifiedEditor.getModel()) {
-          modifiedEditor.setModel(model);
-        }
-      }
       if (modifiedEditor.getOption(monacoRef.current!.editor.EditorOption.readOnly)) {
         modifiedEditor.setValue(modified || '');
       } else {
@@ -75,23 +69,15 @@ function DiffEditor({
         }
       }
     },
-    [modified, modifiedModelPath, keepCurrentModifiedModel],
+    [modified],
     isEditorReady,
   );
 
   useUpdate(
     () => {
-      const originalEditor = editorRef.current!.getOriginalEditor();
-      if (keepCurrentOriginalModel && originalModelPath) {
-        const model = getModel(monacoRef.current!, originalModelPath);
-        if (model !== editorRef.current!.getModel()) {
-          originalEditor.setModel(model);
-        }
-      }
-
-      originalEditor.setValue(original || '');
+      editorRef.current?.getModel()?.original.setValue(original || '');
     },
-    [original, originalModelPath, keepCurrentOriginalModel],
+    [original],
     isEditorReady,
   );
 
