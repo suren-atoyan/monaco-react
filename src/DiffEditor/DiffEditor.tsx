@@ -165,6 +165,46 @@ function DiffEditor({
     !isMonacoMounting && !isEditorReady && createEditor();
   }, [isMonacoMounting, isEditorReady, createEditor]);
 
+  useUpdate(
+    () => {
+      if (editorRef.current && monacoRef.current) {
+        const originalEditor = editorRef.current.getOriginalEditor();
+        const model = getOrCreateModel(
+          monacoRef.current,
+          original || '',
+          originalLanguage || language || 'text',
+          originalModelPath || '',
+        );
+
+        if (model !== originalEditor.getModel()) {
+          originalEditor.setModel(model);
+        }
+      }
+    },
+    [originalModelPath],
+    isEditorReady,
+  );
+
+  useUpdate(
+    () => {
+      if (editorRef.current && monacoRef.current) {
+        const modifiedEditor = editorRef.current.getModifiedEditor();
+        const model = getOrCreateModel(
+          monacoRef.current,
+          modified || '',
+          modifiedLanguage || language || 'text',
+          modifiedModelPath || '',
+        );
+
+        if (model !== modifiedEditor.getModel()) {
+          modifiedEditor.setModel(model);
+        }
+      }
+    },
+    [modifiedModelPath],
+    isEditorReady,
+  );
+
   function disposeEditor() {
     const models = editorRef.current?.getModel();
 
