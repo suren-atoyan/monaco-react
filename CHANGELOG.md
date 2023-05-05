@@ -1,5 +1,13 @@
 ### Versions
 
+## 4.5.1
+
+###### _May 5, 2023_
+
+- DiffEditor: track `originalModelPath` and `modifiedModelPath` changes and get or create a new model accordingly
+- types: fix typo in comment
+- package: replace `prepublish` with `prepublishOnly`
+
 ## 4.5.0
 
 ###### _Apr 7, 2023_
