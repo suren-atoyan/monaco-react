@@ -88,7 +88,7 @@ You just need to import and render the `Editor` component:
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Editor from '@monaco-editor/react';
+import { Editor } from '@monaco-editor/react';
 
 function App() {
   return <Editor height="90vh" defaultLanguage="javascript" defaultValue="// some comment" />;
@@ -106,7 +106,7 @@ ReactDOM.render(<App />, rootElement);
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Editor from '@monaco-editor/react';
+import { Editor } from '@monaco-editor/react';
 
 function App() {
   function handleEditorChange(value, event) {
@@ -158,7 +158,7 @@ There are two options to get the current value:
 import React, { useRef } from 'react';
 import ReactDOM from 'react-dom';
 
-import Editor from '@monaco-editor/react';
+import { Editor } from '@monaco-editor/react';
 
 function App() {
   const editorRef = useRef(null);
@@ -196,7 +196,7 @@ ReactDOM.render(<App />, rootElement);
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Editor from '@monaco-editor/react';
+import { Editor } from '@monaco-editor/react';
 
 function App() {
   function handleEditorChange(value, event) {
@@ -273,7 +273,7 @@ The `editor` instance is exposed from the `onMount` prop as a first parameter, t
 import React, { useRef } from 'react';
 import ReactDOM from 'react-dom';
 
-import Editor from '@monaco-editor/react';
+import { Editor } from '@monaco-editor/react';
 
 function App() {
   const editorRef = useRef(null);
@@ -310,7 +310,7 @@ There are three options to get the `monaco` instance:
 import React, { useRef } from 'react';
 import ReactDOM from 'react-dom';
 
-import Editor from '@monaco-editor/react';
+import { Editor } from '@monaco-editor/react';
 
 function App() {
   const monacoRef = useRef(null);
@@ -523,7 +523,7 @@ And here is our simple multi-model editor implementation:
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Editor from '@monaco-editor/react';
+import { Editor } from '@monaco-editor/react';
 
 function App() {
   const [fileName, setFileName] = useState('script.js');
@@ -586,7 +586,7 @@ will give you more flexibility in working with a multi-model editor.
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Editor from '@monaco-editor/react';
+import { Editor } from '@monaco-editor/react';
 
 function App() {
   function handleEditorValidation(markers) {
