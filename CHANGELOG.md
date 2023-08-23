@@ -1,5 +1,11 @@
 ### Versions
 
+## 4.5.2
+
+###### _Aug 23, 2023_
+
+- DiffEditor: aplly updated on `originalModelPath` and `modifiedModelPath` before `original` and `modified` props
+
 ## 4.5.1
 
 ###### _May 5, 2023_
