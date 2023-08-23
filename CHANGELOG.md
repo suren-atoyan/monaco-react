@@ -4,7 +4,7 @@
 
 ###### _Aug 23, 2023_
 
-- DiffEditor: aplly updated on `originalModelPath` and `modifiedModelPath` before `original` and `modified` props
+- DiffEditor: apply updated on `originalModelPath` and `modifiedModelPath` before `original` and `modified` props
 
 ## 4.5.1
 
