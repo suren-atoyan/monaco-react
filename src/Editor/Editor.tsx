@@ -168,6 +168,10 @@ function Editor({
 
       monacoRef.current.editor.setTheme(theme);
 
+      if (line !== undefined) {
+        editorRef.current.revealLine(line);
+      }
+
       setIsEditorReady(true);
       preventCreation.current = true;
     }
@@ -182,6 +186,7 @@ function Editor({
     overrideServices,
     saveViewState,
     theme,
+    line,
   ]);
 
   useEffect(() => {
