@@ -21,7 +21,6 @@ function Editor({
   language,
   path,
   /* === */
-  theme = 'light',
   line,
   loading = 'Loading...',
   options = {},
@@ -135,14 +134,6 @@ function Editor({
     isEditorReady,
   );
 
-  useUpdate(
-    () => {
-      monacoRef.current?.editor.setTheme(theme);
-    },
-    [theme],
-    isEditorReady,
-  );
-
   const createEditor = useCallback(() => {
     if (!containerRef.current || !monacoRef.current) return;
     if (!preventCreation.current) {
@@ -168,8 +159,6 @@ function Editor({
 
       saveViewState && editorRef.current.restoreViewState(viewStates.get(autoCreatedModelPath));
 
-      monacoRef.current.editor.setTheme(theme);
-
       if (line !== undefined) {
         editorRef.current.revealLine(line);
       }
@@ -187,7 +176,6 @@ function Editor({
     options,
     overrideServices,
     saveViewState,
-    theme,
     line,
   ]);
 

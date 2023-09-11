@@ -1,6 +1,6 @@
 import { type editor } from 'monaco-editor';
 import { type ReactNode } from 'react';
-import { type Monaco, type Theme } from '..';
+import { type Monaco } from '..';
 
 export type MonacoDiffEditor = editor.IStandaloneDiffEditor;
 
@@ -62,13 +62,6 @@ export type DiffEditorProps = {
    */
   keepCurrentModifiedModel?: boolean;
 
-  /**
-   * The theme for the monaco
-   * Available options "vs-dark" | "light"
-   * Define new themes by `monaco.editor.defineTheme`
-   * @default "light"
-   */
-  theme?: Theme | string;
 
   /**
    * The loading screen before the editor will be mounted
