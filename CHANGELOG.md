@@ -1,5 +1,13 @@
 ### Versions
 
+## 4.6.0
+
+###### _Oct 6, 2023_
+
+- Editor/DiffEditor: use `'use client'` on top of `Editor.tsx` and `DiffEditor.tsx`
+- loader: update `@monaco-editor/loader` version (1.4.0)
+- playground: use createRoot for bootstrapping
+
 ## 4.5.2
 
 ###### _Aug 23, 2023_
