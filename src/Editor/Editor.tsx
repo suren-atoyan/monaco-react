@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import loader from '@monaco-editor/loader';
 import useMount from '../hooks/useMount';
