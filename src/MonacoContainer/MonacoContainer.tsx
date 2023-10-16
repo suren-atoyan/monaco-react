@@ -17,7 +17,7 @@ function MonacoContainer({
   wrapperProps,
 }: ContainerProps) {
   return (
-    <section style={{ ...styles.wrapper, width, height }} {...wrapperProps}>
+    <section style={{ ...styles.wrapper, width, height }} {...(wrapperProps ? wrapperProps : {})}>
       {!isEditorReady && <Loading>{loading}</Loading>}
       <div
         ref={_ref}
