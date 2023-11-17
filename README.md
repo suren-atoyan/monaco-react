@@ -491,6 +491,15 @@ loader.init().then(/* ... */);
 
 **NOTE**: your passed object will be deeply merged with the [default one](https://github.com/suren-atoyan/monaco-loader/blob/master/src/config/index.js)
 
+If you use [Next.js](https://nextjs.org/), you may not be able to import `monaco` because of ssr, in that case you can serve the `monaco-editor/min/vs` folder in your public directory and include the path in the loader
+```bash
+cp node_modules/monaco-editor/min/vs public
+```
+
+```ts
+loader.config({ paths: { vs: "/vs" } })
+```
+
 #### Multi-model editor
 
 When you render the `Editor` component, a default model is being created. It's important to mention that when you change the `language` or `value` props, they affect the same model that has been auto-created at the mount of the component. In most cases it's okay, but the developers face problems when they want to implement a multi-model editor to support tabs/files like in `IDE`s. And previously to handle multiple models they had to do it manually and out of the component. Now, the multi-model `API` is supported :tada: Let's check how it works. There are three parameters to create a model - `value`, `language` and `path` (`monaco.editor.createModel(value, language, monaco.Uri.parse(path))`). You can consider last one (`path`) as an identifier for the model. The `Editor` component, now, has a `path` prop. When you specify a `path` prop, the `Editor` component checks if it has a model by that path or not. If yes, the existing model will be shown, otherwise, a new one will be created (and stored). Using this technique you can correspond your files with paths, and create a fully multi-model editor. You can open your file, do some changes, choose another file, and when you come back to the first one the previous model will be shown with the whole view state, text selection, undo stack, scroll position, etc. ([simple demo](https://codesandbox.io/s/multi-model-editor-kugi6?file=/src/App.js))
