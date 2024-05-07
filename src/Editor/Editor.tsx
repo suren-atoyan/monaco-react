@@ -50,6 +50,7 @@ function Editor({
   const valueRef = useRef(value);
   const previousPath = usePrevious(path);
   const preventCreation = useRef(false);
+  const firstUpdateAfterCreationHappened = useRef(false);
   const preventTriggerChangeEvent = useRef<boolean>(false);
 
   useMount(() => {
@@ -92,24 +93,28 @@ function Editor({
     isEditorReady,
   );
 
+  const updateValue = (value: string | undefined) => {
+    if (!editorRef.current || value === undefined) return;
+    if (editorRef.current.getOption(monacoRef.current!.editor.EditorOption.readOnly)) {
+      editorRef.current.setValue(value);
+    } else if (value !== editorRef.current.getValue()) {
+      preventTriggerChangeEvent.current = true;
+      editorRef.current.executeEdits('', [
+        {
+          range: editorRef.current.getModel()!.getFullModelRange(),
+          text: value,
+          forceMoveMarkers: true,
+        },
+      ]);
+
+      editorRef.current.pushUndoStop();
+      preventTriggerChangeEvent.current = false;
+    }
+  };
+
   useUpdate(
     () => {
-      if (!editorRef.current || value === undefined) return;
-      if (editorRef.current.getOption(monacoRef.current!.editor.EditorOption.readOnly)) {
-        editorRef.current.setValue(value);
-      } else if (value !== editorRef.current.getValue()) {
-        preventTriggerChangeEvent.current = true;
-        editorRef.current.executeEdits('', [
-          {
-            range: editorRef.current.getModel()!.getFullModelRange(),
-            text: value,
-            forceMoveMarkers: true,
-          },
-        ]);
-
-        editorRef.current.pushUndoStop();
-        preventTriggerChangeEvent.current = false;
-      }
+      updateValue(value);
     },
     [value],
     isEditorReady,
@@ -198,8 +203,23 @@ function Editor({
   }, [isEditorReady]);
 
   useEffect(() => {
-    !isMonacoMounting && !isEditorReady && createEditor();
-  }, [isMonacoMounting, isEditorReady, createEditor]);
+    if (!isMonacoMounting && !isEditorReady) {
+      createEditor();
+    } else if (isEditorReady) {
+      // This code makes sure that we don't miss an update
+      // if it happened while editor was still being created.
+      if (firstUpdateAfterCreationHappened.current) {
+        return;
+      }
+
+      if (!editorRef.current || !monacoRef.current) return;
+      firstUpdateAfterCreationHappened.current = true;
+
+      if (editorRef.current?.getValue() !== value) {
+        updateValue(value);
+      }
+    }
+  }, [isMonacoMounting, isEditorReady, value, createEditor]);
 
   // subscription
   // to avoid unnecessary updates (attach - dispose listener) in subscription
