@@ -685,6 +685,8 @@ loader.config({
 
 There were several issues about this topic that can be helpful too - [1](https://github.com/suren-atoyan/monaco-react/issues/48) [2](https://github.com/suren-atoyan/monaco-react/issues/12) [3](https://github.com/suren-atoyan/monaco-react/issues/58) [4](https://github.com/suren-atoyan/monaco-react/issues/87)
 
+Also, there is a [blog post](https://www.jameskerr.blog/posts/offline-monaco-editor-in-electron/) about using `@monaco-editor/react` in `Electron` in offline mode. You may find it helpful.
+
 And if you use `electron` with `monaco` and `react` and have faced an issue different than the above-discribed ones, please let us know to make this section more helpful
 
 ##### For `Next.js` users
