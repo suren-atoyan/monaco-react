@@ -51,7 +51,7 @@ export type EditorProps = {
    * Define new themes by `monaco.editor.defineTheme`
    * @default "light"
    */
-  theme?: Theme | string;
+  theme?: Theme | (string & {});
 
   /**
    * The line to jump on it
