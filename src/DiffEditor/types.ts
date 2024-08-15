@@ -68,7 +68,7 @@ export type DiffEditorProps = {
    * Define new themes by `monaco.editor.defineTheme`
    * @default "light"
    */
-  theme?: Theme | string;
+  theme?: Theme | (string & NonNullable<unknown>);
 
   /**
    * The loading screen before the editor will be mounted
