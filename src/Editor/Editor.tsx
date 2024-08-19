@@ -92,12 +92,22 @@ function Editor({
     isEditorReady,
   );
 
+
+  // The value of `editorRef.current.getValue()` can change between the start of
+  // the render cycle and when `useUpdate` is evaluated because monaco model
+  // updates happen outside of the React render cycle. When that happens, it
+  // causes `value` to be stale in `useUpdate`, which erroneously triggers
+  // `executeEdits`. `executeEdits` replaces the entire editor content, which
+  // skips the cursor to the end of the content. Put the
+  // `editorRef.current.getValue()` value in a constant at the start of the
+  // render cycle to prevent this out-of-sync bug.
+  const editorValue = editorRef.current?.getValue();
   useUpdate(
     () => {
       if (!editorRef.current || value === undefined) return;
       if (editorRef.current.getOption(monacoRef.current!.editor.EditorOption.readOnly)) {
         editorRef.current.setValue(value);
-      } else if (value !== editorRef.current.getValue()) {
+      } else if (value !== editorValue) {
         preventTriggerChangeEvent.current = true;
         editorRef.current.executeEdits('', [
           {
