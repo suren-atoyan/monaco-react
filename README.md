@@ -26,6 +26,10 @@ Monaco Editor for React &middot; use the [monaco-editor](https://microsoft.githu
 
 The [monaco-editor](https://microsoft.github.io/monaco-editor/) is a well-known web technology based code editor that powers [VS Code](https://code.visualstudio.com/). This library handles the setup process of the `monaco-editor` and provides a clean `API` to interact with `monaco` from any `React` environment
 
+## Monaco-React AI Bot
+
+[Monaco-React](https://codeparrot.ai/oracle?owner=suren-atoyan&repo=monaco-react) Bot will help you understand this repository better. You can ask for code examples, installation guide, debugging help and much more.
+
 #### Demo
 
 [Check it out!](https://monaco-react.surenatoyan.com/)
