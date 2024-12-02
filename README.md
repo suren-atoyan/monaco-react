@@ -68,9 +68,9 @@ or you can use `CDN`. [Here is an example](https://codesandbox.io/s/cdn-example-
 
 **NOTE**: For `TypeScript` type definitions, this package uses the [monaco-editor](https://www.npmjs.com/package/monaco-editor) package as a peer dependency. So, if you need types and don't already have the [monaco-editor](https://www.npmjs.com/package/monaco-editor) package installed, you will need to do so
 
-## Monaco-React AI Bot
+## Ask AI
 
-[Monaco-React](https://codeparrot.ai/oracle?owner=suren-atoyan&repo=monaco-react) Bot will help you understand this repository better. You can ask for code examples, installation guide, debugging help and much more.
+[Monaco-React](https://codeparrot.ai/oracle?owner=suren-atoyan&repo=monaco-react) AI will help you understand this repository better. You can ask for code examples, installation guide, debugging help and much more.
 
 
 ### Introduction
