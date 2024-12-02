@@ -68,6 +68,11 @@ or you can use `CDN`. [Here is an example](https://codesandbox.io/s/cdn-example-
 
 **NOTE**: For `TypeScript` type definitions, this package uses the [monaco-editor](https://www.npmjs.com/package/monaco-editor) package as a peer dependency. So, if you need types and don't already have the [monaco-editor](https://www.npmjs.com/package/monaco-editor) package installed, you will need to do so
 
+## Ask AI
+
+[Monaco-React](https://codeparrot.ai/oracle?owner=suren-atoyan&repo=monaco-react) AI will help you understand this repository better. You can ask for code examples, installation guide, debugging help and much more.
+
+
 ### Introduction
 
 Besides types, the library exports `Editor`and `DiffEditor` components, as well as the `loader` utility and the `useMonaco` hook:
