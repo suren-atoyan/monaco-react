@@ -1,5 +1,10 @@
 ### Versions
 
+## 4.7.0-rc.0
+
+- package: add support for react/react-dom v19 as a peer dependency
+- playground: update playground's React version to 19
+
 ## 4.6.0
 
 ###### _Oct 6, 2023_
