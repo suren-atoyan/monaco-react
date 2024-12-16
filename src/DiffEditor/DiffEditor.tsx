@@ -59,7 +59,7 @@ function DiffEditor({
         const model = getOrCreateModel(
           monacoRef.current,
           original || '',
-          originalLanguage || language || 'text',
+          originalLanguage || language || '',
           originalModelPath || '',
         );
 
@@ -79,7 +79,7 @@ function DiffEditor({
         const model = getOrCreateModel(
           monacoRef.current,
           modified || '',
-          modifiedLanguage || language || 'text',
+          modifiedLanguage || language || '',
           modifiedModelPath || '',
         );
 
@@ -127,8 +127,8 @@ function DiffEditor({
     () => {
       const { original, modified } = editorRef.current!.getModel()!;
 
-      monacoRef.current!.editor.setModelLanguage(original, originalLanguage || language || 'text');
-      monacoRef.current!.editor.setModelLanguage(modified, modifiedLanguage || language || 'text');
+      monacoRef.current!.editor.setModelLanguage(original, originalLanguage || language || '');
+      monacoRef.current!.editor.setModelLanguage(modified, modifiedLanguage || language || '');
     },
     [language, originalLanguage, modifiedLanguage],
     isEditorReady,
@@ -156,14 +156,14 @@ function DiffEditor({
     const originalModel = getOrCreateModel(
       monacoRef.current,
       original || '',
-      originalLanguage || language || 'text',
+      originalLanguage || language || '',
       originalModelPath || '',
     );
 
     const modifiedModel = getOrCreateModel(
       monacoRef.current,
       modified || '',
-      modifiedLanguage || language || 'text',
+      modifiedLanguage || language || '',
       modifiedModelPath || '',
     );
 
