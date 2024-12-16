@@ -20,7 +20,6 @@ function DiffEditor({
   modifiedModelPath,
   keepCurrentOriginalModel = false,
   keepCurrentModifiedModel = false,
-  theme = 'light',
   loading = 'Loading...',
   options = {},
   height = '100%',
@@ -136,14 +135,6 @@ function DiffEditor({
 
   useUpdate(
     () => {
-      monacoRef.current?.editor.setTheme(theme);
-    },
-    [theme],
-    isEditorReady,
-  );
-
-  useUpdate(
-    () => {
       editorRef.current?.updateOptions(options);
     },
     [options],
@@ -190,12 +181,10 @@ function DiffEditor({
 
       setModels();
 
-      monacoRef.current?.editor.setTheme(theme);
-
       setIsEditorReady(true);
       preventCreation.current = true;
     }
-  }, [options, theme, setModels]);
+  }, [options, setModels]);
 
   useEffect(() => {
     if (isEditorReady) {
