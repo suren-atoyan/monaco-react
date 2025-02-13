@@ -1,5 +1,10 @@
 ### Versions
 
+## 4.7.0
+
+- package: update @monaco-editor/loader to the latest (v1.5.0) version (this uses monaco-editor v0.52.2)
+- package: inherit all changes from v4.7.0-rc.0
+
 ## 4.7.0-rc.0
 
 - package: add support for react/react-dom v19 as a peer dependency
