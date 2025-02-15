@@ -10,7 +10,7 @@ Monaco Editor for React &middot; use the [monaco-editor](https://microsoft.githu
 
 <hr />
 
-- :loudspeaker: for React `v19` users: check out the `v4.7.0-rc.0` version (use `npm install @monaco-editor/react@next` or `yarn add @monaco-editor/react@next`) and let us know if you face any issues
+- :white_check_mark: React `V19` support!
 - :keyboard: rewritten with `TypeScript` :fire:
 - :zap: [multi-model editor](#multi-model-editor) is already supported; enjoy it :tada:
 - :tada: version `v4` is here - to see what's new in the new version and how to migrate from `v3`, please read this [doc](./v4.changes.md) (also, if you need the old version `README`, it's [here](https://github.com/suren-atoyan/monaco-react/blob/v3.8.3/README.md))
