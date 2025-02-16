@@ -1,0 +1,17 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"  # Change this for other languages (e.g., pip, cargo, etc.)
+    directory: "/"  # Location of the package file (e.g., package.json)
+    schedule:
+      interval: "weekly"  # Options: daily, weekly, monthly
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "bot"
+    assignees:
+      - "suren-atoyan"  # Assigns PRs to you or your team
+    reviewers:
+      - "suren-atoyan"  # Requests review from you
