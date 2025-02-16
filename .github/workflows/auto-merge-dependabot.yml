@@ -1,0 +1,30 @@
+name: 'Auto-merge Dependabot PRs'
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Check PR author'
+        id: check
+        run: |
+          if [[ "${{ github.event.pull_request.user.login }}" == "dependabot[bot]" ]]; then
+            echo "::set-output name=merge::true"
+          else
+            echo "::set-output name=merge::false"
+          fi
+
+      - name: 'Auto-merge Dependabot PR'
+        if: steps.check.outputs.merge == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.pulls.merge({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              merge_method: "squash"
+            });
