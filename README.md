@@ -696,6 +696,12 @@ Also, there is a [blog post](https://www.jameskerr.blog/posts/offline-monaco-edi
 
 And if you use `electron` with `monaco` and `react` and have faced an issue different than the above-discribed ones, please let us know to make this section more helpful
 
+##### For `Next.js` users
+
+Like other React components, this one also works with `Next.js` without a hitch. The part of the source that should be pre-parsed is optimized for server-side rendering, so, in usual cases, it will work fine, but if you want to have access, for example, to [`monaco instance`](https://github.com/suren-atoyan/monaco-react#monaco-instance) you should be aware that it wants to access the `document` object, and it requires browser environment. Basically you just need to avoid running that part out of browser environment, there are several ways to do that. The one is described [here](https://nextjs.org/docs/advanced-features/dynamic-import#with-no-ssr)
+
+And if you use `monaco` with `Next.js` and have faced an issue different than the above-described one, please let us know to make this section more helpful
+
 ##### Integrating LSP in Next.js
 
 This guide demonstrates how to integrate Language Server Protocol (LSP) functionality with `@monaco-editor/react` in Next.js while avoiding Server-Side Rendering (SSR) issues.
@@ -835,12 +841,6 @@ If the implementation doesn't work as expected:
 🔧 **Reference Implementation**  
 For a working example and additional configuration details, refer to this comprehensive template:  
 [monaco-editor-lsp-next Template](https://github.com/cfngc4594/monaco-editor-lsp-next)
-
-##### For `Next.js` users
-
-Like other React components, this one also works with `Next.js` without a hitch. The part of the source that should be pre-parsed is optimized for server-side rendering, so, in usual cases, it will work fine, but if you want to have access, for example, to [`monaco instance`](https://github.com/suren-atoyan/monaco-react#monaco-instance) you should be aware that it wants to access the `document` object, and it requires browser environment. Basically you just need to avoid running that part out of browser environment, there are several ways to do that. The one is described [here](https://nextjs.org/docs/advanced-features/dynamic-import#with-no-ssr)
-
-And if you use `monaco` with `Next.js` and have faced an issue different than the above-described one, please let us know to make this section more helpful
 
 #### Create your own editor
 
