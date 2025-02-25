@@ -16,6 +16,7 @@
     "monaco-themes": "^0.4.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hot-toast": "^2.5.2",
     "react-resizable-panels": "^2.1.7",
     "tweakpane": "^4.0.5",
     "usehooks-ts": "^3.1.1"

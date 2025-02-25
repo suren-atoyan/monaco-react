@@ -4,13 +4,14 @@ import { useMediaQuery } from 'usehooks-ts';
 import MonacoEditor from '@monaco-editor/react';
 import { Container, EditorContainer } from './styled';
 import Settings from './Settings';
-import { languageAtom, themeAtom } from './atoms';
+import { languageAtom, optionsAtom, themeAtom } from './atoms';
 import examples from '../config/examples';
 
 function Editor() {
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const language = useAtomValue(languageAtom);
   const theme = useAtomValue(themeAtom);
+  const options = useAtomValue(optionsAtom);
 
   const editorProps = {
     value: examples[language],
@@ -19,8 +20,10 @@ function Editor() {
     path: `${language}-example`,
     options: {
       automaticLayout: true,
+      ...options,
       scrollbar: {
         alwaysConsumeMouseWheel: false,
+        ...(options?.scrollbar || {}),
       },
     },
   };
