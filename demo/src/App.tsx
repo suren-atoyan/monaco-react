@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import githubMarkIcon from './assets/github-mark.svg';
+import monacoReactLogo from './assets/logo.svg';
 import Editor from './Editor';
 import DiffEditor from './DiffEditor';
 import { Actions, Body, Button, Container, GitHubButton, Header } from './styled';
@@ -18,7 +19,7 @@ function App() {
     <ErrorBoundary>
       <Container>
         <Header>
-          <h3>Monaco React</h3>
+          <img src={monacoReactLogo} alt="Monaco React" height={32} />
           <Actions>
             <Button
               onClick={() => setEditorMode(EditorMode.Editor)}

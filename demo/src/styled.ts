@@ -12,8 +12,8 @@ const Container = styled(Flex)(() => ({
 
 const Header = styled(Flex)(({ theme }) => ({
   flexDirection: 'row',
-  paddingLeft: theme.spacing.unit * 3,
-  paddingRight: theme.spacing.unit * 3,
+  paddingLeft: theme.spacing.unit * 2,
+  paddingRight: theme.spacing.unit * 2,
   height: 54,
   alignItems: 'center',
   justifyContent: 'space-between',
