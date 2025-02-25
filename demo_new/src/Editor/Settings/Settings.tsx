@@ -1,7 +1,12 @@
+import MonacoEditor from '@monaco-editor/react';
+import { useAtom } from 'jotai';
+import monacoThemes from 'monaco-themes/themes/themelist';
 import { Button } from '../../styled';
 import { EditorContainer } from '../styled';
 import { Container, Description, Select, SubTitle, Title, Section } from './styled';
-import MonacoEditor from '@monaco-editor/react';
+import { languageAtom, themeAtom } from '../atoms';
+import { defaultThemes, Language } from '../../config';
+import { defineTheme } from './utils';
 
 const options = {
   acceptSuggestionOnCommitCharacter: true,
@@ -24,32 +29,48 @@ const options = {
 };
 
 function Settings() {
+  const [language, setLanguage] = useAtom(languageAtom);
+  const [theme, setTheme] = useAtom(themeAtom);
+
   return (
     <Container>
       <Title>Settings</Title>
 
       <Section>
         <SubTitle>Languages</SubTitle>
-        <Select>
-          <option>JavaScript</option>
-          <option>TypeScript</option>
-          <option>Python</option>
-          <option>Java</option>
-          <option>Go</option>
-          <option>PHP</option>
-          <option>HTML</option>
-          <option>CSS</option>
-          <option>SCSS</option>
-          <option>JSON</option>
-          <option>YAML</option>
-          <option>Markdown</option>
+        <Select
+          value={language}
+          onChange={(e) => {
+            setLanguage(e.target.value as Language);
+          }}
+        >
+          {Object.values(Language).map((lang) => (
+            <option key={lang}>{lang}</option>
+          ))}
         </Select>
       </Section>
       <Section>
         <SubTitle>Themes</SubTitle>
-        <Select>
-          <option>Light</option>
-          <option>Dark</option>
+        <Select
+          value={theme}
+          onChange={async (e) => {
+            const theme = e.target.value;
+
+            if (!defaultThemes.includes(theme)) {
+              await defineTheme(theme);
+            }
+
+            setTheme(theme);
+          }}
+        >
+          <option disabled>Default Themes</option>
+          {defaultThemes.map((theme) => (
+            <option key={theme}>{theme}</option>
+          ))}
+          <option disabled>Custom Themes</option>
+          {Object.entries(monacoThemes).map(([themeName, themeId]) => (
+            <option key={themeId}>{themeName}</option>
+          ))}
         </Select>
       </Section>
       <Section>

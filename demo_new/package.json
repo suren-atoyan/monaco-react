@@ -12,6 +12,8 @@
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",
     "@pigment-css/react": "^0.0.30",
+    "jotai": "^2.12.1",
+    "monaco-themes": "^0.4.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-resizable-panels": "^2.1.7",
