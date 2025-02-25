@@ -88,16 +88,20 @@ function Settings() {
       <Title>Settings</Title>
 
       <Section>
-        <SubTitle>Languages</SubTitle>
-        <Select value={language} onChange={selectLanguage}>
+        <label htmlFor="language-select">
+          <SubTitle>Language</SubTitle>
+        </label>
+        <Select id="language-select" value={language} onChange={selectLanguage}>
           {Object.values(Language).map((lang) => (
             <option key={lang}>{lang}</option>
           ))}
         </Select>
       </Section>
       <Section>
-        <SubTitle>Themes</SubTitle>
-        <Select value={theme} onChange={selectTheme}>
+        <label htmlFor="theme-select">
+          <SubTitle>Themes</SubTitle>
+        </label>
+        <Select id="theme-select" value={theme} onChange={selectTheme}>
           <option disabled>Default Themes</option>
           {defaultThemes.map((theme) => (
             <option key={theme}>{theme}</option>
