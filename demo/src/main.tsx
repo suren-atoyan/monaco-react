@@ -8,11 +8,11 @@
 import './index.css';
 import '@pigment-css/react/styles.css';
 
-Promise.all([import('./root.tsx'), import('./App.tsx')]).then(
-  ([{ default: render }, { default: App }]) => {
-    render(App);
-  },
-);
+import render from './root.tsx';
+
+import('./App.tsx').then(({ default: App }) => {
+  render(App);
+});
 
 // ts(1208)
 export {};
