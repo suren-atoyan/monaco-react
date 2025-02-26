@@ -47,6 +47,7 @@ The [monaco-editor](https://microsoft.github.io/monaco-editor/) is a well-known 
   - [Notes](#notes)
     - [For `electron` users](#for-electron-users)
     - [For `Next.js` users](#for-nextjs-users)
+    - [Integrating LSP in Next.js](#integrating-lsp-in-nextjs)
   - [Create your own editor!](#create-your-own-editor)
 - [Development / Playground](#development-playground)
 - [Props](#props)
@@ -700,6 +701,146 @@ And if you use `electron` with `monaco` and `react` and have faced an issue diff
 Like other React components, this one also works with `Next.js` without a hitch. The part of the source that should be pre-parsed is optimized for server-side rendering, so, in usual cases, it will work fine, but if you want to have access, for example, to [`monaco instance`](https://github.com/suren-atoyan/monaco-react#monaco-instance) you should be aware that it wants to access the `document` object, and it requires browser environment. Basically you just need to avoid running that part out of browser environment, there are several ways to do that. The one is described [here](https://nextjs.org/docs/advanced-features/dynamic-import#with-no-ssr)
 
 And if you use `monaco` with `Next.js` and have faced an issue different than the above-described one, please let us know to make this section more helpful
+
+##### Integrating LSP in Next.js
+
+This guide demonstrates how to integrate Language Server Protocol (LSP) functionality with `@monaco-editor/react` in Next.js while avoiding Server-Side Rendering (SSR) issues.
+
+###### Installation & Setup
+
+1. **Create Next.js App**  
+   ```bash
+   bunx create-next-app@latest demo  # or equivalent with npm/yarn/pnpm
+   cd demo
+   ```
+
+2. **Install Dependencies**  
+   Install the required packages with version constraints:
+   ```bash
+   bun add @monaco-editor/react monaco-editor@0.36.1 monaco-languageclient@5.0.1 vscode-ws-jsonrpc vscode-languageclient
+   bun add -D @types/vscode
+   ```
+   > ⚠️ Version Compatibility:  
+   > - `monaco-editor` ≤ 0.36.1  
+   > - `monaco-languageclient` ≤ 5.0.1  
+   > - If you prefer not to use the versions specified above, verify version mappings in the [Codingame/Monaco-VSCode API Compatibility Table](https://github.com/TypeFox/monaco-languageclient/blob/main/docs/versions-and-history.md#monaco-editor--codingamemonaco-vscode-api-compatibility-table)
+
+3. **Start a Language Server**
+   This guide assumes a C language server running on port `4594`. For a complete setup and configuration reference, check out this [template repository](https://github.com/cfngc4594/monaco-editor-lsp-next)
+
+###### Implementation
+
+Replace `src/app/page.tsx` with:
+
+```typescript
+"use client";
+
+import {
+  toSocket,
+  WebSocketMessageReader,
+  WebSocketMessageWriter,
+} from "vscode-ws-jsonrpc";
+import { useEffect } from "react";
+import dynamic from "next/dynamic";
+
+// Lazy-load Monaco Editor with SSR disabled
+const Editor = dynamic(
+  async () => {
+    await import("vscode");  // Load VSCode type definitions
+
+    const monaco = await import("monaco-editor");
+    const { loader } = await import("@monaco-editor/react");
+    loader.config({ monaco });
+
+    return (await import("@monaco-editor/react")).Editor;
+  },
+  { ssr: false, loading: () => <div>Loading editor...</div> }
+);
+
+export default function Home() {
+  useEffect(() => {
+    const url = "ws://localhost:4594/clangd";
+    const webSocket = new WebSocket(url);
+
+    webSocket.onopen = async () => {
+      const socket = toSocket(webSocket);
+      const reader = new WebSocketMessageReader(socket);
+      const writer = new WebSocketMessageWriter(socket);
+
+      const { MonacoLanguageClient } = await import("monaco-languageclient");
+      const { ErrorAction, CloseAction } = await import(
+        "vscode-languageclient"
+      );
+
+      // Initialize language client
+      const languageClient = new MonacoLanguageClient({
+        name: "C Language Client",
+        clientOptions: {
+          documentSelector: ["c"],
+          errorHandler: {
+            error: () => ({ action: ErrorAction.Continue }),
+            closed: () => ({ action: CloseAction.DoNotRestart }),
+          },
+        },
+        connectionProvider: {
+          get: () => Promise.resolve({ reader, writer }),
+        },
+      });
+
+      languageClient.start();
+      reader.onClose(() => languageClient.stop());
+    };
+
+    webSocket.onerror = (event) => {
+      console.error("WebSocket error observed:", event);
+    };
+
+    webSocket.onclose = (event) => {
+      console.log("WebSocket closed:", event);
+    };
+
+    return () => {
+      webSocket.close();
+    };
+  }, []);
+
+  return (
+    <div className="h-screen flex flex-col">
+      <Editor
+        theme="vs-dark"
+        defaultLanguage="c"
+        defaultValue="# include<stdio.h>"
+        path="file:///main.c"
+        onValidate={(markers) => {
+          markers.forEach((marker) =>
+            console.log("onValidate:", marker.message)
+          );
+        }}
+        options={{ automaticLayout: true }}
+        loading={<div>Loading editor...</div>}
+      />
+    </div>
+  );
+}
+```
+
+###### Verification
+
+After running the application, check your browser console. If you see the following message:  
+`onValidate: Included header stdio.h is not used directly (fix available)`  
+
+🎉 **Congratulations!** This indicates successful integration and working LSP functionality.
+
+###### Troubleshooting
+
+If the implementation doesn't work as expected:  
+1. Double-check the WebSocket connection and LSP server status  
+2. Verify all dependency versions match the compatibility table  
+3. Review the console for any error messages  
+
+🔧 **Reference Implementation**  
+For a working example and additional configuration details, refer to this comprehensive template:  
+[monaco-editor-lsp-next Template](https://github.com/cfngc4594/monaco-editor-lsp-next)
 
 #### Create your own editor
 
