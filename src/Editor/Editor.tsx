@@ -96,7 +96,9 @@ function Editor({
     () => {
       if (!editorRef.current || value === undefined) return;
       if (editorRef.current.getOption(monacoRef.current!.editor.EditorOption.readOnly)) {
+        preventTriggerChangeEvent.current = true;
         editorRef.current.setValue(value);
+        preventTriggerChangeEvent.current = false;
       } else if (value !== editorRef.current.getValue()) {
         preventTriggerChangeEvent.current = true;
         editorRef.current.executeEdits('', [
