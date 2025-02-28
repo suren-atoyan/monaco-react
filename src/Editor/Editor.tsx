@@ -32,7 +32,7 @@ function Editor({
   width = '100%',
   height = '100%',
   className,
-  wrapperProps = {},
+  wrapperProps,
   /* === */
   beforeMount = noop,
   onMount = noop,
