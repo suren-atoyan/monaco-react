@@ -9,5 +9,11 @@
         "buildCommand": "cd demo && npm install && npm run build"
       }
     }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "demo/dist/$1"
+    }
   ]
 } 
