@@ -827,3 +827,37 @@ If you want to change something in the library, go to `monaco-react/src/...`, th
 ## License
 
 [MIT](./LICENSE)
+
+# Monaco Editor React Demo
+
+这是一个基于 Monaco Editor 的 React 演示项目，支持多种编程语言的代码编辑，并提供了丰富的主题选择。
+
+## 特性
+
+- 支持多种编程语言（默认为 YAML）
+- 丰富的主题选择
+- 可调整的设置面板
+- 响应式设计
+
+## 本地开发
+
+```bash
+# 安装依赖
+npm install
+
+# 启动开发服务器
+npm run dev
+
+# 构建生产版本
+npm run build
+```
+
+## 部署
+
+本项目支持一键部署到 Vercel。点击下面的按钮即可部署：
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/monaco-react)
+
+## 许可证
+
+MIT

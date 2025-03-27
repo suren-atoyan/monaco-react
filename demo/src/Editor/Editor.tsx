@@ -2,7 +2,8 @@ import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import { useAtomValue } from 'jotai';
 import { useMediaQuery } from 'usehooks-ts';
 import MonacoEditor from '@monaco-editor/react';
-import { Container, EditorContainer } from './styled';
+import { useState } from 'react';
+import { Container, EditorContainer, ToggleButton } from './styled';
 import Settings from './Settings';
 import { languageAtom, optionsAtom, themeAtom } from './atoms';
 import examples from '../config/examples';
@@ -12,6 +13,7 @@ function Editor() {
   const language = useAtomValue(languageAtom);
   const theme = useAtomValue(themeAtom);
   const options = useAtomValue(optionsAtom);
+  const [showSettings, setShowSettings] = useState(false);
 
   const editorProps = {
     value: examples[language],
@@ -32,16 +34,25 @@ function Editor() {
     return (
       <Container>
         <PanelGroup direction="horizontal">
-          <Panel minSize={20}>
+          <Panel minSize={50}>
             <EditorContainer>
               <MonacoEditor height="100%" {...editorProps} />
             </EditorContainer>
           </Panel>
-          <PanelResizeHandle className="resize-handle" hitAreaMargins={{ fine: 5, coarse: 5 }} />
-          <Panel defaultSize={30} minSize={20}>
-            <Settings />
-          </Panel>
+          {showSettings && (
+            <>
+              <PanelResizeHandle className="resize-handle" hitAreaMargins={{ fine: 5, coarse: 5 }} />
+              <Panel defaultSize={20} minSize={15}>
+                <Settings />
+              </Panel>
+            </>
+          )}
         </PanelGroup>
+        <ToggleButton 
+          onClick={() => setShowSettings(!showSettings)}
+          title={showSettings ? '隐藏设置' : '显示设置'}
+          $showSettings={showSettings}
+        />
       </Container>
     );
   }
