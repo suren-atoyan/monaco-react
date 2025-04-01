@@ -1,26 +1,60 @@
-import { useState } from 'react';
-import loader from '@monaco-editor/loader';
+import { useState, useRef, useEffect } from "react";
+import * as monaco from "monaco-editor";
+import { loader } from "@monaco-editor/react";
 
 import useMount from '../useMount';
+export function useMonaco() {
+	const [monacoInstance, setMonacoInstance] = useState<typeof monaco | null>(
+		null
+	);
+	const mountedRef = useRef(true);
+	const loaderRef = useRef<Promise<typeof monaco> | null>(null);
 
-function useMonaco() {
-  const [monaco, setMonaco] = useState(loader.__getMonacoInstance());
+	useMount(() => {
+		// Check if Monaco is already loaded
+		const instance = loader.__getMonacoInstance();
 
-  useMount(() => {
-    let cancelable: ReturnType<typeof loader.init>;
+		if (instance) {
+			setMonacoInstance(instance);
+			return;
+		}
 
-    if (!monaco) {
-      cancelable = loader.init();
+		// If not loaded, initialize it
+		if (!loaderRef.current) {
+			// Configure loader with minimum settings to avoid errors
+			loader.config({
+				// Completely disable NLS
+				"vs/nls": { availableLanguages: {} },
+			});
 
-      cancelable.then((monaco) => {
-        setMonaco(monaco);
-      });
-    }
+			// Handle initialization with better error catching
+			try {
+				loaderRef.current = loader.init();
 
-    return () => cancelable?.cancel();
-  });
+				loaderRef.current
+					.then((monacoApi: typeof monaco) => {
+						if (mountedRef.current) {
+							setMonacoInstance(monacoApi);
+						}
+					})
+					.catch((error: any) => {
+						// Ignore cancelation errors, log other errors
+						if (mountedRef.current && error.type !== "cancelation") {
+							console.error("Monaco initialization error:", error);
+						}
+					});
+			} catch (err) {
+				console.error("Failed to initialize Monaco:", err);
+			}
+		}
 
-  return monaco;
+		// Cleanup function that won't trigger cancelation errors
+		return () => {
+			mountedRef.current = false;
+		};
+	});
+
+	return monacoInstance;
 }
 
 export default useMonaco;
