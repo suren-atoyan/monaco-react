@@ -118,9 +118,11 @@ function Editor({
   useUpdate(
     () => {
       const model = editorRef.current?.getModel();
-      if (model && language) monacoRef.current?.editor.setModelLanguage(model, language);
+      if (isEditorReady && model && language) {
+        monacoRef.current?.editor.setModelLanguage(model, language);
+      }
     },
-    [language],
+    [language, isEditorReady],
     isEditorReady,
   );
 
