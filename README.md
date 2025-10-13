@@ -697,7 +697,7 @@ And if you use `electron` with `monaco` and `react` and have faced an issue diff
 
 ##### For `Next.js` users
 
-Like other React components, this one also works with `Next.js` without a hitch. The part of the source that should be pre-parsed is optimized for server-side rendering, so, in usual cases, it will work fine, but if you want to have access, for example, to [`monaco instance`](https://github.com/suren-atoyan/monaco-react#monaco-instance) you should be aware that it wants to access the `document` object, and it requires browser environment. Basically you just need to avoid running that part out of browser environment, there are several ways to do that. The one is described [here](https://nextjs.org/docs/advanced-features/dynamic-import#with-no-ssr)
+Like other React components, this one also works with `Next.js` without a hitch. The part of the source that should be pre-parsed is optimized for server-side rendering, so, in usual cases, it will work fine, but if you want to have access, for example, to [`monaco instance`](https://github.com/suren-atoyan/monaco-react#monaco-instance) you should be aware that it wants to access the `document` object, and it requires browser environment. Basically you just need to avoid running that part out of browser environment, there are several ways to do that. The one is described [here](https://nextjs.org/docs/app/guides/lazy-loading#nextdynamic)
 
 And if you use `monaco` with `Next.js` and have faced an issue different than the above-described one, please let us know to make this section more helpful
 
