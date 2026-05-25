@@ -117,7 +117,22 @@ function DiffEditor({
 
   useUpdate(
     () => {
-      editorRef.current?.getModel()?.original.setValue(original || '');
+      const originalEditor = editorRef.current!.getOriginalEditor();
+      if (originalEditor.getOption(monacoRef.current!.editor.EditorOption.readOnly)) {
+        originalEditor.setValue(original || '');
+      } else {
+        if (original !== originalEditor.getValue()) {
+          originalEditor.executeEdits('', [
+            {
+              range: originalEditor.getModel()!.getFullModelRange(),
+              text: original || '',
+              forceMoveMarkers: true,
+            },
+          ]);
+
+          originalEditor.pushUndoStop();
+        }
+      }
     },
     [original],
     isEditorReady,
