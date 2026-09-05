@@ -13,6 +13,11 @@ import MonacoContainer from '../MonacoContainer';
 
 const viewStates = new Map();
 
+// How many not-yet-echoed values to remember. One is outstanding per render that
+// has not delivered yet, so this only has to cover a burst of edits landing while
+// a slow render is in flight; the list drains as each comes back.
+const MAX_UNECHOED_VALUES = 20;
+
 function Editor({
   defaultValue,
   defaultLanguage,
@@ -51,6 +56,10 @@ function Editor({
   const previousPath = usePrevious(path);
   const preventCreation = useRef(false);
   const preventTriggerChangeEvent = useRef<boolean>(false);
+  // Values handed to onChange that have not yet come back through `value`. A
+  // controlled `value` is fed from these, so a prop holding one of them is this
+  // editor's own text arriving late rather than a change made elsewhere.
+  const unechoedValues = useRef<string[]>([]);
 
   useMount(() => {
     const cancelable = loader.init();
@@ -76,6 +85,7 @@ function Editor({
 
       if (model !== editorRef.current?.getModel()) {
         if (saveViewState) viewStates.set(previousPath, editorRef.current?.saveViewState());
+        unechoedValues.current.length = 0;
         editorRef.current?.setModel(model);
         if (saveViewState) editorRef.current?.restoreViewState(viewStates.get(path));
       }
@@ -98,6 +108,17 @@ function Editor({
       if (editorRef.current.getOption(monacoRef.current!.editor.EditorOption.readOnly)) {
         editorRef.current.setValue(value);
       } else if (value !== editorRef.current.getValue()) {
+        const echoed = unechoedValues.current.indexOf(value);
+        if (echoed !== -1) {
+          // This editor's own text, behind the edits made since. Comparing against
+          // the model cannot tell that apart from an outside change, and writing it
+          // back would revert those edits, discard the decorations tracking them,
+          // and say nothing about it: the write suppresses onChange.
+          unechoedValues.current.splice(0, echoed + 1);
+          return;
+        }
+
+        unechoedValues.current.length = 0;
         preventTriggerChangeEvent.current = true;
         editorRef.current.executeEdits('', [
           {
@@ -213,7 +234,18 @@ function Editor({
       subscriptionRef.current?.dispose();
       subscriptionRef.current = editorRef.current?.onDidChangeModelContent((event) => {
         if (!preventTriggerChangeEvent.current) {
-          onChange(editorRef.current!.getValue(), event);
+          const currentValue = editorRef.current!.getValue();
+
+          // Only while controlled: with no `value` to come back, nothing would
+          // ever drain this.
+          if (valueRef.current !== undefined) {
+            unechoedValues.current.push(currentValue);
+            if (unechoedValues.current.length > MAX_UNECHOED_VALUES) {
+              unechoedValues.current.shift();
+            }
+          }
+
+          onChange(currentValue, event);
         }
       });
     }
